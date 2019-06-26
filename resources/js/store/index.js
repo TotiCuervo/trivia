@@ -1,0 +1,25 @@
+import Vue from 'vue';
+import Vuex from 'vuex';
+
+Vue.use(Vuex);
+
+
+import user from './modules/user';
+import game from './modules/game';
+import gameOrder from './modules/gameOrder';
+import round from './modules/round';
+
+
+
+
+const debug = process.env.NODE_ENV !== 'production';
+
+export const store = new Vuex.Store({
+    modules: {
+        user,
+        game,
+        gameOrder,
+        round
+    },
+    strict: debug
+});

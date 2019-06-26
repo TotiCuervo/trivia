@@ -1,0 +1,17 @@
+.far .fa-edit {
+    color: lightgray;
+}
+
+.far .fa-edit:hover {
+    color: black;
+}
+
+.round-button {
+    text-decoration: none;
+    color: white;
+}
+
+.round-button:hover {
+    text-decoration: none;
+    color: white;
+}
