@@ -3,6 +3,7 @@
 
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
+                <!--<router-link :to="{ name: 'home' }" class="nav-link"><span style="color:white">Create Trivia Game!</span></router-link>-->
                 <a class="navbar-brand" href="/">
                     Trivia
                 </a>
@@ -42,13 +43,6 @@
         <div class="container py-4">
             <router-view></router-view>
         </div>
-
-
-        <!--<div class="card">-->
-            <!--<div class="card-body">-->
-                <!--<router-view></router-view>-->
-            <!--</div>-->
-        <!--</div>-->
     </div>
 </template>
 
@@ -58,11 +52,17 @@
     export default {
         data() {
             return {
-                hello: "Hello!"
+                hello: "Hello!",
+                little_id: null,
             }
         },
-        mounted() {
+        // beforeCreate() {
+        //     this.fetchData();
+        // },
+        created() {
+
             this.fetchData();
+
         },
         methods: {
             ...mapActions('user', ['fetchData']),
@@ -75,6 +75,14 @@
         },
         computed: {
             ...mapGetters('user', ['user_id']),
+            user_id2: {
+                    get (){
+                        return this.user_id;
+                    },
+                    set (value) {
+                        this.$store.commit('user/SET_USER_ID', value);
+                    }
+                },
         },
     }
 </script>

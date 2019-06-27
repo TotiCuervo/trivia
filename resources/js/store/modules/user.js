@@ -3,7 +3,7 @@ function initialState() {
         user: {
             name: 'Loading...',
             email: 'Loading...',
-            id: 'Loading...'
+            id: null
         },
         loading: false,
         form:{
@@ -34,11 +34,12 @@ const actions = {
 
         commit('setLoading', true);
 
-        console.log('made it');
-
         axios.get('/api/user')
             .then(response => {
+                let user = response.data;
+                console.log(user.id);
                 commit('SET_USER', response.data);
+                commit('SET_USER_ID', user.id);
                 commit('setLoading', false);
             }).catch( error => {
             console.log(error.response);
@@ -53,6 +54,9 @@ const mutations = {
     },
     SET_USER(state,user){
         state.user = user;
+    },
+    SET_USER_ID(state, user_id){
+        state.user.id = user_id;
     }
 
 };

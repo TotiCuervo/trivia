@@ -8,6 +8,8 @@ import user from './modules/user';
 import game from './modules/game';
 import gameOrder from './modules/gameOrder';
 import round from './modules/round';
+import question from './modules/question';
+
 
 
 
@@ -19,7 +21,8 @@ export const store = new Vuex.Store({
         user,
         game,
         gameOrder,
-        round
+        round,
+        question
     },
     strict: debug
 });

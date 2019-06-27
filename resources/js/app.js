@@ -17,6 +17,9 @@ Vue.use(VueRouter);
 import CreateTrivia from './components/Game/CreateTrivia.vue'
 import ShowGame from './components/Game/Show.vue'
 import CreateRound from './components/Round/CreateRound.vue'
+import RoundForm from './components/Round/RoundForm.vue'
+
+import Home from './components/Home.vue'
 import  {store} from './store'
 
 // import  {store} from './store'
@@ -30,6 +33,11 @@ files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(
 const router = new VueRouter({
     routes: [
         {
+            path: '/home',
+            name: 'home',
+            component: Home
+        },
+        {
             path: '/create/',
             name: 'createTrivia',
             component: CreateTrivia
@@ -41,9 +49,10 @@ const router = new VueRouter({
         },
         {
             path: '/trivia/:id/round',
-            name:  'createRound',
-            component: CreateRound
-        }
+            name:  'roundForm',
+            component: RoundForm
+        },
+        // { path: '*', redirect: '/home' }
     ]
 })
 

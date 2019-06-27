@@ -28,19 +28,15 @@
                 </div>
             </div>
         </div>
+
         <div class="trivia-outline">
             <RoundIndex></RoundIndex>
         </div>
+
         <div class="add-trivia">
-            <div class="row">
-                <div class="col-md-6">
-                    <router-link :to="{ name: 'createRound' }" class="round-button"><button type="button" class="btn btn-success w-100 min-vh-50">Add Round</button></router-link>
-                </div>
-                <div class="col-md-6">
-                    <button type="button" class="btn btn-danger w-100 min-vh-50">Add a Break</button>
-                </div>
-            </div>
+            <AddTrivia></AddTrivia>
         </div>
+
     </div>
 </template>
 

@@ -1,9 +1,16 @@
 <template>
     <div>
         <div class="card">
-            <div class="row">
-                <div class="col-md-12">
-                    <CreateQuestion></CreateQuestion>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <CreateQuestion></CreateQuestion>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <CreateAnswer></CreateAnswer>
+                    </div>
                 </div>
             </div>
         </div>

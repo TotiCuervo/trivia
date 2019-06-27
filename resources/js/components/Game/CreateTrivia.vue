@@ -36,7 +36,7 @@
         },
         methods: {
             newGame(){
-                axios.post('/api/game',{
+                axios.post('/api/game/create',{
                     name: this.name,
                     description: this.description,
                     company: this.company,
@@ -48,12 +48,6 @@
 
                 });
             },
-            // createGameOrder(gameID) {
-            //
-            //     axios.post('/api/gameOrder',{
-            //         game
-            //     })
-            // }
         },
         computed: {
             ...mapGetters('user', ['user_id']),

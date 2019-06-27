@@ -17,7 +17,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/game', 'GameController@store')->middleware('auth:api');
+Route::post('/game/create', 'GameController@store')->middleware('auth:api');
+
+Route::get('/games/{id}', 'GameController@index');
 
 Route::get('/trivia/{id}', 'GameController@show');
 

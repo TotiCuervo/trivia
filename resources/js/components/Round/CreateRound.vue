@@ -1,16 +1,5 @@
 <template>
     <div>
-        <div class="round-intro">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="float-right">
-                        <button type="button" class="btn btn-success" @click="addRound()" ><h4 class="mb-0">Save</h4></button>
-                    </div>
-                    <h1>Round {{roundCount + 1}}</h1>
-                    <hr>
-                </div>
-            </div>
-        </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
@@ -19,7 +8,7 @@
                 </div>
                 <div class="form-group">
                     <label>Time</label>
-                    <select class="form-control" v-model="game_id">
+                    <select class="form-control">
                         <option value=0>No Time Limit</option>
                         <option value="10" selected="selected">10 Sec</option>
                         <option value="20">20 Sec</option>
@@ -28,12 +17,6 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-8 offset-md-4">
-                <QAForm></QAForm>
-            </div>
-        </div>
-
     </div>
 </template>
 
@@ -42,42 +25,21 @@
     export default {
         data() {
             return {
-                // form: {
-                //     title: null,
-                //     time: null,
-                //     round_type: 'play',
-                // }
 
             }
         },
         mounted() {
-            this.id = this.$route.params;
-            this.fetchRounds(this.id);
+            // this.id = this.$route.params;
+            // // this.fetchRounds(this.id);
+            this.game_id = this.trivia_id;
+            this.round_type = 'play';
         },
         methods:{
-            ...mapActions('round', ['fetchRounds']),
-            // ...mapActions('round', ['addRound']),
 
-            addRound()
-            {
-                axios.post('api/round',{
-                    game_id: this.id.id,
-                    order_number: this.roundCount+1,
-                    title: this.form.title,
-                    time: this.form.time,
-                    round_type: this.form.round_type,
-                }).then(response => {
-                    this.$router.push({ name: "showGame", params: { id: this.id.id }});
-                }).catch( error => {
-                    console.log(error.response)
-                });
-
-            }
         },
         computed: {
             ...mapGetters('game', ['trivia_id']),
             ...mapGetters('round', ['roundCount', 'formTitle', 'formGameID', 'formOrderNumber', 'formRoundType']),
-            ...mapGetters('round', ['formGameID']),
 
             title: {
                 get (){
@@ -97,7 +59,7 @@
             },
             order_number: {
                 get (){
-                    return this.formOrderID;
+                    return this.formOrderNumber;
                 },
                 set (value) {
                     this.$store.commit('round/UPDATE_ORDER_NUMBER', value);
