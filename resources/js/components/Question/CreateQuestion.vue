@@ -29,7 +29,7 @@
 
         },
         computed: {
-            ...mapGetters('question', ['formTitle', 'formType', 'formRound_ID']),
+            ...mapGetters('question', ['formTitle', 'formType', 'formRoundID']),
 
             questionTitle: {
                 get() {
@@ -47,7 +47,7 @@
                     this.$store.commit('question/UPDATE_TYPE', value);
                 }
             },
-            questionRound_id: {
+            questionRoundID: {
                 get() {
                     return this.formRoundID;
                 },

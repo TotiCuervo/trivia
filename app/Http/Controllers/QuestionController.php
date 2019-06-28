@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Question;
+use App\Round;
+use App\Game;
 use Illuminate\Http\Request;
 
 class QuestionController extends Controller
@@ -12,9 +14,13 @@ class QuestionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        //
+        $trivia = Game::findorFail($id);
+
+        $questions = $trivia->questions()->get();
+
+        return $questions;
     }
 
     /**
@@ -35,7 +41,14 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $round = Round::findorFail($request->round_id);
+
+        $question = $round->questions()->create([
+            'title' => $request->title,
+            'type' => $request->type,
+        ]);
+
+        return $question;
     }
 
     /**

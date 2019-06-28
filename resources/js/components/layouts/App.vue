@@ -18,7 +18,7 @@
                         <li>
                             <button type="button" class="btn btn-success">
                                 <router-link :to="{ name: 'createTrivia' }" class="nav-link"><span style="color:white">Create Trivia Game!</span></router-link>
-                        </button>
+                            </button>
                         </li>
                     </ul>
 
@@ -75,14 +75,6 @@
         },
         computed: {
             ...mapGetters('user', ['user_id']),
-            user_id2: {
-                    get (){
-                        return this.user_id;
-                    },
-                    set (value) {
-                        this.$store.commit('user/SET_USER_ID', value);
-                    }
-                },
         },
     }
 </script>

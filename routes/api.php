@@ -25,7 +25,11 @@ Route::get('/trivia/{id}', 'GameController@show');
 
 Route::get('/trivia/{id}/rounds', 'RoundController@index');
 
+Route::get('/trivia/{id}/questions', 'QuestionController@index');
+
 Route::post('/round', 'RoundController@store');
+
+Route::post('/question/create', 'QuestionController@store');
 
 
 //Route::prefix('api')->group(function () {

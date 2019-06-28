@@ -1,10 +1,11 @@
 function initialState() {
     return {
         trivia: {
-            name: 'Loading...',
-            description: 'Loading...',
-            id: 'Loading...',
-            company: 'Loading...'
+            name: null,
+
+            description: null,
+            id: null,
+            company: null
         },
         loading: false,
         form:{

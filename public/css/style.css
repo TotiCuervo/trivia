@@ -15,3 +15,12 @@
     text-decoration: none;
     color: white;
 }
+
+.slash::before {
+    display: inline-block;
+    content: "";
+    border-top: .1rem solid black;
+    width: 100%;
+    margin: 0 1rem;
+    transform: translateY(-0.3rem);
+}

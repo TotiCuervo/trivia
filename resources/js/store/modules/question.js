@@ -33,18 +33,29 @@ const getters = {
 
 const actions = {
 
-    fetchRounds({ commit, state }) {
-
+    fetchQuestions({ commit, state }, trivia_id) {
         commit('setLoading', true);
-
-        axios.get('someURL')
+        axios.get('/api/trivia/' + trivia_id + '/questions')
             .then(response => {
-                commit('SET_QUESTION', response.data);
+                console.log(response.data);
+                commit('SET_QUESTIONS', response.data);
                 commit('setLoading', false);
             }).catch( error => {
             console.log(error.response);
         });
     },
+
+    newQuestion({commit, state}) {
+        commit('setLoading', true);
+        axios.post('/api/question/create', state.form)
+            .then(response => {
+                commit('UPDATE_QUESTIONS', response.data);
+                commit('CLEAR_FORM');
+                commit('setLoading', false);
+            }).catch( error => {
+            console.log(error.response);
+        });
+    }
 
 };
 
@@ -61,6 +72,9 @@ const mutations = {
     UPDATE_TITLE(state,title){
         state.form.title = title;
     },
+    UPDATE_QUESTIONS(state,question){
+        state.questions.push(question);
+    },
     UPDATE_TYPE(state,type){
         state.form.type = type;
     },
@@ -71,6 +85,7 @@ const mutations = {
         state.form = {
             title: null,
             type: null,
+            round_id: null,
         };
     },
 };

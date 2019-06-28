@@ -16,9 +16,10 @@ Vue.use(VueRouter);
 //component names
 import CreateTrivia from './components/Game/CreateTrivia.vue'
 import ShowGame from './components/Game/Show.vue'
-import CreateRound from './components/Round/CreateRound.vue'
+import CreateRound from './components/ThrowAways/CreateRound.vue'
 import RoundForm from './components/Round/RoundForm.vue'
-
+// import CreateQuestion from './components/Question/CreateQuestion.vue'
+import QAForm from './components/Question/QAForm.vue'
 import Home from './components/Home.vue'
 import  {store} from './store'
 
@@ -51,6 +52,11 @@ const router = new VueRouter({
             path: '/trivia/:id/round',
             name:  'roundForm',
             component: RoundForm
+        },
+        {
+            path: '/trivia/:id/round/:round_id/Question',
+            name:  'qaForm',
+            component: QAForm
         },
         // { path: '*', redirect: '/home' }
     ]

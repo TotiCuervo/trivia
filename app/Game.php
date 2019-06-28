@@ -22,4 +22,9 @@ class Game extends Model
     {
         return $this->hasMany(Round::class);
     }
+
+    public function questions()
+    {
+        return $this->hasManyThrough(Question::class, Round::class);
+    }
 }

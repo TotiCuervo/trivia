@@ -39,6 +39,7 @@
         methods:{
             ...mapActions('round', ['fetchRounds']),
             ...mapActions('round', ['addRound']),
+
             newRound()
             {
                 this.addRound();

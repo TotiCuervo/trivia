@@ -42,7 +42,7 @@ class RoundController extends Controller
     {
         $trivia = Game::findorFail($request->game_id);
 
-        $trivia->rounds()->create([
+        $round = $trivia->rounds()->create([
             'game_id' => $request->game_id,
             'order_number' => $request->order_number,
             'title' => $request->title,
@@ -50,7 +50,7 @@ class RoundController extends Controller
             'round_type' => $request->round_type,
         ]);
 
-        return $trivia;
+        return $round;
     }
 
     /**

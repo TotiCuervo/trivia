@@ -1,13 +1,13 @@
 function initialState() {
     return {
         rounds: [],
-        roundCount: 0,
+        currentRound: null,
         form:{
             title: null,
             time: null,
             round_type: null,
             game_id: null,
-            order_number:null,
+            order_number: null,
         }
     }
 }
@@ -17,7 +17,7 @@ const getters = {
         return state.rounds;
     },
     roundCount(state){
-        return state.roundCount;
+        return state.rounds.length;
     },
     formTitle(state){
         return state.form.title;
@@ -47,7 +47,6 @@ const actions = {
         axios.get('/api/trivia/'+id.id+'/rounds')
             .then(response => {
                 commit('SET_ROUNDS', response.data);
-                commit('SET_ROUND_COUNT');
                 commit('UPDATE_ORDER_NUMBER');
                 commit('setLoading', false);
             }).catch( error => {
@@ -60,8 +59,10 @@ const actions = {
         commit('setLoading', true);
         axios.post('api/round', state.form)
             .then(response => {
+                commit('ADD_ROUND', response.data);
+                commit('UPDATE_ORDER_NUMBER');
                 commit('setLoading', false);
-                commit('CLEAR_FORM');
+                // commit('CLEAR_FORM');
         }).catch( error => {
             console.log(error.response)
         });
@@ -76,9 +77,6 @@ const mutations = {
     SET_ROUNDS(state,rounds){
         state.rounds = rounds;
     },
-    SET_ROUND_COUNT(state){
-        state.roundCount = state.rounds.length;
-    },
     UPDATE_TITLE(state,title){
         state.form.title = title;
     },
@@ -86,10 +84,13 @@ const mutations = {
         state.form.game_id = gameID;
     },
     UPDATE_ORDER_NUMBER(state){
-        state.form.order_number = state.roundCount + 1;
+        state.form.order_number = state.rounds.length + 1;
     },
     UPDATE_ROUND_TYPE(state, round_type){
         state.form.round_type = round_type;
+    },
+    ADD_ROUND(state, round){
+        state.rounds.push(round);
     },
     CLEAR_FORM(state){
         state.form = {
