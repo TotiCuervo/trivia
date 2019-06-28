@@ -57,10 +57,14 @@
 
             //for Questions
             this.fetchQuestions(this.id.id);
+
+            //for Answers
+            this.fetchAnswers(this.id.id);
         },
         methods:{
             ...mapActions('round', ['fetchRounds']),
             ...mapActions('question', ['fetchQuestions']),
+            ...mapActions('answer', ['fetchAnswers']),
 
         },
         computed: {

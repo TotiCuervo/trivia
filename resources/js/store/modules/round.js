@@ -59,6 +59,7 @@ const actions = {
         commit('setLoading', true);
         axios.post('api/round', state.form)
             .then(response => {
+                console.log('in axios');
                 commit('ADD_ROUND', response.data);
                 commit('UPDATE_ORDER_NUMBER');
                 commit('setLoading', false);
@@ -66,6 +67,7 @@ const actions = {
         }).catch( error => {
             console.log(error.response)
         });
+
     },
 
 };

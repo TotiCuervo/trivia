@@ -1,14 +1,13 @@
 <template>
     <div>
-        <div v-for="question in questions">
-            <!--<h5>{{round_id}}</h5>-->
-            <div v-if="question.round_id === round_id">
-                <h5>{{question.title}}</h5>
-                <AnswerIndex :question_id="question.id"></AnswerIndex>
+        <div v-for="answer in answers">
+
+            <div v-if="answer.question_id === question_id">
+                <h5 class="pl-5">{{answer.title}}</h5>
             </div>
         </div>
     </div>
-    
+
 </template>
 
 <script>
@@ -24,12 +23,12 @@
             // this.fetchQuestions(this.id.id);
         },
         methods:{
-            ...mapActions('question', ['fetchQuestions']),
+            ...mapActions('answer', ['fetchanswers']),
         },
         computed: {
-            ...mapGetters('question', ['questions']),
+            ...mapGetters('answer', ['answers']),
         },
-        props: ['round_id'],
+        props: ['question_id'],
     }
 </script>
 

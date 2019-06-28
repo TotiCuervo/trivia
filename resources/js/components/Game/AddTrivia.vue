@@ -32,11 +32,8 @@
 
             newRound()
             {
-                this.id = this.$route.params;
                 this.addRound();
-                console.log('made it');
-                // this.$router.push({ name: "showGame", params: { id: this.id.id }});
-            }
+            },
         },
         computed: {
             ...mapGetters('round', ['roundCount', 'formTitle', 'formGameID', 'formOrderNumber', 'formRoundType']),

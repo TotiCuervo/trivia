@@ -17,13 +17,16 @@ const getters = {
     question(state){
         return state.question;
     },
+    questionFields(state){
+        return state.form;
+    },
     formTitle(state){
         return state.form.title;
     },
     formType(state){
         return state.form.type;
     },
-    formRoundID(state){
+    formQuestionRoundID(state){
         return state.form.round_id;
     },
     loading(state){
@@ -37,7 +40,6 @@ const actions = {
         commit('setLoading', true);
         axios.get('/api/trivia/' + trivia_id + '/questions')
             .then(response => {
-                console.log(response.data);
                 commit('SET_QUESTIONS', response.data);
                 commit('setLoading', false);
             }).catch( error => {
@@ -49,7 +51,9 @@ const actions = {
         commit('setLoading', true);
         axios.post('/api/question/create', state.form)
             .then(response => {
+                console.log(response.data);
                 commit('UPDATE_QUESTIONS', response.data);
+                commit('SET_QUESTION', response.data);
                 commit('CLEAR_FORM');
                 commit('setLoading', false);
             }).catch( error => {
@@ -71,6 +75,9 @@ const mutations = {
     },
     UPDATE_TITLE(state,title){
         state.form.title = title;
+    },
+    UPDATE_QUESTION(state,question){
+        state.question = question;
     },
     UPDATE_QUESTIONS(state,question){
         state.questions.push(question);
