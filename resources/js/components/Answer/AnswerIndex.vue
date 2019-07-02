@@ -1,7 +1,6 @@
 <template>
     <div>
         <div v-for="answer in answers">
-
             <div v-if="answer.question_id === question_id">
                 <h5 class="pl-5">{{answer.title}}</h5>
             </div>

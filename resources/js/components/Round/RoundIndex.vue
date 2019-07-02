@@ -9,29 +9,24 @@
                 </div>
             </div>
             <div v-else>
-                <div v-for="round in this.rounds" class="row pb-5">
-                    <div class="col-md-12">
-                        <div class="row pb-3">
-                            <div class="col-md-12">
-                                <h4 class="float-left">Round: {{round.order_number}}</h4>
-                                <div class="float-right">
-                                    <p>xxx</p>
-                                </div>
+                <div v-for="round in this.rounds" class="round-row pb-5">
+                    <div class="row pb-3">
+                        <div class="col-md-12">
+                            <h4 class="float-left">Round: {{round.order_number}}</h4>
+                            <div class="float-right">
+                                <p>xxx</p>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <QuestionIndex :round_id="round.id"></QuestionIndex>
-                            </div>
+                    </div>
+                    <QuestionIndex :round_id="round.id"></QuestionIndex>
+
+                    <div class="row pt-3">
+                        <div class="col-md-12">
+                            <button type="button" class="btn btn-success">
+                                <router-link :to="{ name: 'qaForm', params: { id: id.id, round_id: round.id } }" class="nav-link"><span style="color:white">Add Question</span></router-link>
+                            </button>
+                            <hr>
                         </div>
-                        <div class="row pt-3">
-                            <div class="col-md-12">
-                                <button type="button" class="btn btn-success">
-                                    <router-link :to="{ name: 'qaForm', params: { id: id.id, round_id: round.id } }" class="nav-link"><span style="color:white">Add Question</span></router-link>
-                                </button>
-                            </div>
-                        </div>
-                        <hr>
                     </div>
                 </div>
             </div>

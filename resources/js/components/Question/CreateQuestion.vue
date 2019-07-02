@@ -1,16 +1,10 @@
 <template>
     <div>
-        <h1>Question:</h1>
+        <h1>New Question:</h1>
         <div class="form-group">
-            <label>Question</label>
-            <input type="text" class="form-control" placeholder="Enter Name" v-model="questionTitle">
-        </div>
-        <div class="form-group">
-            <label>Type</label>
-            <select class="form-control" v-model="questionType">
-                <option value='Fill-in-blank' selected="selected">Fill In The Blank</option>
-                <option value="Multiple-Choice">Multiple Choice</option>
-            </select>
+
+            <textarea class="form-control" rows="3" v-model="questionTitle" placeholder="Type your question here..."></textarea>
+
         </div>
 
     </div>

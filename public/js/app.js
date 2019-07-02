@@ -1688,6 +1688,147 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Answer/AnswerField.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Answer/AnswerField.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      clicked: false
+    };
+  },
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('answer', ['deletedAnswer']), {
+    toggleClicked: function toggleClicked() {
+      this.clicked = !this.clicked;
+      this.$store.commit('answer/UPDATE_CORRECT', this.order_number);
+    },
+    toggleDelete: function toggleDelete() {
+      this.answerTitle = '';
+      this.deletedAnswer(this.order_number);
+      this.$emit('deleted', this.order_number);
+    }
+  }),
+  props: ['order_number'],
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('answer', ['answerFields', 'formTitle']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('question', ['formType']), {
+    questionType: {
+      get: function get() {
+        return this.formType;
+      },
+      set: function set(value) {
+        this.$store.commit('question/UPDATE_TYPE', value);
+      }
+    },
+    answerTitle: {
+      get: function get() {
+        return this.answerFields[this.order_number].title;
+      },
+      set: function set(value) {
+        var payload = {
+          title: value,
+          order: this.order_number
+        };
+        this.$store.commit('answer/UPDATE_TITLE', payload);
+      }
+    },
+    answerQuestionID: {
+      get: function get() {
+        return this.answerFields[this.order_number].question_id;
+      },
+      set: function set(value) {
+        var payload = {
+          questionID: value,
+          order: this.order_number
+        };
+        this.$store.commit('answer/UPDATE_QUESTION_ID', value);
+      }
+    },
+    answerCorrect: {
+      get: function get() {
+        return this.answerFields[this.order_number].correct;
+      },
+      set: function set(value) {
+        this.$store.commit('answer/CORRECT', value);
+      }
+    }
+  })
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Answer/AnswerIndex.vue?vue&type=script&lang=js&":
 /*!*****************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Answer/AnswerIndex.vue?vue&type=script&lang=js& ***!
@@ -1702,7 +1843,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
 //
 //
 //
@@ -1757,13 +1897,135 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      order_number: 1
+    };
+  },
+  methods: {
+    addAnswerOrder: function addAnswerOrder() {
+      this.order_number++;
+    },
+    changeOrderNumber: function changeOrderNumber() {
+      //if someone clicks on multiple choice and they don't already have two answer forms
+      if (this.order_number < 2 && this.formType === 'Multiple-Choice') {
+        //make this order_number = 2
+        this.order_number = 2;
+      } else if (this.order_number == 2 && this.answerFields[1].title === "") {
+        this.order_number = 1;
+      }
+    },
+    deletedWasClicked: function deletedWasClicked(order) {
+      this.order_number--;
+    }
+  },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('question', ['formType']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('answer', ['answerFields', 'formTitle']), {
+    questionType: {
+      get: function get() {
+        return this.formType;
+      },
+      set: function set(value) {
+        this.$store.commit('question/UPDATE_TYPE', value);
+      }
+    }
+  })
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Answer/FillBlank.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Answer/FillBlank.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {};
   },
-  methods: {},
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('answer', ['formTitle', 'formQuestionID', 'formCorrect']), {
+  methods: {
+    addAnswerOrder: function addAnswerOrder() {
+      this.order_number++;
+    }
+  },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('answer', ['formTitle', 'formQuestionID', 'formCorrect']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('question', ['formType']), {
     answerTitle: {
       get: function get() {
         return this.formTitle;
@@ -1786,6 +2048,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       },
       set: function set(value) {
         this.$store.commit('answer/CORRECT', value);
+      }
+    },
+    questionType: {
+      get: function get() {
+        return this.formType;
+      },
+      set: function set(value) {
+        this.$store.commit('question/UPDATE_TYPE', value);
       }
     }
   })
@@ -2143,12 +2413,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2214,12 +2478,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      routeParams: null,
-      burpy: null
+      routeParams: null
     };
   },
   mounted: function mounted() {
@@ -2230,49 +2504,70 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('question', ['newQuestion']), {
     qaForm: function qaForm() {
       this.addQuestion();
+      this.$router.push({
+        name: "showGame",
+        params: {
+          id: this.routeParams.id
+        }
+      });
     },
     addQuestion: function addQuestion() {
       var _this = this;
 
+      //Adds question to database
       axios.post('/api/question/create', this.questionForm).then(function (response) {
-        _this.$store.commit('question/UPDATE_QUESTIONS', response.data);
+        //creates new variable to pass to answers
+        var $newQuestion = response.data; //updates the question array with the newly made question
 
-        _this.$store.commit('question/SET_QUESTION', response.data);
+        _this.$store.commit('question/UPDATE_QUESTIONS', response.data); //sets the question to be used later
 
-        _this.$store.commit('question/CLEAR_FORM');
 
-        _this.answerQuestionID = _this.question.id;
+        _this.$store.commit('question/SET_QUESTION', response.data); //clears the form of the question store
 
-        _this.addAnswer();
-      })["catch"](function (error) {
-        console.log(error.response);
-      }); // this.$router.push({ name: "showGame", params: { id: this.routeParams.id }});
-    },
-    addAnswer: function addAnswer() {
-      var _this2 = this;
 
-      console.log("Made it in answer");
-      console.log(this.answerForm);
-      console.log('poop');
-      axios.post('/api/answer/create', this.answerForm).then(function (response) {
-        console.log(response.data);
+        _this.$store.commit('question/CLEAR_FORM'); //going to add questions
 
-        _this2.$store.commit('UPDATE_ANSWERS', response.data);
 
-        _this2.$store.commit('answer/CLEAR_FORM');
-
-        _this2.$router.push({
-          name: "showGame",
-          params: {
-            id: _this2.routeParams.id
-          }
-        });
+        _this.addAnswer($newQuestion);
       })["catch"](function (error) {
         console.log(error.response);
       });
+    },
+    addAnswer: function addAnswer($data) {
+      var _this2 = this;
+
+      //assigns all of the answers to this variable
+      var $answers = this.answerForm; //for loop to save each individual answer to the database
+
+      var _loop = function _loop($i) {
+        //if it is not an empty answer, do not fill it
+        if (!($answers[$i].title === '')) {
+          //sets up the answer to be saved
+          var $answer = {
+            'title': $answers[$i].title,
+            'question_id': $data.id,
+            'round_id': $data.round_id,
+            'correct': true
+          }; //posts the question to the database
+
+          axios.post('/api/answer/create', $answer).then(function (response) {
+            //adds the answer to the array of answers
+            _this2.$store.commit('answer/UPDATE_ANSWERS', response.data); //clears the answer form at the index of $i
+
+
+            _this2.$store.commit('answer/CLEAR_FORM', $i);
+          })["catch"](function (error) {
+            console.log(error.response);
+          });
+        }
+      };
+
+      for (var $i = 0; $i < $answers.length; $i++) {
+        _loop($i);
+      }
     }
   }),
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('question', ['formQuestionRoundID', 'question', 'questionFields']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('answer', ['formAnswerRoundID', 'formQuestionID', 'answerFields', 'formCorrect']), {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('question', ['formQuestionRoundID', 'question', 'questionFields']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('answer', ['answerFields']), {
     //Questions
     questionForm: {
       get: function get() {
@@ -2300,22 +2595,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       get: function get() {
         return this.answerFields;
       }
-    },
-    answerCorrect: {
-      get: function get() {
-        return this.formCorrect;
-      },
-      set: function set() {
-        this.$store.commit('answer/UPDATE_CORRECT', value);
-      }
-    },
-    answerRoundID: {
-      get: function get() {
-        return this.formAnswerRoundID;
-      },
-      set: function set(value) {
-        this.$store.commit('answer/UPDATE_ROUND_ID', value);
-      }
     }
   })
 });
@@ -2336,6 +2615,39 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2446,11 +2758,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
-//
-//
-//
-//
 //
 //
 //
@@ -33654,6 +33961,159 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Answer/AnswerField.vue?vue&type=template&id=5c9fab16&scoped=true&":
+/*!*********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Answer/AnswerField.vue?vue&type=template&id=5c9fab16&scoped=true& ***!
+  \*********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _vm.questionType === "Multiple-Choice"
+      ? _c("div", [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-md-10 offset-md-1" }, [
+              this.order_number <= 1
+                ? _c("small", { staticClass: "form-text text-muted mt-0" }, [
+                    _vm._v("\n                    (Required)\n                ")
+                  ])
+                : _vm._e()
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "row mb-3" }, [
+            _c("div", { staticClass: "col-md-1 pr-4" }, [
+              _c("table", { staticStyle: { height: "100%" } }, [
+                _c("tbody", [
+                  this.answerCorrect
+                    ? _c("td", { staticClass: "align-middle" }, [
+                        _c("i", {
+                          staticClass: "fas fa-check-circle fa-1x5 fa-clicked",
+                          on: { click: _vm.toggleClicked }
+                        })
+                      ])
+                    : _c(
+                        "td",
+                        {
+                          staticClass: "align-middle",
+                          on: { click: _vm.toggleClicked }
+                        },
+                        [
+                          _c("i", {
+                            staticClass:
+                              "far fa-check-circle fa-1x5 fa-not-clicked"
+                          })
+                        ]
+                      )
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-10" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.answerTitle,
+                    expression: "answerTitle"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text", placeholder: "Enter Answer" },
+                domProps: { value: _vm.answerTitle },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.answerTitle = $event.target.value
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            this.order_number > 1
+              ? _c("div", { staticClass: "col-md-1 pl-0" }, [
+                  _c("table", { staticStyle: { height: "100%" } }, [
+                    _c("tbody", [
+                      _c("td", { staticClass: "align-middle" }, [
+                        _c("i", {
+                          staticClass: "far fa-trash-alt fa-not-clicked-delete",
+                          on: { click: _vm.toggleDelete }
+                        })
+                      ])
+                    ])
+                  ])
+                ])
+              : _vm._e()
+          ])
+        ])
+      : _c("div", [
+          _c("div", { staticClass: "row mb-3" }, [
+            _c("div", { staticClass: "col-md-10 offset-md-1" }, [
+              this.order_number === 0
+                ? _c("small", { staticClass: "form-text text-muted mt-0" }, [
+                    _vm._v("\n                    (Required)\n                ")
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.answerTitle,
+                    expression: "answerTitle"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text", placeholder: "Enter Answer" },
+                domProps: { value: _vm.answerTitle },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.answerTitle = $event.target.value
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            this.order_number > 0
+              ? _c("div", { staticClass: "col-md-1 pl-0" }, [
+                  _c("table", { staticStyle: { height: "100%" } }, [
+                    _c("tbody", [
+                      _c("td", { staticClass: "align-middle" }, [
+                        _c("i", {
+                          staticClass: "far fa-trash-alt fa-not-clicked-delete",
+                          on: { click: _vm.toggleDelete }
+                        })
+                      ])
+                    ])
+                  ])
+                ])
+              : _vm._e()
+          ])
+        ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Answer/AnswerIndex.vue?vue&type=template&id=3dd6f224&scoped=true&":
 /*!*********************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Answer/AnswerIndex.vue?vue&type=template&id=3dd6f224&scoped=true& ***!
@@ -33706,36 +34166,236 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("h1", [_vm._v("Answer:")]),
-    _vm._v(" "),
-    _c("div", { staticClass: "form-group" }, [
-      _c("label", [_vm._v("Question")]),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-6 offset-md-1" }, [
+        _c(
+          "select",
           {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.answerTitle,
-            expression: "answerTitle"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: { type: "text", placeholder: "Enter Name" },
-        domProps: { value: _vm.answerTitle },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.questionType,
+                expression: "questionType"
+              }
+            ],
+            staticClass: "form-control mt-2",
+            on: {
+              change: [
+                function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.questionType = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                },
+                _vm.changeOrderNumber
+              ]
             }
-            _vm.answerTitle = $event.target.value
-          }
-        }
-      })
-    ])
+          },
+          [
+            _c("option", { attrs: { value: "Fill-in-blank", selected: "" } }, [
+              _vm._v("Fill In The Blank")
+            ]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "Multiple-Choice" } }, [
+              _vm._v("Multiple Choice")
+            ])
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-4" }, [
+        this.order_number === 7
+          ? _c("div", [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-danger w-100 mt-2",
+                  attrs: { type: "button" }
+                },
+                [_vm._v("Cut off: 7 Answers")]
+              )
+            ])
+          : _c("div", [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-outline-success w-100 mt-2",
+                  attrs: { type: "button" },
+                  on: { click: _vm.addAnswerOrder }
+                },
+                [_vm._v("Add Answer")]
+              )
+            ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "pt-3" },
+      _vm._l(this.order_number, function(n, index) {
+        return _c("div", [
+          _c("div", { staticClass: "row" }, [
+            _c(
+              "div",
+              { staticClass: "col-md-12" },
+              [
+                _c("AnswerField", {
+                  attrs: { order_number: index },
+                  on: { deleted: _vm.deletedWasClicked }
+                })
+              ],
+              1
+            )
+          ])
+        ])
+      }),
+      0
+    )
   ])
 }
 var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Answer/FillBlank.vue?vue&type=template&id=7843d26a&scoped=true&":
+/*!*******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Answer/FillBlank.vue?vue&type=template&id=7843d26a&scoped=true& ***!
+  \*******************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-6 offset-md-1" }, [
+        _c(
+          "select",
+          {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.questionType,
+                expression: "questionType"
+              }
+            ],
+            staticClass: "form-control mt-2",
+            on: {
+              change: function($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function(o) {
+                    return o.selected
+                  })
+                  .map(function(o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.questionType = $event.target.multiple
+                  ? $$selectedVal
+                  : $$selectedVal[0]
+              }
+            }
+          },
+          [
+            _c("option", { attrs: { value: "Fill-in-blank", selected: "" } }, [
+              _vm._v("Fill In The Blank")
+            ]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "Multiple-Choice" } }, [
+              _vm._v("Multiple Choice")
+            ])
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-4" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-outline-success w-100 mt-2",
+            attrs: { type: "button" },
+            on: { click: _vm.addAnswerOrder }
+          },
+          [_vm._v("Add Answer")]
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "pt-3" }, [
+      _vm.questionType === "Multiple-Choice"
+        ? _c("div", [_vm._m(0)])
+        : _c(
+            "div",
+            _vm._l(this.order_number, function(n, index) {
+              return _c("div", [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-md-12" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.answerTitle,
+                            expression: "answerTitle"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", placeholder: "Enter Answer" },
+                        domProps: { value: _vm.answerTitle },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.answerTitle = $event.target.value
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("small", { staticClass: "form-text text-muted" }, [
+                        _vm._v(
+                          "\n                                (Required)\n                            "
+                        )
+                      ])
+                    ])
+                  ])
+                ])
+              ])
+            }),
+            0
+          )
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row pt-3" }, [
+      _c("div", { staticClass: "col-md-12" }, [_c("h1", [_vm._v("Poop")])])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -34146,12 +34806,10 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("h1", [_vm._v("Question:")]),
+    _c("h1", [_vm._v("New Question:")]),
     _vm._v(" "),
     _c("div", { staticClass: "form-group" }, [
-      _c("label", [_vm._v("Question")]),
-      _vm._v(" "),
-      _c("input", {
+      _c("textarea", {
         directives: [
           {
             name: "model",
@@ -34161,7 +34819,7 @@ var render = function() {
           }
         ],
         staticClass: "form-control",
-        attrs: { type: "text", placeholder: "Enter Name" },
+        attrs: { rows: "3", placeholder: "Type your question here..." },
         domProps: { value: _vm.questionTitle },
         on: {
           input: function($event) {
@@ -34172,51 +34830,6 @@ var render = function() {
           }
         }
       })
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "form-group" }, [
-      _c("label", [_vm._v("Type")]),
-      _vm._v(" "),
-      _c(
-        "select",
-        {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.questionType,
-              expression: "questionType"
-            }
-          ],
-          staticClass: "form-control",
-          on: {
-            change: function($event) {
-              var $$selectedVal = Array.prototype.filter
-                .call($event.target.options, function(o) {
-                  return o.selected
-                })
-                .map(function(o) {
-                  var val = "_value" in o ? o._value : o.value
-                  return val
-                })
-              _vm.questionType = $event.target.multiple
-                ? $$selectedVal
-                : $$selectedVal[0]
-            }
-          }
-        },
-        [
-          _c(
-            "option",
-            { attrs: { value: "Fill-in-blank", selected: "selected" } },
-            [_vm._v("Fill In The Blank")]
-          ),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "Multiple-Choice" } }, [
-            _vm._v("Multiple Choice")
-          ])
-        ]
-      )
     ])
   ])
 }
@@ -34243,26 +34856,46 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "card" }, [
-      _c("div", { staticClass: "container" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-md-12" }, [_c("CreateQuestion")], 1)
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-md-8" }, [_c("CreateAnswer")], 1)
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "row" }, [
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-success",
-              attrs: { type: "button" },
-              on: { click: _vm.addQuestion }
-            },
-            [_vm._v(" Create Question ")]
-          )
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-8 offset-md-2" }, [
+        _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card-body" }, [
+            _c("div", { staticClass: "container" }, [
+              _c("div", { staticClass: "row pt-3" }, [
+                _c(
+                  "div",
+                  { staticClass: "col-md-10 offset-md-1" },
+                  [_c("CreateQuestion"), _vm._v(" "), _c("hr")],
+                  1
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row pt-4" }, [
+                _c(
+                  "div",
+                  { staticClass: "col-md-10 offset-md-1" },
+                  [_c("CreateAnswer")],
+                  1
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row pt-3 pb-5" }, [
+                _c("div", { staticClass: "col-md-10 offset-md-1" }, [
+                  _c("hr"),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-success w-100",
+                      attrs: { type: "button" },
+                      on: { click: _vm.qaForm }
+                    },
+                    [_vm._v(" Create Question ")]
+                  )
+                ])
+              ])
+            ])
+          ])
         ])
       ])
     ])
@@ -34290,27 +34923,56 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    _vm._l(_vm.questions, function(question) {
-      return _c("div", [
-        question.round_id === _vm.round_id
-          ? _c(
-              "div",
-              [
-                _c("h5", [_vm._v(_vm._s(question.title))]),
-                _vm._v(" "),
-                _c("AnswerIndex", { attrs: { question_id: question.id } })
-              ],
-              1
-            )
-          : _vm._e()
-      ])
-    }),
-    0
-  )
+  return _c("div", [
+    _c(
+      "div",
+      { staticClass: "container" },
+      _vm._l(_vm.questions, function(question) {
+        return _c("div", [
+          question.round_id === _vm.round_id
+            ? _c("div", [
+                _c("div", { staticClass: "row pb-3" }, [
+                  _c("div", { staticClass: "col-md-12 pr-2" }, [
+                    _c("div", { staticClass: "card" }, [
+                      _c("div", { staticClass: "card-body" }, [
+                        _c("div", { staticClass: "row" }, [
+                          _vm._m(0, true),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-md-5" }, [
+                            _c("h4", [_vm._v(_vm._s(question.title))])
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "col-md-5" },
+                            [
+                              _c("AnswerIndex", {
+                                attrs: { question_id: question.id }
+                              })
+                            ],
+                            1
+                          )
+                        ])
+                      ])
+                    ])
+                  ])
+                ])
+              ])
+            : _vm._e()
+        ])
+      }),
+      0
+    )
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-1" }, [_c("h5", [_vm._v("Q1")])])
+  }
+]
 render._withStripped = true
 
 
@@ -34390,8 +35052,10 @@ var render = function() {
             : _c(
                 "div",
                 _vm._l(this.rounds, function(round) {
-                  return _c("div", { staticClass: "row pb-5" }, [
-                    _c("div", { staticClass: "col-md-12" }, [
+                  return _c(
+                    "div",
+                    { staticClass: "round-row pb-5" },
+                    [
                       _c("div", { staticClass: "row pb-3" }, [
                         _c("div", { staticClass: "col-md-12" }, [
                           _c("h4", { staticClass: "float-left" }, [
@@ -34402,18 +35066,7 @@ var render = function() {
                         ])
                       ]),
                       _vm._v(" "),
-                      _c("div", { staticClass: "row" }, [
-                        _c(
-                          "div",
-                          { staticClass: "col-md-12" },
-                          [
-                            _c("QuestionIndex", {
-                              attrs: { round_id: round.id }
-                            })
-                          ],
-                          1
-                        )
-                      ]),
+                      _c("QuestionIndex", { attrs: { round_id: round.id } }),
                       _vm._v(" "),
                       _c("div", { staticClass: "row pt-3" }, [
                         _c("div", { staticClass: "col-md-12" }, [
@@ -34448,13 +35101,14 @@ var render = function() {
                               )
                             ],
                             1
-                          )
+                          ),
+                          _vm._v(" "),
+                          _c("hr")
                         ])
-                      ]),
-                      _vm._v(" "),
-                      _c("hr")
-                    ])
-                  ])
+                      ])
+                    ],
+                    1
+                  )
                 }),
                 0
               )
@@ -50704,8 +51358,10 @@ module.exports = function(module) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
+	"./components/Answer/AnswerField.vue": "./resources/js/components/Answer/AnswerField.vue",
 	"./components/Answer/AnswerIndex.vue": "./resources/js/components/Answer/AnswerIndex.vue",
 	"./components/Answer/CreateAnswer.vue": "./resources/js/components/Answer/CreateAnswer.vue",
+	"./components/Answer/FillBlank.vue": "./resources/js/components/Answer/FillBlank.vue",
 	"./components/ExampleComponent.vue": "./resources/js/components/ExampleComponent.vue",
 	"./components/Game/AddTrivia.vue": "./resources/js/components/Game/AddTrivia.vue",
 	"./components/Game/CreateTrivia.vue": "./resources/js/components/Game/CreateTrivia.vue",
@@ -50876,6 +51532,75 @@ if (token) {
 
 /***/ }),
 
+/***/ "./resources/js/components/Answer/AnswerField.vue":
+/*!********************************************************!*\
+  !*** ./resources/js/components/Answer/AnswerField.vue ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _AnswerField_vue_vue_type_template_id_5c9fab16_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AnswerField.vue?vue&type=template&id=5c9fab16&scoped=true& */ "./resources/js/components/Answer/AnswerField.vue?vue&type=template&id=5c9fab16&scoped=true&");
+/* harmony import */ var _AnswerField_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AnswerField.vue?vue&type=script&lang=js& */ "./resources/js/components/Answer/AnswerField.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _AnswerField_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AnswerField_vue_vue_type_template_id_5c9fab16_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _AnswerField_vue_vue_type_template_id_5c9fab16_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "5c9fab16",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Answer/AnswerField.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Answer/AnswerField.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/Answer/AnswerField.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AnswerField_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./AnswerField.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Answer/AnswerField.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AnswerField_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Answer/AnswerField.vue?vue&type=template&id=5c9fab16&scoped=true&":
+/*!***************************************************************************************************!*\
+  !*** ./resources/js/components/Answer/AnswerField.vue?vue&type=template&id=5c9fab16&scoped=true& ***!
+  \***************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AnswerField_vue_vue_type_template_id_5c9fab16_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./AnswerField.vue?vue&type=template&id=5c9fab16&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Answer/AnswerField.vue?vue&type=template&id=5c9fab16&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AnswerField_vue_vue_type_template_id_5c9fab16_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AnswerField_vue_vue_type_template_id_5c9fab16_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/Answer/AnswerIndex.vue":
 /*!********************************************************!*\
   !*** ./resources/js/components/Answer/AnswerIndex.vue ***!
@@ -51009,6 +51734,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateAnswer_vue_vue_type_template_id_f48509e0_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateAnswer_vue_vue_type_template_id_f48509e0_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Answer/FillBlank.vue":
+/*!******************************************************!*\
+  !*** ./resources/js/components/Answer/FillBlank.vue ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _FillBlank_vue_vue_type_template_id_7843d26a_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FillBlank.vue?vue&type=template&id=7843d26a&scoped=true& */ "./resources/js/components/Answer/FillBlank.vue?vue&type=template&id=7843d26a&scoped=true&");
+/* harmony import */ var _FillBlank_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FillBlank.vue?vue&type=script&lang=js& */ "./resources/js/components/Answer/FillBlank.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _FillBlank_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _FillBlank_vue_vue_type_template_id_7843d26a_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _FillBlank_vue_vue_type_template_id_7843d26a_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "7843d26a",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Answer/FillBlank.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Answer/FillBlank.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/components/Answer/FillBlank.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FillBlank_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./FillBlank.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Answer/FillBlank.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FillBlank_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Answer/FillBlank.vue?vue&type=template&id=7843d26a&scoped=true&":
+/*!*************************************************************************************************!*\
+  !*** ./resources/js/components/Answer/FillBlank.vue?vue&type=template&id=7843d26a&scoped=true& ***!
+  \*************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FillBlank_vue_vue_type_template_id_7843d26a_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./FillBlank.vue?vue&type=template&id=7843d26a&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Answer/FillBlank.vue?vue&type=template&id=7843d26a&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FillBlank_vue_vue_type_template_id_7843d26a_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FillBlank_vue_vue_type_template_id_7843d26a_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -52105,12 +52899,42 @@ function initialState() {
   return {
     answers: [],
     answer: null,
-    form: {
-      title: null,
-      question_id: null,
-      round_id: null,
-      correct: true
-    }
+    form: [{
+      title: '',
+      question_id: '',
+      round_id: '',
+      correct: false
+    }, {
+      title: '',
+      question_id: '',
+      round_id: '',
+      correct: false
+    }, {
+      title: '',
+      question_id: '',
+      round_id: '',
+      correct: false
+    }, {
+      title: '',
+      question_id: '',
+      round_id: '',
+      correct: false
+    }, {
+      title: '',
+      question_id: '',
+      round_id: '',
+      correct: false
+    }, {
+      title: '',
+      question_id: '',
+      round_id: '',
+      correct: false
+    }, {
+      title: '',
+      question_id: '',
+      round_id: '',
+      correct: false
+    }]
   };
 }
 
@@ -52118,9 +52942,9 @@ var getters = {
   answers: function answers(state) {
     return state.answers;
   },
-  answer: function answer(state) {
-    return state.answer;
-  },
+  // answerForm(state){
+  //     return state.form;
+  // },
   answerFields: function answerFields(state) {
     return state.form;
   },
@@ -52131,7 +52955,7 @@ var getters = {
     return state.form.question_id;
   },
   formAnswerRoundID: function formAnswerRoundID(state) {
-    return state.form.question_id;
+    return state.form.round_id;
   },
   formCorrect: function formCorrect(state) {
     return state.form.correct;
@@ -52152,6 +52976,15 @@ var actions = {
     })["catch"](function (error) {
       console.log(error.response);
     });
+  },
+  deletedAnswer: function deletedAnswer(_ref2, order_num) {
+    var commit = _ref2.commit,
+        state = _ref2.state;
+
+    while (order_num < 6) {
+      commit('DELETED_ANSWER', order_num);
+      order_num = order_num + 1;
+    }
   }
 };
 var mutations = {
@@ -52164,26 +52997,32 @@ var mutations = {
   SET_ANSWERS: function SET_ANSWERS(state, answers) {
     state.answers = answers;
   },
-  UPDATE_TITLE: function UPDATE_TITLE(state, title) {
-    state.form.title = title;
+  UPDATE_TITLE: function UPDATE_TITLE(state, payload) {
+    state.form[payload.order].title = payload.title;
   },
   UPDATE_ANSWERS: function UPDATE_ANSWERS(state, answer) {
     state.answers.push(answer);
   },
-  UPDATE_QUESTION_ID: function UPDATE_QUESTION_ID(state, question_id) {
-    state.form.question_id = question_id;
+  UPDATE_QUESTION_ID: function UPDATE_QUESTION_ID(state, payload) {
+    state.form[payload.order].question_id = payload.questionID;
   },
   UPDATE_ROUND_ID: function UPDATE_ROUND_ID(state, round_id) {
     state.form.round_id = round_id;
   },
-  UPDATE_CORRECT: function UPDATE_CORRECT(state, correct) {
-    state.form.correct = correct;
+  UPDATE_CORRECT: function UPDATE_CORRECT(state, order) {
+    state.form[order].correct = !state.form[order].correct;
   },
-  CLEAR_FORM: function CLEAR_FORM(state) {
-    state.form = {
-      title: null,
-      question_id: null,
-      correct: null
+  DELETED_ANSWER: function DELETED_ANSWER(state, order) {
+    state.form[order].title = state.form[order + 1].title;
+    state.form[order].correct = state.form[order + 1].correct;
+  },
+  CLEAR_FORM: function CLEAR_FORM(state, order) {
+    console.log('made it');
+    state.form[order] = {
+      title: '',
+      question_id: '',
+      round_id: '',
+      correct: true
     };
   }
 };
@@ -52367,9 +53206,9 @@ function initialState() {
     questions: [],
     question: null,
     form: {
-      title: null,
-      type: null,
-      round_id: null
+      title: '',
+      type: '',
+      round_id: ''
     }
   };
 }

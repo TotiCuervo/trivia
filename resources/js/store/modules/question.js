@@ -3,9 +3,9 @@ function initialState() {
         questions: [],
         question: null,
         form:{
-            title: null,
-            type: null,
-            round_id: null,
+            title: '',
+            type: '',
+            round_id: '',
         }
     }
 }
