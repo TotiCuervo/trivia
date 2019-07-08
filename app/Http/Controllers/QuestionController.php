@@ -46,6 +46,7 @@ class QuestionController extends Controller
         $question = $round->questions()->create([
             'title' => $request->title,
             'type' => $request->type,
+            'order_number' => $request->order_number,
         ]);
 
         return $question;
@@ -57,9 +58,10 @@ class QuestionController extends Controller
      * @param  \App\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function show(Question $question)
+    public function show($id)
     {
-        //
+        $question = Question::findorFail($id);
+        return $question;
     }
 
     /**

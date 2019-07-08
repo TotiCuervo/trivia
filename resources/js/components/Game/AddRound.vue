@@ -1,19 +1,17 @@
 <template>
     <div>
         <div class="row">
-            <!--<div class="col-md-6">-->
-                <!--<router-link :to="{ name: 'roundForm' }" class="round-button"><button type="button" class="btn btn-success w-100 min-vh-50">Add Round</button></router-link>-->
-            <!--</div>-->
-            <!--<div class="col-md-6">-->
-                <!--<button type="button" class="btn btn-danger w-100 min-vh-50">Add a Break</button>-->
-            <!--</div>-->
 
+            <!--adds new play round-->
             <div class="col-md-6">
                 <button type="button" class="btn btn-success w-100 min-vh-50" @click="newRound">Add Round</button>
             </div>
+
+            <!--adds new break round-->
             <div class="col-md-6">
                 <button type="button" class="btn btn-danger w-100 min-vh-50">Add a Break</button>
             </div>
+
         </div>
     </div>
 </template>
@@ -30,15 +28,13 @@
             ...mapActions('round', ['fetchRounds']),
             ...mapActions('round', ['addRound']),
 
+            //adds new round to game
             newRound()
             {
+                //triggers new round function in round store
                 this.addRound();
             },
         },
-        computed: {
-            ...mapGetters('round', ['roundCount', 'formTitle', 'formGameID', 'formOrderNumber', 'formRoundType']),
-            ...mapGetters('game', ['trivia', 'trivia_id']),
-        }
     }
 </script>
 

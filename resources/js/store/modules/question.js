@@ -3,9 +3,11 @@ function initialState() {
         questions: [],
         question: null,
         form:{
+            id: '',
             title: '',
             type: '',
             round_id: '',
+            order_number: '',
         }
     }
 }
@@ -29,12 +31,29 @@ const getters = {
     formQuestionRoundID(state){
         return state.form.round_id;
     },
+    formOrderNumber(state) {
+        return state.form.order_number;
+    },
     loading(state){
         return state.loading;
     },
 };
 
 const actions = {
+
+    fetchQuestion({ commit, state}, question_id)
+    {
+
+        commit('setLoading', true);
+        axios.get('/api/question/' + question_id)
+            .then(response => {
+                console.log(response.data);
+                commit('SET_QUESTION_FORM', response.data);
+                commit('setLoading', false);
+            }).catch( error => {
+            console.log(error.response);
+        });
+    },
 
     fetchQuestions({ commit, state }, trivia_id) {
         commit('setLoading', true);
@@ -73,8 +92,22 @@ const mutations = {
     SET_QUESTIONS(state, questions){
         state.questions = questions;
     },
+    SET_QUESTION_FORM(state, question){
+
+        state.form = {
+            id: question.id,
+            title: question.title,
+            type: question.type,
+            round_id: question.round_id,
+            order_number: question.order_number
+        };
+    },
     UPDATE_TITLE(state,title){
         state.form.title = title;
+    },
+    UPDATE_ORDER_NUMBER(state,order_number){
+        console.log('made it');
+        state.form.order_number = order_number;
     },
     UPDATE_QUESTION(state,question){
         state.question = question;
@@ -90,9 +123,11 @@ const mutations = {
     },
     CLEAR_FORM(state){
         state.form = {
-            title: null,
-            type: null,
-            round_id: null,
+            id: '',
+            title: '',
+            type: '',
+            round_id: '',
+            order_number: '',
         };
     },
 };

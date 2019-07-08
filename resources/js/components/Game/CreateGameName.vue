@@ -44,7 +44,7 @@
                 }).then(response => {
                     let game = response.data;
                     // this.createGameOrder(game.id);
-                    this.$router.push({ name: "showGame", params: { id: game.id }});
+                    this.$router.push({ name: "gameDetails", params: { id: game.id }});
 
                 });
             },

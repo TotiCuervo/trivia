@@ -16,11 +16,21 @@ class AnswerController extends Controller
      */
     public function index($id)
     {
-        $trivia = Game::findorFail($id);
+        $game = Game::findorFail($id);
 
-        $answers = $trivia->answers()->get();
+        $answers = $game->answers()->get();
 
         return $answers;
+    }
+
+    public function questionIndex($id)
+    {
+        $question = Question::findorFail($id);
+
+        $answers = $question->answers()->get();
+
+        return $answers;
+
     }
 
     /**

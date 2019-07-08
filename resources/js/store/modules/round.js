@@ -57,7 +57,7 @@ const actions = {
     addRound({commit, state})
     {
         commit('setLoading', true);
-        axios.post('api/round', state.form)
+        axios.post('api/round/create', state.form)
             .then(response => {
                 console.log('in axios');
                 commit('ADD_ROUND', response.data);

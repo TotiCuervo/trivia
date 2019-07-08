@@ -19,11 +19,28 @@
 
             }
         },
+        mounted() {
+
+            //gets the params from the url
+            this.routeParams = this.$route.params;
+
+            let $orderNumber = 1;
+
+            for (let $i = 0; $i < this.questions.length; $i++)
+            {
+                if(this.questions[$i].round_id === this.routeParams.round_id)
+                {
+                    $orderNumber++;
+                }
+            }
+
+            this.$store.commit('question/UPDATE_ORDER_NUMBER', $orderNumber);
+        },
         methods:{
 
         },
         computed: {
-            ...mapGetters('question', ['formTitle', 'formType']),
+            ...mapGetters('question', ['formTitle', 'formType', 'questions']),
 
             questionTitle: {
                 get() {

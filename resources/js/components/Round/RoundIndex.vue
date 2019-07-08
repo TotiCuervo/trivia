@@ -1,6 +1,10 @@
 <template>
     <div>
+
+        <!--wait until the rounds have been loaded-->
         <div v-if="!(this.id == null)">
+
+            <!--if there are no rounds, show this-->
             <div v-if="this.rounds.length === 0">
                 <div class="row pb-4">
                     <div class="col-md-12">
@@ -8,26 +12,11 @@
                     </div>
                 </div>
             </div>
+            <!--else, do this-->
             <div v-else>
+                <!--for every round that there is, create a new round component-->
                 <div v-for="round in this.rounds" class="round-row pb-5">
-                    <div class="row pb-3">
-                        <div class="col-md-12">
-                            <h4 class="float-left">Round: {{round.order_number}}</h4>
-                            <div class="float-right">
-                                <p>xxx</p>
-                            </div>
-                        </div>
-                    </div>
-                    <QuestionIndex :round_id="round.id"></QuestionIndex>
-
-                    <div class="row pt-3">
-                        <div class="col-md-12">
-                            <button type="button" class="btn btn-success">
-                                <router-link :to="{ name: 'qaForm', params: { id: id.id, round_id: round.id } }" class="nav-link"><span style="color:white">Add Question</span></router-link>
-                            </button>
-                            <hr>
-                        </div>
-                    </div>
+                    <RoundDetails :round="round"></RoundDetails>
                 </div>
             </div>
         </div>
@@ -47,7 +36,7 @@
 
             //for Rounds
             this.fetchRounds(this.id);
-            this.game_id = this.trivia_id;
+            this.round_game_id = this.game_id;
             this.round_type = 'play';
 
             //for Questions
@@ -63,9 +52,9 @@
 
         },
         computed: {
-            ...mapGetters('game', ['trivia_id', 'trivia']),
+            ...mapGetters('game', ['game_id', 'game']),
             ...mapGetters('round', ['rounds', 'formGameID','formRoundType']),
-            game_id: {
+            round_game_id: {
                 get (){
                     return this.formGameID;
                 },

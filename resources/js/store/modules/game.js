@@ -1,8 +1,7 @@
 function initialState() {
     return {
-        trivia: {
+        game: {
             name: null,
-
             description: null,
             id: null,
             company: null
@@ -18,20 +17,20 @@ function initialState() {
 }
 
 const getters = {
-    trivia(state){
-        return state.trivia;
+    game(state){
+        return state.game;
     },
     name(state){
-        return state.trivia.name;
+        return state.game.name;
     },
     description(state){
-        return state.trivia.description;
+        return state.game.description;
     },
-    trivia_id(state){
-        return state.trivia.id;
+    game_id(state){
+        return state.game.id;
     },
     company(state){
-        return state.trivia.company;
+        return state.game.company;
     },
     formName(state){
         return state.form.name;
@@ -58,9 +57,9 @@ const actions = {
 
         commit('setLoading', true);
 
-        axios.get('/api/trivia/'+id.id)
+        axios.get('/api/game/'+id.id)
             .then(response => {
-                commit('SET_TRIVIA', response.data);
+                commit('SET_GAME', response.data);
                 commit('setLoading', false);
             })
             .catch( error => {
@@ -74,8 +73,8 @@ const mutations = {
     setLoading(state, loading) {
         state.loading = loading
     },
-    SET_TRIVIA(state,trivia){
-        state.trivia = trivia;
+    SET_GAME(state, game){
+        state.game = game;
     }
 
 };

@@ -13,17 +13,24 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter);
 
 
+import Vue from 'vue'
+import BootstrapVue from 'bootstrap-vue'
+
+Vue.use(BootstrapVue)
+
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+
+
 //component names
-import CreateTrivia from './components/Game/CreateTrivia.vue'
-import ShowGame from './components/Game/Show.vue'
-import CreateRound from './components/ThrowAways/CreateRound.vue'
-import RoundForm from './components/Round/RoundForm.vue'
-// import CreateQuestion from './components/Question/CreateQuestion.vue'
-import QAForm from './components/Question/QAForm.vue'
+import EditQAForm from './components/Question/EditQAForm.vue'
+import CreateGameName from './components/Game/CreateGameName.vue'
+import GameDetails from './components/Game/GameDetails.vue'
+import CreateQAForm from './components/Question/CreateQAForm.vue'
 import Home from './components/Home.vue'
 import  {store} from './store'
 
-// import  {store} from './store'
+// import  {store} from './store'c
 
 const files = require.context('./', true, /\.vue$/i);
 files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
@@ -40,23 +47,23 @@ const router = new VueRouter({
         },
         {
             path: '/create/',
-            name: 'createTrivia',
-            component: CreateTrivia
+            name: 'createGameName',
+            component: CreateGameName
         },
         {
-            path: '/trivia/:id',
-            name:  'showGame',
-            component: ShowGame
+            path: '/game/:id',
+            name:  'gameDetails',
+            component: GameDetails
         },
         {
-            path: '/trivia/:id/round',
-            name:  'roundForm',
-            component: RoundForm
+            path: '/game/:id/round/:round_id/question',
+            name:  'createQaForm',
+            component: CreateQAForm
         },
         {
-            path: '/trivia/:id/round/:round_id/Question',
-            name:  'qaForm',
-            component: QAForm
+            path: '/game/:id/round/:round_id/question/:question_id/edit',
+            name:  'editQAForm',
+            component: EditQAForm
         },
         // { path: '*', redirect: '/home' }
     ]

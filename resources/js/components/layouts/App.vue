@@ -17,7 +17,7 @@
                     <ul class="navbar-nav mr-auto ml-auto">
                         <li>
                             <button type="button" class="btn btn-success">
-                                <router-link :to="{ name: 'createTrivia' }" class="nav-link"><span style="color:white">Create Trivia Game!</span></router-link>
+                                <router-link :to="{ name: 'createGameName' }" class="nav-link"><span style="color:white">Create Trivia Game!</span></router-link>
                             </button>
                         </li>
                     </ul>

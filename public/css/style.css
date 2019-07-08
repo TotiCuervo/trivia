@@ -29,12 +29,20 @@
     color: darkgrey;
 }
 
+.fa-not-clicked-stay {
+    color: darkgrey;
+}
+
 .fa-not-clicked:hover {
     color: green;
     cursor: pointer;
 }
 
 .fa-clicked {
+    color: green;
+}
+
+.fa-clicked-stay {
     color: green;
 }
 
@@ -56,6 +64,22 @@
     cursor: pointer;
 }
 
+.fa-pen-square {
+    color: orange;
+}
+
+.fa-trash {
+    color: #e60000;
+}
+
+.circle-icon {
+    /*background: lightgray;*/
+    padding: 8px 13px;
+    border-radius: 60%;
+    cursor: pointer;
+
+}
+
 .card {
     box-shadow: 0px 4px 6px 0 rgba(0,0,0,0.1);
     transition: 0.5s;
@@ -63,4 +87,8 @@
 
 .card:hover {
     box-shadow: 0 5px 7px 0 rgba(0,0,0,0.2);
+}
+
+.no-dec {
+    text-decoration: none;
 }
