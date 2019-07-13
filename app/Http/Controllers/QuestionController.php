@@ -82,9 +82,20 @@ class QuestionController extends Controller
      * @param  \App\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Question $question)
+    public function update(Request $request, $id)
     {
-        //
+        $question = Question::findorFail($id);
+
+        $data = $request->data;
+
+        $question->title = $data['title'];
+        $question->type = $data['type'];
+        $question->order_number = $data['order_number'];
+
+        $question->save();
+
+        return $question;
+
     }
 
     /**
@@ -93,8 +104,12 @@ class QuestionController extends Controller
      * @param  \App\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Question $question)
+    public function destroy($id)
     {
-        //
+        $question = Question::findorFail($id);
+
+        $question->delete();
+
+        return $question;
     }
 }

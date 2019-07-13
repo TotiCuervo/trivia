@@ -1,12 +1,15 @@
 <template>
     <div>
-        <div v-if="this.questions">
+        <div>
             <div class="row">
                 <div class="col-md-8 offset-md-2">
                     <div class="card">
                         <div class="card-body">
                             <div class="container">
-                                <div class="row pt-3">
+                                <div class="row">
+                                    <i class="far fa-times-circle fa-2x clicker fa-gray fa-hover-black" @click="exitPage"></i>
+                                </div>
+                                <div class="row pt">
                                     <div class="col-md-10 offset-md-1">
                                         <CreateQuestion></CreateQuestion>
                                         <hr>
@@ -47,6 +50,14 @@
 
         mounted() {
 
+            //clears the form of the question store
+            if (!(this.questionForm.title === ''))
+            {
+                this.$store.commit('question/CLEAR_FORM');
+
+            }
+            // this.$store.commit('answer/CLEAR_ALL_FORM');
+
             //gets the params from the url
             this.routeParams = this.$route.params;
 
@@ -65,9 +76,26 @@
 
             qaForm() {
 
-                // this.assignOrderNumber();
+                this.setOrderNumber();
                 this.addQuestion();
                 this.$router.push({name: "gameDetails", params: {id: this.routeParams.id}});
+
+            },
+            setOrderNumber() {
+
+                //sets the order number for this question
+                let $orderNumber = 1;
+
+                for (let $i = 0; $i < this.questions.length; $i++)
+                {
+
+                    if(this.questions[$i].round_id === parseInt(this.routeParams.round_id, 10))
+                    {
+                        $orderNumber++;
+                    }
+                }
+
+                this.$store.commit('question/UPDATE_ORDER_NUMBER', $orderNumber);
 
             },
             addQuestion() {
@@ -128,6 +156,10 @@
                             };
                         }
 
+                        // console.log('at the answer post');
+                        // console.log($answer);
+
+
                         //posts the question to the database
                         axios.post('/api/answer/create', $answer)
                             .then(response => {
@@ -146,6 +178,10 @@
 
 
             },
+            exitPage()
+            {
+                this.$router.push({name: "gameDetails", params: {id: this.routeParams.id}});
+            }
 
         },
         computed: {

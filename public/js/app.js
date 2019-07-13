@@ -1764,6 +1764,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -1771,6 +1774,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       clicked: false
     };
   },
+  mounted: function mounted() {},
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('answer', ['deletedAnswer']), {
     toggleClicked: function toggleClicked() {
       this.clicked = !this.clicked;
@@ -1782,8 +1786,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.$emit('deleted', this.order_number);
     }
   }),
-  props: ['order_number'],
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('answer', ['answerFields', 'formTitle']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('question', ['formType']), {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('answer', ['answerFields']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('question', ['formType']), {
     questionType: {
       get: function get() {
         return this.formType;
@@ -1823,8 +1826,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       set: function set(value) {
         this.$store.commit('answer/CORRECT', value);
       }
+    },
+    answerForm: {
+      get: function get() {
+        return this.answerFields;
+      }
     }
-  })
+  }),
+  props: ['order_number']
 });
 
 /***/ }),
@@ -1958,17 +1967,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       order_number: 1
     };
+  },
+  mounted: function mounted() {
+    for (var $i = 1; $i <= 6; $i++) {
+      if (!(this.answerForm[$i].title === '')) {
+        this.order_number++;
+      }
+    }
   },
   methods: {
     addAnswerOrder: function addAnswerOrder() {
@@ -1977,10 +1988,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     changeOrderNumber: function changeOrderNumber() {
       //if someone clicks on multiple choice and they don't already have two answer forms
       if (this.order_number < 2 && this.formType === 'Multiple-Choice') {
-        //make this order_number = 2
         this.order_number = 2;
       } //if someone goes to multiple choice and then back to fill in the blank
-      else if (this.order_number == 2 && this.answerFields[1].title === "") {
+      else if (this.order_number === 2 && this.answerFields[1].title === '') {
           this.order_number = 1;
         }
     },
@@ -1988,13 +1998,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.order_number--;
     }
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('question', ['formType']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('answer', ['answerFields', 'formTitle']), {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('question', ['formType']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('answer', ['answerFields']), {
     questionType: {
       get: function get() {
         return this.formType;
       },
       set: function set(value) {
         this.$store.commit('question/UPDATE_TYPE', value);
+      }
+    },
+    //Answers
+    answerForm: {
+      get: function get() {
+        return this.answerFields;
       }
     }
   })
@@ -2333,6 +2349,27 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2492,6 +2529,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2500,7 +2540,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   mounted: function mounted() {
+    //clears the form of the question store
+    if (!(this.questionForm.title === '')) {
+      this.$store.commit('question/CLEAR_FORM');
+    } // this.$store.commit('answer/CLEAR_ALL_FORM');
     //gets the params from the url
+
+
     this.routeParams = this.$route.params; //sets the round id from the params for question
 
     this.questionRoundID = this.routeParams.round_id; //sets the round id from the params for answer
@@ -2511,7 +2557,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('question', ['newQuestion', 'fetchQuestions']), {
     qaForm: function qaForm() {
-      // this.assignOrderNumber();
+      this.setOrderNumber();
       this.addQuestion();
       this.$router.push({
         name: "gameDetails",
@@ -2519,6 +2565,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           id: this.routeParams.id
         }
       });
+    },
+    setOrderNumber: function setOrderNumber() {
+      //sets the order number for this question
+      var $orderNumber = 1;
+
+      for (var $i = 0; $i < this.questions.length; $i++) {
+        if (this.questions[$i].round_id === parseInt(this.routeParams.round_id, 10)) {
+          $orderNumber++;
+        }
+      }
+
+      this.$store.commit('question/UPDATE_ORDER_NUMBER', $orderNumber);
     },
     addQuestion: function addQuestion() {
       var _this = this;
@@ -2567,7 +2625,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               'round_id': $data.round_id,
               'correct': $answers[$i].correct
             };
-          } //posts the question to the database
+          } // console.log('at the answer post');
+          // console.log($answer);
+          //posts the question to the database
 
 
           axios.post('/api/answer/create', $answer).then(function (response) {
@@ -2585,6 +2645,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       for (var $i = 0; $i < $answers.length; $i++) {
         _loop($i);
       }
+    },
+    exitPage: function exitPage() {
+      this.$router.push({
+        name: "gameDetails",
+        params: {
+          id: this.routeParams.id
+        }
+      });
     }
   }),
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('question', ['formQuestionRoundID', 'questions', 'questionFields']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('answer', ['answerFields']), {
@@ -2648,6 +2716,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2656,18 +2725,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   mounted: function mounted() {
     //gets the params from the url
     this.routeParams = this.$route.params;
-    var $orderNumber = 1;
-
-    for (var $i = 0; $i < this.questions.length; $i++) {
-      if (this.questions[$i].round_id === this.routeParams.round_id) {
-        $orderNumber++;
-      }
-    }
-
-    this.$store.commit('question/UPDATE_ORDER_NUMBER', $orderNumber);
   },
   methods: {},
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('question', ['formTitle', 'formType', 'questions']), {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('question', ['formTitle', 'formType', 'questions', 'questionFields', 'loading']), {
     questionTitle: {
       get: function get() {
         return this.formTitle;
@@ -2682,6 +2742,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       },
       set: function set(value) {
         this.$store.commit('question/UPDATE_TYPE', value);
+      }
+    },
+    questionForm: {
+      get: function get() {
+        return this.questionFields;
+      }
+    },
+    questionLoading: {
+      get: function get() {
+        return this.loading;
       }
     }
   })
@@ -2741,6 +2811,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2750,40 +2822,136 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   mounted: function mounted() {
     //gets the params from the url
-    this.routeParams = this.$route.params; //gets the answers that belong to this question
+    this.routeParams = this.$route.params;
+    this.$store.commit('answer/CLEAR_ALL_FORM'); //gets the answers that belong to this question
 
-    this.fetchQuestionAnswers(this.routeParams.question_id); //get the question that needs to be editted
+    this.fetchQuestionAnswers(this.routeParams.question_id); //not important for this problem
+    //get the question that needs to be edited
 
     this.fetchQuestion(this.routeParams.question_id);
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('question', ['fetchQuestion']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('answer', ['fetchQuestionAnswers'])),
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('question', ['formQuestionRoundID', 'questions', 'questionFields']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('answer', ['answerFields']), {
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('question', ['fetchQuestion', 'question']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('answer', ['fetchQuestionAnswers', 'CLEAR_ALL_FORM']), {
+    exitPage: function exitPage() {
+      this.$store.commit('question/CLEAR_FORM');
+      this.$store.commit('answer/CLEAR_ALL_FORM');
+      this.$router.push({
+        name: "gameDetails",
+        params: {
+          id: this.routeParams.id
+        }
+      });
+    },
+    saveChanges: function saveChanges() {
+      this.saveQuestion();
+      this.saveAnswers();
+      this.$router.push({
+        name: "gameDetails",
+        params: {
+          id: this.routeParams.id
+        }
+      });
+    },
+    saveQuestion: function saveQuestion() {
+      var _this = this;
+
+      if (!(this.questionForm.title === this.questionObject.title)) {
+        axios.post('/api/question/' + this.questionForm.id, {
+          data: this.questionForm,
+          _method: 'patch'
+        }).then(function (response) {
+          // console.log(response.data);
+          _this.$store.commit('question/CLEAR_FORM');
+        })["catch"](function (error) {
+          console.log(error);
+        });
+      }
+    },
+    saveAnswers: function saveAnswers() {
+      var _this2 = this;
+
+      var _loop = function _loop($i) {
+        if ($i < _this2.answerArray.length) {
+          if (!(_this2.answerForm[$i].title === '')) {
+            if (!(_this2.answerForm[$i].title === _this2.answerArray[$i].title) || !(_this2.answerForm[$i].correct === _this2.answerArray[$i].correct)) {
+              axios.post('/api/answer/' + _this2.answerForm[$i].id, {
+                data: _this2.answerForm[$i],
+                _method: 'patch'
+              }).then(function (response) {
+                console.log(response.data);
+              })["catch"](function (error) {
+                console.log(error);
+              });
+            }
+          } else {
+            axios["delete"]('/api/answer/' + _this2.answerArray[$i].id + '/destroy').then(function (response) {
+              console.log(response.data);
+            })["catch"](function (error) {
+              console.log(error);
+            });
+          }
+        } else {
+          if (!(_this2.answerForm[$i].title === '')) {
+            var $answer = ''; //sets up the answer to be saved
+
+            if (_this2.questionForm.type === 'Fill-in-blank') {
+              $answer = {
+                'title': _this2.answerForm[$i].title,
+                'question_id': _this2.answerForm[0].question_id,
+                'round_id': _this2.answerForm[0].round_id,
+                'correct': true
+              };
+            } else {
+              $answer = {
+                'title': _this2.answerForm[$i].title,
+                'question_id': _this2.answerForm[0].question_id,
+                'round_id': _this2.answerForm[0].round_id,
+                'correct': _this2.answerForm[$i].correct
+              };
+            } //posts the question to the database
+
+
+            axios.post('/api/answer/create', $answer).then(function (response) {
+              //adds the answer to the array of answers
+              _this2.$store.commit('answer/UPDATE_ANSWERS', response.data); //clears the answer form at the index of $i
+
+
+              _this2.$store.commit('answer/CLEAR_FORM', $i);
+            })["catch"](function (error) {
+              console.log(error.response);
+            });
+          }
+        }
+      };
+
+      for (var $i = 0; $i < this.answerForm.length; $i++) {
+        _loop($i);
+      }
+    }
+  }),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('question', ['formQuestionRoundID', 'questionObject', 'questionFields']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('answer', ['answerFields', 'answers']), {
     //Questions
     questionForm: {
       get: function get() {
         return this.questionFields;
       }
     },
-    questionRoundID: {
+    question_object: {
       get: function get() {
-        return this.formQuestionRoundID;
+        return this.questionObject;
       },
       set: function set(value) {
-        this.$store.commit('question/UPDATE_ROUND_ID', value);
-      }
-    },
-    answerQuestionID: {
-      get: function get() {
-        return this.formQuestionID;
-      },
-      set: function set(value) {
-        this.$store.commit('answer/UPDATE_QUESTION_ID', value);
+        return this.$store.commit('question/SET_QUESTION', value);
       }
     },
     //Answers
     answerForm: {
       get: function get() {
         return this.answerFields;
+      }
+    },
+    answerArray: {
+      get: function get() {
+        return this.answers;
       }
     }
   })
@@ -2905,6 +3073,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2919,6 +3088,18 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     toggleClicked: function toggleClicked() {
       this.clicked = !this.clicked;
+    },
+    deleteQuestion: function deleteQuestion() {
+      var _this = this;
+
+      axios["delete"]('/api/question/' + this.question.id + '/destroy').then(function (response) {
+        console.log(_this.question.order_number);
+
+        _this.$store.commit('question/DELETE_FROM_QUESTIONS', _this.question.order_number); // this.$router.push({name: "gameDetails", params: {id: this.id.id}});
+
+      })["catch"](function (error) {
+        console.log(error);
+      });
     }
   },
   computed: {},
@@ -2937,6 +3118,16 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -64333,31 +64524,35 @@ var render = function() {
       ? _c("div", [
           _c("div", { staticClass: "game-intro" }, [
             _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-md-12" }, [
+              _c("div", { staticClass: "col-md-12 text-center" }, [
                 _c("div", { staticClass: "game-header" }, [
-                  _vm._m(0),
-                  _vm._v(" "),
-                  _vm.game.name
-                    ? _c("div", [_c("h1", [_vm._v(_vm._s(_vm.game.name))])])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.game.description
-                    ? _c("div", [
-                        _c("h3", { staticClass: "text-muted" }, [
-                          _vm._v(
-                            "\n                                " +
-                              _vm._s(_vm.game.description) +
-                              "\n                            "
-                          )
-                        ])
-                      ])
-                    : _c("div", [
-                        _c("h3", { staticClass: "text-muted" }, [
-                          _vm._v(
-                            "\n                                Edit to add Description\n                            "
-                          )
-                        ])
-                      ])
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-md-11 col-sm-11" }, [
+                      _vm.game.name
+                        ? _c("div", [_c("h1", [_vm._v(_vm._s(_vm.game.name))])])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.game.description
+                        ? _c("div", [
+                            _c("h3", { staticClass: "text-muted" }, [
+                              _vm._v(
+                                "\n                                        " +
+                                  _vm._s(_vm.game.description) +
+                                  "\n                                    "
+                              )
+                            ])
+                          ])
+                        : _c("div", [
+                            _c("h3", { staticClass: "text-muted" }, [
+                              _vm._v(
+                                "\n                                        Edit to add Description\n                                    "
+                              )
+                            ])
+                          ])
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(0)
+                  ])
                 ]),
                 _vm._v(" "),
                 _c("hr")
@@ -64377,10 +64572,11 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "float-right" }, [
-      _c("button", { staticClass: "btn", attrs: { type: "button" } }, [
-        _c("i", { staticClass: "far fa-edit fa-2x" })
-      ])
+    return _c("div", { staticClass: "col-md-1 col-sm-1" }, [
+      _c("i", {
+        staticClass: "fas fa-ellipsis-v circle-icon",
+        attrs: { "aria-hidden": "true" }
+      })
     ])
   }
 ]
@@ -64484,57 +64680,63 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    this.questions
-      ? _c("div", [
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-md-8 offset-md-2" }, [
-              _c("div", { staticClass: "card" }, [
-                _c("div", { staticClass: "card-body" }, [
-                  _c("div", { staticClass: "container" }, [
-                    _c("div", { staticClass: "row pt-3" }, [
-                      _c(
-                        "div",
-                        { staticClass: "col-md-10 offset-md-1" },
-                        [_c("CreateQuestion"), _vm._v(" "), _c("hr")],
-                        1
-                      )
-                    ]),
+    _c("div", [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-md-8 offset-md-2" }, [
+          _c("div", { staticClass: "card" }, [
+            _c("div", { staticClass: "card-body" }, [
+              _c("div", { staticClass: "container" }, [
+                _c("div", { staticClass: "row" }, [
+                  _c("i", {
+                    staticClass:
+                      "far fa-times-circle fa-2x clicker fa-gray fa-hover-black",
+                    on: { click: _vm.exitPage }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row pt" }, [
+                  _c(
+                    "div",
+                    { staticClass: "col-md-10 offset-md-1" },
+                    [_c("CreateQuestion"), _vm._v(" "), _c("hr")],
+                    1
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row pt-4" }, [
+                  _c(
+                    "div",
+                    { staticClass: "col-md-10 offset-md-1" },
+                    [_c("CreateAnswer")],
+                    1
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row pt-3 pb-5" }, [
+                  _c("div", { staticClass: "col-md-10 offset-md-1" }, [
+                    _c("hr"),
                     _vm._v(" "),
-                    _c("div", { staticClass: "row pt-4" }, [
-                      _c(
-                        "div",
-                        { staticClass: "col-md-10 offset-md-1" },
-                        [_c("CreateAnswer")],
-                        1
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "row pt-3 pb-5" }, [
-                      _c("div", { staticClass: "col-md-10 offset-md-1" }, [
-                        _c("hr"),
-                        _vm._v(" "),
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-success w-100",
-                            attrs: { type: "button" },
-                            on: { click: _vm.qaForm }
-                          },
-                          [
-                            _vm._v(
-                              " Create\n                                        Question\n                                    "
-                            )
-                          ]
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-success w-100",
+                        attrs: { type: "button" },
+                        on: { click: _vm.qaForm }
+                      },
+                      [
+                        _vm._v(
+                          " Create\n                                        Question\n                                    "
                         )
-                      ])
-                    ])
+                      ]
+                    )
                   ])
                 ])
               ])
             ])
           ])
         ])
-      : _vm._e()
+      ])
+    ])
   ])
 }
 var staticRenderFns = []
@@ -64560,6 +64762,8 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
+    _c("h1"),
+    _vm._v(" "),
     _c("h1", [_vm._v("New Question:")]),
     _vm._v(" "),
     _c("div", { staticClass: "form-group" }, [
@@ -64609,15 +64813,23 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    this.questionForm
-      ? _c("div", [
+  return !(this.answerForm[0].title === "")
+    ? _c("div", [
+        _c("div", [
           _c("div", { staticClass: "row" }, [
             _c("div", { staticClass: "col-md-8 offset-md-2" }, [
               _c("div", { staticClass: "card" }, [
                 _c("div", { staticClass: "card-body" }, [
                   _c("div", { staticClass: "container" }, [
-                    _c("div", { staticClass: "row pt-3" }, [
+                    _c("div", { staticClass: "row" }, [
+                      _c("i", {
+                        staticClass:
+                          "far fa-times-circle fa-2x clicker fa-gray fa-hover-black",
+                        on: { click: _vm.exitPage }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row pt" }, [
                       _c(
                         "div",
                         { staticClass: "col-md-10 offset-md-1" },
@@ -64635,38 +64847,35 @@ var render = function() {
                       )
                     ]),
                     _vm._v(" "),
-                    _vm._m(0)
+                    _c("div", { staticClass: "row pt-3 pb-5" }, [
+                      _c("div", { staticClass: "col-md-10 offset-md-1" }, [
+                        _c("hr"),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-success w-100",
+                            attrs: { type: "button" },
+                            on: { click: _vm.saveChanges }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                        Save Question\n                                    "
+                            )
+                          ]
+                        )
+                      ])
+                    ])
                   ])
                 ])
               ])
             ])
           ])
         ])
-      : _vm._e()
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row pt-3 pb-5" }, [
-      _c("div", { staticClass: "col-md-10 offset-md-1" }, [
-        _c("hr"),
-        _vm._v(" "),
-        _c(
-          "button",
-          { staticClass: "btn btn-success w-100", attrs: { type: "button" } },
-          [
-            _vm._v(
-              "\n                                        Save Question\n                                    "
-            )
-          ]
-        )
       ])
-    ])
-  }
-]
+    : _vm._e()
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -64752,7 +64961,7 @@ var render = function() {
               _c(
                 "div",
                 {
-                  staticClass: "col-md-10",
+                  staticClass: "col-md-10 clicker",
                   on: {
                     click: function($event) {
                       return _vm.toggleClicked()
@@ -64834,7 +65043,18 @@ var render = function() {
                           ]
                         ),
                         _vm._v(" "),
-                        _vm._m(0)
+                        _c(
+                          "div",
+                          {
+                            staticClass: "nav-link",
+                            on: {
+                              click: function($event) {
+                                return _vm.deleteQuestion()
+                              }
+                            }
+                          },
+                          [_vm._m(0)]
+                        )
                       ],
                       1
                     )
@@ -64875,7 +65095,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
+    return _c("a", { staticClass: "dropdown-item" }, [
       _c("div", { staticClass: "row" }, [
         _c("i", { staticClass: "fas fa-trash fa-1x5 align-middle pr-2 pl-2" }),
         _vm._v(" "),
@@ -64905,8 +65125,8 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "round-details" }, [
+  return _c("div", { staticClass: "card" }, [
+    _c("div", { staticClass: "round-details p-3" }, [
       _c("div", { staticClass: "row pb-3" }, [
         _c("div", { staticClass: "col-md-12" }, [
           _c("h4", { staticClass: "float-left" }, [
@@ -64927,41 +65147,37 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "add-question" }, [
       _c("div", { staticClass: "row pt-3" }, [
-        _c("div", { staticClass: "col-md-12" }, [
-          _c(
-            "button",
-            { staticClass: "btn btn-success", attrs: { type: "button" } },
-            [
-              this.id
-                ? _c(
-                    "div",
-                    [
-                      _c(
-                        "router-link",
-                        {
-                          staticClass: "nav-link",
-                          attrs: {
-                            to: {
-                              name: "createQaForm",
-                              params: { id: _vm.id.id, round_id: this.round.id }
-                            }
-                          }
-                        },
-                        [
-                          _c("span", { staticStyle: { color: "white" } }, [
-                            _vm._v("Add Question")
-                          ])
-                        ]
-                      )
-                    ],
-                    1
-                  )
-                : _vm._e()
-            ]
-          ),
-          _vm._v(" "),
-          _c("hr")
-        ])
+        _c(
+          "div",
+          { staticClass: "col-md-12 text-center" },
+          [
+            _c(
+              "router-link",
+              {
+                attrs: {
+                  to: {
+                    name: "createQaForm",
+                    params: { id: _vm.id.id, round_id: this.round.id }
+                  }
+                }
+              },
+              [
+                _c("i", {
+                  directives: [
+                    {
+                      name: "b-tooltip",
+                      rawName: "v-b-tooltip.hover",
+                      modifiers: { hover: true }
+                    }
+                  ],
+                  staticClass: "fas fa-plus-circle fa-green fa-2x",
+                  attrs: { title: "Add Question!" }
+                })
+              ]
+            )
+          ],
+          1
+        )
       ])
     ])
   ])
@@ -82817,9 +83033,6 @@ var getters = {
   answers: function answers(state) {
     return state.answers;
   },
-  // answerForm(state){
-  //     return state.form;
-  // },
   answerFields: function answerFields(state) {
     return state.form;
   },
@@ -82844,8 +83057,8 @@ var actions = {
         state = _ref2.state;
     commit('setLoading', true);
     axios.get('/api/question/' + question_id + '/answers').then(function (response) {
-      console.log(response.data);
       commit('SET_ANSWERS_FORM', response.data);
+      commit('SET_ANSWERS', response.data);
       commit('setLoading', false);
     })["catch"](function (error) {
       console.log(error.response);
@@ -82872,17 +83085,18 @@ var mutations = {
     state.answers = answers;
   },
   SET_ANSWERS_FORM: function SET_ANSWERS_FORM(state, answers) {
+    var $newForm = {};
+
     for (var $i = 0; $i < answers.length; $i++) {
-      state.form[$i] = {
+      $newForm = {
         id: answers[$i].id,
         title: answers[$i].title,
         question_id: answers[$i].question_id,
         round_id: answers[$i].round_id,
         correct: answers[$i].correct
       };
+      Vue.set(state.form, $i, $newForm);
     }
-
-    state.answers = answers;
   },
   UPDATE_TITLE: function UPDATE_TITLE(state, payload) {
     state.form[payload.order].title = payload.title;
@@ -82904,7 +83118,6 @@ var mutations = {
     state.form[order].correct = state.form[order + 1].correct;
   },
   CLEAR_FORM: function CLEAR_FORM(state, order) {
-    console.log('made it');
     state.form[order] = {
       id: '',
       title: '',
@@ -82912,6 +83125,51 @@ var mutations = {
       round_id: '',
       correct: false
     };
+  },
+  CLEAR_ALL_FORM: function CLEAR_ALL_FORM(state) {
+    state.form = [{
+      id: '',
+      title: '',
+      question_id: '',
+      round_id: '',
+      correct: false
+    }, {
+      id: '',
+      title: '',
+      question_id: '',
+      round_id: '',
+      correct: false
+    }, {
+      id: '',
+      title: '',
+      question_id: '',
+      round_id: '',
+      correct: false
+    }, {
+      id: '',
+      title: '',
+      question_id: '',
+      round_id: '',
+      correct: false
+    }, {
+      id: '',
+      title: '',
+      question_id: '',
+      round_id: '',
+      correct: false
+    }, {
+      id: '',
+      title: '',
+      question_id: '',
+      round_id: '',
+      correct: false
+    }, {
+      id: '',
+      title: '',
+      question_id: '',
+      round_id: '',
+      correct: false
+    }];
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -83099,7 +83357,8 @@ function initialState() {
       type: '',
       round_id: '',
       order_number: ''
-    }
+    },
+    loading: false
   };
 }
 
@@ -83107,7 +83366,7 @@ var getters = {
   questions: function questions(state) {
     return state.questions;
   },
-  question: function question(state) {
+  questionObject: function questionObject(state) {
     return state.question;
   },
   questionFields: function questionFields(state) {
@@ -83135,8 +83394,8 @@ var actions = {
         state = _ref.state;
     commit('setLoading', true);
     axios.get('/api/question/' + question_id).then(function (response) {
-      console.log(response.data);
       commit('SET_QUESTION_FORM', response.data);
+      commit('SET_QUESTION', response.data);
       commit('setLoading', false);
     })["catch"](function (error) {
       console.log(error.response);
@@ -83158,7 +83417,6 @@ var actions = {
         state = _ref3.state;
     commit('setLoading', true);
     axios.post('/api/question/create', state.form).then(function (response) {
-      console.log(response.data);
       commit('UPDATE_QUESTIONS', response.data);
       commit('SET_QUESTION', response.data);
       commit('CLEAR_FORM');
@@ -83191,7 +83449,6 @@ var mutations = {
     state.form.title = title;
   },
   UPDATE_ORDER_NUMBER: function UPDATE_ORDER_NUMBER(state, order_number) {
-    console.log('made it');
     state.form.order_number = order_number;
   },
   UPDATE_QUESTION: function UPDATE_QUESTION(state, question) {
@@ -83205,6 +83462,21 @@ var mutations = {
   },
   UPDATE_ROUND_ID: function UPDATE_ROUND_ID(state, round_id) {
     state.form.round_id = round_id;
+  },
+  DELETE_FROM_QUESTIONS: function DELETE_FROM_QUESTIONS(state, index) {
+    state.questions.splice(index - 1, 1);
+
+    for (var $i = index - 1; $i < state.questions.length; $i++) {
+      state.questions[$i].order_number = state.questions[$i].order_number - 1;
+      axios.post('/api/question/' + state.questions[$i].id, {
+        data: state.questions[$i],
+        _method: 'patch'
+      }).then(function (response) {
+        console.log(response.data);
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    }
   },
   CLEAR_FORM: function CLEAR_FORM(state) {
     state.form = {
@@ -83388,7 +83660,6 @@ var actions = {
     commit('setLoading', true);
     axios.get('/api/user').then(function (response) {
       var user = response.data;
-      console.log(user.id);
       commit('SET_USER', response.data);
       commit('SET_USER_ID', user.id);
       commit('setLoading', false);

@@ -2,6 +2,11 @@
 
 namespace App\Providers;
 
+use App\Question;
+use App\Observers\QuestionObserver;
+
+
+
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +28,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Question::observe(QuestionObserver::class);
+
     }
 }

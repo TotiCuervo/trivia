@@ -1,6 +1,7 @@
 <template>
     <div>
 
+        <!--For multiple choice-->
         <div v-if="questionType === 'Multiple-Choice'">
             <div class="row">
                 <div class="col-md-10 offset-md-1">
@@ -37,6 +38,8 @@
             </div>
         </div>
 
+         <!--For fill in the blank-->
+
         <div v-else>
             <div class="row mb-3">
                 <div class="col-md-10 offset-md-1">
@@ -68,6 +71,10 @@
                 clicked: false,
             }
         },
+        mounted() {
+
+
+        },
         methods:{
             ...mapActions('answer', ['deletedAnswer']),
             toggleClicked() {
@@ -82,9 +89,8 @@
 
             },
         },
-        props: ['order_number'],
         computed: {
-            ...mapGetters('answer', ['answerFields', 'formTitle']),
+            ...mapGetters('answer', ['answerFields']),
             ...mapGetters('question', ['formType']),
 
             questionType: {
@@ -123,8 +129,14 @@
                     this.$store.commit('answer/CORRECT', value);
                 }
             },
+            answerForm: {
+                get() {
+                    return this.answerFields;
+                }
+            }
 
-        }
+        },
+        props: ['order_number'],
     }
 </script>
 <style scoped>

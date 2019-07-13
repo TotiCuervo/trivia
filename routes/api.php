@@ -30,11 +30,18 @@ Route::post('/round/create', 'RoundController@store');
 Route::get('/question/{id}', 'QuestionController@show');
 Route::get('/trivia/{id}/questions', 'QuestionController@index');
 Route::post('/question/create', 'QuestionController@store');
+Route::patch('/question/{id}', 'QuestionController@update');
+Route::delete('/question/{id}/destroy', 'QuestionController@destroy');
+
 
 //Answers
 Route::post('/answer/create', 'AnswerController@store');
 Route::get('/game/{id}/answers', 'AnswerController@index');
 Route::get('/question/{id}/answers', 'AnswerController@questionIndex');
+Route::patch('/answer/{id}', 'AnswerController@update');
+Route::delete('/answer/{id}/destroy', 'AnswerController@destroy');
+
+
 
 
 

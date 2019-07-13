@@ -72,8 +72,38 @@
     color: #e60000;
 }
 
+.fa-hover-black:hover {
+    color: black;
+    transition: color 1s;
+}
+
+.fa-gray {
+    color:darkgrey;
+}
+
+.fa-green {
+    color: green;
+}
+
+.fa-red {
+    color: #e60000;
+}
+
+.fa-white {
+    color: white;
+}
+
+
 .circle-icon {
     /*background: lightgray;*/
+    padding: 8px 13px;
+    border-radius: 60%;
+    cursor: pointer;
+
+}
+
+.circle-icon-delete {
+    background: darkred;
     padding: 8px 13px;
     border-radius: 60%;
     cursor: pointer;
@@ -92,3 +122,9 @@
 .no-dec {
     text-decoration: none;
 }
+
+.clicker {
+    cursor: pointer;
+}
+
+.tooltip { top: 0;}

@@ -7,7 +7,7 @@
                     <div class="col-md-1">
                         <h5>Q{{question.order_number}}:</h5>
                     </div>
-                    <div class="col-md-10" @click="toggleClicked()">
+                    <div class="col-md-10 clicker" @click="toggleClicked()">
                         <div v-if="question.type === 'Fill-in-blank' ">
                             <span class="text-muted">(Fill In The Blank)</span>
                         </div>
@@ -28,12 +28,13 @@
                                             </div>
                                         </a>
                                     </router-link>
-
-                                    <a class="dropdown-item" href="#">
-                                        <div class="row">
-                                            <i class="fas fa-trash fa-1x5 align-middle pr-2 pl-2"></i> <p class="p-0 m-0">Delete</p>
-                                        </div>
-                                    </a>
+                                    <div class="nav-link" @click="deleteQuestion()" >
+                                        <a class="dropdown-item">
+                                            <div class="row">
+                                                <i class="fas fa-trash fa-1x5 align-middle pr-2 pl-2"></i> <p class="p-0 m-0">Delete</p>
+                                            </div>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -67,6 +68,20 @@
             toggleClicked(){
                 this.clicked = !(this.clicked);
             },
+            deleteQuestion() {
+
+                axios.delete('/api/question/' + this.question.id +'/destroy')
+                    .then(response => {
+                        console.log(this.question.order_number);
+                        this.$store.commit('question/DELETE_FROM_QUESTIONS', this.question.order_number);
+                        // this.$router.push({name: "gameDetails", params: {id: this.id.id}});
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
+
+
+            }
         },
         computed: {
         },

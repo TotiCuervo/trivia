@@ -60,9 +60,6 @@ const getters = {
     answers(state){
         return state.answers;
     },
-    // answerForm(state){
-    //     return state.form;
-    // },
     answerFields(state){
         return state.form;
     },
@@ -85,11 +82,12 @@ const actions = {
     },
 
     fetchQuestionAnswers({ commit, state }, question_id) {
+
         commit('setLoading', true);
         axios.get('/api/question/' + question_id + '/answers')
             .then(response => {
-                console.log(response.data);
                 commit('SET_ANSWERS_FORM', response.data);
+                commit('SET_ANSWERS', response.data);
                 commit('setLoading', false);
             }).catch( error => {
             console.log(error.response);
@@ -119,17 +117,22 @@ const mutations = {
         state.answers = answers;
     },
     SET_ANSWERS_FORM(state, answers){
+
+        let $newForm = {};
+
         for(let $i = 0; $i < answers.length; $i++)
         {
-            state.form[$i] = {
+
+            $newForm = {
                 id: answers[$i].id,
                 title: answers[$i].title,
                 question_id: answers[$i].question_id,
                 round_id: answers[$i].round_id,
                 correct: answers[$i].correct,
-            }
+            };
+
+            Vue.set(state.form, $i, $newForm );
         }
-        state.answers = answers;
     },
     UPDATE_TITLE(state, payload){
         state.form[payload.order].title = payload.title;
@@ -151,7 +154,6 @@ const mutations = {
         state.form[order].correct = state.form[order+1].correct;
     },
     CLEAR_FORM(state, order){
-        console.log('made it');
         state.form[order] = {
             id: '',
             title: '',
@@ -159,6 +161,59 @@ const mutations = {
             round_id: '',
             correct: false,
         };
+    },
+    CLEAR_ALL_FORM(state){
+        state.form = [
+            {
+                id: '',
+                title: '',
+                question_id: '',
+                round_id: '',
+                correct: false,
+            },
+            {
+                id: '',
+                title: '',
+                question_id: '',
+                round_id: '',
+                correct: false,
+            },
+            {
+                id: '',
+                title: '',
+                question_id: '',
+                round_id: '',
+                correct: false,
+            },
+            {
+                id: '',
+                title: '',
+                question_id: '',
+                round_id: '',
+                correct: false,
+            },
+            {
+                id: '',
+                title: '',
+                question_id: '',
+                round_id: '',
+                correct: false,
+            },
+            {
+                id: '',
+                title: '',
+                question_id: '',
+                round_id: '',
+                correct: false,
+            },
+            {
+                id: '',
+                title: '',
+                question_id: '',
+                round_id: '',
+                correct: false,
+            }
+        ]
     },
 };
 

@@ -92,9 +92,18 @@ class AnswerController extends Controller
      * @param  \App\Answer  $answer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Answer $answer)
+    public function update(Request $request, $id)
     {
-        //
+        $answer = Answer::findorFail($id);
+
+        $data = $request->data;
+
+        $answer->title = $data['title'];
+        $answer->correct = $data['correct'];
+
+        $answer->save();
+
+        return $answer;
     }
 
     /**
@@ -103,8 +112,10 @@ class AnswerController extends Controller
      * @param  \App\Answer  $answer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Answer $answer)
+    public function destroy($id)
     {
-        //
+        $answer = Answer::findorFail($id);
+
+        $answer->delete();
     }
 }
