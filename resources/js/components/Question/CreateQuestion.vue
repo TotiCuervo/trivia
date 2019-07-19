@@ -1,12 +1,32 @@
 <template>
     <div>
-        <h1></h1>
         <h1>New Question:</h1>
-        <div class="form-group">
+        <b-form-group>
+            <b-form-textarea
+                    id="textarea-state"
+                    v-model="questionTitle"
+                    :state="null"
+                    placeholder="Enter Question"
+                    rows="4"
+                    type="text"
+                    required
+                    v-if="validation"
+            ></b-form-textarea>
+            <b-form-textarea
+                    id="textarea-state"
+                    v-model="questionTitle"
+                    :state="validation"
+                    placeholder="Enter Question"
+                    rows="4"
+                    required
+                    v-if="!validation"
+            ></b-form-textarea>
+            <small v-if="validation">{{textLimit - questionTitle.length}}</small>
+            <b-form-invalid-feedback :state="validation">
+                {{textLimit - questionTitle.length}}
+            </b-form-invalid-feedback>
 
-            <textarea class="form-control" rows="3" v-model="questionTitle" placeholder="Type your question here..."></textarea>
-
-        </div>
+        </b-form-group>
 
     </div>
 </template>
@@ -17,7 +37,7 @@
     export default {
         data() {
             return {
-
+                textLimit: 100,
             }
         },
         mounted() {
@@ -56,6 +76,13 @@
                 get() {
                     return this.loading;
                 }
+            },
+            validation() {
+
+                if (this.questionTitle !== null) {
+                    return this.questionTitle.length < 100
+                }
+
             }
         }
     }

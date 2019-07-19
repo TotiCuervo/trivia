@@ -1,9 +1,9 @@
 <template>
     <div>
         <!--Wait until all of the info of the game has been fetched, then show-->
-        <div v-if="!(this.game_id == null)">
+        <div class="game-creator" v-if="!(this.game_id == null)">
 
-            <div class="game-intro">
+            <div class="game-intro pt-4 pb-4">
 
                 <div class="row">
 
@@ -12,7 +12,7 @@
                         <div class="game-header">
 
                             <div class="row">
-                                <div class="col-md-11 col-sm-11">
+                                <div class="col-md-12 col-sm-12">
                                     <!--Added layer of protection agaisnt null values-->
                                     <div v-if="game.name">
                                         <h1>{{ game.name }}</h1>
@@ -20,7 +20,7 @@
 
                                     <!--Added layer of protection agaisnt null values-->
                                     <div v-if="game.description">
-                                        <h3 class="text-muted">
+                                        <h3>
                                             {{ game.description }}
                                         </h3>
                                     </div>
@@ -30,44 +30,48 @@
                                         </h3>
                                     </div>
                                 </div>
-                                <div class="col-md-1 col-sm-1">
-                                    <i class="fas fa-ellipsis-v circle-icon" aria-hidden="true"></i>
-                                </div>
                             </div>
 
-
-                            <!--&lt;!&ndash;Added layer of protection agaisnt null values&ndash;&gt;-->
-                            <!--<div v-if="game.name">-->
-                                <!--<h1>{{ game.name }}</h1>-->
-                            <!--</div>-->
-
-                            <!--&lt;!&ndash;Added layer of protection agaisnt null values&ndash;&gt;-->
-                            <!--<div v-if="game.description">-->
-                                <!--<h3 class="text-muted">-->
-                                    <!--{{ game.description }}-->
-                                <!--</h3>-->
-                            <!--</div>-->
-                            <!--<div v-else>-->
-                                <!--<h3 class="text-muted">-->
-                                    <!--Edit to add Description-->
-                                <!--</h3>-->
-                            <!--</div>-->
-
                         </div>
-
-                        <hr>
                     </div>
-
                 </div>
-
             </div>
-
-            <div class="round-outline">
+            <!--<hr>-->
+            <div class="round-outline pt-4">
                 <RoundIndex></RoundIndex>
             </div>
 
             <div class="add-Round">
                 <AddRound></AddRound>
+            </div>
+
+            <div class="delete-modals">
+                <b-modal id="delete-round"  hide-footer hide-header centered visible-close>
+                    <template slot="default" slot-scope="{ close }">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <i class="fas fa-times float-right clicker" @click="close()"></i>
+                            </div>
+                        </div>
+                        <div class="d-block text-center">
+                            <h4 class="my-4">Are you sure you want to delete this <b>Round?</b></h4>
+                        </div>
+                        <b-button class="mt-3" block variant="danger" @click="delete_Round()">Delete Round</b-button>
+                    </template>
+                </b-modal>
+                <b-modal id="delete-question" hide-footer hide-header centered visible-close>
+                    <template slot="default" slot-scope="{ close }">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <i class="fas fa-times float-right clicker" @click="close()"></i>
+                            </div>
+                        </div>
+                        <div class="d-block text-center">
+                            <h4 class="my-4">Are you sure you want to delete this <b>Question?</b></h4>
+                        </div>
+                        <b-button class="mt-3" block variant="danger" @click="delete_Question()">Delete Question</b-button>
+                    </template>
+                </b-modal>
             </div>
         </div>
     </div>
@@ -92,6 +96,17 @@
         },
         methods:{
             ...mapActions('game', ['fetchData']),
+            ...mapActions('round', ['deleteRound']),
+            ...mapActions('question', ['deleteQuestion']),
+            delete_Round() {
+                this.deleteRound();
+                this.$bvModal.hide("delete-round");
+            },
+            delete_Question() {
+                this.deleteQuestion();
+                this.$bvModal.hide("delete-question");
+            },
+
         },
         computed: {
             ...mapGetters('game', ['game', 'game_id']),

@@ -1,7 +1,13 @@
 function initialState() {
     return {
         questions: [],
-        question: null,
+        question: {
+            id: '',
+            title: '',
+            type: '',
+            round_id: '',
+            order_number: '',
+        },
         form:{
             id: '',
             title: '',
@@ -17,7 +23,7 @@ const getters = {
     questions(state){
         return state.questions;
     },
-    questionObject(state){
+    currentQuestion(state){
         return state.question;
     },
     questionFields(state){
@@ -79,6 +85,20 @@ const actions = {
             }).catch( error => {
             console.log(error.response);
         });
+    },
+
+    deleteQuestion({commit,state}) {
+        commit('setLoading', true);
+        axios.delete('/api/question/' + state.question.id +'/destroy')
+            .then(response => {
+                commit('DELETE_FROM_QUESTIONS', response.data);
+                commit('setLoading', false);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+
+
     }
 
 };
@@ -121,20 +141,31 @@ const mutations = {
     UPDATE_ROUND_ID(state,round_id){
         state.form.round_id = round_id;
     },
-    DELETE_FROM_QUESTIONS(state, index){
+    DELETE_FROM_QUESTIONS(state, question){
 
-        state.questions.splice(index-1,1);
+        let $roundQuestions = [];
 
-        for (let $i = index-1; $i < state.questions.length; $i++) {
+        for (let $i = 0; $i < state.questions.length; $i++) {
 
-            state.questions[$i].order_number = state.questions[$i].order_number - 1;
+            if (state.questions[$i].id === question.id) {
+                state.questions.splice($i,1);
+            }
 
-            axios.post('/api/question/' + state.questions[$i].id, {
-                data: state.questions[$i],
+            if (state.questions[$i].round_id === question.round_id) {
+                $roundQuestions.push(state.questions[$i]);
+            }
+        }
+
+        for (let $i = question.order_number-1; $i < $roundQuestions.length; $i++) {
+
+            $roundQuestions[$i].order_number = $roundQuestions[$i].order_number - 1;
+
+            axios.post('/api/question/' + $roundQuestions[$i].id, {
+                data: $roundQuestions[$i],
                 _method: 'patch'
             })
                 .then(response => {
-                    console.log(response.data);
+                    // console.log(response.data);
                 })
                 .catch(error => {
                     console.log(error);
@@ -143,6 +174,17 @@ const mutations = {
         }
 
 
+    },
+    CLEAR_CURRENT_QUESTION(state){
+
+        console.log('make it to clear current question');
+        state.question = {
+            id: '',
+            title: '',
+            type: '',
+            round_id: '',
+            order_number: '',
+        };
     },
     CLEAR_FORM(state){
         state.form = {

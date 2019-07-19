@@ -135,7 +135,16 @@ const mutations = {
         }
     },
     UPDATE_TITLE(state, payload){
-        state.form[payload.order].title = payload.title;
+        // state.form[payload.order].title = payload.title;
+        let $form = {
+            id: '',
+            title: payload.title,
+            question_id: '',
+            round_id: '',
+            correct: false,
+        }
+        Vue.set(state.form, payload.order, $form );
+
     },
     UPDATE_ANSWERS(state,answer){
         state.answers.push(answer);
@@ -154,6 +163,8 @@ const mutations = {
         state.form[order].correct = state.form[order+1].correct;
     },
     CLEAR_FORM(state, order){
+        console.log("Clearing:");
+        console.log(state.form[order]);
         state.form[order] = {
             id: '',
             title: '',

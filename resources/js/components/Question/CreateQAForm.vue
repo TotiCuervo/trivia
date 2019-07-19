@@ -1,6 +1,19 @@
 <template>
     <div>
         <div>
+            <!--<h5>this.answerForm[0].title.length > 0:</h5>-->
+            <!--<h5>{{this.answerForm[0].title.length > 0}}</h5>-->
+
+            <!--<h5>this.questionForm.title.length > 0:</h5>-->
+            <!--<h5>{{this.questionForm.title.length > 0}}</h5>-->
+
+            <!--<h5>this.questionForm.title.length < 100:</h5>-->
+            <!--<h5>{{this.questionForm.title.length < 100}}</h5>-->
+
+            <!--<h5>All:</h5>-->
+            <!--<h5>{{this.answerForm[0].title.length > 0 && this.questionForm.title.length > 0 && this.questionForm.title.length < 100}}</h5>-->
+
+
             <div class="row">
                 <div class="col-md-8 offset-md-2">
                     <div class="card">
@@ -23,9 +36,9 @@
                                 <div class="row pt-3 pb-5">
                                     <div class="col-md-10 offset-md-1">
                                         <hr>
-                                        <button type="button" class="btn btn-success w-100" @click="qaForm"> Create
-                                            Question
-                                        </button>
+                                        <b-button v-if="!(validation)" disabled class="w-100" variant="success">Create Question</b-button>
+                                        <b-button v-if="(validation)" class="w-100" variant="success" @click="qaForm">Create Question</b-button>
+
                                     </div>
                                 </div>
                             </div>
@@ -47,16 +60,16 @@
                 routeParams: null,
             }
         },
-
         mounted() {
 
             //clears the form of the question store
             if (!(this.questionForm.title === ''))
             {
                 this.$store.commit('question/CLEAR_FORM');
-
             }
-            // this.$store.commit('answer/CLEAR_ALL_FORM');
+
+            //Clears all the forms for the answers;
+            this.$store.commit('answer/CLEAR_ALL_FORM');
 
             //gets the params from the url
             this.routeParams = this.$route.params;
@@ -70,14 +83,21 @@
             //gets all of the questions already in this trivia
             this.fetchQuestions(this.routeParams.id);
 
+            this.fetchRounds(this.routeParams);
+
         },
         methods: {
             ...mapActions('question', ['newQuestion', 'fetchQuestions']),
+            ...mapActions('round', ['fetchRounds']),
+
 
             qaForm() {
 
                 this.setOrderNumber();
                 this.addQuestion();
+                this.$store.commit('question/CLEAR_CURRENT_QUESTION');
+                this.$store.commit('round/CLEAR_ROUND');
+                // this.$store.commit('round/UPDATE_ROUND_BY_ID', this.routeParams.round_id);
                 this.$router.push({name: "gameDetails", params: {id: this.routeParams.id}});
 
             },
@@ -118,6 +138,9 @@
 
                         //going to add questions
                         this.addAnswer($newQuestion);
+
+                        //clears the current question otherwise it will stay
+                        this.$store.commit('question/CLEAR_CURRENT_QUESTION');
 
                     }).catch(error => {
                     console.log(error.response);
@@ -180,6 +203,8 @@
             },
             exitPage()
             {
+                this.$store.commit('question/CLEAR_CURRENT_QUESTION');
+                this.$store.commit('round/CLEAR_ROUND');
                 this.$router.push({name: "gameDetails", params: {id: this.routeParams.id}});
             }
 
@@ -210,13 +235,26 @@
                     this.$store.commit('answer/UPDATE_QUESTION_ID', value);
                 }
             },
-
             //Answers
             answerForm: {
                 get() {
                     return this.answerFields;
                 },
             },
+            //For Validation
+            validation() {
+
+                if (this.questionForm.type === 'Multiple-Choice') {
+                    return this.answerForm[0].title.length > 0 && this.answerForm[1].title.length > 0 && this.questionForm.title.length > 0 && this.questionForm.title.length < 100;
+                }
+                else {
+
+                    return this.answerForm[0].title.length > 0 && this.questionForm.title.length > 0 && this.questionForm.title.length < 100;
+
+                }
+
+
+            }
         }
     }
 </script>

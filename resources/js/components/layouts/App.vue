@@ -1,7 +1,7 @@
 <template>
     <div>
 
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
             <div class="container">
                 <!--<router-link :to="{ name: 'home' }" class="nav-link"><span style="color:white">Create Trivia Game!</span></router-link>-->
                 <a class="navbar-brand" href="/">
@@ -16,9 +16,9 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto ml-auto">
                         <li>
-                            <button type="button" class="btn btn-success">
-                                <router-link :to="{ name: 'createGameName' }" class="nav-link"><span style="color:white">Create Trivia Game!</span></router-link>
-                            </button>
+                            <!--<button type="button" class="btn btn-success">-->
+                                <!--<router-link :to="{ name: 'createGameName' }" class="nav-link"><span style="color:white">Create Trivia Game!</span></router-link>-->
+                            <!--</button>-->
                         </li>
                     </ul>
 
@@ -39,8 +39,7 @@
                 </div>
             </div>
         </nav>
-
-        <div class="container py-4">
+        <div class="container-fluid pr-0 pl-0">
             <router-view></router-view>
         </div>
     </div>

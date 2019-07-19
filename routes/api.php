@@ -25,6 +25,8 @@ Route::get('/game/{id}', 'GameController@show');
 //Rounds
 Route::get('/trivia/{id}/rounds', 'RoundController@index');
 Route::post('/round/create', 'RoundController@store');
+Route::patch('/round/{id}', 'RoundController@update');
+Route::delete('/round/{id}/destroy', 'RoundController@destroy');
 
 //Questions
 Route::get('/question/{id}', 'QuestionController@show');

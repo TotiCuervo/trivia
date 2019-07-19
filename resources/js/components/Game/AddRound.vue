@@ -24,6 +24,9 @@
                 id: null,
             }
         },
+        mounted() {
+
+        },
         methods:{
             ...mapActions('round', ['fetchRounds']),
             ...mapActions('round', ['addRound']),
@@ -34,6 +37,10 @@
                 //triggers new round function in round store
                 this.addRound();
             },
+            newBreak()
+            {
+                this.addBreak();
+            }
         },
     }
 </script>

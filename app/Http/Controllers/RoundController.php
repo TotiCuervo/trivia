@@ -82,9 +82,17 @@ class RoundController extends Controller
      * @param  \App\Round  $round
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Round $round)
+    public function update(Request $request, $id)
     {
-        //
+        $round = Round::findorFail($id);
+
+        $data = $request->data;
+
+        $round->title = $data['title'];
+        $round->time = $data['time'];
+        $round->order_number = $data['order_number'];
+
+        $round->save();
     }
 
     /**
@@ -93,8 +101,10 @@ class RoundController extends Controller
      * @param  \App\Round  $round
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Round $round)
+    public function destroy($id)
     {
-        //
+        $round = Round::findorFail($id);
+        $round->delete();
+        return $round;
     }
 }

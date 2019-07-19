@@ -1883,24 +1883,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -1980,6 +1962,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         this.order_number++;
       }
     }
+
+    this.questionType = "Fill-in-blank";
   },
   methods: {
     addAnswerOrder: function addAnswerOrder() {
@@ -2195,11 +2179,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       id: null
     };
   },
+  mounted: function mounted() {},
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('round', ['fetchRounds']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('round', ['addRound']), {
     //adds new round to game
     newRound: function newRound() {
       //triggers new round function in round store
       this.addRound();
+    },
+    newBreak: function newBreak() {
+      this.addBreak();
     }
   })
 });
@@ -2370,6 +2358,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2383,7 +2375,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
     this.fetchData(this.id);
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('game', ['fetchData'])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('game', ['fetchData']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('round', ['deleteRound']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('question', ['deleteQuestion']), {
+    delete_Round: function delete_Round() {
+      this.deleteRound();
+      this.$bvModal.hide("delete-round");
+    },
+    delete_Question: function delete_Question() {
+      this.deleteQuestion();
+      this.$bvModal.hide("delete-question");
+    }
+  }),
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('game', ['game', 'game_id']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('round', ['rounds']))
 });
 
@@ -2532,6 +2533,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2543,9 +2557,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     //clears the form of the question store
     if (!(this.questionForm.title === '')) {
       this.$store.commit('question/CLEAR_FORM');
-    } // this.$store.commit('answer/CLEAR_ALL_FORM');
-    //gets the params from the url
+    } //Clears all the forms for the answers;
 
+
+    this.$store.commit('answer/CLEAR_ALL_FORM'); //gets the params from the url
 
     this.routeParams = this.$route.params; //sets the round id from the params for question
 
@@ -2554,11 +2569,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.answerRoundID = this.routeParams.round_id; //gets all of the questions already in this trivia
 
     this.fetchQuestions(this.routeParams.id);
+    this.fetchRounds(this.routeParams);
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('question', ['newQuestion', 'fetchQuestions']), {
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('question', ['newQuestion', 'fetchQuestions']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('round', ['fetchRounds']), {
     qaForm: function qaForm() {
       this.setOrderNumber();
       this.addQuestion();
+      this.$store.commit('question/CLEAR_CURRENT_QUESTION');
+      this.$store.commit('round/CLEAR_ROUND'); // this.$store.commit('round/UPDATE_ROUND_BY_ID', this.routeParams.round_id);
+
       this.$router.push({
         name: "gameDetails",
         params: {
@@ -2595,7 +2614,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this.$store.commit('question/CLEAR_FORM'); //going to add questions
 
 
-        _this.addAnswer($newQuestion);
+        _this.addAnswer($newQuestion); //clears the current question otherwise it will stay
+
+
+        _this.$store.commit('question/CLEAR_CURRENT_QUESTION');
       })["catch"](function (error) {
         console.log(error.response);
       });
@@ -2647,6 +2669,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     },
     exitPage: function exitPage() {
+      this.$store.commit('question/CLEAR_CURRENT_QUESTION');
+      this.$store.commit('round/CLEAR_ROUND');
       this.$router.push({
         name: "gameDetails",
         params: {
@@ -2683,6 +2707,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       get: function get() {
         return this.answerFields;
       }
+    },
+    //For Validation
+    validation: function validation() {
+      if (this.questionForm.type === 'Multiple-Choice') {
+        return this.answerForm[0].title.length > 0 && this.answerForm[1].title.length > 0 && this.questionForm.title.length > 0 && this.questionForm.title.length < 100;
+      } else {
+        return this.answerForm[0].title.length > 0 && this.questionForm.title.length > 0 && this.questionForm.title.length < 100;
+      }
     }
   })
 });
@@ -2717,10 +2749,32 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {};
+    return {
+      textLimit: 100
+    };
   },
   mounted: function mounted() {
     //gets the params from the url
@@ -2752,6 +2806,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     questionLoading: {
       get: function get() {
         return this.loading;
+      }
+    },
+    validation: function validation() {
+      if (this.questionTitle !== null) {
+        return this.questionTitle.length < 100;
       }
     }
   })
@@ -2834,6 +2893,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     exitPage: function exitPage() {
       this.$store.commit('question/CLEAR_FORM');
       this.$store.commit('answer/CLEAR_ALL_FORM');
+      this.$store.commit('question/CLEAR_CURRENT_QUESTION');
+      this.$store.commit('round/CLEAR_ROUND');
       this.$router.push({
         name: "gameDetails",
         params: {
@@ -2844,6 +2905,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     saveChanges: function saveChanges() {
       this.saveQuestion();
       this.saveAnswers();
+      this.$store.commit('question/CLEAR_CURRENT_QUESTION');
+      this.$store.commit('round/CLEAR_ROUND');
       this.$router.push({
         name: "gameDetails",
         params: {
@@ -2854,7 +2917,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     saveQuestion: function saveQuestion() {
       var _this = this;
 
-      if (!(this.questionForm.title === this.questionObject.title)) {
+      if (!(this.questionForm.title === this.question_object.title)) {
         axios.post('/api/question/' + this.questionForm.id, {
           data: this.questionForm,
           _method: 'patch'
@@ -2876,8 +2939,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               axios.post('/api/answer/' + _this2.answerForm[$i].id, {
                 data: _this2.answerForm[$i],
                 _method: 'patch'
-              }).then(function (response) {
-                console.log(response.data);
+              }).then(function (response) {// console.log(response.data);
               })["catch"](function (error) {
                 console.log(error);
               });
@@ -2928,7 +2990,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     }
   }),
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('question', ['formQuestionRoundID', 'questionObject', 'questionFields']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('answer', ['answerFields', 'answers']), {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('question', ['formQuestionRoundID', 'currentQuestion', 'questionFields']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('answer', ['answerFields', 'answers']), {
     //Questions
     questionForm: {
       get: function get() {
@@ -2937,7 +2999,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     question_object: {
       get: function get() {
-        return this.questionObject;
+        return this.currentQuestion;
       },
       set: function set(value) {
         return this.$store.commit('question/SET_QUESTION', value);
@@ -3021,6 +3083,158 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      id: '',
+      clicked: false
+    };
+  },
+  mounted: function mounted() {
+    this.id = this.$route.params;
+  },
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('question', ['deleteQuestion']), {
+    clickQuestion: function clickQuestion() {
+      this.current_Question = this.question;
+    },
+    toggleClicked: function toggleClicked() {
+      this.clicked = !this.clicked;
+    },
+    delete_Question: function delete_Question() {
+      this.deleteQuestion(); // axios.delete('/api/question/' + this.question.id +'/destroy')
+      //     .then(response => {
+      //         console.log(this.question.order_number);
+      //         this.$store.commit('question/DELETE_FROM_QUESTIONS', this.question.order_number);
+      //         // this.$router.push({name: "gameDetails", params: {id: this.id.id}});
+      //     })
+      //     .catch(error => {
+      //         console.log(error);
+      //     });
+    }
+  }),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('round', ['currentRound']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('question', ['currentQuestion']), {
+    current_Question: {
+      get: function get() {
+        return this.currentQuestion;
+      },
+      set: function set(value) {
+        this.$store.commit('question/UPDATE_QUESTION', value);
+      }
+    }
+  }),
+  props: ['question', 'round_id']
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Round/RoundDetails.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Round/RoundDetails.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3079,45 +3293,130 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       id: '',
-      clicked: false
+      loading: false,
+      timeOptions: [{
+        value: null,
+        disabled: true,
+        text: 'Question Time Limit'
+      }, {
+        value: null,
+        text: 'No Time Limit'
+      }, {
+        value: '30',
+        text: '30 Sec'
+      }, {
+        value: '60',
+        text: '60 Sec'
+      }, {
+        value: '90',
+        text: '90 Sec'
+      }, {
+        value: '120',
+        text: '120 Sec'
+      }]
     };
   },
   mounted: function mounted() {
     this.id = this.$route.params;
   },
-  methods: {
-    toggleClicked: function toggleClicked() {
-      this.clicked = !this.clicked;
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('round', ['fetchData', 'deleteRound']), {
+    clickToEdit: function clickToEdit() {
+      if (this.current_Round !== this.round) {
+        this.$store.commit('question/CLEAR_CURRENT_QUESTION');
+        this.current_Round = this.round;
+      }
     },
-    deleteQuestion: function deleteQuestion() {
+    updateTime: function updateTime() {
       var _this = this;
 
-      axios["delete"]('/api/question/' + this.question.id + '/destroy').then(function (response) {
-        console.log(_this.question.order_number);
+      this.loading = true;
+      var $time = this.round_Time;
+      setTimeout(function () {
+        if ($time === _this.round_Time) {
+          if (_this.validation) {
+            axios.post('/api/round/' + _this.current_Round.id, {
+              data: _this.current_Round,
+              _method: 'patch'
+            }).then(function (response) {
+              _this.loading = false;
+            })["catch"](function (error) {
+              console.log(error);
+            });
+          }
+        }
+      }, 500);
+    },
+    updateTitle: function updateTitle() {
+      var _this2 = this;
 
-        _this.$store.commit('question/DELETE_FROM_QUESTIONS', _this.question.order_number); // this.$router.push({name: "gameDetails", params: {id: this.id.id}});
-
-      })["catch"](function (error) {
-        console.log(error);
-      });
+      this.loading = true;
+      var $title = this.round_Title;
+      setTimeout(function () {
+        if ($title === _this2.round_Title) {
+          // console.log('made it');
+          if (_this2.validation) {
+            // console.log('made it2');
+            axios.post('/api/round/' + _this2.current_Round.id, {
+              data: _this2.current_Round,
+              _method: 'patch'
+            }).then(function (response) {
+              _this2.loading = false;
+            })["catch"](function (error) {
+              console.log(error);
+            });
+          }
+        }
+      }, 1000);
+    },
+    delete_Round: function delete_Round() {
+      this.deleteRound();
     }
-  },
-  computed: {},
-  props: ['question', 'round_id']
+  }),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('round', ['currentRound']), {
+    round_Title: {
+      get: function get() {
+        return this.currentRound.title;
+      },
+      set: function set(value) {
+        this.$store.commit('round/UPDATE_ROUND_TITLE', value);
+      }
+    },
+    round_Time: {
+      get: function get() {
+        return this.currentRound.time;
+      },
+      set: function set(value) {
+        this.$store.commit('round/UPDATE_ROUND_TIME', value);
+      }
+    },
+    current_Round: {
+      get: function get() {
+        return this.currentRound;
+      },
+      set: function set(value) {
+        this.$store.commit('round/UPDATE_ROUND', value);
+      }
+    },
+    validation: function validation() {
+      if (this.round_Title !== null) {
+        return this.round_Title.length < 20;
+      }
+    }
+  }),
+  props: ['round']
 });
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Round/RoundDetails.vue?vue&type=script&lang=js&":
-/*!*****************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Round/RoundDetails.vue?vue&type=script&lang=js& ***!
-  \*****************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Round/RoundEditTitleTime.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Round/RoundEditTitleTime.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 //
 //
 //
@@ -3150,31 +3449,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
 /* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      id: ''
-    };
-  },
-  mounted: function mounted() {
-    this.id = this.$route.params;
-  },
-  props: ['round']
+  name: "round-edit-title-time"
 });
 
 /***/ }),
@@ -3218,6 +3494,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -3229,15 +3507,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.id = this.$route.params; //for Rounds
 
     this.fetchRounds(this.id);
-    this.round_game_id = this.game_id;
-    this.round_type = 'play'; //for Questions
+    this.round_game_id = this.game_id; // this.round_type = 'play';
+    //for Questions
 
     this.fetchQuestions(this.id.id); //for Answers
 
     this.fetchAnswers(this.id.id);
   },
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('round', ['fetchRounds']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('question', ['fetchQuestions']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('answer', ['fetchAnswers'])),
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('game', ['game_id', 'game']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('round', ['rounds', 'formGameID', 'formRoundType']), {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('game', ['game_id']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('round', ['rounds', 'formGameID', 'formRoundType']), {
     round_game_id: {
       get: function get() {
         return this.formGameID;
@@ -3393,7 +3671,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
 //
 //
 //
@@ -63969,34 +64246,19 @@ var render = function() {
                 _c("div", { staticClass: "row" }, [
                   _vm.question.type === "Multiple-Choice"
                     ? _c("div", [
-                        _c(
-                          "table",
-                          {
-                            staticClass: "float-left",
-                            staticStyle: { height: "100%" }
-                          },
-                          [
-                            _c("tbody", [
-                              answer.correct
-                                ? _c("td", { staticClass: "align-middle" }, [
-                                    _c("i", {
-                                      staticClass:
-                                        "fas fa-check-circle fa-1x5 fa-clicked-stay"
-                                    })
-                                  ])
-                                : _c("td", { staticClass: "align-middle" }, [
-                                    _c("i", {
-                                      staticClass:
-                                        "far fa-check-circle fa-1x5 fa-not-clicked-stay"
-                                    })
-                                  ])
-                            ])
-                          ]
-                        )
+                        answer.correct
+                          ? _c("i", {
+                              staticClass:
+                                "fas fa-check-circle fa-1 fa-clicked-stay"
+                            })
+                          : _c("i", {
+                              staticClass:
+                                "far fa-check-circle fa-1 fa-not-clicked-stay"
+                            })
                       ])
                     : _vm._e(),
                   _vm._v(" "),
-                  _c("h5", { staticClass: "pl-2 float-right" }, [
+                  _c("p", { staticClass: "pl-2 float-right" }, [
                     _vm._v(_vm._s(answer.title))
                   ])
                 ])
@@ -64065,11 +64327,11 @@ var render = function() {
             }
           },
           [
-            _c("option", { attrs: { value: "", selected: "", disabled: "" } }, [
+            _c("option", { attrs: { value: "", disabled: "" } }, [
               _vm._v("Choose Answer Type")
             ]),
             _vm._v(" "),
-            _c("option", { attrs: { value: "Fill-in-blank" } }, [
+            _c("option", { attrs: { value: "Fill-in-blank", selected: "" } }, [
               _vm._v("Fill In The Blank")
             ]),
             _vm._v(" "),
@@ -64521,20 +64783,20 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     !(this.game_id == null)
-      ? _c("div", [
-          _c("div", { staticClass: "game-intro" }, [
+      ? _c("div", { staticClass: "game-creator" }, [
+          _c("div", { staticClass: "game-intro pt-4 pb-4" }, [
             _c("div", { staticClass: "row" }, [
               _c("div", { staticClass: "col-md-12 text-center" }, [
                 _c("div", { staticClass: "game-header" }, [
                   _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-md-11 col-sm-11" }, [
+                    _c("div", { staticClass: "col-md-12 col-sm-12" }, [
                       _vm.game.name
                         ? _c("div", [_c("h1", [_vm._v(_vm._s(_vm.game.name))])])
                         : _vm._e(),
                       _vm._v(" "),
                       _vm.game.description
                         ? _c("div", [
-                            _c("h3", { staticClass: "text-muted" }, [
+                            _c("h3", [
                               _vm._v(
                                 "\n                                        " +
                                   _vm._s(_vm.game.description) +
@@ -64549,37 +64811,149 @@ var render = function() {
                               )
                             ])
                           ])
-                    ]),
-                    _vm._v(" "),
-                    _vm._m(0)
+                    ])
                   ])
-                ]),
-                _vm._v(" "),
-                _c("hr")
+                ])
               ])
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "round-outline" }, [_c("RoundIndex")], 1),
+          _c(
+            "div",
+            { staticClass: "round-outline pt-4" },
+            [_c("RoundIndex")],
+            1
+          ),
           _vm._v(" "),
-          _c("div", { staticClass: "add-Round" }, [_c("AddRound")], 1)
+          _c("div", { staticClass: "add-Round" }, [_c("AddRound")], 1),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "delete-modals" },
+            [
+              _c("b-modal", {
+                attrs: {
+                  id: "delete-round",
+                  "hide-footer": "",
+                  "hide-header": "",
+                  centered: "",
+                  "visible-close": ""
+                },
+                scopedSlots: _vm._u(
+                  [
+                    {
+                      key: "default",
+                      fn: function(ref) {
+                        var close = ref.close
+                        return [
+                          _c("div", { staticClass: "row" }, [
+                            _c("div", { staticClass: "col-md-12" }, [
+                              _c("i", {
+                                staticClass: "fas fa-times float-right clicker",
+                                on: {
+                                  click: function($event) {
+                                    return close()
+                                  }
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "d-block text-center" }, [
+                            _c("h4", { staticClass: "my-4" }, [
+                              _vm._v("Are you sure you want to delete this "),
+                              _c("b", [_vm._v("Round?")])
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "b-button",
+                            {
+                              staticClass: "mt-3",
+                              attrs: { block: "", variant: "danger" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.delete_Round()
+                                }
+                              }
+                            },
+                            [_vm._v("Delete Round")]
+                          )
+                        ]
+                      }
+                    }
+                  ],
+                  null,
+                  false,
+                  2547216257
+                )
+              }),
+              _vm._v(" "),
+              _c("b-modal", {
+                attrs: {
+                  id: "delete-question",
+                  "hide-footer": "",
+                  "hide-header": "",
+                  centered: "",
+                  "visible-close": ""
+                },
+                scopedSlots: _vm._u(
+                  [
+                    {
+                      key: "default",
+                      fn: function(ref) {
+                        var close = ref.close
+                        return [
+                          _c("div", { staticClass: "row" }, [
+                            _c("div", { staticClass: "col-md-12" }, [
+                              _c("i", {
+                                staticClass: "fas fa-times float-right clicker",
+                                on: {
+                                  click: function($event) {
+                                    return close()
+                                  }
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "d-block text-center" }, [
+                            _c("h4", { staticClass: "my-4" }, [
+                              _vm._v("Are you sure you want to delete this "),
+                              _c("b", [_vm._v("Question?")])
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "b-button",
+                            {
+                              staticClass: "mt-3",
+                              attrs: { block: "", variant: "danger" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.delete_Question()
+                                }
+                              }
+                            },
+                            [_vm._v("Delete Question")]
+                          )
+                        ]
+                      }
+                    }
+                  ],
+                  null,
+                  false,
+                  1807078541
+                )
+              })
+            ],
+            1
+          )
         ])
       : _vm._e()
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-1 col-sm-1" }, [
-      _c("i", {
-        staticClass: "fas fa-ellipsis-v circle-icon",
-        attrs: { "aria-hidden": "true" }
-      })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -64713,23 +65087,37 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "row pt-3 pb-5" }, [
-                  _c("div", { staticClass: "col-md-10 offset-md-1" }, [
-                    _c("hr"),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-success w-100",
-                        attrs: { type: "button" },
-                        on: { click: _vm.qaForm }
-                      },
-                      [
-                        _vm._v(
-                          " Create\n                                        Question\n                                    "
-                        )
-                      ]
-                    )
-                  ])
+                  _c(
+                    "div",
+                    { staticClass: "col-md-10 offset-md-1" },
+                    [
+                      _c("hr"),
+                      _vm._v(" "),
+                      !_vm.validation
+                        ? _c(
+                            "b-button",
+                            {
+                              staticClass: "w-100",
+                              attrs: { disabled: "", variant: "success" }
+                            },
+                            [_vm._v("Create Question")]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.validation
+                        ? _c(
+                            "b-button",
+                            {
+                              staticClass: "w-100",
+                              attrs: { variant: "success" },
+                              on: { click: _vm.qaForm }
+                            },
+                            [_vm._v("Create Question")]
+                          )
+                        : _vm._e()
+                    ],
+                    1
+                  )
                 ])
               ])
             ])
@@ -64761,35 +65149,72 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("h1"),
-    _vm._v(" "),
-    _c("h1", [_vm._v("New Question:")]),
-    _vm._v(" "),
-    _c("div", { staticClass: "form-group" }, [
-      _c("textarea", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.questionTitle,
-            expression: "questionTitle"
-          }
+  return _c(
+    "div",
+    [
+      _c("h1", [_vm._v("New Question:")]),
+      _vm._v(" "),
+      _c(
+        "b-form-group",
+        [
+          _vm.validation
+            ? _c("b-form-textarea", {
+                attrs: {
+                  id: "textarea-state",
+                  state: null,
+                  placeholder: "Enter Question",
+                  rows: "4",
+                  type: "text",
+                  required: ""
+                },
+                model: {
+                  value: _vm.questionTitle,
+                  callback: function($$v) {
+                    _vm.questionTitle = $$v
+                  },
+                  expression: "questionTitle"
+                }
+              })
+            : _vm._e(),
+          _vm._v(" "),
+          !_vm.validation
+            ? _c("b-form-textarea", {
+                attrs: {
+                  id: "textarea-state",
+                  state: _vm.validation,
+                  placeholder: "Enter Question",
+                  rows: "4",
+                  required: ""
+                },
+                model: {
+                  value: _vm.questionTitle,
+                  callback: function($$v) {
+                    _vm.questionTitle = $$v
+                  },
+                  expression: "questionTitle"
+                }
+              })
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.validation
+            ? _c("small", [
+                _vm._v(_vm._s(_vm.textLimit - _vm.questionTitle.length))
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _c("b-form-invalid-feedback", { attrs: { state: _vm.validation } }, [
+            _vm._v(
+              "\n            " +
+                _vm._s(_vm.textLimit - _vm.questionTitle.length) +
+                "\n        "
+            )
+          ])
         ],
-        staticClass: "form-control",
-        attrs: { rows: "3", placeholder: "Type your question here..." },
-        domProps: { value: _vm.questionTitle },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.questionTitle = $event.target.value
-          }
-        }
-      })
-    ])
-  ])
+        1
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -64949,26 +65374,44 @@ var render = function() {
   var _c = _vm._self._c || _h
   return this.id
     ? _c("div", [
-        _c("div", { staticClass: "card" }, [
-          _c("div", { staticClass: "card-body" }, [
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-md-1" }, [
-                _c("h5", [
-                  _vm._v("Q" + _vm._s(_vm.question.order_number) + ":")
-                ])
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "col-md-10 clicker",
-                  on: {
-                    click: function($event) {
-                      return _vm.toggleClicked()
-                    }
-                  }
-                },
-                [
+        _c(
+          "div",
+          {
+            staticClass: "card",
+            class: {
+              "blank-card": this.currentRound.id !== this.round_id,
+              "question-card":
+                this.currentRound.id === this.round_id &&
+                this.current_Question.id !== this.question.id
+            },
+            on: {
+              click: function($event) {
+                return _vm.clickQuestion()
+              }
+            }
+          },
+          [
+            _c("div", { staticClass: "card-body p-2" }, [
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-md-1" }, [
+                  _c("p", { staticClass: "m-0" }, [
+                    _vm._v("Q" + _vm._s(_vm.question.order_number) + ":")
+                  ]),
+                  _vm._v(" "),
+                  _c("i", {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: this.round_id === this.currentRound.id,
+                        expression: "this.round_id === this.currentRound.id"
+                      }
+                    ],
+                    staticClass: "fas fa-arrows-alt"
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-10 clicker" }, [
                   _vm.question.type === "Fill-in-blank"
                     ? _c("div", [
                         _c("span", { staticClass: "text-muted" }, [
@@ -64981,129 +65424,116 @@ var render = function() {
                         ])
                       ]),
                   _vm._v(" "),
-                  _c("h4", [_vm._v(_vm._s(_vm.question.title))])
-                ]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-1" }, [
-                _c("div", { staticClass: "float-right" }, [
-                  _c("div", { staticClass: "dropdown dropleft" }, [
-                    _c("i", {
-                      staticClass: "fas fa-ellipsis-v circle-icon",
-                      attrs: {
-                        id: "dropdownMenuButton",
-                        "data-toggle": "dropdown",
-                        "aria-haspopup": "true",
-                        "aria-expanded": "false"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass: "dropdown-menu",
-                        attrs: { "aria-labelledby": "dropdownMenuButton" }
-                      },
-                      [
-                        _c(
-                          "router-link",
-                          {
-                            staticClass: "nav-link",
-                            attrs: {
-                              to: {
-                                name: "editQAForm",
-                                params: {
-                                  id: _vm.id.id,
-                                  round_id: _vm.round_id,
-                                  question_id: _vm.question.id
+                  _c("p", { staticClass: "m-0" }, [
+                    _c("b", [_vm._v(_vm._s(_vm.question.title))])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-1" }, [
+                  _c(
+                    "div",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: this.current_Question.id === this.question.id,
+                          expression:
+                            "this.current_Question.id === this.question.id"
+                        }
+                      ],
+                      staticClass: "float-right"
+                    },
+                    [
+                      _c(
+                        "div",
+                        { staticClass: "dropdown dropleft" },
+                        [
+                          _c(
+                            "router-link",
+                            {
+                              staticClass: "clicker",
+                              attrs: {
+                                to: {
+                                  name: "editQAForm",
+                                  params: {
+                                    id: _vm.id.id,
+                                    round_id: _vm.round_id,
+                                    question_id: _vm.question.id
+                                  }
                                 }
                               }
-                            }
-                          },
-                          [
-                            _c(
-                              "a",
+                            },
+                            [
+                              _c("i", {
+                                directives: [
+                                  {
+                                    name: "b-tooltip",
+                                    rawName: "v-b-tooltip.left",
+                                    modifiers: { left: true }
+                                  }
+                                ],
+                                staticClass:
+                                  "fas fa-pen fa-white fa-1x circle-icon-edit",
+                                attrs: { title: "Edit question" }
+                              })
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("i", {
+                            directives: [
                               {
-                                staticClass: "dropdown-item no-dec",
-                                attrs: { href: "#" }
+                                name: "b-tooltip",
+                                rawName: "v-b-tooltip.left",
+                                modifiers: { left: true }
                               },
-                              [
-                                _c("div", { staticClass: "row" }, [
-                                  _c("i", {
-                                    staticClass:
-                                      "fas fa-pen-square fa-1x5 align-middle pr-2 pl-2"
-                                  }),
-                                  _vm._v(" "),
-                                  _c("p", { staticClass: "p-0 m-0" }, [
-                                    _vm._v("Edit")
-                                  ])
-                                ])
-                              ]
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass: "nav-link",
-                            on: {
-                              click: function($event) {
-                                return _vm.deleteQuestion()
+                              {
+                                name: "b-modal",
+                                rawName: "v-b-modal.delete-question",
+                                modifiers: { "delete-question": true }
                               }
-                            }
-                          },
-                          [_vm._m(0)]
-                        )
-                      ],
-                      1
-                    )
-                  ])
+                            ],
+                            staticClass:
+                              "fas fa-trash-alt fa-white fa-1x circle-icon-delete mt-2",
+                            attrs: { title: "Delete question" }
+                          })
+                        ],
+                        1
+                      )
+                    ]
+                  )
                 ])
               ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c(
-            "ul",
-            {
-              directives: [
-                {
-                  name: "show",
-                  rawName: "v-show",
-                  value: _vm.clicked,
-                  expression: "clicked"
-                }
-              ],
-              staticClass: "list-group list-group-flush"
-            },
-            [
-              _c(
-                "li",
-                { staticClass: "list-group-item" },
-                [_c("AnswerIndex", { attrs: { question: _vm.question } })],
-                1
-              )
-            ]
-          )
-        ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "ul",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: this.current_Question.id === this.question.id,
+                    expression: "this.current_Question.id === this.question.id"
+                  }
+                ],
+                staticClass: "list-group list-group-flush"
+              },
+              [
+                _c(
+                  "li",
+                  { staticClass: "list-group-item" },
+                  [_c("AnswerIndex", { attrs: { question: _vm.question } })],
+                  1
+                )
+              ]
+            )
+          ]
+        )
       ])
     : _vm._e()
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", { staticClass: "dropdown-item" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("i", { staticClass: "fas fa-trash fa-1x5 align-middle pr-2 pl-2" }),
-        _vm._v(" "),
-        _c("p", { staticClass: "p-0 m-0" }, [_vm._v("Delete")])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -65125,71 +65555,495 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "card" }, [
-    _c("div", { staticClass: "round-details p-3" }, [
-      _c("div", { staticClass: "row pb-3" }, [
-        _c("div", { staticClass: "col-md-12" }, [
-          _c("h4", { staticClass: "float-left" }, [
-            _vm._v("Round: " + _vm._s(this.round.order_number))
-          ]),
-          _vm._v(" "),
-          _vm._m(0)
-        ])
+  return _c(
+    "div",
+    {
+      staticClass: "fancy card",
+      on: {
+        click: function($event) {
+          return _vm.clickToEdit()
+        }
+      }
+    },
+    [
+      _c("div", { staticClass: "p-4" }, [
+        _c("div", { staticClass: "round-details" }, [
+          _c("div", { staticClass: "row pb-3" }, [
+            _c("div", { staticClass: "col-md-2 pr-0" }, [
+              _c("h5", { staticClass: "float-left" }, [
+                _vm._v("Round: " + _vm._s(this.round.order_number))
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-3 pl-0" }, [
+              _c(
+                "div",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value:
+                        this.current_Round.order_number !==
+                          this.round.order_number && this.round.title != null,
+                      expression:
+                        "(this.current_Round.order_number !== this.round.order_number) && (this.round.title != null)"
+                    }
+                  ]
+                },
+                [
+                  _c("h5", { staticClass: "text-muted" }, [
+                    _vm._v(" " + _vm._s(this.round.title) + " ")
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value:
+                        this.current_Round.order_number ===
+                        this.round.order_number,
+                      expression:
+                        "this.current_Round.order_number === this.round.order_number"
+                    }
+                  ]
+                },
+                [
+                  _c(
+                    "b-form",
+                    {
+                      on: {
+                        submit: function($event) {
+                          $event.stopPropagation()
+                          $event.preventDefault()
+                        }
+                      }
+                    },
+                    [
+                      _vm.validation
+                        ? _c("b-input", {
+                            attrs: {
+                              placeholder: "Round Title",
+                              state: null,
+                              id: "feedbacek-user",
+                              size: "sm"
+                            },
+                            on: {
+                              input: function($event) {
+                                return _vm.updateTitle()
+                              }
+                            },
+                            model: {
+                              value: _vm.round_Title,
+                              callback: function($$v) {
+                                _vm.round_Title = $$v
+                              },
+                              expression: "round_Title"
+                            }
+                          })
+                        : _vm._e(),
+                      _vm._v(" "),
+                      !_vm.validation
+                        ? _c("b-input", {
+                            attrs: {
+                              placeholder: "Round Title",
+                              state: _vm.validation,
+                              id: "feedback-user",
+                              size: "sm"
+                            },
+                            on: {
+                              input: function($event) {
+                                return _vm.updateTitle()
+                              }
+                            },
+                            model: {
+                              value: _vm.round_Title,
+                              callback: function($$v) {
+                                _vm.round_Title = $$v
+                              },
+                              expression: "round_Title"
+                            }
+                          })
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c(
+                        "b-form-invalid-feedback",
+                        { attrs: { state: _vm.validation } },
+                        [
+                          _vm._v(
+                            "\n                                Cannot be longer than 20 characters.\n                            "
+                          )
+                        ]
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-3 pl-0" }, [
+              _c(
+                "div",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value:
+                        this.current_Round.order_number !==
+                        this.round.order_number,
+                      expression:
+                        "(this.current_Round.order_number !== this.round.order_number)"
+                    }
+                  ]
+                },
+                [
+                  this.round.time === null
+                    ? _c("div", [
+                        _c("h5", { staticClass: "text-muted" }, [
+                          _vm._v("No Time Restrictions")
+                        ])
+                      ])
+                    : _c("div", [
+                        _c("h5", { staticClass: "text-muted" }, [
+                          _vm._v(
+                            " " +
+                              _vm._s(this.round.time) +
+                              " second questions  "
+                          )
+                        ])
+                      ])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value:
+                        this.current_Round.order_number ===
+                        this.round.order_number,
+                      expression:
+                        "this.current_Round.order_number === this.round.order_number"
+                    }
+                  ]
+                },
+                [
+                  _c("b-form-select", {
+                    attrs: { size: "sm", options: _vm.timeOptions },
+                    on: {
+                      change: function($event) {
+                        return _vm.updateTime()
+                      }
+                    },
+                    model: {
+                      value: _vm.round_Time,
+                      callback: function($$v) {
+                        _vm.round_Time = $$v
+                      },
+                      expression: "round_Time"
+                    }
+                  })
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-3 pl-0" }, [
+              _c(
+                "div",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value:
+                        this.current_Round.order_number ===
+                        this.round.order_number,
+                      expression:
+                        "this.current_Round.order_number === this.round.order_number"
+                    }
+                  ],
+                  staticClass: "save-data"
+                },
+                [
+                  this.loading === true
+                    ? _c(
+                        "div",
+                        [
+                          _c(
+                            "b-button",
+                            {
+                              staticClass: "float-right",
+                              attrs: { variant: "info", size: "sm" }
+                            },
+                            [
+                              _c("b-spinner", { attrs: { small: "" } }),
+                              _vm._v(
+                                "\n                                Saving...\n                            "
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    : _c(
+                        "div",
+                        [
+                          _c(
+                            "b-button",
+                            {
+                              staticClass: "float-right",
+                              attrs: { variant: "outline-info", size: "sm" }
+                            },
+                            [
+                              _c("i", {
+                                staticClass: "fas fa-check faa-tada animated"
+                              }),
+                              _vm._v(
+                                "\n                                Up To Date\n                            "
+                              )
+                            ]
+                          )
+                        ],
+                        1
+                      )
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-1" }, [
+              _c(
+                "div",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value:
+                        this.current_Round.order_number ===
+                        this.round.order_number,
+                      expression:
+                        "this.current_Round.order_number === this.round.order_number"
+                    }
+                  ],
+                  staticClass: "float-right"
+                },
+                [
+                  _c("i", {
+                    directives: [
+                      {
+                        name: "b-modal",
+                        rawName: "v-b-modal.delete-round",
+                        modifiers: { "delete-round": true }
+                      }
+                    ],
+                    staticClass:
+                      "far fa-times-circle fa-1x5 fa-gray-black clicker"
+                  })
+                ]
+              )
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "question-index pt-4" },
+          [_c("QuestionIndex", { attrs: { round_id: this.round.id } })],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value:
+                  this.current_Round.order_number === this.round.order_number,
+                expression:
+                  "this.current_Round.order_number === this.round.order_number"
+              }
+            ],
+            staticClass: "add-question"
+          },
+          [
+            _c("div", { staticClass: "row pt-3" }, [
+              _c(
+                "div",
+                { staticClass: "col-md-12 text-center" },
+                [
+                  _c(
+                    "router-link",
+                    {
+                      attrs: {
+                        to: {
+                          name: "createQaForm",
+                          params: { id: _vm.id.id, round_id: this.round.id }
+                        }
+                      }
+                    },
+                    [
+                      _c("i", {
+                        directives: [
+                          {
+                            name: "b-tooltip",
+                            rawName: "v-b-tooltip.hover",
+                            modifiers: { hover: true }
+                          }
+                        ],
+                        staticClass: "fas fa-plus-circle fa-green  fa-2x",
+                        attrs: { title: "Add Question!" }
+                      })
+                    ]
+                  )
+                ],
+                1
+              )
+            ])
+          ]
+        )
       ])
-    ]),
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Round/RoundEditTitleTime.vue?vue&type=template&id=fb72c3ce&scoped=true&":
+/*!***************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Round/RoundEditTitleTime.vue?vue&type=template&id=fb72c3ce&scoped=true& ***!
+  \***************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "div",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value:
+              this.current_Round.order_number !== this.round.order_number &&
+              this.round.title != null,
+            expression:
+              "(this.current_Round.order_number !== this.round.order_number) && (this.round.title != null)"
+          }
+        ]
+      },
+      [
+        _c("h5", { staticClass: "text-muted" }, [
+          _vm._v(" " + _vm._s(this.round.title) + " ")
+        ])
+      ]
+    ),
     _vm._v(" "),
     _c(
       "div",
-      { staticClass: "question-index" },
-      [_c("QuestionIndex", { attrs: { round_id: this.round.id } })],
-      1
-    ),
-    _vm._v(" "),
-    _c("div", { staticClass: "add-question" }, [
-      _c("div", { staticClass: "row pt-3" }, [
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: this.current_Round.order_number === this.round.order_number,
+            expression:
+              "this.current_Round.order_number === this.round.order_number"
+          }
+        ]
+      },
+      [
         _c(
-          "div",
-          { staticClass: "col-md-12 text-center" },
+          "b-form",
+          {
+            on: {
+              submit: function($event) {
+                $event.stopPropagation()
+                $event.preventDefault()
+              }
+            }
+          },
           [
-            _c(
-              "router-link",
-              {
-                attrs: {
-                  to: {
-                    name: "createQaForm",
-                    params: { id: _vm.id.id, round_id: this.round.id }
+            _vm.validation
+              ? _c("b-input", {
+                  attrs: {
+                    placeholder: "Round Title",
+                    state: null,
+                    id: "feedbacek-user",
+                    size: "sm"
+                  },
+                  model: {
+                    value: _vm.round_Title,
+                    callback: function($$v) {
+                      _vm.round_Title = $$v
+                    },
+                    expression: "round_Title"
                   }
-                }
-              },
-              [
-                _c("i", {
-                  directives: [
-                    {
-                      name: "b-tooltip",
-                      rawName: "v-b-tooltip.hover",
-                      modifiers: { hover: true }
-                    }
-                  ],
-                  staticClass: "fas fa-plus-circle fa-green fa-2x",
-                  attrs: { title: "Add Question!" }
                 })
+              : _vm._e(),
+            _vm._v(" "),
+            !_vm.validation
+              ? _c("b-input", {
+                  attrs: {
+                    placeholder: "Round Title",
+                    state: _vm.validation,
+                    id: "feedback-user",
+                    size: "sm"
+                  },
+                  model: {
+                    value: _vm.round_Title,
+                    callback: function($$v) {
+                      _vm.round_Title = $$v
+                    },
+                    expression: "round_Title"
+                  }
+                })
+              : _vm._e(),
+            _vm._v(" "),
+            _c(
+              "b-form-invalid-feedback",
+              { attrs: { state: _vm.validation } },
+              [
+                _vm._v(
+                  "\n                Cannot be longer than 20 characters.\n            "
+                )
               ]
             )
           ],
           1
         )
-      ])
-    ])
+      ],
+      1
+    )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "float-right" }, [_c("p", [_vm._v("xxx")])])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -65216,18 +66070,21 @@ var render = function() {
       ? _c("div", [
           this.rounds.length === 0
             ? _c("div", [_vm._m(0)])
-            : _c(
-                "div",
-                _vm._l(this.rounds, function(round) {
-                  return _c(
-                    "div",
-                    { staticClass: "round-row pb-5" },
-                    [_c("RoundDetails", { attrs: { round: round } })],
-                    1
-                  )
-                }),
-                0
-              )
+            : _c("div", [
+                _c(
+                  "div",
+                  { staticClass: "col-md-8 offset-md-2" },
+                  _vm._l(this.rounds, function(round) {
+                    return _c(
+                      "div",
+                      { staticClass: "round-row pb-5" },
+                      [_c("RoundDetails", { attrs: { round: round } })],
+                      1
+                    )
+                  }),
+                  0
+                )
+              ])
         ])
       : _vm._e()
   ])
@@ -65369,9 +66226,7 @@ var render = function() {
   return _c("div", [
     _c(
       "nav",
-      {
-        staticClass: "navbar navbar-expand-md navbar-light bg-white shadow-sm"
-      },
+      { staticClass: "navbar navbar-expand-md navbar-dark bg-dark shadow-sm" },
       [
         _c("div", { staticClass: "container" }, [
           _c("a", { staticClass: "navbar-brand", attrs: { href: "/" } }, [
@@ -65387,36 +66242,11 @@ var render = function() {
               attrs: { id: "navbarSupportedContent" }
             },
             [
-              _c("ul", { staticClass: "navbar-nav mr-auto ml-auto" }, [
-                _c("li", [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-success",
-                      attrs: { type: "button" }
-                    },
-                    [
-                      _c(
-                        "router-link",
-                        {
-                          staticClass: "nav-link",
-                          attrs: { to: { name: "createGameName" } }
-                        },
-                        [
-                          _c("span", { staticStyle: { color: "white" } }, [
-                            _vm._v("Create Trivia Game!")
-                          ])
-                        ]
-                      )
-                    ],
-                    1
-                  )
-                ])
-              ]),
+              _vm._m(1),
               _vm._v(" "),
               _c("ul", { staticClass: "navbar-nav ml-auto" }, [
                 _c("li", { staticClass: "nav-item dropdown" }, [
-                  _vm._m(1),
+                  _vm._m(2),
                   _vm._v(" "),
                   _c(
                     "div",
@@ -65453,7 +66283,12 @@ var render = function() {
       ]
     ),
     _vm._v(" "),
-    _c("div", { staticClass: "container py-4" }, [_c("router-view")], 1)
+    _c(
+      "div",
+      { staticClass: "container-fluid pr-0 pl-0" },
+      [_c("router-view")],
+      1
+    )
   ])
 }
 var staticRenderFns = [
@@ -65475,6 +66310,12 @@ var staticRenderFns = [
       },
       [_c("span", { staticClass: "navbar-toggler-icon" })]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("ul", { staticClass: "navbar-nav mr-auto ml-auto" }, [_c("li")])
   },
   function() {
     var _vm = this
@@ -81379,6 +82220,7 @@ var map = {
 	"./components/Question/QuestionIndex.vue": "./resources/js/components/Question/QuestionIndex.vue",
 	"./components/Question/QuestionIndexCard.vue": "./resources/js/components/Question/QuestionIndexCard.vue",
 	"./components/Round/RoundDetails.vue": "./resources/js/components/Round/RoundDetails.vue",
+	"./components/Round/RoundEditTitleTime.vue": "./resources/js/components/Round/RoundEditTitleTime.vue",
 	"./components/Round/RoundIndex.vue": "./resources/js/components/Round/RoundIndex.vue",
 	"./components/ThrowAways/CreateRound.vue": "./resources/js/components/ThrowAways/CreateRound.vue",
 	"./components/ThrowAways/GameOrder.vue": "./resources/js/components/ThrowAways/GameOrder.vue",
@@ -82651,6 +83493,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Round/RoundEditTitleTime.vue":
+/*!**************************************************************!*\
+  !*** ./resources/js/components/Round/RoundEditTitleTime.vue ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _RoundEditTitleTime_vue_vue_type_template_id_fb72c3ce_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./RoundEditTitleTime.vue?vue&type=template&id=fb72c3ce&scoped=true& */ "./resources/js/components/Round/RoundEditTitleTime.vue?vue&type=template&id=fb72c3ce&scoped=true&");
+/* harmony import */ var _RoundEditTitleTime_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RoundEditTitleTime.vue?vue&type=script&lang=js& */ "./resources/js/components/Round/RoundEditTitleTime.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _RoundEditTitleTime_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _RoundEditTitleTime_vue_vue_type_template_id_fb72c3ce_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _RoundEditTitleTime_vue_vue_type_template_id_fb72c3ce_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "fb72c3ce",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Round/RoundEditTitleTime.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Round/RoundEditTitleTime.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/Round/RoundEditTitleTime.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RoundEditTitleTime_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./RoundEditTitleTime.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Round/RoundEditTitleTime.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RoundEditTitleTime_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Round/RoundEditTitleTime.vue?vue&type=template&id=fb72c3ce&scoped=true&":
+/*!*********************************************************************************************************!*\
+  !*** ./resources/js/components/Round/RoundEditTitleTime.vue?vue&type=template&id=fb72c3ce&scoped=true& ***!
+  \*********************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RoundEditTitleTime_vue_vue_type_template_id_fb72c3ce_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./RoundEditTitleTime.vue?vue&type=template&id=fb72c3ce&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Round/RoundEditTitleTime.vue?vue&type=template&id=fb72c3ce&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RoundEditTitleTime_vue_vue_type_template_id_fb72c3ce_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RoundEditTitleTime_vue_vue_type_template_id_fb72c3ce_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/Round/RoundIndex.vue":
 /*!******************************************************!*\
   !*** ./resources/js/components/Round/RoundIndex.vue ***!
@@ -83099,7 +84010,15 @@ var mutations = {
     }
   },
   UPDATE_TITLE: function UPDATE_TITLE(state, payload) {
-    state.form[payload.order].title = payload.title;
+    // state.form[payload.order].title = payload.title;
+    var $form = {
+      id: '',
+      title: payload.title,
+      question_id: '',
+      round_id: '',
+      correct: false
+    };
+    Vue.set(state.form, payload.order, $form);
   },
   UPDATE_ANSWERS: function UPDATE_ANSWERS(state, answer) {
     state.answers.push(answer);
@@ -83118,6 +84037,8 @@ var mutations = {
     state.form[order].correct = state.form[order + 1].correct;
   },
   CLEAR_FORM: function CLEAR_FORM(state, order) {
+    console.log("Clearing:");
+    console.log(state.form[order]);
     state.form[order] = {
       id: '',
       title: '',
@@ -83350,7 +84271,13 @@ __webpack_require__.r(__webpack_exports__);
 function initialState() {
   return {
     questions: [],
-    question: null,
+    question: {
+      id: '',
+      title: '',
+      type: '',
+      round_id: '',
+      order_number: ''
+    },
     form: {
       id: '',
       title: '',
@@ -83366,7 +84293,7 @@ var getters = {
   questions: function questions(state) {
     return state.questions;
   },
-  questionObject: function questionObject(state) {
+  currentQuestion: function currentQuestion(state) {
     return state.question;
   },
   questionFields: function questionFields(state) {
@@ -83424,6 +84351,17 @@ var actions = {
     })["catch"](function (error) {
       console.log(error.response);
     });
+  },
+  deleteQuestion: function deleteQuestion(_ref4) {
+    var commit = _ref4.commit,
+        state = _ref4.state;
+    commit('setLoading', true);
+    axios["delete"]('/api/question/' + state.question.id + '/destroy').then(function (response) {
+      commit('DELETE_FROM_QUESTIONS', response.data);
+      commit('setLoading', false);
+    })["catch"](function (error) {
+      console.log(error);
+    });
   }
 };
 var mutations = {
@@ -83463,20 +84401,39 @@ var mutations = {
   UPDATE_ROUND_ID: function UPDATE_ROUND_ID(state, round_id) {
     state.form.round_id = round_id;
   },
-  DELETE_FROM_QUESTIONS: function DELETE_FROM_QUESTIONS(state, index) {
-    state.questions.splice(index - 1, 1);
+  DELETE_FROM_QUESTIONS: function DELETE_FROM_QUESTIONS(state, question) {
+    var $roundQuestions = [];
 
-    for (var $i = index - 1; $i < state.questions.length; $i++) {
-      state.questions[$i].order_number = state.questions[$i].order_number - 1;
-      axios.post('/api/question/' + state.questions[$i].id, {
-        data: state.questions[$i],
+    for (var $i = 0; $i < state.questions.length; $i++) {
+      if (state.questions[$i].id === question.id) {
+        state.questions.splice($i, 1);
+      }
+
+      if (state.questions[$i].round_id === question.round_id) {
+        $roundQuestions.push(state.questions[$i]);
+      }
+    }
+
+    for (var _$i = question.order_number - 1; _$i < $roundQuestions.length; _$i++) {
+      $roundQuestions[_$i].order_number = $roundQuestions[_$i].order_number - 1;
+      axios.post('/api/question/' + $roundQuestions[_$i].id, {
+        data: $roundQuestions[_$i],
         _method: 'patch'
-      }).then(function (response) {
-        console.log(response.data);
+      }).then(function (response) {// console.log(response.data);
       })["catch"](function (error) {
         console.log(error);
       });
     }
+  },
+  CLEAR_CURRENT_QUESTION: function CLEAR_CURRENT_QUESTION(state) {
+    console.log('make it to clear current question');
+    state.question = {
+      id: '',
+      title: '',
+      type: '',
+      round_id: '',
+      order_number: ''
+    };
   },
   CLEAR_FORM: function CLEAR_FORM(state) {
     state.form = {
@@ -83510,7 +84467,14 @@ __webpack_require__.r(__webpack_exports__);
 function initialState() {
   return {
     rounds: [],
-    currentRound: null,
+    currentRound: {
+      id: '',
+      title: '',
+      time: '',
+      round_type: '',
+      game_id: '',
+      order_number: ''
+    },
     form: {
       title: null,
       time: null,
@@ -83522,6 +84486,9 @@ function initialState() {
 }
 
 var getters = {
+  currentRound: function currentRound(state) {
+    return state.currentRound;
+  },
   rounds: function rounds(state) {
     return state.rounds;
   },
@@ -83563,12 +84530,40 @@ var actions = {
   addRound: function addRound(_ref2) {
     var commit = _ref2.commit,
         state = _ref2.state;
+    var $roundForm = {
+      title: '',
+      time: '',
+      round_type: 'play',
+      game_id: state.form.game_id,
+      order_number: state.rounds.length + 1
+    };
     commit('setLoading', true);
-    axios.post('api/round/create', state.form).then(function (response) {
-      console.log('in axios');
+    axios.post('api/round/create', $roundForm).then(function (response) {
       commit('ADD_ROUND', response.data);
       commit('UPDATE_ORDER_NUMBER');
       commit('setLoading', false); // commit('CLEAR_FORM');
+    })["catch"](function (error) {
+      console.log(error.response);
+    }); // commit('setLoading', true);
+    // axios.post('api/round/create', state.form)
+    //     .then(response => {
+    //         commit('ADD_ROUND', response.data);
+    //         commit('UPDATE_ORDER_NUMBER');
+    //         commit('setLoading', false);
+    //         // commit('CLEAR_FORM');
+    // }).catch( error => {
+    //     console.log(error.response)
+    // });
+  },
+  deleteRound: function deleteRound(_ref3) {
+    var commit = _ref3.commit,
+        state = _ref3.state;
+    commit('setLoading', true);
+    axios["delete"]('api/round/' + state.currentRound.id + '/destroy').then(function (response) {
+      commit('DELETE_FROM_ROUNDS', state.currentRound.order_number);
+      commit('CLEAR_ROUND');
+      commit('UPDATE_ORDER_NUMBER');
+      commit('setLoading', false);
     })["catch"](function (error) {
       console.log(error.response);
     });
@@ -83577,6 +84572,28 @@ var actions = {
 var mutations = {
   setLoading: function setLoading(state, loading) {
     state.loading = loading;
+  },
+  UPDATE_ROUND: function UPDATE_ROUND(state, round) {
+    state.currentRound = round;
+  },
+  UPDATE_ROUND_BY_ID: function UPDATE_ROUND_BY_ID(state, id) {
+    console.log('made it');
+
+    for (var $i = 0; $i < state.rounds.length; $i++) {
+      console.log('made it inside');
+      console.log(state.rounds);
+
+      if (state.rounds[$i].id === id) {
+        console.log('made it 2');
+        state.currentRound = state.rounds[$i];
+      }
+    }
+  },
+  UPDATE_ROUND_TITLE: function UPDATE_ROUND_TITLE(state, title) {
+    state.currentRound.title = title;
+  },
+  UPDATE_ROUND_TIME: function UPDATE_ROUND_TIME(state, time) {
+    state.currentRound.time = time;
   },
   SET_ROUNDS: function SET_ROUNDS(state, rounds) {
     state.rounds = rounds;
@@ -83595,6 +84612,31 @@ var mutations = {
   },
   ADD_ROUND: function ADD_ROUND(state, round) {
     state.rounds.push(round);
+  },
+  DELETE_FROM_ROUNDS: function DELETE_FROM_ROUNDS(state, index) {
+    state.rounds.splice(index - 1, 1);
+
+    for (var $i = index - 1; $i < state.rounds.length; $i++) {
+      state.rounds[$i].order_number = state.rounds[$i].order_number - 1;
+      axios.post('/api/round/' + state.rounds[$i].id, {
+        data: state.rounds[$i],
+        _method: 'patch'
+      }).then(function (response) {
+        console.log(response.data);
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    }
+  },
+  CLEAR_ROUND: function CLEAR_ROUND(state) {
+    state.currentRound = {
+      id: '',
+      title: '',
+      time: '',
+      round_type: '',
+      game_id: '',
+      order_number: ''
+    };
   },
   CLEAR_FORM: function CLEAR_FORM(state) {
     state.form = {

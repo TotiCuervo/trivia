@@ -11,6 +11,15 @@
     color: white;
 }
 
+.fa-gray-black {
+    color: lightgray;
+    transition: 1s;
+}
+.fa-gray-black:hover {
+    color: black;
+}
+
+
 .round-button:hover {
     text-decoration: none;
     color: white;
@@ -53,6 +62,10 @@
 
 .fa-1x5 {
     font-size: 1.5em;
+}
+
+.fa-0x5 {
+    font-size: 0.5em;
 }
 
 .fa-not-clicked-delete {
@@ -104,20 +117,49 @@
 
 .circle-icon-delete {
     background: darkred;
-    padding: 8px 13px;
+    padding: 8px 9px;
     border-radius: 60%;
     cursor: pointer;
 
 }
 
-.card {
-    box-shadow: 0px 4px 6px 0 rgba(0,0,0,0.1);
+.circle-icon-edit {
+    background: orange;
+    padding: 8px 8px;
+    border-radius: 60%;
+    cursor: pointer;
+
+}
+
+.fancy {
+    /*box-shadow: 0px 4px 6px 0 rgba(0,0,0,0.1);*/
+    box-shadow: 0px 4px 6px 0 rgba(0,0,0,0.5);
+
     transition: 0.5s;
 }
 
-.card:hover {
-    box-shadow: 0 5px 7px 0 rgba(0,0,0,0.2);
+/*.fancy:hover {*/
+    /*box-shadow: 0 5px 7px 0 rgba(0,0,0,0.2);*/
+/*}*/
+
+.blank-card {
+    border: 0 !important;
 }
+.question-card {
+    /*box-shadow: 0px 0px 0px 0 rgba(0,0,0,0);*/
+    /*border: 0 !important;*/
+    /*box-shadow: 0px 4px 6px 0 rgba(0,0,0,0.1);*/
+
+    transition: 0.5s;
+
+}
+
+.question-card:hover {
+    /*box-shadow: 0 5px 7px 0 rgba(0,0,0,0.2);*/
+    background-color: #F1F4F6;
+
+}
+
 
 .no-dec {
     text-decoration: none;
@@ -128,3 +170,17 @@
 }
 
 .tooltip { top: 0;}
+
+.animated {
+    animation-iteration-count: 1 !important;
+    -webkit-animation-iteration-count: 1 !important;
+}
+
+.game-intro {
+    background-color: #D1504F;
+    color: white;
+}
+
+.round-outline {
+    background-color: #FAEDED;
+}

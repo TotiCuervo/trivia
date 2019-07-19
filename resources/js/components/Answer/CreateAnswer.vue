@@ -4,8 +4,8 @@
         <div class="row">
             <div class="col-md-6 offset-md-1">
                 <select class="form-control mt-2" v-model="questionType" @change="changeOrderNumber">
-                    <option value='' selected disabled>Choose Answer Type</option>
-                    <option value='Fill-in-blank'>Fill In The Blank</option>
+                    <option value='' disabled>Choose Answer Type</option>
+                    <option value='Fill-in-blank' selected>Fill In The Blank</option>
                     <option value="Multiple-Choice">Multiple Choice</option>
                 </select>
             </div>
@@ -49,8 +49,9 @@
                 {
                     this.order_number++;
                 }
-
             }
+
+            this.questionType = "Fill-in-blank";
 
 
         },

@@ -14,9 +14,11 @@
             </div>
             <!--else, do this-->
             <div v-else>
-                <!--for every round that there is, create a new round component-->
-                <div v-for="round in this.rounds" class="round-row pb-5">
-                    <RoundDetails :round="round"></RoundDetails>
+                <div class="col-md-8 offset-md-2">
+                    <!--for every round that there is, create a new round component-->
+                    <div v-for="round in this.rounds" class="round-row pb-5">
+                        <RoundDetails :round="round"></RoundDetails>
+                    </div>
                 </div>
             </div>
         </div>
@@ -37,7 +39,7 @@
             //for Rounds
             this.fetchRounds(this.id);
             this.round_game_id = this.game_id;
-            this.round_type = 'play';
+            // this.round_type = 'play';
 
             //for Questions
             this.fetchQuestions(this.id.id);
@@ -52,7 +54,7 @@
 
         },
         computed: {
-            ...mapGetters('game', ['game_id', 'game']),
+            ...mapGetters('game', ['game_id']),
             ...mapGetters('round', ['rounds', 'formGameID','formRoundType']),
             round_game_id: {
                 get (){
