@@ -2915,7 +2915,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -3061,6 +3060,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     answerArray: {
       get: function get() {
         return this.answers;
+      }
+    },
+    validation: function validation() {
+      if (this.questionForm.type === 'Multiple-Choice') {
+        return this.answerForm[0].title.length > 0 && this.answerForm[1].title.length > 0 && this.questionForm.title.length > 0 && this.questionForm.title.length < 100;
+      } else {
+        return this.answerForm[0].title.length > 0 && this.questionForm.title.length > 0 && this.questionForm.title.length < 100;
       }
     }
   })
@@ -65412,23 +65418,37 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "row pt-3 pb-5" }, [
-                      _c("div", { staticClass: "col-md-10 offset-md-1" }, [
-                        _c("hr"),
-                        _vm._v(" "),
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-success w-100",
-                            attrs: { type: "button" },
-                            on: { click: _vm.saveChanges }
-                          },
-                          [
-                            _vm._v(
-                              "\n                                        Save Question\n                                    "
-                            )
-                          ]
-                        )
-                      ])
+                      _c(
+                        "div",
+                        { staticClass: "col-md-10 offset-md-1" },
+                        [
+                          _c("hr"),
+                          _vm._v(" "),
+                          !_vm.validation
+                            ? _c(
+                                "b-button",
+                                {
+                                  staticClass: "w-100",
+                                  attrs: { disabled: "", variant: "success" }
+                                },
+                                [_vm._v("Save Question")]
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.validation
+                            ? _c(
+                                "b-button",
+                                {
+                                  staticClass: "w-100",
+                                  attrs: { variant: "success" },
+                                  on: { click: _vm.saveChanges }
+                                },
+                                [_vm._v("Save Question")]
+                              )
+                            : _vm._e()
+                        ],
+                        1
+                      )
                     ])
                   ])
                 ])

@@ -23,9 +23,8 @@
                                 <div class="row pt-3 pb-5">
                                     <div class="col-md-10 offset-md-1">
                                         <hr>
-                                        <button type="button" class="btn btn-success w-100" @click="saveChanges">
-                                            Save Question
-                                        </button>
+                                        <b-button v-if="!(validation)" disabled class="w-100" variant="success">Save Question</b-button>
+                                        <b-button v-if="(validation)" class="w-100" variant="success" @click="saveChanges">Save Question</b-button>
                                     </div>
                                 </div>
                             </div>
@@ -212,6 +211,17 @@
             answerArray: {
                 get() {
                     return this.answers;
+                }
+            },
+            validation() {
+
+                if (this.questionForm.type === 'Multiple-Choice') {
+                    return this.answerForm[0].title.length > 0 && this.answerForm[1].title.length > 0 && this.questionForm.title.length > 0 && this.questionForm.title.length < 100;
+                }
+                else {
+
+                    return this.answerForm[0].title.length > 0 && this.questionForm.title.length > 0 && this.questionForm.title.length < 100;
+
                 }
             }
         }
