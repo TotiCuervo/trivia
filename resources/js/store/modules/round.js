@@ -64,8 +64,7 @@ const actions = {
         });
     },
 
-    addRound({commit, state})
-    {
+    addRound({commit, state}) {
         let $roundForm = {
             title: '',
             time: '',
@@ -85,21 +84,9 @@ const actions = {
             console.log(error.response)
         });
 
-        // commit('setLoading', true);
-        // axios.post('api/round/create', state.form)
-        //     .then(response => {
-        //         commit('ADD_ROUND', response.data);
-        //         commit('UPDATE_ORDER_NUMBER');
-        //         commit('setLoading', false);
-        //         // commit('CLEAR_FORM');
-        // }).catch( error => {
-        //     console.log(error.response)
-        // });
-
     },
 
-    deleteRound({commit, state})
-    {
+    deleteRound({commit, state}) {
         commit('setLoading', true);
         axios.delete('api/round/' + state.currentRound.id+'/destroy')
             .then(response => {
@@ -133,7 +120,6 @@ const mutations = {
                 console.log('made it 2');
                 state.currentRound = state.rounds[$i];
             }
-
         }
     },
     UPDATE_ROUND_TITLE(state,title){

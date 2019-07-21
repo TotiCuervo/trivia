@@ -35,6 +35,7 @@
 
         },
         methods: {
+            ...mapActions('round', ['addRound']),
             newGame(){
                 axios.post('/api/game/create',{
                     name: this.name,
@@ -42,9 +43,13 @@
                     company: this.company,
                     user_id: this.user_id,
                 }).then(response => {
-                    let game = response.data;
+                    let $game = response.data;
                     // this.createGameOrder(game.id);
-                    this.$router.push({ name: "gameDetails", params: { id: game.id }});
+                    this.$store.commit('round/UPDATE_GAME_ID', $game.id);
+
+                    this.addRound();
+
+                    this.$router.push({ name: "gameDetails", params: { id: $game.id }});
 
                 });
             },

@@ -38,26 +38,30 @@
         mounted() {
             this.id = this.$route.params;
 
-            //for Rounds
-            this.fetchRounds(this.id);
-            this.round_game_id = this.game_id;
-            // this.round_type = 'play';
 
-            //for Questions
-            this.fetchQuestions(this.id.id);
 
-            //for Answers
-            this.fetchAnswers(this.id.id);
+            // //for Rounds
+            // this.fetchRounds(this.id);
+            //
+            // this.round_game_id = this.game_id;
+            //
+            // //for Questions
+            // this.fetchQuestions(this.id.id);
+            //
+            // //for Answers
+            // this.fetchAnswers(this.id.id);
+
+            // this.organizeByOrderNumber();
         },
         methods:{
             ...mapActions('round', ['fetchRounds']),
             ...mapActions('question', ['fetchQuestions']),
             ...mapActions('answer', ['fetchAnswers']),
-
         },
         computed: {
             ...mapGetters('game', ['game_id']),
             ...mapGetters('round', ['rounds', 'formGameID','formRoundType']),
+            ...mapGetters('question', ['questions']),
             round_game_id: {
                 get (){
                     return this.formGameID;

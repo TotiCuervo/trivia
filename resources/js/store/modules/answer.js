@@ -142,7 +142,8 @@ const mutations = {
             question_id: '',
             round_id: '',
             correct: false,
-        }
+        };
+
         Vue.set(state.form, payload.order, $form );
 
     },

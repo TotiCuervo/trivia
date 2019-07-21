@@ -3,23 +3,54 @@
 
         <div class="container">
             <!--if there are questions in the array-->
-            <div v-for="question in questions">
-                <!--and they match the round id of this round-->
-                <div v-if="question.round_id === round_id">
-                    <div class="row pb-3">
-                        <div class="col-md-12 pr-2">
-                            <QuestionIndexCard :question="question" :round_id="round_id"></QuestionIndexCard>
+
+            <draggable v-model="roundQuestions">
+                <div v-for="question in roundQuestions" :key="question.id">
+                    <!--and they match the round id of this round-->
+                    <div v-if="question.round_id === round_id">
+                        <div class="row pb-3">
+                            <div class="col-md-12 pr-2">
+                                <QuestionIndexCard :question="question" :round_id="round_id"></QuestionIndexCard>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </draggable>
         </div>
     </div>
+
+
+    <!--<div>-->
+
+        <!--<div class="container">-->
+            <!--&lt;!&ndash;if there are questions in the array&ndash;&gt;-->
+            <!--<div v-for="question in roundQuestions">-->
+                <!--&lt;!&ndash;and they match the round id of this round&ndash;&gt;-->
+                <!--<div v-if="question.round_id === round_id">-->
+                    <!--<div class="row pb-3">-->
+                        <!--<div class="col-md-12 pr-2">-->
+                            <!--<QuestionIndexCard :question="question" :round_id="round_id"></QuestionIndexCard>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<draggable v-model="exampleList">-->
+                <!--<transition-group name="list-complete">-->
+                    <!--<div-->
+                            <!--v-for="text in exampleList" :key="text"-->
+                            <!--class="card"-->
+                            <!--@dragend="log('a')"-->
+                    <!--&gt;{{ text }}</div>-->
+                <!--</transition-group>-->
+            <!--</draggable>-->
+        <!--</div>-->
+    <!--</div>-->
 
 </template>
 
 <script>
     import {mapActions, mapGetters} from 'vuex';
+    import draggable from 'vuedraggable';
 
     export default {
         data() {
@@ -27,6 +58,9 @@
                 id: null,
                 clicked: false,
             }
+        },
+        components: {
+            draggable,
         },
         mounted() {
             // this.id = this.$route.params;
@@ -37,6 +71,14 @@
         },
         computed: {
             ...mapGetters('question', ['questions']),
+            roundQuestions: {
+                get() {
+                    return this.questions;
+                },
+                set(value) {
+                    this.$store.commit('question/UPDATE_LIST', value);
+                }
+            }
         },
         props: ['round_id'],
     }

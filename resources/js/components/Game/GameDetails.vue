@@ -7,7 +7,7 @@
                 <GameHeader></GameHeader>
             </div>
             <!--<hr>-->
-            <div class="round-outline game-creator-background pt-4">
+            <div class="round-outline game-creator-background pt-4" v-if="this.loaded === true">
                 <RoundIndex></RoundIndex>
             </div>
 
@@ -66,11 +66,24 @@
 
             //fetches the information of the game to load it into the details
             this.fetchData(this.id);
+
+            this.fetchRounds(this.id);
+
+            this.round_game_id = this.game_id;
+
+            //for Questions
+            this.fetchQuestions(this.id.id);
+
+            //for Answers
+            this.fetchAnswers(this.id.id);
+
+
         },
         methods:{
             ...mapActions('game', ['fetchData']),
-            ...mapActions('round', ['deleteRound']),
-            ...mapActions('question', ['deleteQuestion']),
+            ...mapActions('round', ['deleteRound', 'fetchRounds']),
+            ...mapActions('question', ['fetchQuestions','deleteQuestion']),
+            ...mapActions('answer', ['fetchAnswers']),
             delete_Round() {
                 this.deleteRound();
                 this.$bvModal.hide("delete-round");
@@ -79,11 +92,21 @@
                 this.deleteQuestion();
                 this.$bvModal.hide("delete-question");
             },
-
         },
         computed: {
             ...mapGetters('game', ['game', 'game_id']),
             ...mapGetters('round', ['rounds']),
+            ...mapGetters('question', ['questions', 'loaded']),
+            questionLoaded: {
+                get() {
+                    return this.loaded;
+                }
+            },
+            gameRounds : {
+                get() {
+                    return this.rounds;
+                }
+            }
         }
     }
 </script>

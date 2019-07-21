@@ -18,7 +18,7 @@ class QuestionController extends Controller
     {
         $trivia = Game::findorFail($id);
 
-        $questions = $trivia->questions()->get();
+        $questions = $trivia->questions()->orderBy('round_id', 'ASC')->orderBy('order_number', 'ASC')->get();
 
         return $questions;
     }

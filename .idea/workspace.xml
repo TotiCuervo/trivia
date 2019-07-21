@@ -3,9 +3,19 @@
   <component name="ChangeListManager">
     <list default="true" id="f562f43b-05cf-4003-ae95-b369e5751c9b" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/QuestionController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/QuestionController.php" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" afterPath="$PROJECT_DIR$/package-lock.json" />
+      <change beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" afterPath="$PROJECT_DIR$/public/js/app.js" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Question/EditQAForm.vue" afterPath="$PROJECT_DIR$/resources/js/components/Question/EditQAForm.vue" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Round/RoundDetails.vue" afterPath="$PROJECT_DIR$/resources/js/components/Round/RoundDetails.vue" />
+      <change beforePath="$PROJECT_DIR$/resources/js/app.js" afterPath="$PROJECT_DIR$/resources/js/app.js" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Game/CreateGameName.vue" afterPath="$PROJECT_DIR$/resources/js/components/Game/CreateGameName.vue" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Game/GameDetails.vue" afterPath="$PROJECT_DIR$/resources/js/components/Game/GameDetails.vue" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Question/QuestionIndex.vue" afterPath="$PROJECT_DIR$/resources/js/components/Question/QuestionIndex.vue" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Round/RoundIndex.vue" afterPath="$PROJECT_DIR$/resources/js/components/Round/RoundIndex.vue" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/layouts/App.vue" afterPath="$PROJECT_DIR$/resources/js/components/layouts/App.vue" />
+      <change beforePath="$PROJECT_DIR$/resources/js/store/modules/answer.js" afterPath="$PROJECT_DIR$/resources/js/store/modules/answer.js" />
+      <change beforePath="$PROJECT_DIR$/resources/js/store/modules/question.js" afterPath="$PROJECT_DIR$/resources/js/store/modules/question.js" />
+      <change beforePath="$PROJECT_DIR$/resources/js/store/modules/round.js" afterPath="$PROJECT_DIR$/resources/js/store/modules/round.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -28,21 +38,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/css/style.css">
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/js/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="663">
-              <caret line="200" column="0" lean-forward="false" selection-start-line="200" selection-start-column="0" selection-end-line="200" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="284">
+              <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+              <folding>
+                <element signature="e#540#601#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RoundDetails.vue" pinned="false" current-in-tab="true">
+      <file leaf-file-name="RoundDetails.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/js/components/Round/RoundDetails.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="721">
-              <caret line="95" column="10" lean-forward="false" selection-start-line="95" selection-start-column="10" selection-end-line="95" selection-end-column="10" />
+            <state relative-caret-position="-464">
+              <caret line="59" column="26" lean-forward="true" selection-start-line="59" selection-start-column="26" selection-end-line="59" selection-end-column="26" />
               <folding>
                 <element signature="e#5679#5732#0" expanded="false" />
                 <element signature="e#6092#6908#0" expanded="false" />
@@ -60,8 +72,8 @@
       <file leaf-file-name="RoundIndex.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/js/components/Round/RoundIndex.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="20" column="72" lean-forward="false" selection-start-line="20" selection-start-column="72" selection-end-line="20" selection-end-column="72" />
+            <state relative-caret-position="-13">
+              <caret line="36" column="10" lean-forward="false" selection-start-line="36" selection-start-column="10" selection-end-line="36" selection-end-column="10" />
               <folding />
             </state>
           </provider>
@@ -70,51 +82,75 @@
       <file leaf-file-name="EditQAForm.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/js/components/Question/EditQAForm.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="254">
-              <caret line="26" column="147" lean-forward="false" selection-start-line="26" selection-start-column="147" selection-end-line="26" selection-end-column="147" />
+            <state relative-caret-position="-3">
+              <caret line="36" column="11" lean-forward="false" selection-start-line="36" selection-start-column="11" selection-end-line="36" selection-end-column="11" />
               <folding>
                 <element signature="e#1953#2034#0" expanded="false" />
                 <element signature="e#2154#2611#0" expanded="false" />
-                <element signature="e#2630#7603#0" expanded="false" />
+                <element signature="e#3530#4166#0" expanded="false" />
+                <element signature="e#7623#8995#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CreateQAForm.vue" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/js/components/Question/CreateQAForm.vue">
+      <file leaf-file-name="question.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/js/store/modules/question.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="141">
-              <caret line="38" column="40" lean-forward="false" selection-start-line="38" selection-start-column="40" selection-end-line="40" selection-end-column="0" />
+            <state relative-caret-position="478">
+              <caret line="177" column="23" lean-forward="false" selection-start-line="177" selection-start-column="23" selection-end-line="177" selection-end-column="23" />
               <folding>
-                <element signature="e#2538#2619#0" expanded="false" />
-                <element signature="e#2639#3458#0" expanded="false" />
-                <element signature="e#3493#3558#0" expanded="false" />
-                <element signature="e#3577#8139#0" expanded="false" />
-                <element signature="e#4167#4648#0" expanded="false" />
+                <element signature="e#1079#1452#0" expanded="false" />
+                <element signature="e#2095#2508#0" expanded="false" />
+                <element signature="e#2546#2900#0" expanded="false" />
+                <element signature="e#2957#2996#0" expanded="false" />
+                <element signature="e#3030#3072#0" expanded="false" />
+                <element signature="e#3109#3153#0" expanded="false" />
+                <element signature="e#3193#3421#0" expanded="false" />
+                <element signature="e#3452#3493#0" expanded="false" />
+                <element signature="e#3538#3593#0" expanded="false" />
+                <element signature="e#3630#3672#0" expanded="false" />
+                <element signature="e#3710#3757#0" expanded="false" />
+                <element signature="e#3786#3825#0" expanded="false" />
+                <element signature="e#3862#3909#0" expanded="false" />
+                <element signature="e#4881#5803#0" expanded="false" />
+                <element signature="e#5838#6063#0" expanded="false" />
+                <element signature="e#6086#6248#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AddRound.vue" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/js/components/Game/AddRound.vue">
+      <file leaf-file-name="GameDetails.vue" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/resources/js/components/Game/GameDetails.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="12" column="26" lean-forward="false" selection-start-line="12" selection-start-column="26" selection-end-line="12" selection-end-column="26" />
+            <state relative-caret-position="433">
+              <caret line="85" column="51" lean-forward="false" selection-start-line="85" selection-start-column="51" selection-end-line="85" selection-end-column="51" />
+              <folding>
+                <element signature="n#div#3;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
+                <element signature="e#3297#3400#0" expanded="false" />
+                <element signature="e#3432#3541#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="QuestionIndexCard.vue" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/js/components/Question/QuestionIndexCard.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="323">
+              <caret line="40" column="10" lean-forward="true" selection-start-line="40" selection-start-column="10" selection-end-line="40" selection-end-column="10" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GameDetails.vue" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/js/components/Game/GameDetails.vue">
+      <file leaf-file-name="QuestionController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/QuestionController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="371">
-              <caret line="60" column="51" lean-forward="false" selection-start-line="60" selection-start-column="51" selection-end-line="60" selection-end-column="51" />
-              <folding>
-                <element signature="n#div#3;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-              </folding>
+            <state relative-caret-position="259">
+              <caret line="20" column="92" lean-forward="false" selection-start-line="20" selection-start-column="92" selection-end-line="20" selection-end-column="92" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -150,6 +186,7 @@
       <find>Vue.set</find>
       <find>set</find>
       <find>CLEAR_CURRENT</find>
+      <find>game</find>
     </findStrings>
     <replaceStrings>
       <replace>title</replace>
@@ -183,41 +220,41 @@
         <option value="$PROJECT_DIR$/app/Answer.php" />
         <option value="$PROJECT_DIR$/database/migrations/2019_06_26_224537_create_questions_table.php" />
         <option value="$PROJECT_DIR$/resources/js/components/Answer/FillBlank.vue" />
-        <option value="$PROJECT_DIR$/resources/js/components/Game/CreateGameName.vue" />
         <option value="$PROJECT_DIR$/resources/js/store/modules/game.js" />
         <option value="$PROJECT_DIR$/resources/js/components/Question/EditQuestion.vue" />
-        <option value="$PROJECT_DIR$/resources/js/components/Question/QuestionIndex.vue" />
         <option value="$PROJECT_DIR$/resources/js/components/Question/QAForm.vue" />
-        <option value="$PROJECT_DIR$/resources/js/app.js" />
         <option value="$PROJECT_DIR$/resources/js/store/modules/user.js" />
         <option value="$PROJECT_DIR$/resources/js/components/Answer/AnswerField.vue" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/AnswerController.php" />
         <option value="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" />
         <option value="$PROJECT_DIR$/app/Observers/QuestionObserver.php" />
         <option value="$PROJECT_DIR$/app/Question.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/QuestionController.php" />
         <option value="$PROJECT_DIR$/resources/js/components/Round/RoundTitleForm.vue" />
         <option value="$PROJECT_DIR$/resources/js/components/Answer/AnswerIndex.vue" />
         <option value="$PROJECT_DIR$/resources/js/components/Round/RoundEditTitleTime.vue" />
         <option value="$PROJECT_DIR$/resources/views/layouts/app.blade.php" />
         <option value="$PROJECT_DIR$/routes/api.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/RoundController.php" />
-        <option value="$PROJECT_DIR$/resources/js/store/modules/round.js" />
         <option value="$PROJECT_DIR$/resources/js/components/Answer/CreateAnswer.vue" />
         <option value="$PROJECT_DIR$/resources/js/components/Question/CreateQuestion.vue" />
-        <option value="$PROJECT_DIR$/resources/js/store/modules/answer.js" />
-        <option value="$PROJECT_DIR$/resources/js/store/modules/question.js" />
         <option value="$PROJECT_DIR$/resources/js/components/Question/QuestionIndexCard.vue" />
-        <option value="$PROJECT_DIR$/resources/js/components/layouts/App.vue" />
         <option value="$PROJECT_DIR$/resources/views/home.blade.php" />
         <option value="$PROJECT_DIR$/resources/js/components/Game/GameHeader.vue" />
         <option value="$PROJECT_DIR$/public/css/style.css" />
-        <option value="$PROJECT_DIR$/resources/js/components/Game/GameDetails.vue" />
         <option value="$PROJECT_DIR$/resources/js/components/Question/CreateQAForm.vue" />
         <option value="$PROJECT_DIR$/resources/js/components/Game/AddRound.vue" />
         <option value="$PROJECT_DIR$/resources/js/components/Question/EditQAForm.vue" />
-        <option value="$PROJECT_DIR$/resources/js/components/Round/RoundIndex.vue" />
         <option value="$PROJECT_DIR$/resources/js/components/Round/RoundDetails.vue" />
+        <option value="$PROJECT_DIR$/resources/js/app.js" />
+        <option value="$PROJECT_DIR$/resources/js/components/Question/QuestionIndex.vue" />
+        <option value="$PROJECT_DIR$/resources/js/components/layouts/App.vue" />
+        <option value="$PROJECT_DIR$/resources/js/components/Game/CreateGameName.vue" />
+        <option value="$PROJECT_DIR$/resources/js/store/modules/round.js" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/QuestionController.php" />
+        <option value="$PROJECT_DIR$/resources/js/components/Round/RoundIndex.vue" />
+        <option value="$PROJECT_DIR$/resources/js/store/modules/answer.js" />
+        <option value="$PROJECT_DIR$/resources/js/store/modules/question.js" />
+        <option value="$PROJECT_DIR$/resources/js/components/Game/GameDetails.vue" />
       </list>
     </option>
   </component>
@@ -309,7 +346,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
-    <property name="SearchEverywhereHistoryKey" value="roundd&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Round/RoundDetails.vue&#10;roundind&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Round/RoundIndex.vue&#10;rounddet&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Round/RoundDetails.vue&#10;add&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Game/AddRound.vue&#10;editq&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Question/EditQAForm.vue&#10;crea&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Question/CreateQAForm.vue&#10;gameh&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Game/GameHeader.vue&#10;addro&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Game/AddRound.vue&#10;game&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Game/GameDetails.vue&#10;answerfield&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Answer/AnswerField.vue&#10;answer&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Answer/CreateAnswer.vue&#10;dash&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/views/layouts/dashboard.blade.php&#10;app&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/views/layouts/app.blade.php&#10;home&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/views/home.blade.php&#10;gamede&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Game/GameDetails.vue&#10;create&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Question/CreateQAForm.vue&#10;question&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Question/QuestionIndexCard.vue&#10;addroun&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Game/AddRound.vue&#10;style&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/public/css/style.css&#10;roundin&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Round/RoundIndex.vue&#10;questionind&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Question/QuestionIndexCard.vue&#10;addrou&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Game/AddRound.vue&#10;round&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/store/modules/round.js&#10;CREATEQU&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Question/CreateQuestion.vue&#10;ques&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/store/modules/question.js&#10;edi&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Question/EditQAForm.vue&#10;questionin&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Question/QuestionIndexCard.vue&#10;answerfi&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Answer/AnswerField.vue&#10;createan&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Answer/CreateAnswer.vue&#10;question.js&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/store/modules/question.js&#10;createqa&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Question/CreateQAForm.vue&#10;answerin&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Answer/AnswerIndex.vue&#10;roun&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/store/modules/round.js&#10;createqu&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Question/CreateQuestion.vue&#10;createans&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Answer/CreateAnswer.vue&#10;api&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/routes/api.php&#10;questi&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/store/modules/question.js&#10;qu&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Question/QuestionIndexCard.vue&#10;editqa&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Question/EditQAForm.vue&#10;createque&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Question/CreateQuestion.vue&#10;edit&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Question/EditQAForm.vue&#10;gamed&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Game/GameDetails.vue&#10;addr&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Game/AddRound.vue&#10;questioncon&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/app/Http/Controllers/QuestionController.php&#10;roundcon&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/app/Http/Controllers/RoundController.php&#10;game de&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Game/GameDetails.vue&#10;roundde&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Round/RoundDetails.vue&#10;question &#9;null&#9;null&#10;answ&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/store/modules/answer.js&#10;questio&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/store/modules/question.js" />
+    <property name="SearchEverywhereHistoryKey" value="gamede&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Game/GameDetails.vue&#10;questionind&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Question/QuestionIndexCard.vue&#10;roundde&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Round/RoundDetails.vue&#10;answe&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/store/modules/answer.js&#10;editqa&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Question/EditQAForm.vue&#10;ques&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/store/modules/question.js&#10;questioncon&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/app/Http/Controllers/QuestionController.php&#10;questionc&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Question/QuestionIndexCard.vue&#10;game&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Game/GameDetails.vue&#10;roundind&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Round/RoundIndex.vue&#10;app&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/layouts/App.vue&#10;creat&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Game/CreateGameName.vue&#10;addr&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Game/AddRound.vue&#10;round&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/store/modules/round.js&#10;ADD&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Game/AddRound.vue&#10;gamed&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Game/GameDetails.vue&#10;roundin&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Round/RoundIndex.vue&#10;question&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/store/modules/question.js&#10;questioninde&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Question/QuestionIndex.vue&#10;app.js&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/app.js&#10;roundd&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Round/RoundDetails.vue&#10;rounddet&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Round/RoundDetails.vue&#10;add&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Game/AddRound.vue&#10;editq&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Question/EditQAForm.vue&#10;crea&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Question/CreateQAForm.vue&#10;gameh&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Game/GameHeader.vue&#10;addro&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Game/AddRound.vue&#10;answerfield&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Answer/AnswerField.vue&#10;answer&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Answer/CreateAnswer.vue&#10;dash&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/views/layouts/dashboard.blade.php&#10;home&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/views/home.blade.php&#10;create&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Question/CreateQAForm.vue&#10;addroun&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Game/AddRound.vue&#10;style&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/public/css/style.css&#10;addrou&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Game/AddRound.vue&#10;CREATEQU&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Question/CreateQuestion.vue&#10;edi&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Question/EditQAForm.vue&#10;questionin&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Question/QuestionIndexCard.vue&#10;answerfi&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Answer/AnswerField.vue&#10;createan&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Answer/CreateAnswer.vue&#10;question.js&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/store/modules/question.js&#10;createqa&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Question/CreateQAForm.vue&#10;answerin&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Answer/AnswerIndex.vue&#10;roun&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/store/modules/round.js&#10;createqu&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Question/CreateQuestion.vue&#10;createans&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Answer/CreateAnswer.vue&#10;api&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/routes/api.php&#10;questi&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/store/modules/question.js&#10;qu&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Question/QuestionIndexCard.vue&#10;createque&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Question/CreateQuestion.vue" />
     <property name="settings.editor.selected.configurable" value="preferences.fileTypes" />
     <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
   </component>
@@ -374,12 +411,12 @@
       <workItem from="1562345827270" duration="4808000" />
       <workItem from="1562559372575" duration="15000" />
       <workItem from="1562683282781" duration="64185000" />
-      <workItem from="1563419038531" duration="26730000" />
+      <workItem from="1563419038531" duration="37482000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="306341000" />
+    <option name="totallyTimeSpent" value="317093000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -423,7 +460,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="26" />
+      <option name="time" value="31" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -527,13 +564,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/js/components/layouts/Creation.vue" />
-    <entry file="file://$PROJECT_DIR$/resources/js/components/Game/CreateGameName.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="34" column="0" lean-forward="true" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/js/store/modules/game.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1275">
@@ -546,21 +576,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
           <caret line="18" column="55" lean-forward="false" selection-start-line="18" selection-start-column="55" selection-end-line="18" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/Question/QuestionIndex.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="8" lean-forward="false" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="657">
-          <caret line="54" column="20" lean-forward="false" selection-start-line="54" selection-start-column="20" selection-end-line="54" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -594,6 +609,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
           <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -601,6 +617,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="535">
           <caret line="42" column="25" lean-forward="false" selection-start-line="42" selection-start-column="25" selection-end-line="42" selection-end-column="25" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -615,14 +632,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
           <caret line="23" column="11" lean-forward="false" selection-start-line="23" selection-start-column="11" selection-end-line="23" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/QuestionController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="637">
-          <caret line="110" column="28" lean-forward="false" selection-start-line="110" selection-start-column="27" selection-end-line="110" selection-end-column="28" />
           <folding />
         </state>
       </provider>
@@ -655,46 +664,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-12">
           <caret line="10" column="30" lean-forward="false" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/store/modules/answer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-105">
-          <caret line="146" column="0" lean-forward="false" selection-start-line="146" selection-start-column="0" selection-end-line="146" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/store/modules/round.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="366">
-          <caret line="184" column="12" lean-forward="false" selection-start-line="184" selection-start-column="0" selection-end-line="185" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/store/modules/question.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="251">
-          <caret line="177" column="17" lean-forward="false" selection-start-line="177" selection-start-column="4" selection-end-line="177" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/Question/QuestionIndexCard.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="343">
-          <caret line="27" column="139" lean-forward="true" selection-start-line="27" selection-start-column="99" selection-end-line="27" selection-end-column="139" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/layouts/App.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="475">
-          <caret line="44" column="43" lean-forward="false" selection-start-line="44" selection-start-column="43" selection-end-line="44" selection-end-column="43" />
           <folding />
         </state>
       </provider>
@@ -760,28 +729,47 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/Game/GameDetails.vue">
+    <entry file="file://$PROJECT_DIR$/public/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="371">
-          <caret line="60" column="51" lean-forward="false" selection-start-line="60" selection-start-column="51" selection-end-line="60" selection-end-column="51" />
+        <state relative-caret-position="663">
+          <caret line="200" column="0" lean-forward="false" selection-start-line="200" selection-start-column="0" selection-end-line="200" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/js/components/Game/CreateGameName.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="453">
+          <caret line="50" column="20" lean-forward="false" selection-start-line="50" selection-start-column="20" selection-end-line="50" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/js/store/modules/round.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="88" column="33" lean-forward="false" selection-start-line="88" selection-start-column="33" selection-end-line="88" selection-end-column="33" />
           <folding>
-            <element signature="n#div#3;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
+            <element signature="e#1067#1424#0" expanded="false" />
+            <element signature="e#1457#2062#0" expanded="false" />
+            <element signature="e#2098#2540#0" expanded="false" />
+            <element signature="e#2746#3093#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/js/components/Game/AddRound.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="12" column="26" lean-forward="false" selection-start-line="12" selection-start-column="26" selection-end-line="12" selection-end-column="26" />
+        <state relative-caret-position="442">
+          <caret line="32" column="49" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/js/components/Question/CreateQAForm.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
-          <caret line="38" column="40" lean-forward="false" selection-start-line="38" selection-start-column="40" selection-end-line="40" selection-end-column="0" />
+        <state relative-caret-position="-119">
+          <caret line="29" column="34" lean-forward="false" selection-start-line="29" selection-start-column="34" selection-end-line="29" selection-end-column="34" />
           <folding>
             <element signature="e#2538#2619#0" expanded="false" />
             <element signature="e#2639#3458#0" expanded="false" />
@@ -792,38 +780,100 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/Question/EditQAForm.vue">
+    <entry file="file://$PROJECT_DIR$/resources/js/components/Question/QuestionIndex.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="254">
-          <caret line="26" column="147" lean-forward="false" selection-start-line="26" selection-start-column="147" selection-end-line="26" selection-end-column="147" />
+        <state relative-caret-position="-96">
+          <caret line="18" column="8" lean-forward="false" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/js/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="284">
+          <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
           <folding>
-            <element signature="e#1953#2034#0" expanded="false" />
-            <element signature="e#2154#2611#0" expanded="false" />
-            <element signature="e#2630#7603#0" expanded="false" />
+            <element signature="e#540#601#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/css/style.css">
+    <entry file="file://$PROJECT_DIR$/resources/js/components/layouts/App.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="663">
-          <caret line="200" column="0" lean-forward="false" selection-start-line="200" selection-start-column="0" selection-end-line="200" selection-end-column="0" />
+        <state relative-caret-position="255">
+          <caret line="17" column="28" lean-forward="false" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
+          <folding>
+            <element signature="n#style#0;n#span#0;n#router-link#0;n#button#0;n#li#0;n#ul#0;n#div#0;n#div#0;n#nav#0;n#div#0;n#template#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/QuestionController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="259">
+          <caret line="20" column="92" lean-forward="false" selection-start-line="20" selection-start-column="92" selection-end-line="20" selection-end-column="92" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/js/components/Round/RoundIndex.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="72" lean-forward="false" selection-start-line="20" selection-start-column="72" selection-end-line="20" selection-end-column="72" />
+        <state relative-caret-position="-13">
+          <caret line="36" column="10" lean-forward="false" selection-start-line="36" selection-start-column="10" selection-end-line="36" selection-end-column="10" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/js/store/modules/answer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="401">
+          <caret line="144" column="10" lean-forward="false" selection-start-line="144" selection-start-column="10" selection-end-line="144" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/js/components/Question/EditQAForm.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3">
+          <caret line="36" column="11" lean-forward="false" selection-start-line="36" selection-start-column="11" selection-end-line="36" selection-end-column="11" />
+          <folding>
+            <element signature="e#1953#2034#0" expanded="false" />
+            <element signature="e#2154#2611#0" expanded="false" />
+            <element signature="e#3530#4166#0" expanded="false" />
+            <element signature="e#7623#8995#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/js/store/modules/question.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="478">
+          <caret line="177" column="23" lean-forward="false" selection-start-line="177" selection-start-column="23" selection-end-line="177" selection-end-column="23" />
+          <folding>
+            <element signature="e#1079#1452#0" expanded="false" />
+            <element signature="e#2095#2508#0" expanded="false" />
+            <element signature="e#2546#2900#0" expanded="false" />
+            <element signature="e#2957#2996#0" expanded="false" />
+            <element signature="e#3030#3072#0" expanded="false" />
+            <element signature="e#3109#3153#0" expanded="false" />
+            <element signature="e#3193#3421#0" expanded="false" />
+            <element signature="e#3452#3493#0" expanded="false" />
+            <element signature="e#3538#3593#0" expanded="false" />
+            <element signature="e#3630#3672#0" expanded="false" />
+            <element signature="e#3710#3757#0" expanded="false" />
+            <element signature="e#3786#3825#0" expanded="false" />
+            <element signature="e#3862#3909#0" expanded="false" />
+            <element signature="e#4881#5803#0" expanded="false" />
+            <element signature="e#5838#6063#0" expanded="false" />
+            <element signature="e#6086#6248#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/js/components/Round/RoundDetails.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="721">
-          <caret line="95" column="10" lean-forward="false" selection-start-line="95" selection-start-column="10" selection-end-line="95" selection-end-column="10" />
+        <state relative-caret-position="-464">
+          <caret line="59" column="26" lean-forward="true" selection-start-line="59" selection-start-column="26" selection-end-line="59" selection-end-column="26" />
           <folding>
             <element signature="e#5679#5732#0" expanded="false" />
             <element signature="e#6092#6908#0" expanded="false" />
@@ -833,6 +883,26 @@
             <element signature="e#8055#8287#0" expanded="false" />
             <element signature="e#8313#8543#0" expanded="false" />
             <element signature="e#8572#8794#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/js/components/Question/QuestionIndexCard.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="40" column="10" lean-forward="true" selection-start-line="40" selection-start-column="10" selection-end-line="40" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/js/components/Game/GameDetails.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="433">
+          <caret line="85" column="51" lean-forward="false" selection-start-line="85" selection-start-column="51" selection-end-line="85" selection-end-column="51" />
+          <folding>
+            <element signature="n#div#3;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
+            <element signature="e#3297#3400#0" expanded="false" />
+            <element signature="e#3432#3541#0" expanded="false" />
           </folding>
         </state>
       </provider>

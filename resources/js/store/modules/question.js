@@ -16,6 +16,7 @@ function initialState() {
             order_number: '',
         },
         loading: false,
+        loaded: false,
     }
 }
 
@@ -44,12 +45,14 @@ const getters = {
     loading(state){
         return state.loading;
     },
+    loaded(state){
+        return state.loaded;
+    }
 };
 
 const actions = {
 
-    fetchQuestion({ commit, state}, question_id)
-    {
+    fetchQuestion({ commit, state}, question_id) {
 
         commit('setLoading', true);
         axios.get('/api/question/' + question_id)
@@ -69,10 +72,20 @@ const actions = {
             .then(response => {
                 commit('SET_QUESTIONS', response.data);
                 commit('setLoading', false);
+                commit('SET_LOADED', true);
             }).catch( error => {
             console.log(error.response);
         });
     },
+
+    // organizeByOrderNumber({commit, state}) {
+    //
+    //     let $newQuestions = [];
+    //
+    //     for (let $i=0; $i < state.rounds.length; $i++) {
+    //
+    //     }
+    // },
 
     newQuestion({commit, state}) {
         commit('setLoading', true);
@@ -141,6 +154,36 @@ const mutations = {
     UPDATE_ROUND_ID(state,round_id){
         state.form.round_id = round_id;
     },
+    UPDATE_LIST(state, value) {
+
+        for (let $i = 0; $i < state.questions.length; $i++) {
+            if (state.questions[$i].id !== value[$i].id) {
+                let $form = {
+                    id: value[$i].id,
+                    title: value[$i].title,
+                    type: value[$i].type,
+                    round_id: value[$i].round_id,
+                    order_number: state.questions[$i].order_number,
+                };
+
+                axios.post('/api/question/' + $form.id, {
+                    data: $form,
+                    _method: 'patch'
+                })
+                    .then(response => {
+                        // console.log(response.data);
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
+
+
+                Vue.set(value, $i, $form );
+            }
+        }
+
+        state.questions = value;
+    },
     DELETE_FROM_QUESTIONS(state, question){
 
         let $roundQuestions = [];
@@ -194,6 +237,9 @@ const mutations = {
             round_id: '',
             order_number: '',
         };
+    },
+    SET_LOADED(state, value) {
+        state.loaded = value;
     },
 };
 
