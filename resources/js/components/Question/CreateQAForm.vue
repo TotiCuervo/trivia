@@ -13,9 +13,9 @@
             <!--<h5>All:</h5>-->
             <!--<h5>{{this.answerForm[0].title.length > 0 && this.questionForm.title.length > 0 && this.questionForm.title.length < 100}}</h5>-->
 
-
-            <div class="row">
-                <div class="col-md-8 offset-md-2">
+            <!--<GameHeader></GameHeader>-->
+            <div class="row no-gutters pt-5 pb-5">
+                <div class="col-md-6 offset-md-3">
                     <div class="card">
                         <div class="card-body">
                             <div class="container">
@@ -85,6 +85,9 @@
 
             this.fetchRounds(this.routeParams);
 
+        },
+        beforeCreate: function() {
+            document.body.className = 'game-creator';
         },
         methods: {
             ...mapActions('question', ['newQuestion', 'fetchQuestions']),
@@ -260,5 +263,9 @@
 </script>
 
 <style scoped>
+
+    body {
+        background-color: black;
+    }
 
 </style>

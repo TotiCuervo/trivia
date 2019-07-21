@@ -182,5 +182,24 @@
 }
 
 .round-outline {
+}
+
+.game-header-background {
+    background-color: #D1504F;
+}
+.game-creator-background {
+    background-color: #FAEDED;
+
+}
+
+.row {
+    /*width: 100%;*/
+}
+
+.body.game-creator {
+    background-color: #FAEDED;
+}
+
+.game-creator {
     background-color: #FAEDED;
 }

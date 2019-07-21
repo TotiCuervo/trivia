@@ -1,8 +1,8 @@
 <template>
     <div v-if="!(this.answerForm[0].title === '')">
         <div>
-            <div class="row">
-                <div class="col-md-8 offset-md-2">
+            <div class="row no-gutters pt-5 pb-5">
+                <div class="col-md-6 offset-md-3">
                     <div class="card">
                         <div class="card-body">
                             <div class="container">
@@ -47,7 +47,9 @@
                 routeParams: null,
             }
         },
-
+        beforeCreate: function() {
+            document.body.className = 'game-creator';
+        },
         mounted() {
 
             //gets the params from the url

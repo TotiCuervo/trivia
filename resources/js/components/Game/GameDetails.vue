@@ -4,40 +4,10 @@
         <div class="game-creator" v-if="!(this.game_id == null)">
 
             <div class="game-intro pt-4 pb-4">
-
-                <div class="row">
-
-                    <div class="col-md-12 text-center">
-
-                        <div class="game-header">
-
-                            <div class="row">
-                                <div class="col-md-12 col-sm-12">
-                                    <!--Added layer of protection agaisnt null values-->
-                                    <div v-if="game.name">
-                                        <h1>{{ game.name }}</h1>
-                                    </div>
-
-                                    <!--Added layer of protection agaisnt null values-->
-                                    <div v-if="game.description">
-                                        <h3>
-                                            {{ game.description }}
-                                        </h3>
-                                    </div>
-                                    <div v-else>
-                                        <h3 class="text-muted">
-                                            Edit to add Description
-                                        </h3>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
+                <GameHeader></GameHeader>
             </div>
             <!--<hr>-->
-            <div class="round-outline pt-4">
+            <div class="round-outline game-creator-background pt-4">
                 <RoundIndex></RoundIndex>
             </div>
 
@@ -87,6 +57,9 @@
                 id: null,
             }
         },
+        beforeCreate: function() {
+            document.body.className = 'game-creator';
+        },
         mounted() {
             //sets the value of id to the id of the game that was created
             this.id = this.$route.params;
@@ -116,5 +89,6 @@
 </script>
 
 <style scoped>
+
 
 </style>

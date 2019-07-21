@@ -39,9 +39,12 @@
                 </div>
             </div>
         </nav>
-        <div class="container-fluid pr-0 pl-0">
+        <!--<div class="container-fluid pr-0 pl-0">-->
+            <!--<router-view></router-view>-->
+        <!--</div>-->
+        <b-container fluid class="pl-0 pr-0">
             <router-view></router-view>
-        </div>
+        </b-container>
     </div>
 </template>
 

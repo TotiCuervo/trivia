@@ -14,10 +14,12 @@
             </div>
             <!--else, do this-->
             <div v-else>
-                <div class="col-md-8 offset-md-2">
-                    <!--for every round that there is, create a new round component-->
-                    <div v-for="round in this.rounds" class="round-row pb-5">
-                        <RoundDetails :round="round"></RoundDetails>
+                <div class="row no-gutters">
+                    <div class="col-md-8 offset-md-2">
+                        <!--for every round that there is, create a new round component-->
+                        <div v-for="round in this.rounds" class="round-row pb-5">
+                            <RoundDetails :round="round"></RoundDetails>
+                        </div>
                     </div>
                 </div>
             </div>
