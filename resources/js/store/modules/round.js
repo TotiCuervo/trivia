@@ -10,11 +10,11 @@ function initialState() {
             order_number: '',
         },
         form:{
-            title: null,
-            time: null,
-            round_type: null,
-            game_id: null,
-            order_number: null,
+            title: '',
+            time: '',
+            round_type: '',
+            game_id: '',
+            order_number: '',
         }
     }
 }
@@ -65,10 +65,33 @@ const actions = {
     },
 
     addRound({commit, state}) {
+
         let $roundForm = {
             title: '',
             time: '',
             round_type: 'play',
+            game_id: state.form.game_id,
+            order_number: state.rounds.length + 1,
+        };
+
+        commit('setLoading', true);
+        axios.post('api/round/create', $roundForm)
+            .then(response => {
+                commit('ADD_ROUND', response.data);
+                commit('UPDATE_ORDER_NUMBER');
+                commit('setLoading', false);
+                // commit('CLEAR_FORM');
+            }).catch( error => {
+            console.log(error.response)
+        });
+
+    },
+
+    addBreak({commit, state}) {
+        let $roundForm = {
+            title: '',
+            time: '',
+            round_type: 'break',
             game_id: state.form.game_id,
             order_number: state.rounds.length + 1,
         };
@@ -107,6 +130,9 @@ const mutations = {
     setLoading(state, loading) {
         state.loading = loading
     },
+    SET_ROUNDS(state,rounds){
+        state.rounds = rounds;
+    },
     UPDATE_ROUND(state,round) {
         state.currentRound = round;
     },
@@ -128,14 +154,41 @@ const mutations = {
     UPDATE_ROUND_TIME(state,time){
         state.currentRound.time = time;
     },
-    SET_ROUNDS(state,rounds){
-        state.rounds = rounds;
-    },
     UPDATE_TITLE(state,title){
         state.form.title = title;
     },
     UPDATE_GAME_ID(state, gameID){
         state.form.game_id = gameID;
+    },
+    UPDATE_LIST(state, value){
+
+        for (let $i = 0; $i < state.rounds.length; $i++) {
+            if (state.rounds[$i].id !== value[$i].id) {
+                let $form = {
+                    id: value[$i].id,
+                    title: value[$i].title,
+                    time: value[$i].time,
+                    round_type: value[$i].round_type,
+                    game_id: value[$i].game_id,
+                    order_number: state.rounds[$i].order_number,
+                };
+
+                axios.post('/api/round/' + $form.id, {
+                    data: $form,
+                    _method: 'patch'
+                })
+                    .then(response => {
+                        // console.log(response.data);
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
+
+                Vue.set(value, $i, $form );
+            }
+        }
+
+        state.rounds = value;
     },
     UPDATE_ORDER_NUMBER(state){
         state.form.order_number = state.rounds.length + 1;

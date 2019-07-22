@@ -2173,15 +2173,29 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      id: null
+      id: null,
+      showByIndex: null
     };
   },
-  mounted: function mounted() {},
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('round', ['fetchRounds']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('round', ['addRound']), {
+  mounted: function mounted() {
+    this.id = this.$route.params;
+    this.round_game_id = this.game_id;
+  },
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('round', ['fetchRounds', 'addRound', 'addBreak']), {
     //adds new round to game
     newRound: function newRound() {
       //triggers new round function in round store
@@ -2189,6 +2203,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     newBreak: function newBreak() {
       this.addBreak();
+    }
+  }),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('round', ['formGameID']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('game', ['game', 'game_id']), {
+    round_game_id: {
+      get: function get() {
+        return this.formGameID;
+      },
+      set: function set(value) {
+        this.$store.commit('round/UPDATE_GAME_ID', value);
+      }
     }
   })
 });
@@ -2233,6 +2257,49 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2240,10 +2307,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     return {
       name: null,
       description: null,
-      company: null
+      company: null,
+      color: 'bc-header-blue'
     };
   },
   mounted: function mounted() {},
+  beforeCreate: function beforeCreate() {
+    this.color = 'bc-header-red';
+    document.body.className = this.color;
+  },
+  update: function update() {
+    document.body.className = this.color;
+  },
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('round', ['addRound']), {
     newGame: function newGame() {
       var _this = this;
@@ -2267,6 +2342,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           }
         });
       });
+    },
+    setRed: function setRed() {
+      this.color = 'bc-header-red';
+    },
+    setBlue: function setBlue() {
+      this.color = 'bc-header-blue';
     }
   }),
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])('user', ['user_id']))
@@ -2353,13 +2434,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
     this.fetchData(this.id);
     this.fetchRounds(this.id);
-    this.round_game_id = this.game_id; //for Questions
+    this.round_game_id = this.game_id; // this.round_type = 'play';
+    //for Questions
 
     this.fetchQuestions(this.id.id); //for Answers
 
     this.fetchAnswers(this.id.id);
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('game', ['fetchData']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('round', ['deleteRound', 'fetchRounds']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('question', ['fetchQuestions', 'deleteQuestion']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('answer', ['fetchAnswers']), {
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('game', ['fetchData']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('round', ['deleteRound', 'fetchRounds']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('question', ['fetchQuestions', 'deleteQuestion']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('answer', ['fetchAnswers', 'deleteQuestion']), {
     delete_Round: function delete_Round() {
       this.deleteRound();
       this.$bvModal.hide("delete-round");
@@ -2369,7 +2451,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.$bvModal.hide("delete-question");
     }
   }),
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('game', ['game', 'game_id']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('round', ['rounds']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('question', ['questions', 'loaded']), {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('game', ['game', 'game_id']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('round', ['rounds', 'formGameID']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('question', ['questions', 'loaded']), {
     questionLoaded: {
       get: function get() {
         return this.loaded;
@@ -2378,6 +2460,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     gameRounds: {
       get: function get() {
         return this.rounds;
+      }
+    },
+    round_game_id: {
+      get: function get() {
+        return this.formGameID;
+      },
+      set: function set(value) {
+        this.$store.commit('round/UPDATE_GAME_ID', value);
       }
     }
   })
@@ -3134,33 +3224,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3617,6 +3680,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -3639,6 +3707,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('round', ['fetchRounds']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('question', ['fetchQuestions']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('answer', ['fetchAnswers'])),
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('game', ['game_id']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('round', ['rounds', 'formGameID', 'formRoundType']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('question', ['questions']), {
+    game_rounds: {
+      get: function get() {
+        return this.rounds;
+      },
+      set: function set(value) {
+        this.$store.commit('round/UPDATE_LIST', value);
+      }
+    },
     round_game_id: {
       get: function get() {
         return this.formGameID;
@@ -67244,9 +67320,9 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "game-creator-background pt-2 pb-5" }, [
+  return _c("div", { staticClass: "pt-2 pb-5" }, [
     _c("div", { staticClass: "row no-gutters" }, [
-      _c("div", { staticClass: "col-md-12" }, [
+      _c("div", { staticClass: "col-md-10 offset-md-1" }, [
         _c("div", { staticClass: "row" }, [
           _c(
             "div",
@@ -67277,7 +67353,8 @@ var render = function() {
                 "b-button",
                 {
                   staticClass: "w-100 h-100 pt-4 pb-4",
-                  attrs: { pill: "", variant: "outline-dark" }
+                  attrs: { pill: "", variant: "outline-dark" },
+                  on: { click: _vm.newBreak }
                 },
                 [_vm._v("Add Break")]
               )
@@ -67312,114 +67389,215 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "form-group" }, [
-      _c("label", [_vm._v("Name")]),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.name,
-            expression: "name"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: {
-          type: "text",
-          id: "name",
-          "aria-describedby": "name",
-          placeholder: "Enter Name"
-        },
-        domProps: { value: _vm.name },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.name = $event.target.value
-          }
-        }
-      })
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "form-group" }, [
-      _c("label", [_vm._v("Description (Optional)")]),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.description,
-            expression: "description"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: {
-          type: "text",
-          id: "description",
-          "aria-describedby": "name",
-          placeholder: "Enter Name"
-        },
-        domProps: { value: _vm.description },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.description = $event.target.value
-          }
-        }
-      })
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "form-group" }, [
-      _c("label", [_vm._v("Company (Optional)")]),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.company,
-            expression: "company"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: {
-          type: "text",
-          id: "company",
-          "aria-describedby": "name",
-          placeholder: "Enter Name"
-        },
-        domProps: { value: _vm.company },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.company = $event.target.value
-          }
-        }
-      })
-    ]),
-    _vm._v(" "),
-    _c(
-      "button",
-      {
-        staticClass: "btn btn-primary",
-        on: {
-          click: function($event) {
-            return _vm.newGame()
-          }
-        }
-      },
-      [_vm._v("Submit")]
-    )
+    _c("div", { staticClass: "row no-gutters pt-5" }, [
+      _c("div", { staticClass: "col-md-6 offset-md-3" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-12" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", [_vm._v("Name")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.name,
+                    expression: "name"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  type: "text",
+                  id: "name",
+                  "aria-describedby": "name",
+                  placeholder: "Enter Name"
+                },
+                domProps: { value: _vm.name },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.name = $event.target.value
+                  }
+                }
+              })
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-6" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", [_vm._v("Description (Optional)")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.description,
+                    expression: "description"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  type: "text",
+                  id: "description",
+                  "aria-describedby": "name",
+                  placeholder: "Enter Name"
+                },
+                domProps: { value: _vm.description },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.description = $event.target.value
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-6" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", [_vm._v("Company (Optional)")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.company,
+                    expression: "company"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  type: "text",
+                  id: "company",
+                  "aria-describedby": "name",
+                  placeholder: "Enter Name"
+                },
+                domProps: { value: _vm.company },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.company = $event.target.value
+                  }
+                }
+              })
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _vm._m(1),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-2" }, [
+            _c("i", {
+              staticClass: "fas fa-circle fa-stack-2x",
+              staticStyle: { color: "#D1504F" },
+              on: {
+                click: function($event) {
+                  return _vm.setRed()
+                }
+              }
+            }),
+            _vm._v(" "),
+            this.color === "bc-header-red"
+              ? _c("i", { staticClass: "far fa-circle fa-stack-2x" })
+              : _vm._e()
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-2" }, [
+            _c("i", {
+              staticClass: "fas fa-circle fa-stack-2x",
+              staticStyle: { color: "#4FA1D1" },
+              on: {
+                click: function($event) {
+                  return _vm.setBlue()
+                }
+              }
+            }),
+            _vm._v(" "),
+            this.color === "bc-header-blue"
+              ? _c("i", { staticClass: "far fa-circle fa-stack-2x" })
+              : _vm._e()
+          ]),
+          _vm._v(" "),
+          _vm._m(2),
+          _vm._v(" "),
+          _vm._m(3)
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row pt-4" }, [
+          _c("div", { staticClass: "col-md-12" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary",
+                on: {
+                  click: function($event) {
+                    return _vm.newGame()
+                  }
+                }
+              },
+              [_vm._v("Submit")]
+            )
+          ])
+        ])
+      ])
+    ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-12 text-center" }, [
+        _c("h1", [_vm._v("New Game")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-12 pb-3" }, [
+      _c("label", [_vm._v("Pick Color Scheme")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-2" }, [
+      _c("i", {
+        staticClass: "fas fa-circle fa-2x",
+        staticStyle: { color: "#4FD17C" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-2" }, [
+      _c("i", {
+        staticClass: "fas fa-circle fa-2x",
+        staticStyle: { color: "#FFCD2B" }
+      })
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -67454,7 +67632,7 @@ var render = function() {
           this.loaded === true
             ? _c(
                 "div",
-                { staticClass: "round-outline game-creator-background pt-4" },
+                { staticClass: "round-outline pt-4" },
                 [_c("RoundIndex")],
                 1
               )
@@ -68429,7 +68607,7 @@ var render = function() {
                   this.round.time === null
                     ? _c("div", [
                         _c("h5", { staticClass: "text-muted" }, [
-                          _vm._v("No Time Restrictions")
+                          _vm._v("No Time Limit")
                         ])
                       ])
                     : _c("div", [
@@ -68796,15 +68974,30 @@ var render = function() {
                   _c(
                     "div",
                     { staticClass: "col-md-8 offset-md-2" },
-                    _vm._l(this.rounds, function(round) {
-                      return _c(
-                        "div",
-                        { staticClass: "round-row pb-5" },
-                        [_c("RoundDetails", { attrs: { round: round } })],
-                        1
+                    [
+                      _c(
+                        "draggable",
+                        {
+                          model: {
+                            value: _vm.game_rounds,
+                            callback: function($$v) {
+                              _vm.game_rounds = $$v
+                            },
+                            expression: "game_rounds"
+                          }
+                        },
+                        _vm._l(_vm.game_rounds, function(round) {
+                          return _c(
+                            "div",
+                            { key: round.id, staticClass: "round-row pb-3" },
+                            [_c("RoundDetails", { attrs: { round: round } })],
+                            1
+                          )
+                        }),
+                        0
                       )
-                    }),
-                    0
+                    ],
+                    1
                   )
                 ])
               ])
@@ -90622,11 +90815,11 @@ function initialState() {
       order_number: ''
     },
     form: {
-      title: null,
-      time: null,
-      round_type: null,
-      game_id: null,
-      order_number: null
+      title: '',
+      time: '',
+      round_type: '',
+      game_id: '',
+      order_number: ''
     }
   };
 }
@@ -90692,9 +90885,28 @@ var actions = {
       console.log(error.response);
     });
   },
-  deleteRound: function deleteRound(_ref3) {
+  addBreak: function addBreak(_ref3) {
     var commit = _ref3.commit,
         state = _ref3.state;
+    var $roundForm = {
+      title: '',
+      time: '',
+      round_type: 'break',
+      game_id: state.form.game_id,
+      order_number: state.rounds.length + 1
+    };
+    commit('setLoading', true);
+    axios.post('api/round/create', $roundForm).then(function (response) {
+      commit('ADD_ROUND', response.data);
+      commit('UPDATE_ORDER_NUMBER');
+      commit('setLoading', false); // commit('CLEAR_FORM');
+    })["catch"](function (error) {
+      console.log(error.response);
+    });
+  },
+  deleteRound: function deleteRound(_ref4) {
+    var commit = _ref4.commit,
+        state = _ref4.state;
     commit('setLoading', true);
     axios["delete"]('api/round/' + state.currentRound.id + '/destroy').then(function (response) {
       commit('DELETE_FROM_ROUNDS', state.currentRound.order_number);
@@ -90709,6 +90921,9 @@ var actions = {
 var mutations = {
   setLoading: function setLoading(state, loading) {
     state.loading = loading;
+  },
+  SET_ROUNDS: function SET_ROUNDS(state, rounds) {
+    state.rounds = rounds;
   },
   UPDATE_ROUND: function UPDATE_ROUND(state, round) {
     state.currentRound = round;
@@ -90732,14 +90947,35 @@ var mutations = {
   UPDATE_ROUND_TIME: function UPDATE_ROUND_TIME(state, time) {
     state.currentRound.time = time;
   },
-  SET_ROUNDS: function SET_ROUNDS(state, rounds) {
-    state.rounds = rounds;
-  },
   UPDATE_TITLE: function UPDATE_TITLE(state, title) {
     state.form.title = title;
   },
   UPDATE_GAME_ID: function UPDATE_GAME_ID(state, gameID) {
     state.form.game_id = gameID;
+  },
+  UPDATE_LIST: function UPDATE_LIST(state, value) {
+    for (var $i = 0; $i < state.rounds.length; $i++) {
+      if (state.rounds[$i].id !== value[$i].id) {
+        var $form = {
+          id: value[$i].id,
+          title: value[$i].title,
+          time: value[$i].time,
+          round_type: value[$i].round_type,
+          game_id: value[$i].game_id,
+          order_number: state.rounds[$i].order_number
+        };
+        axios.post('/api/round/' + $form.id, {
+          data: $form,
+          _method: 'patch'
+        }).then(function (response) {// console.log(response.data);
+        })["catch"](function (error) {
+          console.log(error);
+        });
+        Vue.set(value, $i, $form);
+      }
+    }
+
+    state.rounds = value;
   },
   UPDATE_ORDER_NUMBER: function UPDATE_ORDER_NUMBER(state) {
     state.form.order_number = state.rounds.length + 1;

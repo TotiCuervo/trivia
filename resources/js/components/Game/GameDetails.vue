@@ -7,7 +7,7 @@
                 <GameHeader></GameHeader>
             </div>
             <!--<hr>-->
-            <div class="round-outline game-creator-background pt-4" v-if="this.loaded === true">
+            <div class="round-outline pt-4" v-if="this.loaded === true">
                 <RoundIndex></RoundIndex>
             </div>
 
@@ -57,7 +57,7 @@
                 id: null,
             }
         },
-        beforeCreate: function() {
+        beforeCreate() {
             document.body.className = 'game-creator';
         },
         mounted() {
@@ -68,8 +68,8 @@
             this.fetchData(this.id);
 
             this.fetchRounds(this.id);
-
             this.round_game_id = this.game_id;
+            // this.round_type = 'play';
 
             //for Questions
             this.fetchQuestions(this.id.id);
@@ -83,7 +83,7 @@
             ...mapActions('game', ['fetchData']),
             ...mapActions('round', ['deleteRound', 'fetchRounds']),
             ...mapActions('question', ['fetchQuestions','deleteQuestion']),
-            ...mapActions('answer', ['fetchAnswers']),
+            ...mapActions('answer', ['fetchAnswers','deleteQuestion']),
             delete_Round() {
                 this.deleteRound();
                 this.$bvModal.hide("delete-round");
@@ -92,19 +92,28 @@
                 this.deleteQuestion();
                 this.$bvModal.hide("delete-question");
             },
+
         },
         computed: {
             ...mapGetters('game', ['game', 'game_id']),
-            ...mapGetters('round', ['rounds']),
+            ...mapGetters('round', ['rounds','formGameID']),
             ...mapGetters('question', ['questions', 'loaded']),
             questionLoaded: {
                 get() {
                     return this.loaded;
                 }
             },
-            gameRounds : {
+            gameRounds: {
                 get() {
                     return this.rounds;
+                }
+            },
+            round_game_id: {
+                get() {
+                    return this.formGameID;
+                },
+                set(value) {
+                    this.$store.commit('round/UPDATE_GAME_ID', value);
                 }
             }
         }

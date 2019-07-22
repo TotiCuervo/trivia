@@ -43,7 +43,7 @@
                         <div v-show="(this.current_Round.order_number !== this.round.order_number)">
                             <div v-if="this.round.time === null">
 
-                                <h5 class="text-muted">No Time Restrictions</h5>
+                                <h5 class="text-muted">No Time Limit</h5>
                             </div>
                             <div v-else>
                                 <h5 class="text-muted"> {{this.round.time}} second questions  </h5>

@@ -17,7 +17,7 @@ class RoundController extends Controller
     {
         $trivia = Game::findorFail($id);
 
-        $rounds = $trivia->rounds()->get();
+        $rounds = $trivia->rounds()->orderBy('order_number', 'ASC')->get();
 
         return $rounds;
     }

@@ -19,33 +19,6 @@
         </div>
     </div>
 
-
-    <!--<div>-->
-
-        <!--<div class="container">-->
-            <!--&lt;!&ndash;if there are questions in the array&ndash;&gt;-->
-            <!--<div v-for="question in roundQuestions">-->
-                <!--&lt;!&ndash;and they match the round id of this round&ndash;&gt;-->
-                <!--<div v-if="question.round_id === round_id">-->
-                    <!--<div class="row pb-3">-->
-                        <!--<div class="col-md-12 pr-2">-->
-                            <!--<QuestionIndexCard :question="question" :round_id="round_id"></QuestionIndexCard>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-            <!--<draggable v-model="exampleList">-->
-                <!--<transition-group name="list-complete">-->
-                    <!--<div-->
-                            <!--v-for="text in exampleList" :key="text"-->
-                            <!--class="card"-->
-                            <!--@dragend="log('a')"-->
-                    <!--&gt;{{ text }}</div>-->
-                <!--</transition-group>-->
-            <!--</draggable>-->
-        <!--</div>-->
-    <!--</div>-->
-
 </template>
 
 <script>

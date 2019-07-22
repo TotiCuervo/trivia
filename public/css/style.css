@@ -203,3 +203,32 @@
 .game-creator {
     background-color: #FAEDED;
 }
+
+.bc-header-red {
+    background-color: #D1504F;
+}
+
+.bc-header-blue {
+    background-color: #4184AC;
+}
+
+.bc-blue {
+    background-color: #EFF6FA;
+}
+
+.bc-header-green {
+    background-color: #4FD17C;
+}
+
+.bc-green {
+    background-color: #EFFAF3;
+}
+
+.bc-header-yellow {
+    background-color: #FFCD2B;
+}
+
+.bc-yellow {
+    background-color: #FFF5D8;
+}
+

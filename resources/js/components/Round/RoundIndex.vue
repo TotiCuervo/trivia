@@ -17,9 +17,14 @@
                 <div class="row no-gutters">
                     <div class="col-md-8 offset-md-2">
                         <!--for every round that there is, create a new round component-->
-                        <div v-for="round in this.rounds" class="round-row pb-5">
-                            <RoundDetails :round="round"></RoundDetails>
-                        </div>
+
+                        <draggable v-model="game_rounds">
+                            <div v-for="round in game_rounds" class="round-row pb-3" :key="round.id">
+                                <RoundDetails :round="round"></RoundDetails>
+                                <!--<AddRound></AddRound>-->
+                            </div>
+                        </draggable>
+
                     </div>
                 </div>
             </div>
@@ -62,6 +67,14 @@
             ...mapGetters('game', ['game_id']),
             ...mapGetters('round', ['rounds', 'formGameID','formRoundType']),
             ...mapGetters('question', ['questions']),
+            game_rounds: {
+                get() {
+                    return this.rounds;
+                },
+                set(value) {
+                    this.$store.commit('round/UPDATE_LIST', value);
+                }
+            },
             round_game_id: {
                 get (){
                     return this.formGameID;
