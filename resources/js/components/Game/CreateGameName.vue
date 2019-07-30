@@ -1,64 +1,77 @@
 <template>
     <div>
-       <div class="row no-gutters pt-5">
-           <div class="col-md-6 offset-md-3">
-               <div class="row">
-                   <div class="col-md-12 text-center">
-                       <h1>New Game</h1>
-                   </div>
-               </div>
-               <div class="row">
-                   <div class="col-md-12">
-                       <div class="form-group">
-                           <label>Name</label>
-                           <input type="text" class="form-control" id="name" aria-describedby="name"
-                                  placeholder="Enter Name" v-model="name">
-                       </div>
-                   </div>
-               </div>
-               <div class="row">
-                   <div class="col-md-6">
-                       <div class="form-group">
-                           <label>Description (Optional)</label>
-                           <input type="text" class="form-control" id="description" aria-describedby="name"
-                                  placeholder="Enter Name" v-model="description">
-                       </div>
-                   </div>
-                   <div class="col-md-6">
-                       <div class="form-group">
-                           <label>Company (Optional)</label>
-                           <input type="text" class="form-control" id="company" aria-describedby="name"
-                                  placeholder="Enter Name" v-model="company">
-                       </div>
-                   </div>
-               </div>
-               <div class="row">
-                   <div class="col-md-12 pb-3">
-                       <label>Pick Color Scheme</label>
-                   </div>
-                   <div class="col-md-2">
-                       <i class="fas fa-circle fa-stack-2x" style="color: #D1504F;" @click="setRed()"></i>
-                       <i class="far fa-circle fa-stack-2x" v-if=" this.color === 'bc-header-red' "></i>
-                   </div>
-                   <div class="col-md-2">
-                       <i class="fas fa-circle fa-stack-2x" style="color: #4FA1D1;" @click="setBlue()"></i>
-                       <i class="far fa-circle fa-stack-2x" v-if=" this.color === 'bc-header-blue' "></i>
-
-                   </div>
-                   <div class="col-md-2">
-                       <i class="fas fa-circle fa-2x" style="color: #4FD17C;"></i>
-                   </div>
-                   <div class="col-md-2">
-                       <i class="fas fa-circle fa-2x" style="color: #FFCD2B;"></i>
-                   </div>
-               </div>
-               <div class="row pt-4">
-                   <div class="col-md-12">
-                       <button @click="newGame()" class="btn btn-primary">Submit</button>
-                   </div>
-               </div>
+        <div class="row no-gutters">
+           <div class="game-header text-center col-md-12 pt-5 pb-5" v-bind:class="[headClass]">
+               <h1>New Game</h1>
            </div>
-       </div>
+        </div>
+        <div class="container">
+            <div class="row pt-5">
+                <div class="col-md-6 offset-md-3">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input type="text" class="form-control" id="name" aria-describedby="name"
+                                       placeholder="Enter Name" v-model="name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Description (Optional)</label>
+                                <input type="text" class="form-control" id="description" aria-describedby="name"
+                                       placeholder="Enter Name" v-model="description">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Company (Optional)</label>
+                                <input type="text" class="form-control" id="company" aria-describedby="name"
+                                       placeholder="Enter Name" v-model="company">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label>Pick Color Scheme</label>
+                        </div>
+                    </div>
+                    <div class="row pb-4">
+                        <div class="col-md-2 offset-md-2 text-center">
+                            <i class="fas fa-circle fa-2x" style="color: #D1504F;" @click="setRed()" v-if=" this.headClass !== 'bc-header-red' "></i>
+                            <i class="fas fa-circle fa-stack-2x" style="color: #D1504F;" v-if=" this.headClass === 'bc-header-red' "></i>
+                            <i class="far fa-circle fa-stack-2x" v-if=" this.headClass === 'bc-header-red' "></i>
+                        </div>
+                        <div class="col-md-2 text-center">
+                            <i class="fas fa-circle fa-2x" style="color: #4FA1D1;" @click="setBlue()" v-if=" this.headClass !== 'bc-header-blue' "></i>
+                            <i class="fas fa-circle fa-stack-2x" style="color: #4FA1D1;" @click="setBlue()" v-if=" this.headClass === 'bc-header-blue' "></i>
+                            <i class="far fa-circle fa-stack-2x" v-if=" this.headClass === 'bc-header-blue' "></i>
+
+                        </div>
+                        <div class="col-md-2 text-center">
+                            <i class="fas fa-circle fa-2x" style="color: #4FD17C;" @click="setGreen()" v-if=" this.headClass !== 'bc-header-green' "></i>
+                            <i class="fas fa-circle fa-stack-2x" style="color: #4FD17C;" @click="setGreen()" v-if=" this.headClass === 'bc-header-green' "></i>
+                            <i class="far fa-circle fa-stack-2x" v-if=" this.headClass === 'bc-header-green' "></i>
+
+                        </div>
+                        <div class="col-md-2 text-center">
+                            <i class="fas fa-circle fa-2x" style="color: #FFCD2B;" @click="setYellow()" v-if=" this.headClass !== 'bc-header-yellow' "></i>
+                            <i class="fas fa-circle fa-stack-2x" style="color: #FFCD2B;" @click="setYellow()" v-if=" this.headClass === 'bc-header-yellow' "></i>
+                            <i class="far fa-circle fa-stack-2x" v-if=" this.headClass === 'bc-header-yellow' "></i>
+
+                        </div>
+                    </div>
+                    <div class="row pt-4">
+                        <div class="col-md-12">
+                            <button @click="newGame()" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
 </template>
@@ -72,17 +85,14 @@
                 name: null,
                 description: null,
                 company: null,
-                color: 'bc-header-blue',
+                bodyColor: '#FAEDED',
+                headClass: 'bc-header-red',
+
             }
         },
         mounted() {
-        },
-        beforeCreate() {
-            this.color = 'bc-header-red';
-            document.body.className = this.color;
-        },
-        update() {
-            document.body.className = this.color;
+            document.querySelector('body').style.backgroundColor = '#FAEDED';
+
         },
         methods: {
             ...mapActions('round', ['addRound']),
@@ -92,31 +102,56 @@
                     description: this.description,
                     company: this.company,
                     user_id: this.user_id,
+                    headClass: this.headClass,
+                    bodyColor: this.bodyColor,
                 }).then(response => {
                     let $game = response.data;
                     // this.createGameOrder(game.id);
                     this.$store.commit('round/UPDATE_GAME_ID', $game.id);
-
                     this.addRound();
-
                     this.$router.push({ name: "gameDetails", params: { id: $game.id }});
-
                 });
             },
             setRed() {
-                this.color = 'bc-header-red';
+                this.headClass = 'bc-header-red';
+                document.querySelector('body').style.backgroundColor = '#FAEDED';
+                this.bodyColor = '#FAEDED';
+
             },
             setBlue() {
-                this.color = 'bc-header-blue';
+                this.headClass = 'bc-header-blue';
+                document.querySelector('body').style.backgroundColor = '#EFF6FA';
+                this.bodyColor = '#EFF6FA';
+
+            },
+            setGreen() {
+                this.headClass = 'bc-header-green';
+                document.querySelector('body').style.backgroundColor = '#EFFAF3';
+                this.bodyColor = '#EFFAF3';
+
+
+            },
+            setYellow() {
+                this.headClass = 'bc-header-yellow';
+                document.querySelector('body').style.backgroundColor = '#FFF5D8';
+                this.bodyColor = '#FFF5D8';
+
+
             },
         },
         computed: {
             ...mapGetters('user', ['user_id']),
 
         },
+        beforeDestroy() {
+            document.querySelector('body').style.backgroundColor = '';
+        },
     }
 </script>
 
 <style scoped>
 
+
 </style>
+
+<!--v-bind:style="{backgroundColor: headColor}"-->

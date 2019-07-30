@@ -4,30 +4,23 @@
 
             <div class="row no-gutters">
 
-                <div class="col-md-12 text-center">
+                <div class="col-md-12">
 
                     <div class="game-header">
 
                         <div v-if="game.name">
-                            <h1 style="font-size: 50px;">{{ game.name }}</h1>
-                        </div>
+                            <div v-if="game.description">
+                                <h5>
+                                    {{ game.name}}: {{ game.description }}
+                                </h5>
+                            </div>
+                            <div v-else>
+                                <h5>
+                                    {{ game.name }}
+                                </h5>
+                            </div>
 
-                        <!--Added layer of protection agaisnt null values-->
-                        <div v-if="game.description">
-                            <h3>
-                                {{ game.description }}
-                                <router-link :to="{ name: 'editGameName', params: {id: game.id} }" style="text-decoration:none; color:white;">
-                                    <i class="far fa-edit clicker"></i>
-                                </router-link>
-                            </h3>
                         </div>
-                        <div v-else>
-                            <h3 class="text-muted">
-                                Edit to add Description
-                                <i class="far fa-edit clicker"></i>
-                            </h3>
-                        </div>
-
                     </div>
                 </div>
             </div>

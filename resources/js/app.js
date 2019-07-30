@@ -25,8 +25,11 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 //component names
 import EditQAForm from './components/Question/EditQAForm.vue'
 import CreateGameName from './components/Game/CreateGameName.vue'
+import EditGameName from './components/Game/EditGameName.vue'
 import GameDetails from './components/Game/GameDetails.vue'
+import GameReview from './components/Game/GameReview.vue'
 import CreateQAForm from './components/Question/CreateQAForm.vue'
+import HostLobby from './components/Host/HostLobby.vue'
 import Home from './components/Home.vue'
 import  {store} from './store'
 
@@ -51,9 +54,24 @@ const router = new VueRouter({
             component: CreateGameName
         },
         {
-            path: '/game/:id',
+            path: '/create/:id/edit',
+            name: 'editGameName',
+            component: EditGameName
+        },
+        {
+            path: '/game/create/:id',
             name:  'gameDetails',
             component: GameDetails
+        },
+        {
+            path: '/game/details/:id',
+            name:  'gameReviewPage',
+            component: GameReview
+        },
+        {
+            path: '/host/lobby/:id',
+            name:  'hostLobby',
+            component: HostLobby
         },
         {
             path: '/game/:id/round/:round_id/question',
@@ -65,7 +83,7 @@ const router = new VueRouter({
             name:  'editQAForm',
             component: EditQAForm
         },
-        // { path: '*', redirect: '/home' }
+        { path: '*', redirect: '/home' }
     ]
 })
 

@@ -78,15 +78,6 @@ const actions = {
         });
     },
 
-    // organizeByOrderNumber({commit, state}) {
-    //
-    //     let $newQuestions = [];
-    //
-    //     for (let $i=0; $i < state.rounds.length; $i++) {
-    //
-    //     }
-    // },
-
     newQuestion({commit, state}) {
         commit('setLoading', true);
         axios.post('/api/question/create', state.form)

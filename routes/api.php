@@ -21,6 +21,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/game/create', 'GameController@store')->middleware('auth:api');
 Route::get('/games/{id}', 'GameController@index');
 Route::get('/game/{id}', 'GameController@show');
+Route::delete('/game/{id}/destroy', 'GameController@destroy');
+Route::patch('/game/{id}', 'GameController@update');
+Route::patch('/game/{id}/play', 'GameController@playOn');
+Route::patch('/game/{id}/gameOver', 'GameController@playOff');
+
+
+
 
 //Rounds
 Route::get('/trivia/{id}/rounds', 'RoundController@index');
@@ -43,7 +50,12 @@ Route::get('/question/{id}/answers', 'AnswerController@questionIndex');
 Route::patch('/answer/{id}', 'AnswerController@update');
 Route::delete('/answer/{id}/destroy', 'AnswerController@destroy');
 
+//Play
+Route::post('/play/checkCode', 'PlayController@checkCode');
 
+//GameCode
+Route::get('/game/{id}/gameCode', 'GameCodeController@show');
+Route::post('/gameCode/{id}/create', 'GameCodeController@store');
 
 
 

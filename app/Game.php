@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Game extends Model
 {
-    protected $fillable = ['name', 'user_id', 'description', 'company'];
+    protected $fillable = ['name', 'user_id', 'description', 'company', 'bodyColor', 'headClass', 'gameCode'];
 
     public function user()
     {
@@ -31,5 +31,10 @@ class Game extends Model
     public function answers()
     {
         return $this->hasManyThrough(Answer::class, Round::class);
+    }
+
+    public function gameCodes()
+    {
+        return $this->hasMany(GameCode::class);
     }
 }

@@ -6,6 +6,7 @@ use App\Game;
 use App\User;
 use Illuminate\Http\Request;
 
+use Str;
 use Auth;
 
 class GameController extends Controller
@@ -50,9 +51,14 @@ class GameController extends Controller
             'name' => $request->name,
             'description' => $request->description,
             'company' => $request->company,
+            'headClass' => $request->headClass,
+            'bodyColor' => $request->bodyColor,
+            'gameCode' => Str::random(5),
         ]);
 
         return $game;
+
+//        return $request->headClass;
     }
 
     /**
@@ -85,9 +91,22 @@ class GameController extends Controller
      * @param  \App\Game  $game
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Game $game)
+    public function update(Request $request, $id)
     {
-        //
+        $game = Game::findorFail($id);
+
+        $data = $request->data;
+
+        $game->name = $data['name'];
+        $game->description = $data['description'];
+        $game->company = $data['company'];
+        $game->headClass = $data['headClass'];
+        $game->bodyColor = $data['bodyColor'];
+
+        $game->save();
+
+        return $game;
+
     }
 
     /**
@@ -96,8 +115,30 @@ class GameController extends Controller
      * @param  \App\Game  $game
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Game $game)
+    public function destroy($id)
     {
-        //
+        $game = Game::findorFail($id);
+
+        $game->delete();
+
+        return $game;
+    }
+
+    public function playOn($id) {
+
+        $game = Game::findorFail($id);
+
+        $game->playing = true;
+
+        $game->save();
+    }
+
+    public function playOff($id) {
+
+        $game = Game::findorFail($id);
+
+        $game->playing = false;
+
+        $game->save();
     }
 }

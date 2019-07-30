@@ -1,10 +1,10 @@
 <template>
-    <div>
 
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
+    <div>
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm" v-if="!(noNav.includes(this.$route.name))">
             <div class="container">
                 <!--<router-link :to="{ name: 'home' }" class="nav-link"><span style="color:white">Create Trivia Game!</span></router-link>-->
-                <a class="navbar-brand" href="/">
+                <a class="navbar-brand" href="/app#/home">
                     Trivia
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -14,13 +14,13 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto ml-auto">
-                        <li>
-                            <button type="button" class="btn btn-success">
-                                <router-link :to="{ name: 'createGameName' }" class="nav-link"><span style="color:white">Create Trivia Game!</span></router-link>
-                            </button>
-                        </li>
-                    </ul>
+                    <!--<ul class="navbar-nav mr-auto ml-auto">-->
+                        <!--<li>-->
+                            <!--<button type="button" class="btn btn-success">-->
+                                <!--<router-link :to="{ name: 'createGameName' }" class="nav-link"><span style="color:white">Create Trivia Game!</span></router-link>-->
+                            <!--</button>-->
+                        <!--</li>-->
+                    <!--</ul>-->
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -56,11 +56,9 @@
             return {
                 hello: "Hello!",
                 little_id: null,
+                noNav: ['hostLobby']
             }
         },
-        // beforeCreate() {
-        //     this.fetchData();
-        // },
         created() {
 
             this.fetchData();

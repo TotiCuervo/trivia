@@ -51,10 +51,10 @@ const getters = {
 
 const actions = {
 
-    fetchRounds({ commit, state }, id) {
+    fetchRounds({ commit, state }, game) {
 
         commit('setLoading', true);
-        axios.get('/api/trivia/'+id.id+'/rounds')
+        axios.get('/api/trivia/'+game.id+'/rounds')
             .then(response => {
                 commit('SET_ROUNDS', response.data);
                 commit('UPDATE_ORDER_NUMBER');
@@ -239,6 +239,9 @@ const mutations = {
             round_type:null,
         };
     },
+    CLEAR_ROUNDS(state){
+        state.rounds = [];
+    }
 
 };
 

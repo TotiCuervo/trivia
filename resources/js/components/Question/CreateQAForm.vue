@@ -62,6 +62,8 @@
         },
         mounted() {
 
+            document.body.className = 'game-creator';
+
             //clears the form of the question store
             if (!(this.questionForm.title === ''))
             {
@@ -73,6 +75,8 @@
 
             //gets the params from the url
             this.routeParams = this.$route.params;
+
+            this.fetchData(this.routeParams);
 
             //sets the round id from the params for question
             this.questionRoundID = this.routeParams.round_id;
@@ -86,13 +90,10 @@
             this.fetchRounds(this.routeParams);
 
         },
-        beforeCreate: function() {
-            document.body.className = 'game-creator';
-        },
         methods: {
             ...mapActions('question', ['newQuestion', 'fetchQuestions']),
             ...mapActions('round', ['fetchRounds']),
-
+            ...mapActions('game', ['fetchData']),
 
             qaForm() {
 
@@ -204,8 +205,7 @@
 
 
             },
-            exitPage()
-            {
+            exitPage() {
                 this.$store.commit('question/CLEAR_CURRENT_QUESTION');
                 this.$store.commit('round/CLEAR_ROUND');
                 this.$router.push({name: "gameDetails", params: {id: this.routeParams.id}});
@@ -213,6 +213,7 @@
 
         },
         computed: {
+            ...mapGetters('game', ['game']),
             ...mapGetters('question', ['formQuestionRoundID', 'questions', 'questionFields']),
             ...mapGetters('answer', ['answerFields',]),
 
@@ -257,6 +258,11 @@
                 }
 
 
+            }
+        },
+        watch: {
+            game: function () {
+                document.querySelector('body').style.backgroundColor = this.game.bodyColor;
             }
         }
     }

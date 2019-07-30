@@ -1,54 +1,17 @@
 <template>
     <div>
-        <!--Wait until all of the info of the game has been fetched, then show-->
-        <div class="game-creator" v-if="!(this.game_id == null)">
+        <div class="row no-gutters">
+            <div class="col-md-4">
 
-            <div class="game-intro pt-4 pb-4" v-bind:class="[this.game.headClass]">
-                <GameHeader></GameHeader>
             </div>
-            <!--<hr>-->
-            <div class="round-outline pt-4" v-if="this.loaded === true">
+            <div class="col-md-8">
                 <RoundIndex></RoundIndex>
-            </div>
-
-            <div class="add-Round">
-                <AddRound></AddRound>
-            </div>
-
-            <div class="delete-modals">
-                <b-modal id="delete-round"  hide-footer hide-header centered visible-close>
-                    <template slot="default" slot-scope="{ close }">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <i class="fas fa-times float-right clicker" @click="close()"></i>
-                            </div>
-                        </div>
-                        <div class="d-block text-center">
-                            <h4 class="my-4">Are you sure you want to delete this <b>Round?</b></h4>
-                        </div>
-                        <b-button class="mt-3" block variant="danger" @click="delete_Round()">Delete Round</b-button>
-                    </template>
-                </b-modal>
-                <b-modal id="delete-question" hide-footer hide-header centered visible-close>
-                    <template slot="default" slot-scope="{ close }">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <i class="fas fa-times float-right clicker" @click="close()"></i>
-                            </div>
-                        </div>
-                        <div class="d-block text-center">
-                            <h4 class="my-4">Are you sure you want to delete this <b>Question?</b></h4>
-                        </div>
-                        <b-button class="mt-3" block variant="danger" @click="delete_Question()">Delete Question</b-button>
-                    </template>
-                </b-modal>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-
     import {mapActions, mapGetters} from 'vuex';
 
     export default {
@@ -60,8 +23,6 @@
         mounted() {
             //sets the value of id to the id of the game that was created
             this.id = this.$route.params;
-
-            console.log(this.$route);
 
             //fetches the information of the game to load it into the details
             this.fetchData(this.id);
@@ -117,10 +78,6 @@
                 }
             }
         },
-        beforeDestroy() {
-            this.$store.commit('round/CLEAR_ROUNDS');
-            document.querySelector('body').style.backgroundColor = '';
-        },
         watch: {
             game: function () {
                 document.querySelector('body').style.backgroundColor = this.game.bodyColor;
@@ -130,6 +87,5 @@
 </script>
 
 <style scoped>
-
 
 </style>

@@ -46,9 +46,6 @@
                 routeParams: null,
             }
         },
-        beforeCreate: function() {
-            document.body.className = 'game-creator';
-        },
         mounted() {
 
             //gets the params from the url
@@ -66,6 +63,7 @@
         methods: {
             ...mapActions('question', ['fetchQuestion','question']),
             ...mapActions('answer', ['fetchQuestionAnswers', 'CLEAR_ALL_FORM']),
+            ...mapActions('game', ['fetchData']),
 
             exitPage() {
                 this.$store.commit('question/CLEAR_FORM');
@@ -223,6 +221,11 @@
                     return this.answerForm[0].title.length > 0 && this.questionForm.title.length > 0 && this.questionForm.title.length < 100;
 
                 }
+            }
+        },
+        watch: {
+            game: function () {
+                document.querySelector('body').style.backgroundColor = this.game.bodyColor;
             }
         }
     }

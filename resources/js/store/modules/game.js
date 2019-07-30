@@ -1,5 +1,6 @@
 function initialState() {
     return {
+        games: [],
         game: {
             name: null,
             description: null,
@@ -19,6 +20,9 @@ function initialState() {
 const getters = {
     game(state){
         return state.game;
+    },
+    games(state){
+        return state.games;
     },
     name(state){
         return state.game.name;
@@ -53,6 +57,7 @@ const getters = {
 };
 
 const actions = {
+
     fetchData({ commit, state }, id) {
 
         commit('setLoading', true);
@@ -67,6 +72,57 @@ const actions = {
             });
     },
 
+    fetchGames({ commit, state }, id) {
+        commit('setLoading', true);
+        axios.get('api/games/'+ id).
+        then(response => {
+            commit('SET_GAMES', response.data);
+            commit('setLoading', false);
+            this.games = response.data
+        });
+    },
+
+    deleteGame({ commit, state }) {
+        commit('setLoading',true);
+        axios.delete('/api/game/' + state.game.id +'/destroy')
+            .then(response => {
+                commit('DELETE_FROM_GAMES', response.data);
+                commit('setLoading', false);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    },
+
+    updateGame({commit, state}) {
+        commit('setLoading', true);
+        axios.post('/api/game/' + state.game.id, {
+            data: state.game,
+            _method: 'patch'
+        })
+            .then(response => {
+                // console.log(response.data);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    },
+
+    newGame({commit,state}) {
+        axios.post('/api/game/create', state.game)
+            .then(response => {
+                return response.data;
+                // let $game = response.data;
+                // // this.createGameOrder(game.id);
+                // this.$store.commit('round/UPDATE_GAME_ID', $game.id);
+                //
+                // this.addRound();
+                //
+                // this.$router.push({ name: "gameDetails", params: { id: $game.id }});
+
+        });
+    }
+
 };
 
 const mutations = {
@@ -75,6 +131,33 @@ const mutations = {
     },
     SET_GAME(state, game){
         state.game = game;
+    },
+    SET_GAMES(state, games) {
+        state.games = games;
+    },
+    UPDATE_GAME_NAME(state,name) {
+        state.game.name = name;
+    },
+    UPDATE_GAME_DESCRIPTION(state,description) {
+        state.game.description = description;
+    },
+    UPDATE_GAME_COMPANY(state,company) {
+        state.game.company = company;
+    },
+    UPDATE_GAME_HEAD_CLASS(state,headClass) {
+        state.game.headClass = headClass;
+    },
+    UPDATE_GAME_BODY_COLOR(state,bodyColor) {
+        state.game.bodyColor = bodyColor;
+    },
+    DELETE_FROM_GAMES(state,game) {
+
+        for (let $i = 0; $i < state.games.length; $i++) {
+
+            if (state.games[$i].id === game.id) {
+                state.games.splice($i, 1);
+            }
+        }
     }
 
 };
