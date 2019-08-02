@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Team;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Auth;
 
 class TeamController extends Controller
 {
@@ -12,9 +15,28 @@ class TeamController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct() {
+        $this->middleware('auth:team');
+    }
+
+    public function user() {
+        return Auth::guard('team')->user();
+//        return Auth::guard('team-api')->id;
+//        return auth()->user();
+//        return Auth::user();
+    }
+
+
+
     public function index()
     {
-        //
+        return view('play');
+    }
+
+    public function home()
+    {
+        return view('dashboard');
     }
 
     /**
@@ -31,11 +53,11 @@ class TeamController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Responsen
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
@@ -82,4 +104,6 @@ class TeamController extends Controller
     {
         //
     }
+
+
 }

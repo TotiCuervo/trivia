@@ -42,6 +42,11 @@
             this.params = this.$route.params;
             this.fetchData(this.params);
 
+            axios.get('api/user')
+                .then( response => {
+                    console.log(response.data);
+                });
+
             //get the game code
             axios.get('/api/game/' + this.params.id + '/gameCode', {
             })

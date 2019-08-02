@@ -54,7 +54,6 @@
     export default {
         data() {
             return {
-                hello: "Hello!",
                 little_id: null,
                 noNav: ['hostLobby']
             }

@@ -18,6 +18,8 @@ return [
         'passwords' => 'users',
     ],
 
+//    Auth::guard('team')->once($credentials);
+
     /*
     |--------------------------------------------------------------------------
     | Authentication Guards
@@ -40,10 +42,18 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-
         'api' => [
             'driver' => 'passport',
             'provider' => 'users',
+            'hash' => false,
+        ],
+        'team' => [
+            'driver' => 'session',
+            'provider' => 'teams',
+        ],
+        'team-api' => [
+            'driver' => 'passport',
+            'provider' => 'teams',
             'hash' => false,
         ],
     ],
@@ -70,6 +80,10 @@ return [
             'driver' => 'eloquent',
             'model' => App\User::class,
         ],
+        'teams' => [
+            'driver' => 'eloquent',
+            'model' => App\Team::class,
+        ],
 
         // 'users' => [
         //     'driver' => 'database',
@@ -95,6 +109,11 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+        'teams' => [
+            'provider' => 'teams',
             'table' => 'password_resets',
             'expire' => 60,
         ],

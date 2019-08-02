@@ -37,6 +37,8 @@ const actions = {
         axios.get('/api/user')
             .then(response => {
                 let user = response.data;
+                console.log('Made it');
+                console.log(response.data);
                 commit('SET_USER', response.data);
                 commit('SET_USER_ID', user.id);
                 commit('setLoading', false);

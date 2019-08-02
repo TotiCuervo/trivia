@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Game;
 use App\GameCode;
+use Illuminate\Support\Facades\Auth;
+
 
 
 use Illuminate\Http\Request;
@@ -15,6 +17,11 @@ class PlayController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+//    public function __construct() {
+//        $this->middleware('auth:team');
+//    }
+
     public function index()
     {
         return view('play');
@@ -48,9 +55,9 @@ class PlayController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        return view('team/testlogin');
     }
 
     /**
@@ -99,6 +106,26 @@ class PlayController extends Controller
         }
 
         return 'false';
+    }
 
+    public function login(Request $request) {
+
+        $request->validate([
+            'name' =>'required',
+            'password' => 'required',
+        ]);
+
+        if(Auth::guard('team')->attempt(['name' => $request->name, 'password' => $request->password], true)) {
+
+//            return response()->json(Auth::team(),200);
+
+//            return response()->json('made it', 200);
+
+            return redirect()->intended(route('dashboard'));
+
+
+        }
+
+        return 'not logged in';
     }
 }

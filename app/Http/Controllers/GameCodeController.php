@@ -40,19 +40,6 @@ class GameCodeController extends Controller
     public function store($id)
     {
 
-//        $gameCode = GameCode::create([
-//            'code' => Str::random(5),
-//            'expirationTime' => date("Y-m-d H:m:s", strtotime('+5 hours')),
-//            'game_id' => $id,
-//
-//        ]);
-
-//        $gameCode = new GameCode;
-//        $gameCode->code = Str::random(5);
-//        $gameCode->cxpirationTime =  date("Y-m-d H:m:s", strtotime('+5 hours'));
-//        $gameCode->game_id = $id;
-//        $gameCode->save();
-
         $game = Game::findorFail($id);
 
         $gameCode = $game->gameCodes()->create([

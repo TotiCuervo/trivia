@@ -10,13 +10,15 @@ class Team extends Authenticatable
 {
     use HasApiTokens, Notifiable;
 
+    protected $guard = 'team';
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'password', 'gameCode'
     ];
 
     /**
@@ -25,7 +27,7 @@ class Team extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'identifier', 'remember_token',
     ];
 
     /**
@@ -33,12 +35,8 @@ class Team extends Authenticatable
      *
      * @var array
      */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+//    protected $casts = [
+//        'email_verified_at' => 'datetime',
+//    ];
 
-    public function games()
-    {
-        return $this->hasMany(Game::class);
-    }
 }

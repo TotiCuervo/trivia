@@ -57,9 +57,7 @@ Route::post('/play/checkCode', 'PlayController@checkCode');
 Route::get('/game/{id}/gameCode', 'GameCodeController@show');
 Route::post('/gameCode/{id}/create', 'GameCodeController@store');
 
+//Teams
+Route::post('/team/checkTeam', 'TeamController@checkTeam');
+Route::get('/team/user', 'TeamController@user');
 
-
-//Route::prefix('api')->group(function () {
-//    Route::get('/trivia/{id}', 'GameController@show');
-//
-//});

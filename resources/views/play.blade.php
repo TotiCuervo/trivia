@@ -1,5 +1,5 @@
 @extends('layouts.dashboard')
 
 @section('content')
-    <Play></Play>
+    <Play-Lobby></Play-Lobby>
 @stop
