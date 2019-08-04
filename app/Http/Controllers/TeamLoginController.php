@@ -79,7 +79,7 @@ class TeamLoginController extends Controller
         $team = new Team;
         $team->name = $request->name;
         $team->gameCode = $request->gameCode;
-        $team->password = Hash::make($request->password);
+        $team->password = bcrypt($request->password);
         $team->identifier = $request->name.$request->gameCode;
 
         $team->save();
