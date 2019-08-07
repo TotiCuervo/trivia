@@ -48,13 +48,8 @@ return [
             'hash' => false,
         ],
         'team' => [
-            'driver' => 'session',
-            'provider' => 'teams',
-        ],
-        'team-api' => [
             'driver' => 'passport',
             'provider' => 'teams',
-            'hash' => false,
         ],
     ],
 

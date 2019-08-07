@@ -6,14 +6,34 @@ use Illuminate\Http\Request;
 
 use App\Team;
 use App\GameCode;
+use App\Model\Authenticator;
+use Illuminate\Auth\AuthenticationException;
+
+
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Hashing\HashManager;
+
 
 
 class TeamLoginController extends Controller
 {
+//    protected $hasher;
+//
+//    public function __construct(HashManager $hasher)
+//    {
+//        $this->hasher = $hasher->driver();
+//    }
+
+    private $authenticator;
+
+    public function __construct(Authenticator $authenticator)
+    {
+        $this->authenticator = $authenticator;
+    }
+
     public function index()
     {
         return view('team/login');
@@ -25,16 +45,12 @@ class TeamLoginController extends Controller
 
         for ($i = 0; $i < count($gameCodes); $i++) {
 
-            if ($request->gameCode === $gameCodes[$i]->code) {
-                return $this->registerOrLogin($request);
+            if ($request->code === $gameCodes[$i]->code) {
+                return 'true';
             }
         }
 
-        $messages = array(
-            'gameCode' => 'Sorry, this seems to be the wrong game code',
-        );
-
-        return Redirect::back()->withErrors($messages);
+        return 'false';
     }
 
     public function registerOrLogin(Request $request) {
@@ -56,22 +72,42 @@ class TeamLoginController extends Controller
     public function login(Request $request)
     {
 
-        $request->validate([
-            'name' =>'required',
-            'password' => 'required',
-        ]);
+        $credentials = array_values($request->only('name', 'password', 'provider', 'identifier'));
 
-        if(Auth::guard('team')->attempt(['name' => $request->name, 'password' => $request->password, 'identifier' => $request->name.$request->gameCode], true)) {
-            return redirect()->intended(route('play-lobby'));
-
-//            dd(Auth::guard('team')->user());
+        if (! $team = $this->authenticator->attempt(...$credentials)) {
+            throw new AuthenticationException();
         }
 
-        $messages = array(
-            'password' => 'Sorry, wrong password :(',
-        );
+        $token = $team->createToken('My Token')->accessToken;
 
-        return Redirect::back()->withErrors($messages);
+        return [
+            'token_type' => 'Bearer',
+            'access_token' => $token,
+        ];
+
+
+
+
+//        $team = Team::where('identifier', $request->name.$request->gameCode)->first();
+//
+//        if (! $this->hasher->check($request->password, $team->password)) {
+//            return ':(';
+//        }
+//
+//        $token = $team->createToken('My Token')->accessToken;
+//
+//        return [
+//            'token_type' => 'Bearer',
+//            'access_token' => $token,
+//        ];
+
+        //        if(Auth::guard('team')->check(['name' => $request->name, 'password' => $request->password, 'identifier' => $request->name.$request->gameCode], true)) {
+////            return redirect()->intended(route('play-lobby'));
+//
+////            dd(Auth::guard('team')->user());
+//            return 'made it';
+//        }
+
     }
 
     public function register(Request $request)
@@ -84,6 +120,7 @@ class TeamLoginController extends Controller
 
         $team->save();
 
-        return $this->login($request);
+        return $team;
+//        return $this->login($request);
     }
 }

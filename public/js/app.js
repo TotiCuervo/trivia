@@ -3570,50 +3570,48 @@ __webpack_require__.r(__webpack_exports__);
       password: ''
     };
   },
+  mounted: function mounted() {// console.log('maee it');
+    // axios.get('/api/team')
+    //     .then(response => {
+    //         console.log(response.data);
+    //         // this.$router.push({name: "playLobby"});
+    //     });
+  },
   methods: {
     checkPlayCode: function checkPlayCode() {
       var _this = this;
 
-      axios.post('/api/play/checkCode', {
+      axios.post('/api/team/checkCode', {
         code: this.gameCode
       }).then(function (response) {
         // console.log(response.data);
         if (response.data === false) {
           _this.validCode = false;
         } else {
-          // console.log('made it');
           _this.validCode = true;
         }
       });
     },
     loginOrRegister: function loginOrRegister() {
-      var _this2 = this;
-
       var $team = {
         name: this.name,
         gameCode: this.gameCode,
-        password: this.password
-      }; // axios.post('/api/team/checkTeam', $team)
-      //     .then(response => {
-      //         console.log(response.data);
-      //
-      //         this.$router.push({name: "playLobby"});
-      //
-      //         // this.tryIt();
-      //         // if(response.data === false) {
-      //         //     this.validCode = false;
-      //         // }
-      //         // else {
-      //         //     console.log('made it');
-      //         //     this.validCode = true;
-      //         // }
-      //     });
+        password: this.password,
+        identifier: this.name + this.gameCode,
+        provider: 'teams'
+      };
+      axios.post('/api/team/registerOrLogin', $team).then(function (response) {
+        console.log(response.data); // this.$router.push({name: "playLobby"});
 
-      axios.post('/team/login2', $team).then(function (response) {
-        console.log(response.data);
-
-        _this2.$router.push({
-          name: "playLobby"
+        console.log('made it');
+        var $config = {
+          headers: {
+            'Authorization': "bearer " + response.data.access_token
+          }
+        };
+        console.log($config);
+        axios.get('/api/team', $config).then(function (response) {
+          console.log(response.data); // this.$router.push({name: "playLobby"});
         });
       });
     }

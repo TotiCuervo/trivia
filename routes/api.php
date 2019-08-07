@@ -17,6 +17,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::group(['middleware' => ['api', 'multiauth:team']], function () {
+    Route::get('/team', function ($request) {
+        // Get the logged admin instance
+        return $request->user('team'); // You can use too `$request->user('admin')` passing the guard.
+    });
+});
+
 //Game
 Route::post('/game/create', 'GameController@store')->middleware('auth:api');
 Route::get('/games/{id}', 'GameController@index');
@@ -58,6 +65,10 @@ Route::get('/game/{id}/gameCode', 'GameCodeController@show');
 Route::post('/gameCode/{id}/create', 'GameCodeController@store');
 
 //Teams
-Route::post('/team/checkTeam', 'TeamController@checkTeam');
-Route::get('/team/user', 'TeamController@user');
+//Route::post('/team/checkTeam', 'TeamController@checkTeam');
+//Route::get('/team/user', 'TeamController@user');
+
+Route::post('/team/checkCode', 'TeamLoginController@checkCode');
+Route::post('/team/registerOrLogin', 'TeamLoginController@registerOrLogin');
+
 
