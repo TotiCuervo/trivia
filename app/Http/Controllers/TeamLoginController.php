@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Str;
+
 use App\Team;
 use App\GameCode;
 use App\Model\Authenticator;
@@ -20,18 +22,19 @@ use Illuminate\Hashing\HashManager;
 
 class TeamLoginController extends Controller
 {
-//    protected $hasher;
-//
-//    public function __construct(HashManager $hasher)
-//    {
-//        $this->hasher = $hasher->driver();
-//    }
 
     private $authenticator;
 
     public function __construct(Authenticator $authenticator)
     {
         $this->authenticator = $authenticator;
+    }
+
+
+    public function team(Request $request)
+    {
+        return Team::where('token', $request->token)->first();
+
     }
 
     public function index()
@@ -53,60 +56,49 @@ class TeamLoginController extends Controller
         return 'false';
     }
 
+    public function checkIfExpired(Request $request)
+    {
+        $team = Team::where('token', $request->token)->first();
+
+        if (! GameCode::where('code', $team->gameCode)->exists()) {
+            return 'expired';
+        }
+        else {
+            return $team;
+        }
+    }
+
     public function registerOrLogin(Request $request) {
 
-        $teams = Team::where('gameCode', $request->gameCode)->get();
-
-        for ($i = 0; $i < count($teams); $i++) {
-
-            if($request->name === $teams[$i]->name) {
-//                return 'trying to login';
-                return $this->login($request);
-            }
+        //if this team exists log them in
+        if ($teams = Team::where('gameCode', $request->gameCode)->where('name', $request->name)->first()) {
+            return $this->login($request);
         }
 
+        //if not, register them
         return $this->Register($request);
 
     }
 
     public function login(Request $request)
     {
-
+        //get the credentials
         $credentials = array_values($request->only('name', 'password', 'provider', 'identifier'));
 
+        //attempt to authorize, if not return unauthorized
         if (! $team = $this->authenticator->attempt(...$credentials)) {
-            throw new AuthenticationException();
+            return 'unauthorized';
         }
 
-        $token = $team->createToken('My Token')->accessToken;
+        if ($team->loggedIn = true) {
+//            return 'alreadyLoggedIn';
+        } else {
+            $team->loggedIn = true;
+            $team->save();
+        }
 
-        return [
-            'token_type' => 'Bearer',
-            'access_token' => $token,
-        ];
-
-
-
-
-//        $team = Team::where('identifier', $request->name.$request->gameCode)->first();
-//
-//        if (! $this->hasher->check($request->password, $team->password)) {
-//            return ':(';
-//        }
-//
-//        $token = $team->createToken('My Token')->accessToken;
-//
-//        return [
-//            'token_type' => 'Bearer',
-//            'access_token' => $token,
-//        ];
-
-        //        if(Auth::guard('team')->check(['name' => $request->name, 'password' => $request->password, 'identifier' => $request->name.$request->gameCode], true)) {
-////            return redirect()->intended(route('play-lobby'));
-//
-////            dd(Auth::guard('team')->user());
-//            return 'made it';
-//        }
+        //if authorized, return the team
+        return $team;
 
     }
 
@@ -117,6 +109,7 @@ class TeamLoginController extends Controller
         $team->gameCode = $request->gameCode;
         $team->password = bcrypt($request->password);
         $team->identifier = $request->name.$request->gameCode;
+        $team->token = Str::random(32);
 
         $team->save();
 

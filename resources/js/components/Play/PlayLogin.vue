@@ -37,10 +37,17 @@
                     <div class="row pt-3">
                         <div class="col-md-8 offset-md-2">
                             <label>Team Password:</label>
-                            <b-form-input id="team-password" placeholder="Password" type="password" v-model="password"></b-form-input>
+                            <b-form-input id="team-password" placeholder="Password" type="password" v-model="password" :state=validPassword @click="resetInput()"> </b-form-input>
                             <b-form-text id="team-password">
                                 Create a new team or login
                             </b-form-text>
+                            <b-form-invalid-feedback id="team-password" v-if="this.error === 'unauthorized'">
+                                Sorry, it seems like this is the wrong password
+                            </b-form-invalid-feedback>
+                            <b-form-invalid-feedback v-if="this.error === 'alreadyLoggedIn'" id="team-password">
+                                Sorry, it seems like someone is already logged in. If this is a mistake, please see the trivia master.
+                            </b-form-invalid-feedback>
+                            <p>{{this.error === 'alreadyLoggedIn'}}</p>
                         </div>
                     </div>
                 </div>
@@ -60,22 +67,21 @@
 </template>
 
 <script>
+    import {mapActions, mapGetters} from 'vuex';
+
     export default {
         data() {
             return {
                 validCode: '',
+                validPassword:'',
                 gameCode: '',
                 name: '',
-                password: ''
+                password: '',
+                error: ''
             }
         },
         mounted() {
-            // console.log('maee it');
-            // axios.get('/api/team')
-            //     .then(response => {
-            //         console.log(response.data);
-            //         // this.$router.push({name: "playLobby"});
-            //     });
+
         },
         methods: {
             checkPlayCode() {
@@ -84,7 +90,7 @@
                 })
                     .then(response => {
                         // console.log(response.data);
-                        if(response.data === false) {
+                        if (response.data === false) {
                             this.validCode = false;
                         }
                         else {
@@ -105,27 +111,57 @@
                 axios.post('/api/team/registerOrLogin', $team)
                     .then(response => {
                         console.log(response.data);
-                        // this.$router.push({name: "playLobby"});
-
-                        console.log('made it');
-
-                        let $config = {
-                            headers: {'Authorization': "bearer " + response.data.access_token}
-                        };
-
-                        console.log($config);
-
-
-                        axios.get('/api/team', $config)
-                            .then(response => {
-                                console.log(response.data);
-                                // this.$router.push({name: "playLobby"});
-                            });
+                        if (response.data === 'unauthorized') {
+                            this.error = 'unauthorized';
+                            this.validPassword = false;
+                        }
+                        else if (response.data === 'alreadyLoggedIn') {
+                            this.error = 'alreadyLoggedIn';
+                            this.validPassword = false;
+                        }
+                        else {
+                            // console.log(response.data);
+                            this.loggedTeam = response.data;
+                            localStorage.setItem('user-token',  response.data.token);
+                            localStorage.setItem('poop', 'poopMe');
+                            this.$router.push({name: "playLobby"});
+                        }
                     });
-
-
             },
-        }
+            resetInput() {
+
+                this.validPassword = '';
+                this.error = '';
+
+            }
+        },
+        computed: {
+            ...mapGetters('team', ['team', 'token']),
+            teamToken: {
+                get() {
+                    return this.token;
+                },
+                set(value) {
+                    return this.$store.commit('team/SET_TOKEN', value);
+                }
+            },
+            teamName: {
+                get() {
+                    return this.team.name;
+                },
+                set(value) {
+                    return this.$store.commit('team/SET_NAME', value);
+                }
+            },
+            loggedTeam: {
+                get() {
+                    return this.team;
+                },
+                set(value) {
+                    return this.$store.commit('team/SET_TEAM', value);
+                }
+            }
+        },
     }
 </script>
 

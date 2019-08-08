@@ -10,8 +10,7 @@ import gameOrder from './modules/gameOrder';
 import round from './modules/round';
 import question from './modules/question';
 import answer from './modules/answer';
-
-
+import team from './modules/team';
 
 
 
@@ -25,7 +24,8 @@ export const store = new Vuex.Store({
         gameOrder,
         round,
         question,
-        answer
+        answer,
+        team
     },
     strict: debug
 });

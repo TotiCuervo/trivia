@@ -19,6 +19,8 @@ class CreateTeamsTable extends Migration
             $table->string('password');
             $table->string('gameCode');
             $table->string('identifier')->unique();
+            $table->string('token');
+            $table->boolean('loggedIn')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });
