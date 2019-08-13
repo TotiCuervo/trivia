@@ -1,8 +1,11 @@
 function initialState() {
     return {
+        teams: [],
         team: {
+            id: '',
             name: '',
-            token: ''
+            token: '',
+            gameCode: '',
         },
         loading: false,
     }
@@ -11,6 +14,9 @@ function initialState() {
 const getters = {
     team(state){
         return state.team;
+    },
+    teams(state){
+        return state.teams;
     },
     name(state){
         return state.team.name;
@@ -45,14 +51,42 @@ const mutations = {
         state.loading = loading
     },
     SET_TEAM(state,team){
+        state.team.id = team.id;
         state.team.name = team.name;
         state.team.token = team.token;
+        state.team.gameCode = team.gameCode;
+    },
+    SET_TEAMS(state,teams) {
+
+        for (let $i=0; $i < teams.length; $i++) {
+
+            let $team = {
+                id: teams[$i].id,
+                name: teams[$i].name,
+                token: teams[$i].token,
+                gameCode: teams[$i].gameCode
+            };
+
+            state.teams.push($team);
+        }
+
     },
     SET_TOKEN(state, token){
         state.team.token = token;
     },
     SET_NAME(state, name){
         state.team.name = name;
+    },
+    ADD_TEAM(state, team){
+
+        let $gameTeam = {
+            id: team.id,
+            name: team.name,
+            token: team.token,
+            gameCode: team.gameCode
+        };
+
+        state.teams.push($gameTeam);
     },
     CLEAR_FORM(state){
         state.team = {

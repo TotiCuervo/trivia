@@ -7,6 +7,7 @@ function initialState() {
             id: null,
             company: null
         },
+        gameCode: '',
         loading: false,
         form:{
             name: null,
@@ -26,6 +27,9 @@ const getters = {
     },
     name(state){
         return state.game.name;
+    },
+    gameCode(state){
+        return state.gameCode;
     },
     description(state){
         return state.game.description;
@@ -112,14 +116,6 @@ const actions = {
         axios.post('/api/game/create', state.game)
             .then(response => {
                 return response.data;
-                // let $game = response.data;
-                // // this.createGameOrder(game.id);
-                // this.$store.commit('round/UPDATE_GAME_ID', $game.id);
-                //
-                // this.addRound();
-                //
-                // this.$router.push({ name: "gameDetails", params: { id: $game.id }});
-
         });
     }
 
@@ -134,6 +130,9 @@ const mutations = {
     },
     SET_GAMES(state, games) {
         state.games = games;
+    },
+    SET_GAME_CODE(state,code) {
+        state.gameCode = code;
     },
     UPDATE_GAME_NAME(state,name) {
         state.game.name = name;

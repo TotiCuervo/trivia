@@ -1,13 +1,17 @@
 <template>
     <div v-if="this.game.name !== ''">
         <div class="game-intro pt-2 pb-2">
-
             <div class="row no-gutters">
+                <!--<div class="col-md-6">-->
+                    <!--<h1>-->
+                        <!--<span class="badge badge-pill" v-bind:class="this.game.headClass">{{ game.name}}: {{ game.description }}</span>-->
+                    <!--</h1>-->
+                <!--</div>-->
+                <!--<div class="col-md-6">-->
 
+                <!--</div>-->
                 <div class="col-md-12">
-
                     <div class="game-header">
-
                         <div v-if="game.name">
                             <div v-if="game.description">
                                 <h5>
@@ -19,7 +23,6 @@
                                     {{ game.name }}
                                 </h5>
                             </div>
-
                         </div>
                     </div>
                 </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Game;
 use App\User;
+use App\Team;
 use Illuminate\Http\Request;
 
 use Str;
@@ -25,22 +26,11 @@ class GameController extends Controller
         return $games;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
 
@@ -61,36 +51,17 @@ class GameController extends Controller
 //        return $request->headClass;
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Game  $game
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $game = Game::findorFail($id);
         return $game;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Game  $game
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Game $game)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Game  $game
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $game = Game::findorFail($id);
@@ -109,12 +80,6 @@ class GameController extends Controller
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Game  $game
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $game = Game::findorFail($id);
@@ -140,5 +105,9 @@ class GameController extends Controller
         $game->playing = false;
 
         $game->save();
+    }
+
+    public function teams($gameCode) {
+        return Team::where('gameCode', $gameCode)->where('loggedIn', 1)->get();
     }
 }

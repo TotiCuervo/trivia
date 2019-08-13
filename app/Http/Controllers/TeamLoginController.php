@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NewTeam;
 use Illuminate\Http\Request;
 
 use Str;
 
 use App\Team;
+use App\User;
 use App\GameCode;
 use App\Model\Authenticator;
 use Illuminate\Auth\AuthenticationException;
@@ -17,6 +19,8 @@ use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Hashing\HashManager;
+use Illuminate\Support\Facades\Log;
+
 
 
 
@@ -33,7 +37,12 @@ class TeamLoginController extends Controller
 
     public function team(Request $request)
     {
-        return Team::where('token', $request->token)->first();
+        $team = Team::where('token', $request->token)->first();
+
+        $team->loggedIn = 1;
+        $team->save();
+
+        return $team;
 
     }
 
@@ -80,28 +89,6 @@ class TeamLoginController extends Controller
 
     }
 
-    public function login(Request $request)
-    {
-        //get the credentials
-        $credentials = array_values($request->only('name', 'password', 'provider', 'identifier'));
-
-        //attempt to authorize, if not return unauthorized
-        if (! $team = $this->authenticator->attempt(...$credentials)) {
-            return 'unauthorized';
-        }
-
-        if ($team->loggedIn = true) {
-//            return 'alreadyLoggedIn';
-        } else {
-            $team->loggedIn = true;
-            $team->save();
-        }
-
-        //if authorized, return the team
-        return $team;
-
-    }
-
     public function register(Request $request)
     {
         $team = new Team;
@@ -114,6 +101,41 @@ class TeamLoginController extends Controller
         $team->save();
 
         return $team;
-//        return $this->login($request);
+    }
+
+    public function login(Request $request)
+    {
+        //get the credentials
+        $credentials = array_values($request->only('name', 'password', 'provider', 'identifier'));
+
+        //attempt to authorize, if not return unauthorized
+        if (! $team = $this->authenticator->attempt(...$credentials)) {
+            return 'unauthorized';
+        }
+
+//        if ($team->loggedIn = true) {
+//            return 'alreadyLoggedIn';
+//        } else {
+//            $team->loggedIn = true;
+//            $team->save();
+//        }
+
+        //if authorized, return the team
+
+        $broadTeam = Team::where('identifier', $team->identifier)->first();
+
+        broadcast(new NewTeam($broadTeam));
+
+        return $team;
+
+    }
+
+    public function logout($id){
+
+        $team = Team::findorFail($id);
+        $team->loggedIn = false;
+        $team->save();
+
+        return $team;
     }
 }

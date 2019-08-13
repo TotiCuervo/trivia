@@ -47,7 +47,7 @@
                             <b-form-invalid-feedback v-if="this.error === 'alreadyLoggedIn'" id="team-password">
                                 Sorry, it seems like someone is already logged in. If this is a mistake, please see the trivia master.
                             </b-form-invalid-feedback>
-                            <p>{{this.error === 'alreadyLoggedIn'}}</p>
+                            <!--<p>{ this.error === 'alreadyLoggedIn'}}</p>-->
                         </div>
                     </div>
                 </div>
@@ -81,7 +81,7 @@
             }
         },
         mounted() {
-
+            console.log('made it');
         },
         methods: {
             checkPlayCode() {

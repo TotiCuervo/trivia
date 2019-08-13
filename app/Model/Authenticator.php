@@ -41,7 +41,9 @@ class Authenticator
         string $identifier
     ): ?Authenticatable {
 
-        Log::error($provider);
+//        Log::error($identifier);
+//        Log::error($password);
+//        Log::error($provider);
 
         if (! $model = config('auth.providers.'.$provider.'.model')) {
             throw new RuntimeException('Unable to determine authentication model from configuration.');
@@ -49,6 +51,7 @@ class Authenticator
 
         /** @var Authenticatable $user */
         if (! $user = (new $model)->where('identifier', $identifier)->first()) {
+            Log::error('Hit');
             return null;
         }
 

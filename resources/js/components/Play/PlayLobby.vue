@@ -2,6 +2,8 @@
     <div>
         <h1>I am the lobby</h1>
         <div class="btn btn-primary" @click="logout()">Logout</div>
+        <div class="btn btn-primary" @click="leaving()">Logout2</div>
+
     </div>
 </template>
 
@@ -18,22 +20,37 @@
         mounted() {
 
             if (this.team.name === '') {
-
                 axios.post('api/team', {
                     token: localStorage.getItem('user-token')
                 }).then(response => {
-                    // console.log(response.data);
                     this.loggedTeam = response.data;
                 });
             }
 
-            console.log(localStorage.getItem('poop'));
+            Echo.join('game.'+this.loggedTeam.gameCode)
+                .here((users) => {
+
+                })
+                .listen('NewTeam', (e) => {
+                    // console.log(e);
+                    console.log('WOW A NEW TEAM');
+                });
+        },
+        created() {
+            window.addEventListener('beforeunload', this.leaving);
         },
         methods: {
             logout(){
                 localStorage.removeItem('user-token');
                 this.$store.commit('team/CLEAR_FORM');
                 this.$router.push({name: "playLogin"});
+            },
+            leaving() {
+                event.preventDefault();
+                axios.post('/api/team/logout/'+ this.loggedTeam.id)
+                    .then(response => {
+
+                    });
             },
         },
         computed: {
