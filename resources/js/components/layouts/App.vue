@@ -55,7 +55,7 @@
         data() {
             return {
                 little_id: null,
-                noNav: ['hostLobby']
+                noNav: ['hostLobby', 'hostInterface']
             }
         },
         created() {

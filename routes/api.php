@@ -21,6 +21,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/game/create', 'GameController@store')->middleware('auth:api');
 Route::get('/games/{id}', 'GameController@index');
 Route::get('/game/{id}', 'GameController@show');
+Route::get('/game/{gameCode}/code', 'GameController@getByGameCode');
+
 Route::delete('/game/{id}/destroy', 'GameController@destroy');
 Route::patch('/game/{id}', 'GameController@update');
 Route::patch('/game/{id}/play', 'GameController@playOn');
@@ -60,5 +62,6 @@ Route::post('/team/logout/{id}', 'TeamLoginController@logout');
 Route::post('/team/checkCode', 'TeamLoginController@checkCode');
 Route::post('/team/checkIfExpired', 'TeamLoginController@checkIfExpired');
 Route::post('/team/registerOrLogin', 'TeamLoginController@registerOrLogin');
+Route::get('/team/{id}/pulse', 'TeamLoginController@getPulse');
 
 

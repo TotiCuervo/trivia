@@ -76,6 +76,19 @@ const actions = {
             });
     },
 
+    fetchDataByGameCode({ commit, state}, gameCode) {
+        commit('setLoading', true);
+
+        axios.get('/api/game/'+ gameCode + '/code')
+            .then(response => {
+                commit('SET_GAME', response.data);
+                commit('setLoading', false);
+            })
+            .catch( error => {
+                console.log(error.response);
+            });
+    },
+
     fetchGames({ commit, state }, id) {
         commit('setLoading', true);
         axios.get('api/games/'+ id).

@@ -1,33 +1,5 @@
 <template>
-    <div v-if="this.game.name !== ''">
-        <!--<div class="game-intro pt-2 pb-2">-->
-            <!--<div class="row no-gutters">-->
-                <!--&lt;!&ndash;<div class="col-md-6">&ndash;&gt;-->
-                    <!--&lt;!&ndash;<h31>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<span class="badge badge-pill" v-bind:class="this.game.headClass">{{ game.name}}: {{ game.description }}</span>&ndash;&gt;-->
-                    <!--&lt;!&ndash;</h31>&ndash;&gt;-->
-                <!--&lt;!&ndash;</div>&ndash;&gt;-->
-                <!--&lt;!&ndash;<div class="col-md-6">&ndash;&gt;-->
-
-                <!--&lt;!&ndash;</div>&ndash;&gt;-->
-                <!--<div class="col-md-12">-->
-                    <!--<div class="game-header">-->
-                        <!--<div v-if="game.name">-->
-                            <!--<div v-if="game.description">-->
-                                <!--<h5>-->
-                                    <!--{{ game.name}}: {{ game.description }}-->
-                                <!--</h5>-->
-                            <!--</div>-->
-                            <!--<div v-else>-->
-                                <!--<h5>-->
-                                    <!--{{ game.name }}-->
-                                <!--</h5>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
+    <div class="pr-3 pl-3" v-if="this.game_code">
         <div class="row pt-3">
             <div class="col-md-12">
                 <div class="row">
@@ -66,36 +38,86 @@
                 <hr>
             </div>
         </div>
+        <HostLobby></HostLobby>
     </div>
 </template>
 
 <script>
-
     import {mapActions, mapGetters} from 'vuex';
 
     export default {
         data() {
             return {
-                id: null,
+                params: '',
+                showGame: false,
             }
         },
         mounted() {
-            //sets the value of id to the id of the game that was created
-            this.id = this.$route.params;
+            this.params = this.$route.params;
+            this.fetchData(this.params);
 
-            //fetches the information of the game to load it into the details
-            this.fetchData(this.id);
+            //get the game code
+            axios.get('/api/game/' + this.params.id + '/gameCode', {
+            })
+                .then(response => {
+
+                    if (response.data === false) {
+                        axios.post('/api/gameCode/' + this.params.id + '/create', {
+                        })
+                            .then(response => {
+                                this.game_code = response.data;
+                            })
+                            .catch(error => {
+                                console.log(error);
+                            });
+                    } else {
+                        // console.log(response.data);
+                        this.game_code = response.data[0];
+                    }
+
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        },
+        beforeDestroy() {
+
+            //changes the value to false
+            axios.post('/api/game/' + this.game.id + '/gameOver', {
+                _method: 'patch'
+            })
+                .then(response => {
+                    // console.log(response.data);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
         },
         methods: {
             ...mapActions('game', ['fetchData']),
+
+            toggleShowGame() {
+                this.showGame = ! this.showGame;
+            }
+
         },
         computed: {
             ...mapGetters('game', ['game', 'game_id', 'gameCode']),
+            ...mapGetters('team', ['teams']),
+            game_code: {
+                get() {
+                    return this.gameCode;
+                },
+                set(value) {
+                    return this.$store.commit('game/SET_GAME_CODE', value);
+                }
+            }
+
         }
+
     }
 </script>
 
 <style scoped>
-
 
 </style>

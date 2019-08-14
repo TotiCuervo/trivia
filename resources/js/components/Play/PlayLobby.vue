@@ -1,8 +1,9 @@
 <template>
     <div>
-        <h1>I am the lobby</h1>
-        <div class="btn btn-primary" @click="logout()">Logout</div>
-        <div class="btn btn-primary" @click="leaving()">Logout2</div>
+        <TeamPlayHeader></TeamPlayHeader>
+        <PlayHomeScreen v-if="this.game.name !== ''"></PlayHomeScreen>
+        <!--<div class="btn btn-primary" @click="logout()">Logout</div>-->
+        <!--<div class="btn btn-primary" @click="leaving()">Logout2</div>-->
 
     </div>
 </template>
@@ -19,13 +20,7 @@
         },
         mounted() {
 
-            if (this.team.name === '') {
-                axios.post('api/team', {
-                    token: localStorage.getItem('user-token')
-                }).then(response => {
-                    this.loggedTeam = response.data;
-                });
-            }
+            this.fetchDataByGameCode(this.team.gameCode);
 
             Echo.join('game.'+this.loggedTeam.gameCode)
                 .here((users) => {
@@ -40,13 +35,14 @@
             window.addEventListener('beforeunload', this.leaving);
         },
         methods: {
+            ...mapActions('game', ['fetchDataByGameCode']),
+
             logout(){
                 localStorage.removeItem('user-token');
                 this.$store.commit('team/CLEAR_FORM');
                 this.$router.push({name: "playLogin"});
             },
             leaving() {
-                event.preventDefault();
                 axios.post('/api/team/logout/'+ this.loggedTeam.id)
                     .then(response => {
 
@@ -55,6 +51,7 @@
         },
         computed: {
             ...mapGetters('team', ['team']),
+            ...mapGetters('game', ['game']),
             loggedTeam: {
                 get() {
                     return this.team;

@@ -1,10 +1,21 @@
 <template>
-    
+    <div>
+        <div class="card fancy-2">
+            <div class="card-body">
+                <h5>{{team.name}}</h5>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
     export default {
-        name: "trivia-team"
+        data() {
+            return {
+
+            }
+        },
+        props: ['team']
     }
 </script>
 

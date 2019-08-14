@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\NewTeam;
+use App\Events\TeamLeaving;
 use Illuminate\Http\Request;
 
 use Str;
@@ -73,6 +74,12 @@ class TeamLoginController extends Controller
             return 'expired';
         }
         else {
+            $team->loggedIn = 1;
+
+            $team->save();
+
+            $this->broadcastNewTeam($team);
+
             return $team;
         }
     }
@@ -100,6 +107,8 @@ class TeamLoginController extends Controller
 
         $team->save();
 
+        $this->broadcastNewTeam($team);
+
         return $team;
     }
 
@@ -113,29 +122,46 @@ class TeamLoginController extends Controller
             return 'unauthorized';
         }
 
-//        if ($team->loggedIn = true) {
-//            return 'alreadyLoggedIn';
-//        } else {
-//            $team->loggedIn = true;
-//            $team->save();
-//        }
+//        Log::error($team->loggedIn);
+        if ($team->loggedIn === 1) {
+            return 'alreadyLoggedIn';
+        } else {
+            $team->loggedIn = true;
+            $team->save();
+        }
+
+        $this->broadcastNewTeam($team);
 
         //if authorized, return the team
-
-        $broadTeam = Team::where('identifier', $team->identifier)->first();
-
-        broadcast(new NewTeam($broadTeam));
-
         return $team;
-
     }
 
     public function logout($id){
+        Log::error('made it to logout');
 
         $team = Team::findorFail($id);
         $team->loggedIn = false;
         $team->save();
 
+        $this->broadcastTeamLeaving($team);
+
         return $team;
     }
+
+    //broadcasts
+    public function broadcastNewTeam($team) {
+        $broadTeam = Team::where('identifier', $team->identifier)->first();
+        return broadcast(new NewTeam($broadTeam));
+    }
+
+    public function broadcastTeamLeaving($team) {
+        Log::error('made it to TeamLeaving broadcat');
+        $broadTeam = Team::where('identifier', $team->identifier)->first();
+        return broadcast(new TeamLeaving($broadTeam));
+    }
+
+    public function getPulse($id) {
+        return Team::findorFail($id)->first()->loggedIn;
+    }
+
 }

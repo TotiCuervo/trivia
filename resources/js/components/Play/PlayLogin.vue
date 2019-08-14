@@ -81,7 +81,7 @@
             }
         },
         mounted() {
-            console.log('made it');
+
         },
         methods: {
             checkPlayCode() {
@@ -123,7 +123,6 @@
                             // console.log(response.data);
                             this.loggedTeam = response.data;
                             localStorage.setItem('user-token',  response.data.token);
-                            localStorage.setItem('poop', 'poopMe');
                             this.$router.push({name: "playLobby"});
                         }
                     });

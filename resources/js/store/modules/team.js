@@ -88,6 +88,15 @@ const mutations = {
 
         state.teams.push($gameTeam);
     },
+    REMOVE_TEAM(state, team) {
+
+        for (let $i = 0; $i < state.teams.length; $i++) {
+
+            if (team.name = state.teams[$i].name) {
+                state.teams.splice($i-1,1);
+            }
+        }
+    },
     CLEAR_FORM(state){
         state.team = {
             name: '',

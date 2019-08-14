@@ -34,7 +34,7 @@
                 <div class="row">
                     <div class="col-md-12 text-center">
                         <hr>
-                        <router-link :to="{ name: 'hostLobby', params: {id: game.id} }">
+                        <router-link :to="{ name: 'hostInterface', params: {id: game.id} }">
                             <b-button block pill variant="primary">Play</b-button>
                         </router-link>
                     </div>

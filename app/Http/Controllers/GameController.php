@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Game;
+use App\GameCode;
 use App\User;
 use App\Team;
 use Illuminate\Http\Request;
@@ -48,13 +49,17 @@ class GameController extends Controller
 
         return $game;
 
-//        return $request->headClass;
     }
 
     public function show($id)
     {
-        $game = Game::findorFail($id);
-        return $game;
+        return Game::findorFail($id);
+    }
+
+    public function getByGameCode($gameCode) {
+        $game = GameCode::where('code', $gameCode)->first();
+
+        return Game::findorFail($game->game_id);
     }
 
     public function edit(Game $game)

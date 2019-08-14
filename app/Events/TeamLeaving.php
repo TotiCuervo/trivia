@@ -3,6 +3,7 @@
 namespace App\Events;
 
 use App\Team;
+
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -13,8 +14,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
 use Illuminate\Support\Facades\Log;
 
-
-class NewTeam implements ShouldBroadcast
+class TeamLeaving implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -37,6 +37,7 @@ class NewTeam implements ShouldBroadcast
      */
     public function broadcastOn()
     {
+        Log::error('made it here');
         return new PresenceChannel('game.'.$this->team->gameCode);
     }
 
