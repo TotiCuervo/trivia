@@ -2,83 +2,44 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NextStep;
+use App\Events\StartQuestion;
+use App\Events\StartRound;
+use App\Events\RoundReview;
+use App\Events\RevealAnswer;
+
+use App\Round;
+
 use Illuminate\Http\Request;
 
 class HostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        return view('host');
+
+    public function startRound($code, $roundPosition) {
+
+        broadcast(new StartRound($code, $roundPosition));
+        return 'Start Round Successful';
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function startQuestion($code, $roundPosition, $questionPosition) {
+        broadcast(new StartQuestion($code, $roundPosition, $questionPosition));
+        return 'startQuestion Successful';
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+    public function roundReview($code) {
+        broadcast(new RoundReview($code));
+        return 'roundReview Successful';
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+    public function revealAnswer($code, $roundPosition, $questionPosition) {
+        broadcast(new RevealAnswer($code, $roundPosition, $questionPosition));
+        return 'revealAnswer Succcessful!';
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+    public function navigateHandler($code, $roundPosition, $questionPosition, $currentPage) {
+        broadcast(new NextStep($code, $roundPosition, $questionPosition, $currentPage));
+        return 'success';
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\GameCode;
 use App\Question;
 use App\Round;
 use App\Game;
@@ -21,6 +22,15 @@ class QuestionController extends Controller
         $questions = $trivia->questions()->orderBy('round_id', 'ASC')->orderBy('order_number', 'ASC')->get();
 
         return $questions;
+    }
+
+    public function indexByCode($gameCode)
+    {
+        $gameCode = GameCode::where('code', $gameCode)->first();
+
+        $game = Game::findorFail($gameCode->game_id);
+
+        return $game->questions()->orderBy('round_id', 'ASC')->orderBy('order_number', 'ASC')->get();
     }
 
     /**

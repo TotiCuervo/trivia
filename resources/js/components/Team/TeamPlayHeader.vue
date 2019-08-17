@@ -1,7 +1,9 @@
 <template>
-    <div class="row" style="color:white; background-color:black">
-        <div class="col-md-12 text-center">
-            <h1>{{this.loggedTeam.name}}</h1>
+    <div class="row no-gutters" style="color:white; background-color:black">
+        <div class="container">
+            <div class="col-md-12 text-center">
+                <h1>{{this.loggedTeam.name}}</h1>
+            </div>
         </div>
     </div>
 </template>

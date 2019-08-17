@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-use App\Team;
+use App\Round;
 
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
@@ -14,7 +14,8 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
 use Illuminate\Support\Facades\Log;
 
-class TeamLeaving implements ShouldBroadcast
+
+class StartRound implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -23,11 +24,14 @@ class TeamLeaving implements ShouldBroadcast
      *
      * @return void
      */
-    public $team;
+    public $roundPosition;
 
-    public function __construct(Team $team)
+    public $gameCode;
+
+    public function __construct($gameCode, $roundPosition)
     {
-        $this->team = $team;
+        $this->gameCode = $gameCode;
+        $this->roundPosition = $roundPosition;
     }
 
     /**
@@ -37,12 +41,11 @@ class TeamLeaving implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-//        Log::error('made it here');
-        return new PresenceChannel('game.'.$this->team->gameCode);
+        return new PresenceChannel('game.'.$this->gameCode);
     }
 
     public function broadcastWith()
     {
-        return ["team" => $this->team];
+        return ["roundPosition" => $this->roundPosition];
     }
 }

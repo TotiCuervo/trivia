@@ -1,0 +1,135 @@
+<template>
+    <div>
+        <TeamPlayHeader></TeamPlayHeader>
+        <div class="container">
+            <PlayHomeScreen
+                    v-if="this.game.name !== '' && this.currentPage === ''">
+            </PlayHomeScreen>
+            <PlayRoundPreview
+                    v-if="this.currentPage === 'PlayRoundPreview'">
+            </PlayRoundPreview>
+            <PlayQuestion
+                    v-if="this.currentPage === 'PlayQuestion'">
+            </PlayQuestion>
+            <PlayRoundReview
+                    v-if="this.currentPage === 'PlayRoundReview'">
+            </PlayRoundReview>
+            <PlayRevealAnswer
+                v-if="this.currentPage === 'PlayRevealAnswer'">
+            </PlayRevealAnswer>
+        </div>
+    </div>
+</template>
+
+<script>
+    import {mapActions, mapGetters} from 'vuex';
+
+    export default {
+        data() {
+            return {
+
+            }
+        },
+        mounted() {
+
+            this.fetchDataByGameCode(this.team.gameCode);
+            this.fetchRoundsByGameCode(this.team.gameCode);
+            this.fetchQuestionsByGameCode(this.team.gameCode);
+            this.fetchAnswersByGameCode(this.team.gameCode);
+
+            Echo.join('game.'+this.loggedTeam.gameCode)
+                .here((users) => {
+
+                })
+                .listen('NextStep', (e) => {
+                    console.log(e);
+                    this.playRoundPosition = e.roundPosition;
+                    this.playQuestionPosition = e.questionPosition;
+                    this.currentPage = e.currentPage;
+                })
+                .listen('StartRound', (e) => {
+                    // console.log(e);
+                    this.playRoundPosition = e.roundPosition;
+                    this.playQuestionPosition = 0;
+                    this.currentPage = 'PlayRoundPreview';
+                })
+                .listen('StartQuestion', (e) => {
+                    // console.log(e);
+                    console.log('just got new question');
+                    this.playRoundPosition = e.roundPosition;
+                    this.playQuestionPosition = e.questionPosition;
+                    this.currentPage = 'PlayQuestion';
+                })
+                .listen('RoundReview', (e) => {
+                    console.log('lets go to round review');
+                    this.currentPage = 'PlayRoundReview';
+                });
+        },
+        created() {
+            window.addEventListener('beforeunload', this.leaving);
+        },
+        methods: {
+            ...mapActions('game', ['fetchDataByGameCode']),
+            ...mapActions('round', ['fetchRoundsByGameCode']),
+            ...mapActions('question', ['fetchQuestionsByGameCode']),
+            ...mapActions('answer', ['fetchAnswersByGameCode']),
+
+            logout(){
+                localStorage.removeItem('user-token');
+                this.$store.commit('team/CLEAR_FORM');
+                this.$router.push({name: "playLogin"});
+            },
+            leaving() {
+                axios.post('/api/team/logout/'+ this.loggedTeam.id)
+                    .then(response => {
+
+                    });
+            },
+        },
+        computed: {
+            ...mapGetters('team', ['team']),
+            ...mapGetters('game', ['game']),
+            ...mapGetters('round', ['rounds']),
+            ...mapGetters('question', ['questions']),
+            ...mapGetters('answer', ['answers']),
+            ...mapGetters('play', ['roundPosition', 'questionPosition', 'page']),
+            loggedTeam: {
+                get() {
+                    return this.team;
+                },
+                set(value) {
+                    return this.$store.commit('team/SET_TEAM', value);
+                }
+            },
+            playRoundPosition: {
+                get() {
+                    return this.roundPosition;
+                },
+                set(value) {
+                    return this.$store.commit('play/SET_ROUND_POSITION', value);
+                }
+            },
+            playQuestionPosition: {
+                get() {
+                    return this.questionPosition;
+                },
+                set(value) {
+                    return this.$store.commit('play/SET_QUESTION_POSITION', value);
+                }
+            },
+            currentPage: {
+                get() {
+                    return this.page;
+                },
+                set(value) {
+                    return this.$store.commit('play/SET_PAGE', value);
+                }
+            }
+
+        },
+    }
+</script>
+
+<style scoped>
+
+</style>

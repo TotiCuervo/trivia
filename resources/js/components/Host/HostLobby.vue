@@ -45,54 +45,12 @@
             }
         },
         mounted() {
-            this.params = this.$route.params;
-            this.fetchData(this.params);
 
-            //get the game code
-            axios.get('/api/game/' + this.params.id + '/gameCode', {
-            })
-                .then(response => {
-
-                    if (response.data === false) {
-                        axios.post('/api/gameCode/' + this.params.id + '/create', {
-                        })
-                            .then(response => {
-                                this.game_code = response.data;
-                            })
-                            .catch(error => {
-                                console.log(error);
-                            });
-                    } else {
-                        // console.log(response.data);
-                        this.game_code = response.data[0];
-                    }
-
-                })
-                .catch(error => {
-                    console.log(error);
-                });
-
-        },
-        beforeDestroy() {
-
-            //changes the value to false
-            axios.post('/api/game/' + this.game.id + '/gameOver', {
-                _method: 'patch'
-            })
-                .then(response => {
-                    // console.log(response.data);
-                })
-                .catch(error => {
-                    console.log(error);
-                });
         },
         methods: {
-            ...mapActions('game', ['fetchData']),
-
             toggleShowGame() {
                 this.showGame = ! this.showGame;
             }
-
         },
         computed: {
             ...mapGetters('game', ['game', 'game_id', 'gameCode']),

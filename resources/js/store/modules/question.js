@@ -66,9 +66,9 @@ const actions = {
         });
     },
 
-    fetchQuestions({ commit, state }, trivia_id) {
+    fetchQuestions({ commit, state }, game_id) {
         commit('setLoading', true);
-        axios.get('/api/trivia/' + trivia_id + '/questions')
+        axios.get('/api/game/' + game_id + '/questions')
             .then(response => {
                 commit('SET_QUESTIONS', response.data);
                 commit('setLoading', false);
@@ -78,7 +78,19 @@ const actions = {
         });
     },
 
-    newQuestion({commit, state}) {
+    fetchQuestionsByGameCode({ commit, state }, gameCode) {
+        commit('setLoading', true);
+        axios.get('/api/game/' + gameCode + '/questionsByCode')
+            .then(response => {
+                commit('SET_QUESTIONS', response.data);
+                commit('setLoading', false);
+                commit('SET_LOADED', true);
+            }).catch( error => {
+            console.log(error.response);
+        });
+    },
+
+newQuestion({commit, state}) {
         commit('setLoading', true);
         axios.post('/api/question/create', state.form)
             .then(response => {

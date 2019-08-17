@@ -83,7 +83,7 @@
             ...mapActions('game', ['fetchData']),
             ...mapActions('round', ['deleteRound', 'fetchRounds']),
             ...mapActions('question', ['fetchQuestions','deleteQuestion']),
-            ...mapActions('answer', ['fetchAnswers','deleteQuestion']),
+            ...mapActions('answer', ['fetchAnswers']),
             delete_Round() {
                 this.deleteRound();
                 this.$bvModal.hide("delete-round");

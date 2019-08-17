@@ -81,6 +81,17 @@ const actions = {
         });
     },
 
+    fetchAnswersByGameCode({ commit, state }, gameCode) {
+        commit('setLoading', true);
+        axios.get('/api/game/' + gameCode + '/answersByCode')
+            .then(response => {
+                commit('SET_ANSWERS', response.data);
+                commit('setLoading', false);
+            }).catch( error => {
+            console.log(error.response);
+        });
+    },
+
     fetchQuestionAnswers({ commit, state }, question_id) {
 
         commit('setLoading', true);

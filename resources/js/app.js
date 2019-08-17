@@ -31,6 +31,7 @@ import GameReview from './components/Game/GameReview.vue'
 import CreateQAForm from './components/Question/CreateQAForm.vue'
 import HostLobby from './components/Host/HostLobby.vue'
 import HostInterface from './components/Host/HostInterface.vue'
+import PlayInterface from './components/Play/PlayInterface'
 import PlayLogin from './components/Play/PlayLogin.vue'
 import PlayLobby from './components/Play/PlayLobby.vue'
 import Home from './components/Home.vue'
@@ -82,9 +83,9 @@ const router = new VueRouter({
             component: HostInterface
         },
         {
-            path: '/play/lobby',
-            name:  'playLobby',
-            component: PlayLobby
+            path: '/play/goodLuck',
+            name:  'playInterface',
+            component: PlayInterface
         },
         {
             path: '/play/login',

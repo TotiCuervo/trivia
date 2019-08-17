@@ -123,7 +123,8 @@
                             // console.log(response.data);
                             this.loggedTeam = response.data;
                             localStorage.setItem('user-token',  response.data.token);
-                            this.$router.push({name: "playLobby"});
+                            this.$router.push({name: "playInterface"});
+
                         }
                     });
             },

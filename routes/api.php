@@ -30,14 +30,17 @@ Route::patch('/game/{id}/gameOver', 'GameController@playOff');
 Route::get('/game/{gameCode}/teams', 'GameController@teams');
 
 //Rounds
-Route::get('/trivia/{id}/rounds', 'RoundController@index');
+Route::get('/game/{id}/rounds', 'RoundController@index');
+Route::get('/game/{gameCode}/roundsByCode', 'RoundController@indexByCode');
 Route::post('/round/create', 'RoundController@store');
 Route::patch('/round/{id}', 'RoundController@update');
 Route::delete('/round/{id}/destroy', 'RoundController@destroy');
 
 //Questions
 Route::get('/question/{id}', 'QuestionController@show');
-Route::get('/trivia/{id}/questions', 'QuestionController@index');
+Route::get('/game/{id}/questions', 'QuestionController@index');
+Route::get('/game/{gameCode}/questionsByCode', 'QuestionController@indexByCode');
+
 Route::post('/question/create', 'QuestionController@store');
 Route::patch('/question/{id}', 'QuestionController@update');
 Route::delete('/question/{id}/destroy', 'QuestionController@destroy');
@@ -45,12 +48,21 @@ Route::delete('/question/{id}/destroy', 'QuestionController@destroy');
 //Answers
 Route::post('/answer/create', 'AnswerController@store');
 Route::get('/game/{id}/answers', 'AnswerController@index');
+Route::get('/game/{gameCode}/answersByCode', 'AnswerController@indexByCode');
 Route::get('/question/{id}/answers', 'AnswerController@questionIndex');
 Route::patch('/answer/{id}', 'AnswerController@update');
 Route::delete('/answer/{id}/destroy', 'AnswerController@destroy');
 
 //Play
 Route::post('/play/checkCode', 'PlayController@checkCode');
+
+//Host
+Route::post('/host/{code}/startRound/{roundPosition}', 'HostController@startRound');
+Route::post('/host/{code}/round/{roundPosition}/startQuestion/{questionPosition}', 'HostController@startQuestion');
+Route::post('/host/{code}/roundReview', 'HostController@roundReview');
+Route::post('/host/{gameCode}/round/{roundPosition}/question/{questionPosition}/revealAnswer', 'HostController@revealAnswer');
+Route::post('/host/{gameCode}/round/{roundPosition}/question/{questionPosition}/currentPage/{currentPage}', 'HostController@navigateHandler');
+
 
 //GameCode
 Route::get('/game/{id}/gameCode', 'GameCodeController@show');

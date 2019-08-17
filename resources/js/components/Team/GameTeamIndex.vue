@@ -1,5 +1,10 @@
 <template>
     <div>
+        <div class="row pb-3">
+            <div class="col-md-12 text-center">
+                <h3>This Trivia game can be joined using this code: <u><b>{{this.gameCode.code}}</b></u></h3>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-4 text-center" v-for="team in this.gameTeams">
                 <div class="pb-3">
@@ -38,7 +43,7 @@
                         axios.get('/api/team/' + this.gameTeams[$i].id + '/pulse')
                             .then(response => {
                                 if (response.data === 0) {
-                                    vm.$store.commit('team/REMOVE_TEAM', this.gameTeams[$i].team)
+                                    this.$store.commit('team/REMOVE_TEAM', this.gameTeams[$i].team)
                                 }
                             });
                     }
