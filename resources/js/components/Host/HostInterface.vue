@@ -43,41 +43,25 @@
                 v-if="currentPage === 'HostLobby'">
         </HostLobby>
         <HostStartGame
-                v-if="currentPage === 'HostStartGame'"
-                @goToDestination="destinationHandler">
+                v-if="currentPage === 'HostStartGame'">
         </HostStartGame>
         <HostRoundPreview
-                v-if="currentPage === 'HostRoundPreview'"
-                :roundPosition = "this.playRoundPosition"
-                @goToDestination="destinationHandler">
+                v-if="currentPage === 'HostRoundPreview'">
         </HostRoundPreview>
         <HostQuestionPreview
-                v-if="currentPage === 'HostQuestionPreview'"
-                :roundPosition = "this.playRoundPosition"
-                :questionPosition="this.playQuestionPosition"
-                @goToDestination="destinationHandler">
+                v-if="currentPage === 'HostQuestionPreview'">
         </HostQuestionPreview>
         <HostQuestion
-                v-if="currentPage === 'HostQuestion'"
-                :roundPosition="this.playRoundPosition"
-                :questionPosition="this.playQuestionPosition"
-                @goToDestination="destinationHandler">
+                v-if="currentPage === 'HostQuestion'">
         </HostQuestion>
         <HostRoundReview
-            v-if="currentPage === 'HostRoundReview'"
-            :roundPosition = "this.playRoundPosition"
-            @goToDestination="destinationHandler">
+            v-if="currentPage === 'HostRoundReview'">
         </HostRoundReview>
         <HostAnswerReveal
-            v-if="currentPage === 'HostAnswerReveal'"
-            :roundPosition="this.playRoundPosition"
-            :questionPosition="this.playQuestionPosition"
-            @goToDestination="destinationHandler">
+            v-if="currentPage === 'HostAnswerReveal'">
         </HostAnswerReveal>
         <HostLeaderBoard
             v-if="currentPage === 'HostLeaderBoard'"
-            :roundPosition="this.playRoundPosition"
-            @goToDestination="destinationHandler"
             @gameOver="onGameOver">
         </HostLeaderBoard>
 
@@ -92,9 +76,6 @@
             return {
                 params: '',
                 showGame: false,
-                currentPage: 'HostLobby',
-                playRoundPosition: '',
-                playQuestionPosition: '',
             }
         },
         mounted() {
@@ -130,53 +111,58 @@
                 .catch(error => {
                     console.log(error);
                 });
+
+            this.currentPage = 'HostLobby';
         },
         methods: {
             ...mapActions('game', ['fetchData']),
             ...mapActions('round', ['fetchRounds']),
             ...mapActions('question', ['fetchQuestions']),
             ...mapActions('answer', ['fetchAnswers']),
-
-
             goToStartGame() {
                 this.currentPage = 'HostStartGame';
             },
             goToHostLobby() {
                 this.currentPage = 'HostLobby';
             },
-            destinationHandler(roundPosition, questionPosition, destination) {
-                this.playRoundPosition = roundPosition;
-                this.playQuestionPosition = questionPosition;
-                this.currentPage = destination;
-            },
-
-            onStartRoundReview(roundPosition) {
-                this.playRoundPosition = roundPosition;
-                this.currentPage = 'HostRoundReview';
-            },
-            onStartAnswerReveal(questionPosition) {
-                this.playQuestionPosition = questionPosition;
-                this.currentPage = 'HostAnswerReveal';
-            },
-            onGoToLeaderBoard(roundPosition) {
-                this.playRoundPosition = roundPosition;
-                this.currentPage = 'HostLeaderBoard';
-            },
             onGameOver(){
                 console.log('Game Over');
             },
-
-
         },
         computed: {
             ...mapGetters('game', ['game', 'game_id', 'gameCode']),
             ...mapGetters('round', ['rounds']),
+            ...mapGetters('play', ['roundPosition', 'questionPosition', 'page']),
             game_code: {
                 get() {
                     return this.gameCode;
                 },
                 set(value) {
                     return this.$store.commit('game/SET_GAME_CODE', value);
+                }
+            },
+            playRoundPosition: {
+                get() {
+                    return this.roundPosition;
+                },
+                set(value) {
+                    return this.$store.commit('play/SET_ROUND_POSITION', value);
+                }
+            },
+            playQuestionPosition: {
+                get() {
+                    return this.questionPosition;
+                },
+                set(value) {
+                    return this.$store.commit('play/SET_QUESTION_POSITION', value);
+                }
+            },
+            currentPage: {
+                get() {
+                    return this.page;
+                },
+                set(value) {
+                    return this.$store.commit('play/SET_PAGE', value);
                 }
             }
 

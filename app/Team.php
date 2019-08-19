@@ -20,7 +20,7 @@ class Team extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'password', 'gameCode'
+        'name', 'password', 'gameCode', 'points'
     ];
 
     /**
@@ -40,5 +40,9 @@ class Team extends Authenticatable
 //    protected $casts = [
 //        'email_verified_at' => 'datetime',
 //    ];
+
+    public function teamAnswers() {
+        return $this->hasMany(TeamAnswer::class);
+    }
 
 }

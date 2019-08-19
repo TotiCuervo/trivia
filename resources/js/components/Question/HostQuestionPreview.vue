@@ -13,7 +13,7 @@
         <div class="row pt-5">
             <div class="col-md-12 text-center pt-5">
 
-                <h1>Round {{this.rounds[roundPosition].order_number}} Question {{this.questions[questionPosition].order_number}}</h1>
+                <h1>Round {{this.rounds[this.playRoundPosition].order_number}} Question {{this.questions[this.playQuestionPosition].order_number}}</h1>
                 <h1>Starts in: {{this.timer}}</h1>
                 <b-progress height="3rem" :max="max" :striped=true :animated=true>
                     <b-progress-bar :value="value" variant="success">
@@ -52,28 +52,46 @@
                     vm.value += 6;
                     if (vm.value >= 240) {
                         clearInterval(timer);
-
-                        console.log('hit');
-                        axios.post('/api/host/'+ vm.gameCode.code + '/round/'+ vm.roundPosition + '/startQuestion/' +vm.questionPosition)
+                        axios.post('/api/host/'+ vm.gameCode.code + '/round/'+ vm.playRoundPosition + '/startQuestion/' +vm.playQuestionPosition)
                             .then(response => {
                                 console.log(response.data);
 
                             });
-
-                        vm.$emit('goToDestination', vm.roundPosition, vm.questionPosition, 'HostQuestion');
+                        vm.currentPage = 'HostQuestion';
                     }
-                    // clearInterval(timer);
                 }, 100);
             }
         },
         computed: {
             ...mapGetters('round', ['rounds']),
             ...mapGetters('question', ['questions']),
-            ...mapGetters('game', ['gameCode'])
-
-
+            ...mapGetters('game', ['gameCode']),
+            ...mapGetters('play', ['roundPosition', 'questionPosition', 'page']),
+            playRoundPosition: {
+                get() {
+                    return this.roundPosition;
+                },
+                set(value) {
+                    return this.$store.commit('play/SET_ROUND_POSITION', value);
+                }
+            },
+            playQuestionPosition: {
+                get() {
+                    return this.questionPosition;
+                },
+                set(value) {
+                    return this.$store.commit('play/SET_QUESTION_POSITION', value);
+                }
+            },
+            currentPage: {
+                get() {
+                    return this.page;
+                },
+                set(value) {
+                    return this.$store.commit('play/SET_PAGE', value);
+                }
+            }
         },
-        props: ['roundPosition','questionPosition']
     }
 </script>
 

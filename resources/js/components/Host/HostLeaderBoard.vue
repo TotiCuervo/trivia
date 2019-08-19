@@ -30,8 +30,8 @@
             if (this.roundPosition === this.rounds.length - 1) {
                 this.upNext = 'Game Over'
             } else {
-                this.upNext = 'Start Round ' + this.rounds[this.roundPosition + 1].order_number;
-                this.newRoundPosition = this.roundPosition + 1;
+                this.upNext = 'Start Round ' + this.rounds[this.playRoundPosition + 1].order_number;
+                this.newRoundPosition = this.playRoundPosition + 1;
             }
         },
         methods: {
@@ -39,15 +39,42 @@
                 if (this.upNext === 'Game Over') {
                     this.$emit('gameOver');
                 } else {
-                    this.$emit('goToDestination', this.newRoundPosition, 0, 'HostRoundPreview');
+                    this.playRoundPosition = this.newRoundPosition;
+                    this.playQuestionPosition = 0;
+                    this.currentPage = "HostRoundPreview";
+                    // this.$emit('goToDestination', this.newRoundPosition, 0, 'HostRoundPreview');
                 }
             }
         },
         computed: {
             ...mapGetters('question', ['questions']),
-            ...mapGetters('round', ['rounds'])
+            ...mapGetters('round', ['rounds']),
+            ...mapGetters('play', ['roundPosition', 'questionPosition', 'page']),
+            playRoundPosition: {
+                get() {
+                    return this.roundPosition;
+                },
+                set(value) {
+                    return this.$store.commit('play/SET_ROUND_POSITION', value);
+                }
+            },
+            playQuestionPosition: {
+                get() {
+                    return this.questionPosition;
+                },
+                set(value) {
+                    return this.$store.commit('play/SET_QUESTION_POSITION', value);
+                }
+            },
+            currentPage: {
+                get() {
+                    return this.page;
+                },
+                set(value) {
+                    return this.$store.commit('play/SET_PAGE', value);
+                }
+            }
         },
-        props: ['roundPosition']
     }
 </script>
 

@@ -76,4 +76,6 @@ Route::post('/team/checkIfExpired', 'TeamLoginController@checkIfExpired');
 Route::post('/team/registerOrLogin', 'TeamLoginController@registerOrLogin');
 Route::get('/team/{id}/pulse', 'TeamLoginController@getPulse');
 
+//TeamAnswers
+Route::post('/teamAnswers/store', 'TeamAnswerController@store');
 

@@ -110,7 +110,6 @@
 
                 axios.post('/api/team/registerOrLogin', $team)
                     .then(response => {
-                        console.log(response.data);
                         if (response.data === 'unauthorized') {
                             this.error = 'unauthorized';
                             this.validPassword = false;

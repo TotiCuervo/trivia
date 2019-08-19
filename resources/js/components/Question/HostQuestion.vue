@@ -2,13 +2,13 @@
     <div>
         <div class="row">
             <div class="col-md-12">
-                <small>Round {{this.rounds[roundPosition].order_number}}</small>
+                <small>Round {{this.rounds[this.playRoundPosition].order_number}}</small>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="float-left">
-                    <h4>Question {{this.questions[questionPosition].order_number}}</h4>
+                    <h4>Question {{this.questions[this.playQuestionPosition].order_number}}</h4>
                 </div>
                 <div class="float-right">
                     <div v-if="this.timer === 0">
@@ -22,7 +22,7 @@
         </div>
         <div class="row pt-3">
             <div class="col-md-12 text-center pt-5">
-                <h1> {{this.questions[questionPosition].title}}</h1>
+                <h1> {{this.questions[this.playQuestionPosition].title}}</h1>
             </div>
         </div>
     </div>
@@ -56,14 +56,14 @@
                         vm.startTimer();
 
                     } else {
-                        if (vm.questionPosition + 1 === vm.questions.length) {
-                            vm.upNext = 'Round ' + vm.rounds[vm.roundPosition].order_number + ' Review'
+                        if (vm.playQuestionPosition + 1 === vm.questions.length) {
+                            vm.upNext = 'Round ' + vm.rounds[vm.playRoundPosition].order_number + ' Review'
                         } else {
-                            if (vm.questions[vm.questionPosition + 1].round_id === vm.rounds[vm.roundPosition].id) {
-                                vm.upNext = 'Question ' + vm.questions[vm.questionPosition + 1].order_number;
-                                vm.newQuestionPosition = vm.questionPosition + 1;
+                            if (vm.questions[vm.playQuestionPosition + 1].round_id === vm.rounds[vm.playRoundPosition].id) {
+                                vm.upNext = 'Question ' + vm.questions[vm.playQuestionPosition + 1].order_number;
+                                vm.newQuestionPosition = vm.playQuestionPosition + 1;
                             } else {
-                                vm.upNext = 'Round ' + vm.rounds[vm.roundPosition].order_number + ' Review'
+                                vm.upNext = 'Round ' + vm.rounds[vm.playRoundPosition].order_number + ' Review'
                             }
                         }
                     }
@@ -71,17 +71,43 @@
             },
             onUpNext() {
                 if (this.newQuestionPosition !== "") {
-                    this.$emit('goToDestination', this.roundPosition, this.newQuestionPosition, 'HostQuestionPreview')
+                    this.playQuestionPosition = this.newQuestionPosition;
+                    this.currentPage = 'HostQuestionPreview';
                 } else {
-                    this.$emit('goToDestination', this.roundPosition, 0, 'HostRoundReview');
+                    this.playQuestionPosition = 0;
+                    this.currentPage = 'HostRoundReview';
                 }
             }
         },
         computed: {
             ...mapGetters('question', ['questions']),
-            ...mapGetters('round', ['rounds'])
+            ...mapGetters('round', ['rounds']),
+            ...mapGetters('play', ['roundPosition', 'questionPosition', 'page']),
+            playRoundPosition: {
+                get() {
+                    return this.roundPosition;
+                },
+                set(value) {
+                    return this.$store.commit('play/SET_ROUND_POSITION', value);
+                }
+            },
+            playQuestionPosition: {
+                get() {
+                    return this.questionPosition;
+                },
+                set(value) {
+                    return this.$store.commit('play/SET_QUESTION_POSITION', value);
+                }
+            },
+            currentPage: {
+                get() {
+                    return this.page;
+                },
+                set(value) {
+                    return this.$store.commit('play/SET_PAGE', value);
+                }
+            }
         },
-        props: ['questionPosition', 'roundPosition']
     }
 </script>
 

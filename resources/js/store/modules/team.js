@@ -6,6 +6,7 @@ function initialState() {
             name: '',
             token: '',
             gameCode: '',
+            points: '',
         },
         loading: false,
     }

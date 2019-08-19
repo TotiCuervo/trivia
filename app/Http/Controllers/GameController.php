@@ -44,7 +44,6 @@ class GameController extends Controller
             'company' => $request->company,
             'headClass' => $request->headClass,
             'bodyColor' => $request->bodyColor,
-            'gameCode' => Str::random(5),
         ]);
 
         return $game;

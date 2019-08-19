@@ -43,4 +43,5 @@ class RevealAnswer implements ShouldBroadcast
     public function broadcastWith()
     {
         return ["roundPosition" => $this->roundPosition, 'questionPosition' => $this->questionPosition];
+    }
 }

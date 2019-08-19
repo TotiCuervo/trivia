@@ -6,10 +6,8 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-4" v-for="round in this.rounds">
-                <HostRoundCard :round="round">
-
-                </HostRoundCard>
+            <div class="col-md-4" v-for="(round, index) in this.rounds" @click="startThisRound(index)">
+                <HostRoundCard :round="round" :roundPosition="playRoundPosition"></HostRoundCard>
             </div>
         </div>
     </div>
@@ -21,17 +19,48 @@
     export default {
         data() {
             return {
-                currentRoundPosition: 0
+
             }
+        },
+        mounted() {
+
         },
         methods: {
             startRound() {
-                this.$emit('goToDestination', this.currentRoundPosition, 0, 'HostRoundPreview');
+                this.currentPage = 'HostRoundPreview';
+            },
+            startThisRound(index) {
+                this.playRoundPosition = index;
             }
 
         },
         computed: {
             ...mapGetters('round', ['rounds']),
+            ...mapGetters('play', ['roundPosition', 'questionPosition', 'page']),
+            playRoundPosition: {
+                get() {
+                    return this.roundPosition;
+                },
+                set(value) {
+                    return this.$store.commit('play/SET_ROUND_POSITION', value);
+                }
+            },
+            playQuestionPosition: {
+                get() {
+                    return this.questionPosition;
+                },
+                set(value) {
+                    return this.$store.commit('play/SET_QUESTION_POSITION', value);
+                }
+            },
+            currentPage: {
+                get() {
+                    return this.page;
+                },
+                set(value) {
+                    return this.$store.commit('play/SET_PAGE', value);
+                }
+            }
         }
     }
 </script>

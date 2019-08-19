@@ -33,26 +33,49 @@
         },
         methods: {
             startAnswerReveal() {
-                let questionPosition = '';
                 for (let $i=0; $i < this.questions.length; $i++) {
-                    if (this.questions[$i].round_id === this.rounds[this.roundPosition].id && this.questions[$i].order_number === 1) {
-                        questionPosition = $i;
+                    if (this.questions[$i].round_id === this.rounds[this.playRoundPosition].id && this.questions[$i].order_number === 1) {
+                        this.playQuestionPosition = $i;
                     }
                 }
 
-                axios.post('/api/host/' + this.gameCode.code + '/round/'+ this.roundPosition + '/question/' + questionPosition + '/currentPage/'+'PlayRevealAnswer')
+                axios.post('/api/host/' + this.gameCode.code + '/round/'+ this.playRoundPosition + '/question/' + this.playQuestionPosition + '/currentPage/'+'PlayRevealAnswer')
                     .then(response => {
 
                     });
-                this.$emit('goToDestination', this.roundPosition, questionPosition, 'HostAnswerReveal');
+                this.currentPage = 'HostAnswerReveal';
             }
         },
         computed: {
             ...mapGetters('game', ['gameCode']),
             ...mapGetters('question', ['questions']),
-            ...mapGetters('round', ['rounds'])
+            ...mapGetters('round', ['rounds']),
+            ...mapGetters('play', ['roundPosition', 'questionPosition', 'page']),
+            playRoundPosition: {
+                get() {
+                    return this.roundPosition;
+                },
+                set(value) {
+                    return this.$store.commit('play/SET_ROUND_POSITION', value);
+                }
+            },
+            playQuestionPosition: {
+                get() {
+                    return this.questionPosition;
+                },
+                set(value) {
+                    return this.$store.commit('play/SET_QUESTION_POSITION', value);
+                }
+            },
+            currentPage: {
+                get() {
+                    return this.page;
+                },
+                set(value) {
+                    return this.$store.commit('play/SET_PAGE', value);
+                }
+            }
         },
-        props: ['roundPosition']
     }
 </script>
 

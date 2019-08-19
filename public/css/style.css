@@ -1,3 +1,5 @@
+/*font-awesome*/
+
 .far .fa-edit {
     color: lightgray;
 }
@@ -105,6 +107,8 @@
 .fa-white {
     color: white;
 }
+
+/*icons*/
 
 
 .circle-icon {
@@ -262,6 +266,9 @@
     height: inherit;
 }
 
+
+/*fades*/
+
 .fade-enter-active, .fade-leave-active {
     transition: opacity 2s;
 }
@@ -287,6 +294,13 @@
     transform: translateX(10px);
     opacity: 0;
 }
+
+
+
+
+
+
+
 
 /*toggle switch*/
 
@@ -334,4 +348,11 @@
 }
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
     right: 0px;
+}
+
+/*other*/
+
+.isChosen {
+    background-color: black !important;
+    color:white;
 }

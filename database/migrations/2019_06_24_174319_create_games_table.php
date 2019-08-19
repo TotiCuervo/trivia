@@ -22,7 +22,6 @@ class CreateGamesTable extends Migration
             $table->boolean('completed')->default(false);
             $table->string('headClass');
             $table->string('bodyColor');
-            $table->string('gameCode')->unique();
             $table->boolean('playing')->default(false);
             $table->timestamps();
         });

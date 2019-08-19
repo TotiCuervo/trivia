@@ -1,7 +1,7 @@
 function initialState() {
     return {
-        roundPosition: '',
-        questionPosition: '',
+        roundPosition: 0,
+        questionPosition: 0,
         page: '',
         //make myAnswers into an array when ready to implement
         myAnswers: 'This is my Answer!',
