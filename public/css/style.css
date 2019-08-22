@@ -169,6 +169,10 @@
     cursor: pointer;
 }
 
+.pointer {
+    cursor: default;
+}
+
 .tooltip { top: 0;}
 
 .animated {

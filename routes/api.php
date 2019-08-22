@@ -28,6 +28,7 @@ Route::patch('/game/{id}', 'GameController@update');
 Route::patch('/game/{id}/play', 'GameController@playOn');
 Route::patch('/game/{id}/gameOver', 'GameController@playOff');
 Route::get('/game/{gameCode}/teams', 'GameController@teams');
+Route::get('/game/{gameCode}/teamAnswers', 'GameController@teamAnswers');
 
 //Rounds
 Route::get('/game/{id}/rounds', 'RoundController@index');
@@ -60,7 +61,6 @@ Route::post('/play/checkCode', 'PlayController@checkCode');
 Route::post('/host/{code}/startRound/{roundPosition}', 'HostController@startRound');
 Route::post('/host/{code}/round/{roundPosition}/startQuestion/{questionPosition}', 'HostController@startQuestion');
 Route::post('/host/{code}/roundReview', 'HostController@roundReview');
-Route::post('/host/{gameCode}/round/{roundPosition}/question/{questionPosition}/revealAnswer', 'HostController@revealAnswer');
 Route::post('/host/{gameCode}/round/{roundPosition}/question/{questionPosition}/currentPage/{currentPage}', 'HostController@navigateHandler');
 
 
@@ -75,7 +75,9 @@ Route::post('/team/checkCode', 'TeamLoginController@checkCode');
 Route::post('/team/checkIfExpired', 'TeamLoginController@checkIfExpired');
 Route::post('/team/registerOrLogin', 'TeamLoginController@registerOrLogin');
 Route::get('/team/{id}/pulse', 'TeamLoginController@getPulse');
+Route::post('/team/{id}/answers', 'TeamAnswerController@index');
 
 //TeamAnswers
 Route::post('/teamAnswers/store', 'TeamAnswerController@store');
+Route::post('/teamAnswers/{id}/updateCorrect', 'TeamAnswerController@updateCorrect');
 

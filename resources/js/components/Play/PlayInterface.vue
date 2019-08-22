@@ -41,6 +41,7 @@
             this.fetchRoundsByGameCode(this.team.gameCode);
             this.fetchQuestionsByGameCode(this.team.gameCode);
             this.fetchAnswersByGameCode(this.team.gameCode);
+            this.fetchTeamAnswers(this.team.id);
 
             Echo.join('game.'+this.loggedTeam.gameCode)
                 .here((users) => {
@@ -78,6 +79,7 @@
             ...mapActions('round', ['fetchRoundsByGameCode']),
             ...mapActions('question', ['fetchQuestionsByGameCode']),
             ...mapActions('answer', ['fetchAnswersByGameCode']),
+            ...mapActions('team', ['fetchTeamAnswers']),
 
             logout(){
                 localStorage.removeItem('user-token');
@@ -92,7 +94,7 @@
             },
         },
         computed: {
-            ...mapGetters('team', ['team']),
+            ...mapGetters('team', ['team', 'teamAnswers']),
             ...mapGetters('game', ['game']),
             ...mapGetters('round', ['rounds']),
             ...mapGetters('question', ['questions']),

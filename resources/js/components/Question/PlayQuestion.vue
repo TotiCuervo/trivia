@@ -91,6 +91,7 @@
                     console.log('just got new question');
                     this.variantColor = 'success';
                     this.endQuestion = false;
+                    this.answer = '';
                     this.startTimer();
                 });
         },
@@ -123,9 +124,11 @@
                     answer: this.answer,
                     round_id: this.rounds[this.roundPosition].id,
                     question_id: this.questions[this.questionPosition].id,
-                    team_id: this.team.id
+                    team_id: this.team.id,
+                    gameCode: this.team.gameCode,
                 }).then(response => {
-                    console.log(response.data);
+                    // console.log(response.data);
+                    this.$store.commit('team/ADD_TEAM_ANSWER', response.data);
                     this.endQuestion = true;
                 });
             },

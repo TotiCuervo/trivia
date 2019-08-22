@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Game;
 use App\GameCode;
+use App\TeamAnswer;
 use App\User;
 use App\Team;
 use Illuminate\Http\Request;
@@ -113,5 +114,9 @@ class GameController extends Controller
 
     public function teams($gameCode) {
         return Team::where('gameCode', $gameCode)->where('loggedIn', 1)->get();
+    }
+
+    public function teamAnswers($gameCode) {
+        return TeamAnswer::where('gameCode', $gameCode)->get();
     }
 }

@@ -2200,6 +2200,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     showAnswer: function showAnswer() {
       this.revealAnswer = true;
+      axios.post('/api/host/revealAnswer');
 
       if (this.playQuestionPosition + 1 === this.questions.length) {
         this.newQuestionPosition = '';
@@ -2321,12 +2322,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {};
+    return {
+      revealAnswer: false
+    };
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('round', ['rounds']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('question', ['questions']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('answer', ['answers']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('game', ['gameCode']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('play', ['roundPosition', 'questionPosition', 'page', 'myAnswers']))
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('round', ['rounds']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('question', ['questions']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('answer', ['answers']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('game', ['gameCode']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('team', ['teamAnswers']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('play', ['roundPosition', 'questionPosition', 'page', 'myAnswers']))
 });
 
 /***/ }),
@@ -3566,10 +3571,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Host/HostInterface.vue?vue&type=script&lang=js&":
-/*!*****************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Host/HostInterface.vue?vue&type=script&lang=js& ***!
-  \*****************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Host/HostHeader.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Host/HostHeader.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -3618,6 +3623,129 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {};
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    Echo.join('game.' + this.gameCode.code).here(function (users) {
+      axios.get('/api/game/' + _this.gameCode.code + '/teams').then(function (response) {
+        _this.$store.commit('team/SET_TEAMS', response.data);
+      });
+      axios.get('/api/game/' + _this.gameCode.code + '/teamAnswers').then(function (response) {
+        _this.$store.commit('team/SET_TEAM_ANSWERS', response.data);
+      });
+    }).leaving(function (user) {
+      console.log('oh wow, someone is leaving and i caught them!');
+
+      var _loop = function _loop($i) {
+        axios.get('/api/team/' + _this.gameTeams[$i].id + '/pulse').then(function (response) {
+          if (response.data === 0) {
+            _this.$store.commit('team/REMOVE_TEAM', _this.gameTeams[$i].team);
+          }
+        });
+      };
+
+      for (var $i = 0; $i < _this.gameTeams.length; $i++) {
+        _loop($i);
+      }
+    }).listen('NewTeam', function (e) {
+      // console.log('made it in new team');
+      var $add = true;
+
+      for (var $i = 0; $i < _this.gameTeams.length; $i++) {
+        if (_this.gameTeams[$i].name === e.team.name) {
+          $add = false;
+        }
+      }
+
+      if ($add === true) {
+        // console.log(e);
+        _this.gameTeams = e.team;
+      }
+    }).listen('TeamLeaving', function (e) {
+      console.log('someone is leaving the game'); // let vm = this;
+      // setTimeout(function () {
+      //     axios.get('/api/team/'+ e.team.id + '/pulse')
+      //         .then(response => {
+      //             // console.log(response.data);
+      //             if (response.data === 0) {
+      //                 vm.$store.commit('team/REMOVE_TEAM', e.team)
+      //             }
+      //         });
+      // }, 2000);
+
+      _this.$store.commit('team/REMOVE_TEAM', e.team);
+    }).listen('NewTeamAnswer', function (e) {
+      _this.$store.commit('team/ADD_TEAM_ANSWER', e.teamAnswer);
+    });
+  },
+  methods: {
+    goToStartGame: function goToStartGame() {
+      this.currentPage = 'HostStartGame';
+    },
+    goToHostLobby: function goToHostLobby() {
+      this.currentPage = 'HostLobby';
+    }
+  },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('game', ['game', 'game_id', 'gameCode']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('round', ['rounds']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('play', ['roundPosition', 'questionPosition', 'page']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('team', ['teams', 'teamAnswers']), {
+    playRoundPosition: {
+      get: function get() {
+        return this.roundPosition;
+      },
+      set: function set(value) {
+        return this.$store.commit('play/SET_ROUND_POSITION', value);
+      }
+    },
+    playQuestionPosition: {
+      get: function get() {
+        return this.questionPosition;
+      },
+      set: function set(value) {
+        return this.$store.commit('play/SET_QUESTION_POSITION', value);
+      }
+    },
+    currentPage: {
+      get: function get() {
+        return this.page;
+      },
+      set: function set(value) {
+        return this.$store.commit('play/SET_PAGE', value);
+      }
+    },
+    gameTeams: {
+      get: function get() {
+        return this.teams;
+      },
+      set: function set(value) {
+        return this.$store.commit('team/ADD_TEAM', value);
+      }
+    }
+  })
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Host/HostInterface.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Host/HostInterface.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -3686,12 +3814,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.currentPage = 'HostLobby';
   },
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('game', ['fetchData']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('round', ['fetchRounds']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('question', ['fetchQuestions']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('answer', ['fetchAnswers']), {
-    goToStartGame: function goToStartGame() {
-      this.currentPage = 'HostStartGame';
-    },
-    goToHostLobby: function goToHostLobby() {
-      this.currentPage = 'HostLobby';
-    },
     onGameOver: function onGameOver() {
       console.log('Game Over');
     }
@@ -4163,6 +4285,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.fetchRoundsByGameCode(this.team.gameCode);
     this.fetchQuestionsByGameCode(this.team.gameCode);
     this.fetchAnswersByGameCode(this.team.gameCode);
+    this.fetchTeamAnswers(this.team.id);
     Echo.join('game.' + this.loggedTeam.gameCode).here(function (users) {}).listen('NextStep', function (e) {
       console.log(e);
       _this.playRoundPosition = e.roundPosition;
@@ -4187,7 +4310,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   created: function created() {
     window.addEventListener('beforeunload', this.leaving);
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('game', ['fetchDataByGameCode']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('round', ['fetchRoundsByGameCode']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('question', ['fetchQuestionsByGameCode']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('answer', ['fetchAnswersByGameCode']), {
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('game', ['fetchDataByGameCode']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('round', ['fetchRoundsByGameCode']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('question', ['fetchQuestionsByGameCode']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('answer', ['fetchAnswersByGameCode']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('team', ['fetchTeamAnswers']), {
     logout: function logout() {
       localStorage.removeItem('user-token');
       this.$store.commit('team/CLEAR_FORM');
@@ -4199,7 +4322,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       axios.post('/api/team/logout/' + this.loggedTeam.id).then(function (response) {});
     }
   }),
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('team', ['team']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('game', ['game']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('round', ['rounds']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('question', ['questions']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('answer', ['answers']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('play', ['roundPosition', 'questionPosition', 'page']), {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('team', ['team', 'teamAnswers']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('game', ['game']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('round', ['rounds']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('question', ['questions']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('answer', ['answers']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('play', ['roundPosition', 'questionPosition', 'page']), {
     loggedTeam: {
       get: function get() {
         return this.team;
@@ -5422,6 +5545,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       console.log('just got new question');
       _this.variantColor = 'success';
       _this.endQuestion = false;
+      _this.answer = '';
 
       _this.startTimer();
     });
@@ -5457,9 +5581,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         answer: this.answer,
         round_id: this.rounds[this.roundPosition].id,
         question_id: this.questions[this.questionPosition].id,
-        team_id: this.team.id
+        team_id: this.team.id,
+        gameCode: this.team.gameCode
       }).then(function (response) {
-        console.log(response.data);
+        // console.log(response.data);
+        _this2.$store.commit('team/ADD_TEAM_ANSWER', response.data);
+
         _this2.endQuestion = true;
       });
     },
@@ -5860,6 +5987,118 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -5878,9 +6117,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       axios.post('/api/host/' + this.gameCode.code + '/round/' + this.playRoundPosition + '/question/' + this.playQuestionPosition + '/currentPage/' + 'PlayRevealAnswer').then(function (response) {});
       this.currentPage = 'HostAnswerReveal';
+    },
+    changeAnswer: function changeAnswer(id, change) {
+      if (this.teamAnswers.find(function (x) {
+        return x.id === id && x.correct !== change;
+      })) {
+        console.log('found it');
+
+        for (var $i = 0; $i < this.teamAnswers.length; $i++) {
+          if (this.teamAnswers[$i].id === id) {
+            this.team_Answers = {
+              answer: this.teamAnswers[$i],
+              order: $i
+            };
+          }
+        }
+      }
     }
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('game', ['gameCode']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('question', ['questions']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('round', ['rounds']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('play', ['roundPosition', 'questionPosition', 'page']), {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('game', ['gameCode']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('question', ['questions']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('answer', ['answers']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('round', ['rounds']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('play', ['roundPosition', 'questionPosition', 'page']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('team', ['teams', 'teamAnswers']), {
     playRoundPosition: {
       get: function get() {
         return this.roundPosition;
@@ -5903,6 +6158,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       },
       set: function set(value) {
         return this.$store.commit('play/SET_PAGE', value);
+      }
+    },
+    team_Answers: {
+      get: function get() {
+        return this.teamAnswers;
+      },
+      set: function set(value) {
+        return this.$store.commit('team/UPDATE_TEAM_ANSWER_CORRECT', value);
       }
     }
   })
@@ -6005,14 +6268,63 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {};
+    return {
+      clickedPowerUp: ''
+    };
   },
   mounted: function mounted() {},
-  methods: {},
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('round', ['rounds']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('question', ['questions']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('answer', ['answers']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('game', ['gameCode']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('play', ['roundPosition', 'questionPosition', 'page']))
+  methods: {
+    setPowerUp: function setPowerUp(powerUp) {
+      this.clickedPowerUp = this.clickedPowerUp === powerUp ? '' : powerUp;
+    }
+  },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('round', ['rounds']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('question', ['questions']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('answer', ['answers']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('game', ['gameCode']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('team', ['teamAnswers', 'double', 'triple']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('play', ['roundPosition', 'questionPosition', 'page']))
 });
 
 /***/ }),
@@ -6437,66 +6749,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.$store.commit('team/REMOVE_TEAM', $team);
     }
   },
-  mounted: function mounted() {
-    var _this = this;
-
-    Echo.join('game.' + this.game_code.code).here(function (users) {
-      axios.get('/api/game/' + _this.game_code.code + '/teams').then(function (response) {
-        _this.$store.commit('team/SET_TEAMS', response.data);
-      });
-    }).leaving(function (user) {
-      console.log('oh wow, someone is leaving and i caught them!');
-
-      var _loop = function _loop($i) {
-        axios.get('/api/team/' + _this.gameTeams[$i].id + '/pulse').then(function (response) {
-          if (response.data === 0) {
-            _this.$store.commit('team/REMOVE_TEAM', _this.gameTeams[$i].team);
-          }
-        });
-      };
-
-      for (var $i = 0; $i < _this.gameTeams.length; $i++) {
-        _loop($i);
-      }
-    }).listen('NewTeam', function (e) {
-      // console.log('made it in new team');
-      var $add = true;
-
-      for (var $i = 0; $i < _this.gameTeams.length; $i++) {
-        if (_this.gameTeams[$i].name === e.team.name) {
-          $add = false;
-        }
-      } // console.log($add === true);
-
-
-      if ($add === true) {
-        // console.log(e);
-        _this.gameTeams = e.team;
-      }
-    }).listen('TeamLeaving', function (e) {
-      console.log('someone is leaving the game'); // let vm = this;
-      // setTimeout(function () {
-      //     axios.get('/api/team/'+ e.team.id + '/pulse')
-      //         .then(response => {
-      //             // console.log(response.data);
-      //             if (response.data === 0) {
-      //                 vm.$store.commit('team/REMOVE_TEAM', e.team)
-      //             }
-      //         });
-      // }, 2000);
-
-      _this.$store.commit('team/REMOVE_TEAM', e.team);
-    });
-  },
+  mounted: function mounted() {},
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('game', ['game', 'game_id', 'gameCode']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('team', ['teams']), {
-    game_code: {
-      get: function get() {
-        return this.gameCode;
-      },
-      set: function set(value) {
-        return this.$store.commit('game/SET_GAME_CODE', value);
-      }
-    },
     gameTeams: {
       get: function get() {
         return this.teams;
@@ -83452,31 +83706,47 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "row pt-3" }, [
                 _c("div", { staticClass: "col-md-12 text-center" }, [
-                  _c("h5", [_vm._v(_vm._s(this.myAnswers))])
+                  _c("h5", [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(
+                          _vm.teamAnswers.find(function(x) {
+                            return (
+                              x.question_id ===
+                              _vm.questions[_vm.questionPosition].id
+                            )
+                          }).answer
+                        ) +
+                        "\n                        "
+                    )
+                  ])
                 ])
               ])
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "row pt-5" }, [
-            _c(
-              "div",
-              { staticClass: "col-md-4 offset-md-4 text-center" },
-              _vm._l(this.answers, function(answer) {
-                return _c("div", [
-                  answer.correct === 1 &&
-                  answer.question_id === _vm.questions[_vm.questionPosition].id
-                    ? _c("div", { staticClass: "row pt-3" }, [
-                        _c("div", { staticClass: "col-md-12" }, [
-                          _c("h5", [_vm._v(_vm._s(answer.title))])
-                        ])
-                      ])
-                    : _vm._e()
-                ])
-              }),
-              0
-            )
-          ])
+          _vm.revealAnswer === true
+            ? _c("div", { staticClass: "row pt-5" }, [
+                _c(
+                  "div",
+                  { staticClass: "col-md-4 offset-md-4 text-center" },
+                  _vm._l(this.answers, function(answer) {
+                    return _c("div", [
+                      answer.correct === 1 &&
+                      answer.question_id ===
+                        _vm.questions[_vm.questionPosition].id
+                        ? _c("div", { staticClass: "row pt-3" }, [
+                            _c("div", { staticClass: "col-md-12" }, [
+                              _c("h5", [_vm._v(_vm._s(answer.title))])
+                            ])
+                          ])
+                        : _vm._e()
+                    ])
+                  }),
+                  0
+                )
+              ])
+            : _vm._e()
         ])
       : _c("div", { staticClass: "row pt-5 fill-in-blank" }, [
           _c(
@@ -84990,6 +85260,133 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Host/HostHeader.vue?vue&type=template&id=33ec13a1&scoped=true&":
+/*!******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Host/HostHeader.vue?vue&type=template&id=33ec13a1&scoped=true& ***!
+  \******************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "row pt-3" }, [
+    _c("div", { staticClass: "col-md-12" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-md-12" }, [
+          _vm.game.description
+            ? _c("div", [
+                _c("h3", [
+                  _vm._v(
+                    "\n                        " +
+                      _vm._s(_vm.game.name) +
+                      ": " +
+                      _vm._s(_vm.game.description) +
+                      "\n                    "
+                  )
+                ])
+              ])
+            : _c("div", [
+                _c("h3", [
+                  _vm._v(
+                    "\n                        " +
+                      _vm._s(_vm.game.name) +
+                      "\n                    "
+                  )
+                ])
+              ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-md-8" }, [
+          _c("h5", [
+            _vm._v("Game Code: "),
+            _c("u", [_c("b", [_vm._v(_vm._s(this.gameCode.code))])])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-4" }, [
+          _c("div", { staticClass: "float-right" }, [
+            _vm.currentPage === "HostLobby"
+              ? _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-success btn-lg mr-2",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        return _vm.goToStartGame()
+                      }
+                    }
+                  },
+                  [_vm._v("Start Game")]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.currentPage === "HostStartGame"
+              ? _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-success btn-lg mr-2",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        return _vm.goToHostLobby()
+                      }
+                    }
+                  },
+                  [_vm._v("Back")]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm._m(0),
+            _vm._v(" "),
+            _vm._m(1)
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("hr")
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "btn btn-outline-secondary mr-2",
+        attrs: { type: "button" }
+      },
+      [_c("i", { staticClass: "fas fa-edit fa-2x" })]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      { staticClass: "btn btn-outline-danger", attrs: { type: "button" } },
+      [_c("i", { staticClass: "fas fa-door-open fa-2x" })]
+    )
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Host/HostInterface.vue?vue&type=template&id=f82d4656&scoped=true&":
 /*!*********************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Host/HostInterface.vue?vue&type=template&id=f82d4656&scoped=true& ***!
@@ -85010,86 +85407,7 @@ var render = function() {
         "div",
         { staticClass: "pr-3 pl-3" },
         [
-          _c("div", { staticClass: "row pt-3" }, [
-            _c("div", { staticClass: "col-md-12" }, [
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-md-12" }, [
-                  _vm.game.description
-                    ? _c("div", [
-                        _c("h3", [
-                          _vm._v(
-                            "\n                            " +
-                              _vm._s(_vm.game.name) +
-                              ": " +
-                              _vm._s(_vm.game.description) +
-                              "\n                        "
-                          )
-                        ])
-                      ])
-                    : _c("div", [
-                        _c("h3", [
-                          _vm._v(
-                            "\n                            " +
-                              _vm._s(_vm.game.name) +
-                              "\n                        "
-                          )
-                        ])
-                      ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-md-8" }, [
-                  _c("h5", [
-                    _vm._v("Game Code: "),
-                    _c("u", [_c("b", [_vm._v(_vm._s(this.gameCode.code))])])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-4" }, [
-                  _c("div", { staticClass: "float-right" }, [
-                    _vm.currentPage === "HostLobby"
-                      ? _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-success btn-lg mr-2",
-                            attrs: { type: "button" },
-                            on: {
-                              click: function($event) {
-                                return _vm.goToStartGame()
-                              }
-                            }
-                          },
-                          [_vm._v("Start Game")]
-                        )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm.currentPage === "HostStartGame"
-                      ? _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-success btn-lg mr-2",
-                            attrs: { type: "button" },
-                            on: {
-                              click: function($event) {
-                                return _vm.goToHostLobby()
-                              }
-                            }
-                          },
-                          [_vm._v("Back")]
-                        )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm._m(0),
-                    _vm._v(" "),
-                    _vm._m(1)
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("hr")
-            ])
-          ]),
+          _c("HostHeader"),
           _vm._v(" "),
           _vm.currentPage === "HostLobby" ? _c("HostLobby") : _vm._e(),
           _vm._v(" "),
@@ -85121,31 +85439,7 @@ var render = function() {
       )
     : _vm._e()
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "btn btn-outline-secondary mr-2",
-        attrs: { type: "button" }
-      },
-      [_c("i", { staticClass: "fas fa-edit fa-2x" })]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      { staticClass: "btn btn-outline-danger", attrs: { type: "button" } },
-      [_c("i", { staticClass: "fas fa-door-open fa-2x" })]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -87021,14 +87315,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
 var render = function() {
+  var this$1 = this
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-md-12 text-center" }, [
-        _c("h3", [_vm._v("Round Review")]),
-        _vm._v(" "),
         _c("div", { staticClass: "float-right" }, [
           _c(
             "button",
@@ -87047,7 +87340,459 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _vm._m(0)
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "row pb-5" }, [
+      _c(
+        "div",
+        { staticClass: "col-md-8 offset-md-2" },
+        _vm._l(
+          this.questions.filter(function(x) {
+            return x.round_id === this$1.rounds[_vm.playRoundPosition].id
+          }),
+          function(question) {
+            return _c("div", { staticClass: "pt-3" }, [
+              _c("div", { staticClass: "card" }, [
+                _c(
+                  "div",
+                  { staticClass: "card-body" },
+                  [
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-12" }, [
+                        _c("small", { staticClass: "text-muted" }, [
+                          _vm._v("Question " + _vm._s(question.order_number))
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-12" }, [
+                        _c("h5", { staticClass: "mb-0" }, [
+                          _vm._v(_vm._s(question.title))
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-12" }, [
+                        _vm.answers.filter(function(x) {
+                          return (
+                            x.question_id === question.id && x.correct === 1
+                          )
+                        }).length === 1
+                          ? _c(
+                              "small",
+                              { staticClass: "text-muted" },
+                              [
+                                _c("b", [_vm._v("Possible Answer(s): ")]),
+                                _vm._v(" "),
+                                _vm._l(
+                                  _vm.answers.filter(function(x) {
+                                    return (
+                                      x.question_id === question.id &&
+                                      x.correct === 1
+                                    )
+                                  }),
+                                  function(answer) {
+                                    return _c("span", [
+                                      _vm._v(
+                                        "\n                                        " +
+                                          _vm._s(answer.title) +
+                                          "\n                                    "
+                                      )
+                                    ])
+                                  }
+                                )
+                              ],
+                              2
+                            )
+                          : _c(
+                              "small",
+                              { staticClass: "text-muted" },
+                              [
+                                _c("b", [_vm._v("Possible Answer(s): ")]),
+                                _vm._v(" "),
+                                _vm._l(
+                                  _vm.answers.filter(function(x) {
+                                    return (
+                                      x.question_id === question.id &&
+                                      x.correct === 1
+                                    )
+                                  }),
+                                  function(answer, index) {
+                                    return _c("span", [
+                                      _vm._v(
+                                        "\n                                        " +
+                                          _vm._s(answer.title)
+                                      ),
+                                      _vm.answers.filter(function(x) {
+                                        return (
+                                          x.question_id === question.id &&
+                                          x.correct === 1
+                                        )
+                                      }).length !==
+                                      index + 1
+                                        ? _c("span", [_vm._v(",")])
+                                        : _vm._e()
+                                    ])
+                                  }
+                                )
+                              ],
+                              2
+                            )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(1, true),
+                    _vm._v(" "),
+                    _vm._l(_vm.teams, function(team) {
+                      return _c("div", { staticClass: "row pt-3" }, [
+                        _c("div", { staticClass: "col-md-5" }, [
+                          _c("p", { staticClass: "m-0" }, [
+                            _vm._v(_vm._s(team.name))
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-5" }, [
+                          question.type === "Fill-in-blank"
+                            ? _c("div", [
+                                _c(
+                                  "div",
+                                  { staticClass: "col-md-5" },
+                                  _vm._l(
+                                    _vm.teamAnswers.filter(function(x) {
+                                      return (
+                                        x.team_id === team.id &&
+                                        x.question_id === question.id
+                                      )
+                                    }),
+                                    function(answer) {
+                                      return _c("div", [
+                                        answer.matchIndex === 0
+                                          ? _c(
+                                              "h5",
+                                              {
+                                                directives: [
+                                                  {
+                                                    name: "b-tooltip",
+                                                    rawName: "v-b-tooltip.left",
+                                                    modifiers: { left: true }
+                                                  }
+                                                ],
+                                                staticClass: "mb-0 pointer",
+                                                attrs: { title: "Correct" }
+                                              },
+                                              [
+                                                _c(
+                                                  "span",
+                                                  {
+                                                    staticClass:
+                                                      "badge badge-success p-2"
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      "\n                                                    " +
+                                                        _vm._s(answer.answer) +
+                                                        "\n                                                "
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            )
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        answer.matchIndex > 0 &&
+                                        answer.matchIndex <= 7
+                                          ? _c(
+                                              "h5",
+                                              {
+                                                directives: [
+                                                  {
+                                                    name: "b-tooltip",
+                                                    rawName: "v-b-tooltip.left",
+                                                    modifiers: { left: true }
+                                                  }
+                                                ],
+                                                staticClass: "mb-0 pointer",
+                                                attrs: {
+                                                  title: "Probably correct"
+                                                }
+                                              },
+                                              [
+                                                _c(
+                                                  "span",
+                                                  {
+                                                    staticClass:
+                                                      "badge list-group-item-success p-2"
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      "\n                                                    " +
+                                                        _vm._s(answer.answer) +
+                                                        "\n                                                "
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            )
+                                          : answer.matchIndex > 7 &&
+                                            answer.matchIndex <= 11
+                                          ? _c(
+                                              "h5",
+                                              {
+                                                directives: [
+                                                  {
+                                                    name: "b-tooltip",
+                                                    rawName: "v-b-tooltip.left",
+                                                    modifiers: { left: true }
+                                                  }
+                                                ],
+                                                staticClass: "mb-0 pointer",
+                                                attrs: {
+                                                  title: "Maybe correct"
+                                                }
+                                              },
+                                              [
+                                                _c(
+                                                  "span",
+                                                  {
+                                                    staticClass:
+                                                      "badge list-group-item-warning p-2"
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      "\n                                                    " +
+                                                        _vm._s(answer.answer) +
+                                                        "\n                                                "
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            )
+                                          : answer.matchIndex > 11
+                                          ? _c(
+                                              "h5",
+                                              {
+                                                directives: [
+                                                  {
+                                                    name: "b-tooltip",
+                                                    rawName: "v-b-tooltip.left",
+                                                    modifiers: { left: true }
+                                                  }
+                                                ],
+                                                staticClass: "mb-0 pointer",
+                                                attrs: {
+                                                  title: "Probably not correct"
+                                                }
+                                              },
+                                              [
+                                                _c(
+                                                  "span",
+                                                  {
+                                                    staticClass:
+                                                      "badge list-group-item-danger p-2"
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      "\n                                                    " +
+                                                        _vm._s(answer.answer) +
+                                                        "\n                                                "
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            )
+                                          : _vm._e()
+                                      ])
+                                    }
+                                  ),
+                                  0
+                                )
+                              ])
+                            : _c(
+                                "div",
+                                _vm._l(
+                                  _vm.teamAnswers.filter(function(x) {
+                                    return (
+                                      x.team_id === team.id &&
+                                      x.question_id === question.id
+                                    )
+                                  }),
+                                  function(answer) {
+                                    return _c("div", [
+                                      answer.matchIndex === 0
+                                        ? _c(
+                                            "h5",
+                                            {
+                                              directives: [
+                                                {
+                                                  name: "b-tooltip",
+                                                  rawName: "v-b-tooltip.left",
+                                                  modifiers: { left: true }
+                                                }
+                                              ],
+                                              staticClass: "mb-0 pointer",
+                                              attrs: { title: "Correct" }
+                                            },
+                                            [
+                                              _c(
+                                                "span",
+                                                {
+                                                  staticClass:
+                                                    "badge badge-success p-2"
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                                                " +
+                                                      _vm._s(answer.answer) +
+                                                      "\n                                            "
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        : _c(
+                                            "h5",
+                                            {
+                                              directives: [
+                                                {
+                                                  name: "b-tooltip",
+                                                  rawName: "v-b-tooltip.left",
+                                                  modifiers: { left: true }
+                                                }
+                                              ],
+                                              staticClass: "mb-0 pointer",
+                                              attrs: { title: "Wrong" }
+                                            },
+                                            [
+                                              _c(
+                                                "span",
+                                                {
+                                                  staticClass:
+                                                    "badge badge-danger p-2"
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                                                " +
+                                                      _vm._s(answer.answer) +
+                                                      "\n                                            "
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                    ])
+                                  }
+                                ),
+                                0
+                              ),
+                          _vm._v(" "),
+                          _vm.teamAnswers.filter(function(x) {
+                            return (
+                              x.team_id === team.id &&
+                              x.question_id === question.id
+                            )
+                          }).length === 0
+                            ? _c(
+                                "h5",
+                                {
+                                  directives: [
+                                    {
+                                      name: "b-tooltip",
+                                      rawName: "v-b-tooltip.left",
+                                      modifiers: { left: true }
+                                    }
+                                  ],
+                                  staticClass: "mb-0 pointer",
+                                  attrs: { title: " ¯\\_(ツ)_/¯" }
+                                },
+                                [
+                                  _c(
+                                    "span",
+                                    { staticClass: "badge badge-danger p-2" },
+                                    [
+                                      _vm._v(
+                                        "\n                                            No Answer\n                                        "
+                                      )
+                                    ]
+                                  )
+                                ]
+                              )
+                            : _vm._e()
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "col-md-2" },
+                          _vm._l(
+                            _vm.teamAnswers.filter(function(x) {
+                              return (
+                                x.team_id === team.id &&
+                                x.question_id === question.id
+                              )
+                            }),
+                            function(answer) {
+                              return _c("div", [
+                                _c("i", {
+                                  directives: [
+                                    {
+                                      name: "b-tooltip",
+                                      rawName: "v-b-tooltip.left",
+                                      modifiers: { left: true }
+                                    }
+                                  ],
+                                  staticClass: "fas fa-check",
+                                  class: {
+                                    "text-muted": answer.correct === 0,
+                                    "text-success": answer.correct === 1
+                                  },
+                                  attrs: { title: "Click to mark right" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.changeAnswer(answer.id, 1)
+                                    }
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("span", [_vm._v(" / ")]),
+                                _vm._v(" "),
+                                _c("i", {
+                                  directives: [
+                                    {
+                                      name: "b-tooltip",
+                                      rawName: "v-b-tooltip.right",
+                                      modifiers: { right: true }
+                                    }
+                                  ],
+                                  staticClass: "fas fa-ban",
+                                  class: {
+                                    "text-muted": answer.correct === 1,
+                                    "text-danger": answer.correct === 0
+                                  },
+                                  attrs: { title: "Click to mark wrong" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.changeAnswer(answer.id, 0)
+                                    }
+                                  }
+                                })
+                              ])
+                            }
+                          ),
+                          0
+                        )
+                      ])
+                    })
+                  ],
+                  2
+                )
+              ])
+            ])
+          }
+        ),
+        0
+      )
+    ])
   ])
 }
 var staticRenderFns = [
@@ -87055,9 +87800,27 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-12" }, [
-        _c("h1", [_vm._v("This is the round review. stay tuned for more")])
+    return _c("div", { staticClass: "row pt-3" }, [
+      _c("div", { staticClass: "col-md-12 text-center" }, [
+        _c("h3", [_vm._v("Round Review")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row pt-4" }, [
+      _c("div", { staticClass: "col-md-5" }, [
+        _c("small", { staticClass: "text-muted" }, [_vm._v("Team Name")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-5" }, [
+        _c("small", { staticClass: "text-muted" }, [_vm._v("Answer")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-2" }, [
+        _c("small", { staticClass: "text-muted" }, [_vm._v("Change Points")])
       ])
     ])
   }
@@ -87137,37 +87900,153 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
 var render = function() {
+  var this$1 = this
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "row pt-5" }, [
-      _c("div", { staticClass: "col-md-12 text-center" }, [
-        _c("h1", [
-          _vm._v(
-            "Round " +
-              _vm._s(this.rounds[this.roundPosition].order_number) +
-              " is done!"
-          )
+  return _c(
+    "div",
+    [
+      _c("div", { staticClass: "row pt-3" }, [
+        _c("div", { staticClass: "col-md-12 text-center" }, [
+          _c("h3", [
+            _vm._v(
+              "Round " +
+                _vm._s(this.rounds[this.roundPosition].order_number) +
+                " Answers"
+            )
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _vm._l(
+        this.questions.filter(function(x) {
+          return x.round_id === this$1.rounds[_vm.roundPosition].id
+        }),
+        function(question) {
+          return _c("div", [
+            _c("div", { staticClass: "row pt-3" }, [
+              _c("div", { staticClass: "col-md-12 text-center" }, [
+                _c("div", { staticClass: "card" }, [
+                  _c("div", { staticClass: "card-body" }, [
+                    _c("p", [_vm._v(_vm._s(question.title))]),
+                    _vm._v(" "),
+                    _vm.teamAnswers.find(function(x) {
+                      return x.question_id === question.id
+                    })
+                      ? _c("div", [
+                          _c("small", [
+                            _vm._v(
+                              _vm._s(
+                                _vm.teamAnswers.find(function(x) {
+                                  return x.question_id === question.id
+                                }).answer
+                              )
+                            )
+                          ])
+                        ])
+                      : _c("div", [_c("small", [_vm._v("No answer :(")])])
+                  ])
+                ])
+              ])
+            ])
+          ])
+        }
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "row pt-3" }, [
+        _c("div", { staticClass: "col-md-12" }, [
+          _c("div", { staticClass: "row" }, [
+            this.double === 0
+              ? _c("div", { staticClass: "col-md-6 text-center" }, [
+                  _c("div", { staticClass: "fa-4x" }, [
+                    _c(
+                      "span",
+                      {
+                        staticClass: "fa-layers fa-fw clicker",
+                        class: {
+                          "text-muted": _vm.clickedPowerUp !== "Double"
+                        },
+                        on: {
+                          click: function($event) {
+                            return _vm.setPowerUp("Double")
+                          }
+                        }
+                      },
+                      [
+                        _c("i", { staticClass: "fas fa-certificate" }),
+                        _vm._v(" "),
+                        _c(
+                          "span",
+                          {
+                            staticClass: "fa-layers-text fa-inverse",
+                            staticStyle: { "font-weight": "900" },
+                            attrs: { "data-fa-transform": "shrink-11.5" }
+                          },
+                          [_vm._v("2X")]
+                        )
+                      ]
+                    )
+                  ])
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            this.triple === 0
+              ? _c("div", { staticClass: "col-md-6 text-center" }, [
+                  _c("div", { staticClass: "fa-4x" }, [
+                    _c(
+                      "span",
+                      {
+                        staticClass: "fa-layers fa-fw clicker",
+                        class: {
+                          "text-muted": _vm.clickedPowerUp !== "Triple"
+                        },
+                        on: {
+                          click: function($event) {
+                            return _vm.setPowerUp("Triple")
+                          }
+                        }
+                      },
+                      [
+                        _c("i", { staticClass: "fas fa-certificate" }),
+                        _vm._v(" "),
+                        _c(
+                          "span",
+                          {
+                            staticClass: "fa-layers-text fa-inverse",
+                            staticStyle: { "font-weight": "900" },
+                            attrs: { "data-fa-transform": "shrink-11.5" }
+                          },
+                          [_vm._v("3X")]
+                        )
+                      ]
+                    )
+                  ])
+                ])
+              : _vm._e()
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "row" }, [
+            this.clickedPowerUp !== ""
+              ? _c(
+                  "div",
+                  { staticClass: "col-md-6 offset-md-3 text-center" },
+                  [
+                    _c("b-button", { attrs: { variant: "success" } }, [
+                      _vm._v(_vm._s(_vm.clickedPowerUp) + " Points This Round")
+                    ])
+                  ],
+                  1
+                )
+              : _vm._e()
+          ])
         ])
       ])
-    ]),
-    _vm._v(" "),
-    _vm._m(0)
-  ])
+    ],
+    2
+  )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-12 text-center" }, [
-        _c("h3", [_vm._v("Stay tuned for the Answers!")])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -107266,6 +108145,7 @@ var map = {
 	"./components/Game/TriviaIndex.vue": "./resources/js/components/Game/TriviaIndex.vue",
 	"./components/Home.vue": "./resources/js/components/Home.vue",
 	"./components/Host/HostGameOutline.vue": "./resources/js/components/Host/HostGameOutline.vue",
+	"./components/Host/HostHeader.vue": "./resources/js/components/Host/HostHeader.vue",
 	"./components/Host/HostInterface.vue": "./resources/js/components/Host/HostInterface.vue",
 	"./components/Host/HostLeaderBoard.vue": "./resources/js/components/Host/HostLeaderBoard.vue",
 	"./components/Host/HostLobby.vue": "./resources/js/components/Host/HostLobby.vue",
@@ -108752,6 +109632,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_HostGameOutline_vue_vue_type_template_id_5a3dcb0c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_HostGameOutline_vue_vue_type_template_id_5a3dcb0c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Host/HostHeader.vue":
+/*!*****************************************************!*\
+  !*** ./resources/js/components/Host/HostHeader.vue ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _HostHeader_vue_vue_type_template_id_33ec13a1_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./HostHeader.vue?vue&type=template&id=33ec13a1&scoped=true& */ "./resources/js/components/Host/HostHeader.vue?vue&type=template&id=33ec13a1&scoped=true&");
+/* harmony import */ var _HostHeader_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./HostHeader.vue?vue&type=script&lang=js& */ "./resources/js/components/Host/HostHeader.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _HostHeader_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _HostHeader_vue_vue_type_template_id_33ec13a1_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _HostHeader_vue_vue_type_template_id_33ec13a1_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "33ec13a1",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Host/HostHeader.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Host/HostHeader.vue?vue&type=script&lang=js&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/components/Host/HostHeader.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_HostHeader_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./HostHeader.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Host/HostHeader.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_HostHeader_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Host/HostHeader.vue?vue&type=template&id=33ec13a1&scoped=true&":
+/*!************************************************************************************************!*\
+  !*** ./resources/js/components/Host/HostHeader.vue?vue&type=template&id=33ec13a1&scoped=true& ***!
+  \************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_HostHeader_vue_vue_type_template_id_33ec13a1_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./HostHeader.vue?vue&type=template&id=33ec13a1&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Host/HostHeader.vue?vue&type=template&id=33ec13a1&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_HostHeader_vue_vue_type_template_id_33ec13a1_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_HostHeader_vue_vue_type_template_id_33ec13a1_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -111376,7 +112325,6 @@ var mutations = {
     }
   },
   UPDATE_TITLE: function UPDATE_TITLE(state, payload) {
-    // state.form[payload.order].title = payload.title;
     var $form = {
       id: '',
       title: payload.title,
@@ -112220,8 +113168,11 @@ function initialState() {
       name: '',
       token: '',
       gameCode: '',
-      points: ''
+      points: '',
+      "double": '',
+      triple: ''
     },
+    answers: [],
     loading: false
   };
 }
@@ -112233,8 +113184,17 @@ var getters = {
   teams: function teams(state) {
     return state.teams;
   },
+  teamAnswers: function teamAnswers(state) {
+    return state.answers;
+  },
   name: function name(state) {
     return state.team.name;
+  },
+  "double": function double(state) {
+    return state.team["double"];
+  },
+  triple: function triple(state) {
+    return state.team.triple;
   },
   token: function token(state) {
     return state.team.token;
@@ -112255,6 +113215,18 @@ var actions = {
     })["catch"](function (error) {
       console.log(error.response);
     });
+  },
+  fetchTeamAnswers: function fetchTeamAnswers(_ref2) {
+    var commit = _ref2.commit,
+        state = _ref2.state;
+    commit('setLoading', true);
+    axios.post('/api/team/' + state.team.id + '/answers').then(function (response) {
+      console.log(response.data);
+      commit('SET_TEAM_ANSWERS', response.data);
+      commit('setLoading', false);
+    })["catch"](function (error) {
+      console.log(error.response);
+    });
   }
 };
 var mutations = {
@@ -112266,6 +113238,9 @@ var mutations = {
     state.team.name = team.name;
     state.team.token = team.token;
     state.team.gameCode = team.gameCode;
+    state.team.points = team.points;
+    state.team["double"] = team["double"];
+    state.team.triple = team.triple;
   },
   SET_TEAMS: function SET_TEAMS(state, teams) {
     for (var $i = 0; $i < teams.length; $i++) {
@@ -112276,6 +113251,11 @@ var mutations = {
         gameCode: teams[$i].gameCode
       };
       state.teams.push($team);
+    }
+  },
+  SET_TEAM_ANSWERS: function SET_TEAM_ANSWERS(state, answers) {
+    for (var $i = 0; $i < answers.length; $i++) {
+      state.answers.push(answers[$i]);
     }
   },
   SET_TOKEN: function SET_TOKEN(state, token) {
@@ -112299,6 +113279,24 @@ var mutations = {
         state.teams.splice($i - 1, 1);
       }
     }
+  },
+  ADD_TEAM_ANSWER: function ADD_TEAM_ANSWER(state, answer) {
+    state.answers.push(answer);
+  },
+  UPDATE_TEAM_ANSWER_CORRECT: function UPDATE_TEAM_ANSWER_CORRECT(state, payload) {
+    axios.post('/api/teamAnswers/' + payload.answer.id + '/updateCorrect').then(function (response) {// console.log(response.data);
+    });
+    Vue.set(state.answers, payload.order, {
+      answer: payload.answer.answer,
+      correct: !payload.answer.correct === true ? 1 : 0,
+      gameCode: payload.answer.gameCode,
+      id: payload.answer.id,
+      matchIndex: payload.answer.matchIndex,
+      points: payload.answer.points,
+      powerUp: payload.answer.powerUp,
+      question_id: payload.answer.question_id,
+      team_id: payload.answer.team_id
+    });
   },
   CLEAR_FORM: function CLEAR_FORM(state) {
     state.team = {

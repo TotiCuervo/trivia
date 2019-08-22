@@ -21,6 +21,8 @@ class CreateTeamsTable extends Migration
             $table->string('identifier')->unique();
             $table->string('token');
             $table->boolean('loggedIn')->default(false);
+            $table->boolean('double')->default(false);
+            $table->boolean('triple')->default(false);
             $table->unsignedBigInteger('points')->default(0);
             $table->rememberToken();
             $table->timestamps();

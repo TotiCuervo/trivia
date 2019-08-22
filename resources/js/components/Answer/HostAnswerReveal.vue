@@ -91,6 +91,8 @@
             showAnswer() {
                 this.revealAnswer = true;
 
+                axios.post('/api/host/revealAnswer');
+
                 if (this.playQuestionPosition + 1 === this.questions.length) {
                     this.newQuestionPosition = '';
                     this.upNext = 'Leaderboard';

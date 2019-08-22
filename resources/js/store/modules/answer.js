@@ -146,7 +146,6 @@ const mutations = {
         }
     },
     UPDATE_TITLE(state, payload){
-        // state.form[payload.order].title = payload.title;
         let $form = {
             id: '',
             title: payload.title,

@@ -20,7 +20,7 @@ class Team extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'password', 'gameCode', 'points'
+        'name', 'password', 'gameCode', 'points', 'double', 'triple'
     ];
 
     /**

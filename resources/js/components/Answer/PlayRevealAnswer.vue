@@ -19,12 +19,14 @@
                     </div>
                     <div class="row pt-3">
                         <div class="col-md-12 text-center">
-                            <h5>{{this.myAnswers}}</h5>
+                            <h5>
+                                {{teamAnswers.find(x => x.question_id === questions[questionPosition].id).answer}}
+                            </h5>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row pt-5">
+            <div class="row pt-5" v-if="revealAnswer === true">
                 <div class="col-md-4 offset-md-4 text-center">
                     <div v-for="answer in this.answers">
                         <div class="row pt-3" v-if="answer.correct === 1 && answer.question_id === questions[questionPosition].id">
@@ -66,7 +68,7 @@
     export default {
         data() {
             return {
-
+                revealAnswer: false,
             }
         },
         computed: {
@@ -74,6 +76,7 @@
             ...mapGetters('question', ['questions']),
             ...mapGetters('answer', ['answers']),
             ...mapGetters('game', ['gameCode']),
+            ...mapGetters('team', ['teamAnswers']),
             ...mapGetters('play', ['roundPosition', 'questionPosition', 'page', 'myAnswers']),
         }
     }

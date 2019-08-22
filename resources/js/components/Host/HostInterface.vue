@@ -1,44 +1,6 @@
 <template>
     <div class="pr-3 pl-3" v-if="this.game_code">
-        <div class="row pt-3">
-            <div class="col-md-12">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div v-if="game.description">
-                            <h3>
-                                {{ game.name}}: {{ game.description }}
-                            </h3>
-                        </div>
-                        <div v-else>
-                            <h3>
-                                {{ game.name }}
-                            </h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-8">
-                        <h5>Game Code: <u><b>{{this.gameCode.code}}</b></u></h5>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="float-right">
-                            <button type="button" class="btn btn-success btn-lg mr-2" @click='goToStartGame()' v-if="currentPage === 'HostLobby'">Start Game</button>
-                            <button type="button" class="btn btn-success btn-lg mr-2" @click='goToHostLobby()' v-if="currentPage === 'HostStartGame'">Back</button>
-
-                            <button type="button" class="btn btn-outline-secondary mr-2">
-                                <i class="fas fa-edit fa-2x"></i>
-                            </button>
-
-                            <button type="button" class="btn btn-outline-danger">
-                                <i class="fas fa-door-open fa-2x"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <hr>
-            </div>
-        </div>
-
+        <HostHeader></HostHeader>
         <HostLobby
                 v-if="currentPage === 'HostLobby'">
         </HostLobby>
@@ -119,12 +81,6 @@
             ...mapActions('round', ['fetchRounds']),
             ...mapActions('question', ['fetchQuestions']),
             ...mapActions('answer', ['fetchAnswers']),
-            goToStartGame() {
-                this.currentPage = 'HostStartGame';
-            },
-            goToHostLobby() {
-                this.currentPage = 'HostLobby';
-            },
             onGameOver(){
                 console.log('Game Over');
             },

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Answer;
+use App\Events\NewTeamAnswer;
 use App\TeamAnswer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -15,9 +16,9 @@ class TeamAnswerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        //
+        return TeamAnswer::where('team_id', $id)->get();
     }
 
     /**
@@ -68,11 +69,13 @@ class TeamAnswerController extends Controller
             'answer' => $request->answer,
             'correct' => ($matchIndex == 0) ? $answers[$answerPosition]->correct : false,
             'matchIndex' => $matchIndex,
+            'gameCode' => $request->gameCode,
             'points' => ($matchIndex == 0) ? 1 : 0,
             'question_id' => $request->question_id,
 
         ]);
 
+        broadcast(new NewTeamAnswer($teamAnswer));
         return $teamAnswer;
 
     }
@@ -109,6 +112,14 @@ class TeamAnswerController extends Controller
     public function update(Request $request, TeamAnswer $teamAnswer)
     {
         //
+    }
+
+    public function updateCorrect($id)
+    {
+        $teamAnswer = TeamAnswer::findorFail($id);
+        $teamAnswer->correct = !($teamAnswer->correct);
+        $teamAnswer->save();
+        return $teamAnswer;
     }
 
     /**

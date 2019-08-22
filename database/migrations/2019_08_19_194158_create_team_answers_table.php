@@ -16,11 +16,13 @@ class CreateTeamAnswersTable extends Migration
         Schema::create('team_answers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('team_id');
+            $table->unsignedBigInteger('question_id');
+            $table->string('gameCode');
             $table->string('answer');
             $table->boolean('correct');
             $table->unsignedBigInteger('matchIndex');
             $table->unsignedBigInteger('points');
-            $table->unsignedBigInteger('question_id');
+            $table->string('powerUp')->nullable();
             $table->timestamps();
         });
     }
