@@ -2199,8 +2199,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     },
     showAnswer: function showAnswer() {
+      axios.post('/api/host/game/' + this.gameCode.code + '/question/' + this.questionPosition + '/revealAnswer');
       this.revealAnswer = true;
-      axios.post('/api/host/revealAnswer');
 
       if (this.playQuestionPosition + 1 === this.questions.length) {
         this.newQuestionPosition = '';
@@ -2324,14 +2324,39 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {
-      revealAnswer: false
-    };
+    return {};
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('round', ['rounds']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('question', ['questions']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('answer', ['answers']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('game', ['gameCode']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('team', ['teamAnswers']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('play', ['roundPosition', 'questionPosition', 'page', 'myAnswers']))
+  mounted: function mounted() {},
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('round', ['rounds']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('question', ['questions']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('answer', ['answers']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('game', ['gameCode']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('team', ['teamAnswers']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('play', ['roundPosition', 'questionPosition', 'page', 'myAnswers'])),
+  props: ['revealAnswer'],
+  watch: {
+    revealAnswer: function revealAnswer() {
+      var _this = this;
+
+      var $answer = this.teamAnswers.find(function (x) {
+        return x.question_id === _this.questions[_this.questionPosition].id;
+      });
+
+      if (this.revealAnswer === true) {
+        if (this.questions[this.questionPosition].type === 'Fill-in-blank') {
+          if ($answer.correct === 1) {
+            document.querySelector('body').style.backgroundColor = 'green';
+          } else {
+            document.querySelector('body').style.backgroundColor = 'red';
+          }
+
+          document.getElementById('reveal-answer').style.color = 'white';
+        }
+      }
+    },
+    questionPosition: function questionPosition() {
+      document.getElementById('reveal-answer').style.color = 'black';
+    }
+  }
 });
 
 /***/ }),
@@ -3897,6 +3922,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   mounted: function mounted() {
+    axios.post('/api/team/' + this.gameCode.code + '/leaderBoard').then(function (response) {
+      console.log(response.data);
+    });
+
     if (this.roundPosition === this.rounds.length - 1) {
       this.upNext = 'Game Over';
     } else {
@@ -3915,7 +3944,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     }
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('question', ['questions']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('round', ['rounds']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('play', ['roundPosition', 'questionPosition', 'page']), {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('question', ['questions']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('round', ['rounds']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('game', ['gameCode']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('play', ['roundPosition', 'questionPosition', 'page']), {
     playRoundPosition: {
       get: function get() {
         return this.roundPosition;
@@ -4273,10 +4302,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {};
+    return {
+      revealAnswer: false
+    };
   },
   mounted: function mounted() {
     var _this = this;
@@ -4287,11 +4319,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.fetchAnswersByGameCode(this.team.gameCode);
     this.fetchTeamAnswers(this.team.id);
     Echo.join('game.' + this.loggedTeam.gameCode).here(function (users) {}).listen('NextStep', function (e) {
-      console.log(e);
       _this.playRoundPosition = e.roundPosition;
       _this.playQuestionPosition = e.questionPosition;
       _this.currentPage = e.currentPage;
-    }).listen('StartRound', function (e) {
+    }).listen('RevealAnswer', function (e) {
+      // console.log('time to show answer');
+      _this.revealAnswer = true;
+    }).listen('UpdatedAnswer', function (e) {
+      if (e.answer.team_id === _this.loggedTeam.id) {
+        _this.$store.commit('team/UPDATE_TEAM_ANSWER', e.answer);
+      }
+    }) //delete bottom listeners in future
+    .listen('StartRound', function (e) {
       // console.log(e);
       _this.playRoundPosition = e.roundPosition;
       _this.playQuestionPosition = 0;
@@ -4355,7 +4394,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         return this.$store.commit('play/SET_PAGE', value);
       }
     }
-  })
+  }),
+  watch: {
+    questionPosition: function questionPosition() {
+      if (this.revealAnswer === true) {
+        this.revealAnswer = false;
+        document.querySelector('body').style.backgroundColor = 'white';
+      }
+    }
+  }
 });
 
 /***/ }),
@@ -6309,19 +6356,30 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      clickedPowerUp: ''
+      clickedPowerUp: '',
+      undo: false
     };
   },
   mounted: function mounted() {},
   methods: {
     setPowerUp: function setPowerUp(powerUp) {
-      this.clickedPowerUp = this.clickedPowerUp === powerUp ? '' : powerUp;
+      if (this.undo === false) {
+        this.clickedPowerUp = this.clickedPowerUp === powerUp ? '' : powerUp;
+      }
+    },
+    updatePowerUp: function updatePowerUp() {
+      var _this = this;
+
+      var $powerUp = this.undo === false ? this.clickedPowerUp : 'Null';
+      axios.post('/api/team/' + this.teamAnswers[0].team_id + '/round/' + this.rounds[this.roundPosition].id + '/powerUp/' + $powerUp).then(function (response) {
+        console.log(response.data);
+        _this.undo = !_this.undo;
+        _this.clickedPowerUp = _this.undo === false ? '' : _this.clickedPowerUp;
+      });
     }
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('round', ['rounds']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('question', ['questions']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('answer', ['answers']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('game', ['gameCode']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('team', ['teamAnswers', 'double', 'triple']), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('play', ['roundPosition', 'questionPosition', 'page']))
@@ -83685,111 +83743,131 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _c("div", { staticClass: "row pt-5" }, [
-      _c("div", { staticClass: "col-md-8 offset-md-2 text-center" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-md-12" }, [
-            _c("h3", [
-              _vm._v(_vm._s(this.questions[_vm.questionPosition].title))
+  return _c(
+    "div",
+    { staticClass: "container", attrs: { id: "reveal-answer" } },
+    [
+      _c("div", { staticClass: "row pt-5" }, [
+        _c("div", { staticClass: "col-md-8 offset-md-2 text-center" }, [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-md-12" }, [
+              _c("h3", [
+                _vm._v(_vm._s(this.questions[_vm.questionPosition].title))
+              ])
             ])
           ])
         ])
-      ])
-    ]),
-    _vm._v(" "),
-    this.questions[_vm.questionPosition].type === "Fill-in-blank"
-      ? _c("div", [
-          _c("div", { staticClass: "row pt-5 fill-in-blank" }, [
-            _c("div", { staticClass: "col-md-4 offset-md-4" }, [
-              _vm._m(0),
-              _vm._v(" "),
-              _c("div", { staticClass: "row pt-3" }, [
-                _c("div", { staticClass: "col-md-12 text-center" }, [
-                  _c("h5", [
-                    _vm._v(
-                      "\n                            " +
-                        _vm._s(
-                          _vm.teamAnswers.find(function(x) {
-                            return (
-                              x.question_id ===
-                              _vm.questions[_vm.questionPosition].id
-                            )
-                          }).answer
-                        ) +
-                        "\n                        "
-                    )
+      ]),
+      _vm._v(" "),
+      this.questions[_vm.questionPosition].type === "Fill-in-blank"
+        ? _c("div", [
+            _c("div", { staticClass: "row pt-5 fill-in-blank" }, [
+              _c("div", { staticClass: "col-md-4 offset-md-4" }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _c("div", { staticClass: "row pt-3" }, [
+                  _c("div", { staticClass: "col-md-12 text-center" }, [
+                    _c("h5", [
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(
+                            _vm.teamAnswers.find(function(x) {
+                              return (
+                                x.question_id ===
+                                _vm.questions[_vm.questionPosition].id
+                              )
+                            }).answer
+                          ) +
+                          "\n                        "
+                      )
+                    ])
                   ])
                 ])
               ])
-            ])
-          ]),
-          _vm._v(" "),
-          _vm.revealAnswer === true
-            ? _c("div", { staticClass: "row pt-5" }, [
-                _c(
-                  "div",
-                  { staticClass: "col-md-4 offset-md-4 text-center" },
-                  _vm._l(this.answers, function(answer) {
-                    return _c("div", [
-                      answer.correct === 1 &&
-                      answer.question_id ===
-                        _vm.questions[_vm.questionPosition].id
-                        ? _c("div", { staticClass: "row pt-3" }, [
-                            _c("div", { staticClass: "col-md-12" }, [
-                              _c("h5", [_vm._v(_vm._s(answer.title))])
+            ]),
+            _vm._v(" "),
+            _vm.revealAnswer === true
+              ? _c("div", { staticClass: "row pt-5" }, [
+                  _c(
+                    "div",
+                    { staticClass: "col-md-4 offset-md-4 text-center" },
+                    _vm._l(this.answers, function(answer) {
+                      return _c("div", [
+                        answer.correct === 1 &&
+                        answer.question_id ===
+                          _vm.questions[_vm.questionPosition].id
+                          ? _c("div", { staticClass: "row pt-3" }, [
+                              _c("div", { staticClass: "col-md-12" }, [
+                                _c("h5", [_vm._v(_vm._s(answer.title))])
+                              ])
                             ])
-                          ])
-                        : _vm._e()
-                    ])
-                  }),
-                  0
-                )
-              ])
-            : _vm._e()
-        ])
-      : _c("div", { staticClass: "row pt-5 fill-in-blank" }, [
-          _c(
-            "div",
-            { staticClass: "col-md-4 offset-md-4 text-center" },
-            [
+                          : _vm._e()
+                      ])
+                    }),
+                    0
+                  )
+                ])
+              : _vm._e()
+          ])
+        : _c("div", { staticClass: "row pt-5" }, [
+            _c(
+              "div",
+              { staticClass: "col-md-4 offset-md-4 text-center" },
               _vm._l(this.answers, function(answer) {
                 return _c("div", [
                   answer.question_id === _vm.questions[_vm.questionPosition].id
                     ? _c("div", { staticClass: "row pb-3" }, [
                         _c("div", { staticClass: "col-md-12 text-center" }, [
-                          _c("div", { staticClass: "fancy2 card" }, [
-                            _c("div", { staticClass: "card-body p-2" }, [
-                              _c("h5", { staticClass: "mb-0" }, [
-                                _vm._v(_vm._s(answer.title))
+                          _c(
+                            "div",
+                            {
+                              staticClass: "fancy2 card",
+                              class: {
+                                isChosen:
+                                  _vm.teamAnswers.find(function(x) {
+                                    return (
+                                      x.question_id ===
+                                      _vm.questions[_vm.questionPosition].id
+                                    )
+                                  }).answer === answer.title &&
+                                  _vm.revealAnswer === false,
+                                "bg-success text-white":
+                                  answer.correct === 1 &&
+                                  _vm.revealAnswer === true,
+                                "bg-danger text-white":
+                                  _vm.teamAnswers.find(function(x) {
+                                    return (
+                                      x.question_id ===
+                                      _vm.questions[_vm.questionPosition].id
+                                    )
+                                  }).answer === answer.title &&
+                                  _vm.teamAnswers.find(function(x) {
+                                    return (
+                                      x.question_id ===
+                                      _vm.questions[_vm.questionPosition].id
+                                    )
+                                  }).correct === 0 &&
+                                  _vm.revealAnswer === true
+                              }
+                            },
+                            [
+                              _c("div", { staticClass: "card-body p-2" }, [
+                                _c("h5", { staticClass: "mb-0" }, [
+                                  _vm._v(_vm._s(answer.title))
+                                ])
                               ])
-                            ])
-                          ])
+                            ]
+                          )
                         ])
                       ])
                     : _vm._e()
                 ])
               }),
-              _vm._v(" "),
-              _c("div", { staticClass: "row pt-3" }, [
-                _c(
-                  "div",
-                  { staticClass: "col-md-12" },
-                  [
-                    _c(
-                      "b-button",
-                      { attrs: { variant: "success", block: "" } },
-                      [_vm._v("Submit Answer")]
-                    )
-                  ],
-                  1
-                )
-              ])
-            ],
-            2
-          )
-        ])
-  ])
+              0
+            )
+          ])
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
@@ -85819,7 +85897,9 @@ var render = function() {
                 : _vm._e(),
               _vm._v(" "),
               this.currentPage === "PlayRevealAnswer"
-                ? _c("PlayRevealAnswer")
+                ? _c("PlayRevealAnswer", {
+                    attrs: { revealAnswer: _vm.revealAnswer }
+                  })
                 : _vm._e(),
               _vm._v(" "),
               this.currentPage === "PlayLeaderBoard"
@@ -87502,7 +87582,7 @@ var render = function() {
                                           : _vm._e(),
                                         _vm._v(" "),
                                         answer.matchIndex > 0 &&
-                                        answer.matchIndex <= 7
+                                        answer.matchIndex <= 4
                                           ? _c(
                                               "h5",
                                               {
@@ -87535,8 +87615,8 @@ var render = function() {
                                                 )
                                               ]
                                             )
-                                          : answer.matchIndex > 7 &&
-                                            answer.matchIndex <= 11
+                                          : answer.matchIndex > 4 &&
+                                            answer.matchIndex <= 7
                                           ? _c(
                                               "h5",
                                               {
@@ -87569,7 +87649,7 @@ var render = function() {
                                                 )
                                               ]
                                             )
-                                          : answer.matchIndex > 11
+                                          : answer.matchIndex > 8
                                           ? _c(
                                               "h5",
                                               {
@@ -87958,7 +88038,7 @@ var render = function() {
         _c("div", { staticClass: "col-md-12" }, [
           _c("div", { staticClass: "row" }, [
             this.double === 0
-              ? _c("div", { staticClass: "col-md-6 text-center" }, [
+              ? _c("div", { staticClass: "col-md-8 offset-md-2 text-center" }, [
                   _c("div", { staticClass: "fa-4x" }, [
                     _c(
                       "span",
@@ -87986,14 +88066,8 @@ var render = function() {
                           [_vm._v("2X")]
                         )
                       ]
-                    )
-                  ])
-                ])
-              : _vm._e(),
-            _vm._v(" "),
-            this.triple === 0
-              ? _c("div", { staticClass: "col-md-6 text-center" }, [
-                  _c("div", { staticClass: "fa-4x" }, [
+                    ),
+                    _vm._v(" "),
                     _c(
                       "span",
                       {
@@ -88032,9 +88106,30 @@ var render = function() {
                   "div",
                   { staticClass: "col-md-6 offset-md-3 text-center" },
                   [
-                    _c("b-button", { attrs: { variant: "success" } }, [
-                      _vm._v(_vm._s(_vm.clickedPowerUp) + " Points This Round")
-                    ])
+                    _vm.undo === false
+                      ? _c(
+                          "b-button",
+                          {
+                            attrs: { variant: "success" },
+                            on: { click: _vm.updatePowerUp }
+                          },
+                          [
+                            _vm._v(
+                              _vm._s(_vm.clickedPowerUp) + " Points This Round"
+                            )
+                          ]
+                        )
+                      : _c(
+                          "b-button",
+                          {
+                            attrs: { variant: "success" },
+                            on: { click: _vm.updatePowerUp }
+                          },
+                          [
+                            _c("i", { staticClass: "fas fa-undo-alt" }),
+                            _vm._v(" Undo")
+                          ]
+                        )
                   ],
                   1
                 )
@@ -113288,15 +113383,24 @@ var mutations = {
     });
     Vue.set(state.answers, payload.order, {
       answer: payload.answer.answer,
+      id: payload.answer.id,
+      question_id: payload.answer.question_id,
+      round_id: payload.answer.round_id,
+      team_id: payload.answer.team_id,
       correct: !payload.answer.correct === true ? 1 : 0,
       gameCode: payload.answer.gameCode,
-      id: payload.answer.id,
       matchIndex: payload.answer.matchIndex,
       points: payload.answer.points,
-      powerUp: payload.answer.powerUp,
-      question_id: payload.answer.question_id,
-      team_id: payload.answer.team_id
+      powerUp: payload.answer.powerUp
     });
+  },
+  UPDATE_TEAM_ANSWER: function UPDATE_TEAM_ANSWER(state, answer) {
+    for (var $i = 0; $i < state.answers.length; $i++) {
+      if (answer.question_id === state.answers[$i].question_id) {
+        Vue.set(state.answers, $i, answer);
+        break;
+      }
+    }
   },
   CLEAR_FORM: function CLEAR_FORM(state) {
     state.team = {

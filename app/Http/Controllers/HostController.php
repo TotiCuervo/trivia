@@ -31,8 +31,8 @@ class HostController extends Controller
         return 'roundReview Successful';
     }
 
-    public function revealAnswer($code, $roundPosition, $questionPosition) {
-        broadcast(new RevealAnswer($code, $roundPosition, $questionPosition));
+    public function revealAnswer($gameCode, $questionPosition) {
+        broadcast(new RevealAnswer($gameCode, $questionPosition));
         return 'revealAnswer Succcessful!';
     }
 

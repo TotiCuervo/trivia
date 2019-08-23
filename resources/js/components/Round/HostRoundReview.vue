@@ -68,19 +68,19 @@
                                                     </span>
                                                 </h5>
 
-                                                <h5 class="mb-0 pointer" v-if="answer.matchIndex > 0 && answer.matchIndex <= 7" v-b-tooltip.left title="Probably correct">
+                                                <h5 class="mb-0 pointer" v-if="answer.matchIndex > 0 && answer.matchIndex <= 4" v-b-tooltip.left title="Probably correct">
                                                     <span class="badge list-group-item-success p-2">
                                                         {{answer.answer}}
                                                     </span>
                                                 </h5>
 
-                                                <h5 class="mb-0 pointer" v-else-if="answer.matchIndex > 7 && answer.matchIndex <= 11" v-b-tooltip.left title="Maybe correct">
+                                                <h5 class="mb-0 pointer" v-else-if="answer.matchIndex > 4 && answer.matchIndex <= 7" v-b-tooltip.left title="Maybe correct">
                                                     <span class="badge list-group-item-warning p-2">
                                                         {{answer.answer}}
                                                     </span>
                                                 </h5>
 
-                                                <h5 class="mb-0 pointer" v-else-if="answer.matchIndex > 11" v-b-tooltip.left title="Probably not correct">
+                                                <h5 class="mb-0 pointer" v-else-if="answer.matchIndex > 8" v-b-tooltip.left title="Probably not correct">
                                                     <span class="badge list-group-item-danger p-2">
                                                         {{answer.answer}}
                                                     </span>

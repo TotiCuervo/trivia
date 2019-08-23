@@ -144,15 +144,25 @@ const mutations = {
 
         Vue.set(state.answers, payload.order, {
             answer: payload.answer.answer,
+            id: payload.answer.id,
+            question_id: payload.answer.question_id,
+            round_id: payload.answer.round_id,
+            team_id: payload.answer.team_id,
             correct: !(payload.answer.correct) === true ? 1 : 0,
             gameCode: payload.answer.gameCode,
-            id: payload.answer.id,
             matchIndex: payload.answer.matchIndex,
             points: payload.answer.points,
             powerUp: payload.answer.powerUp,
-            question_id: payload.answer.question_id,
-            team_id: payload.answer.team_id,
         });
+    },
+    UPDATE_TEAM_ANSWER(state, answer) {
+
+        for (let $i=0; $i < state.answers.length; $i++) {
+            if (answer.question_id === state.answers[$i].question_id) {
+                Vue.set(state.answers, $i, answer);
+                break;
+            }
+        }
     },
     CLEAR_FORM(state){
         state.team = {

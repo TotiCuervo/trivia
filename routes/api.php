@@ -62,7 +62,7 @@ Route::post('/host/{code}/startRound/{roundPosition}', 'HostController@startRoun
 Route::post('/host/{code}/round/{roundPosition}/startQuestion/{questionPosition}', 'HostController@startQuestion');
 Route::post('/host/{code}/roundReview', 'HostController@roundReview');
 Route::post('/host/{gameCode}/round/{roundPosition}/question/{questionPosition}/currentPage/{currentPage}', 'HostController@navigateHandler');
-
+Route::post('/host/game/{gameCode}/question/{questionPosition}/revealAnswer', 'HostController@revealAnswer');
 
 //GameCode
 Route::get('/game/{id}/gameCode', 'GameCodeController@show');
@@ -80,4 +80,6 @@ Route::post('/team/{id}/answers', 'TeamAnswerController@index');
 //TeamAnswers
 Route::post('/teamAnswers/store', 'TeamAnswerController@store');
 Route::post('/teamAnswers/{id}/updateCorrect', 'TeamAnswerController@updateCorrect');
+Route::post('/team/{teamID}/round/{roundID}/powerUp/{powerUp}', 'TeamAnswerController@updatePowerUp');
+Route::post('/team/{gameCode}/leaderBoard', 'TeamAnswerController@leaderBoard');
 

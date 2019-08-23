@@ -13,7 +13,8 @@
                         v-if="this.currentPage === 'PlayRoundReview'">
                 </PlayRoundReview>
                 <PlayRevealAnswer
-                        v-if="this.currentPage === 'PlayRevealAnswer'">
+                        v-if="this.currentPage === 'PlayRevealAnswer'"
+                        :revealAnswer = revealAnswer>
                 </PlayRevealAnswer>
                 <PlayLeaderBoard
                         v-if="this.currentPage === 'PlayLeaderBoard'">
@@ -32,7 +33,7 @@
     export default {
         data() {
             return {
-
+                revealAnswer: false
             }
         },
         mounted() {
@@ -48,11 +49,20 @@
 
                 })
                 .listen('NextStep', (e) => {
-                    console.log(e);
                     this.playRoundPosition = e.roundPosition;
                     this.playQuestionPosition = e.questionPosition;
                     this.currentPage = e.currentPage;
                 })
+                .listen('RevealAnswer', (e) => {
+                    // console.log('time to show answer');
+                    this.revealAnswer = true;
+                })
+                .listen('UpdatedAnswer', (e) => {
+                    if (e.answer.team_id === this.loggedTeam.id) {
+                        this.$store.commit('team/UPDATE_TEAM_ANSWER', e.answer);
+                    }
+                })
+                //delete bottom listeners in future
                 .listen('StartRound', (e) => {
                     // console.log(e);
                     this.playRoundPosition = e.roundPosition;
@@ -134,6 +144,14 @@
             }
 
         },
+        watch: {
+            questionPosition: function () {
+                if (this.revealAnswer === true) {
+                    this.revealAnswer = false;
+                    document.querySelector('body').style.backgroundColor = 'white';
+                }
+            },
+        }
     }
 </script>
 

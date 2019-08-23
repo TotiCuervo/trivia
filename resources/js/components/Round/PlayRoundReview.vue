@@ -25,7 +25,7 @@
         <div class="row pt-3">
             <div class="col-md-12">
                 <div class="row">
-                    <div class="col-md-6 text-center" v-if="this.double === 0">
+                    <div class="col-md-8 offset-md-2 text-center" v-if="this.double === 0">
                         <div class="fa-4x">
                             <span class="fa-layers fa-fw clicker" v-bind:class="{'text-muted': clickedPowerUp !== 'Double'}"
                                   @click="setPowerUp('Double')">
@@ -33,10 +33,6 @@
                                 <span class="fa-layers-text fa-inverse" data-fa-transform="shrink-11.5"
                                       style="font-weight:900">2X</span>
                             </span>
-                        </div>
-                    </div>
-                    <div class="col-md-6 text-center" v-if="this.triple === 0">
-                        <div class="fa-4x">
                             <span class="fa-layers fa-fw clicker" v-bind:class="{'text-muted': clickedPowerUp !== 'Triple'}"
                                   @click="setPowerUp('Triple')">
                                 <i class="fas fa-certificate"></i>
@@ -48,7 +44,9 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6 offset-md-3 text-center" v-if="this.clickedPowerUp !== ''">
-                        <b-button variant="success">{{clickedPowerUp}} Points This Round</b-button>
+                        <b-button variant="success" @click="updatePowerUp" v-if="undo === false">{{clickedPowerUp}} Points This Round</b-button>
+                        <b-button variant="success" @click="updatePowerUp" v-else><i class="fas fa-undo-alt"></i> Undo</b-button>
+
                     </div>
                 </div>
             </div>
@@ -62,7 +60,8 @@
     export default {
         data() {
             return {
-                clickedPowerUp: ''
+                clickedPowerUp: '',
+                undo: false,
             }
         },
         mounted() {
@@ -70,8 +69,20 @@
         },
         methods: {
             setPowerUp(powerUp) {
+                if (this.undo === false) {
+                    this.clickedPowerUp = (this.clickedPowerUp === powerUp) ? '' : powerUp;
+                }
+            },
+            updatePowerUp() {
 
-                this.clickedPowerUp = (this.clickedPowerUp === powerUp) ? '' : powerUp;
+                let $powerUp = (this.undo === false) ? this.clickedPowerUp : 'Null';
+
+                axios.post('/api/team/'+ this.teamAnswers[0].team_id +'/round/'+ this.rounds[this.roundPosition].id +'/powerUp/'+$powerUp)
+                    .then(response => {
+                        console.log(response.data);
+                        this.undo = !(this.undo);
+                        this.clickedPowerUp = (this.undo === false) ? '' : this.clickedPowerUp;
+                    });
             }
         },
         computed: {

@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\TeamAnswer;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -10,7 +11,7 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class RevealAnswer implements ShouldBroadcast
+class UpdatedAnswer implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -19,13 +20,11 @@ class RevealAnswer implements ShouldBroadcast
      *
      * @return void
      */
-    public $gameCode;
-    public $questionPosition;
+    public $answer;
 
-    public function __construct($gameCode, $questionPosition)
+    public function __construct(TeamAnswer $answer)
     {
-        $this->gameCode = $gameCode;
-        $this->questionPosition = $questionPosition;
+        $this->answer = $answer;
     }
 
     /**
@@ -35,11 +34,11 @@ class RevealAnswer implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PresenceChannel('game.'.$this->gameCode);
+        return new PresenceChannel('game.'.$this->answer->gameCode);
     }
 
     public function broadcastWith()
     {
-        return ['questionPosition' => $this->questionPosition];
+        return ['answer' => $this->answer];
     }
 }

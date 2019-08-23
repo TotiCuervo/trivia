@@ -89,9 +89,10 @@
             },
 
             showAnswer() {
-                this.revealAnswer = true;
 
-                axios.post('/api/host/revealAnswer');
+                axios.post('/api/host/game/'+ this.gameCode.code +'/question/'+ this.questionPosition +'/revealAnswer');
+
+                this.revealAnswer = true;
 
                 if (this.playQuestionPosition + 1 === this.questions.length) {
                     this.newQuestionPosition = '';

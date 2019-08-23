@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Answer;
 use App\Events\NewTeamAnswer;
+use App\Events\UpdatedAnswer;
+use App\Team;
 use App\TeamAnswer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -11,32 +13,12 @@ use Illuminate\Support\Facades\Log;
 
 class TeamAnswerController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index($id)
     {
         return TeamAnswer::where('team_id', $id)->get();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $answers = Answer::where('question_id', $request->question_id)->where('correct', true)->get();
@@ -72,6 +54,7 @@ class TeamAnswerController extends Controller
             'gameCode' => $request->gameCode,
             'points' => ($matchIndex == 0) ? 1 : 0,
             'question_id' => $request->question_id,
+            'round_id' => $request->round_id,
 
         ]);
 
@@ -80,35 +63,6 @@ class TeamAnswerController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\TeamAnswer  $teamAnswer
-     * @return \Illuminate\Http\Response
-     */
-    public function show(TeamAnswer $teamAnswer)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\TeamAnswer  $teamAnswer
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(TeamAnswer $teamAnswer)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\TeamAnswer  $teamAnswer
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, TeamAnswer $teamAnswer)
     {
         //
@@ -119,17 +73,46 @@ class TeamAnswerController extends Controller
         $teamAnswer = TeamAnswer::findorFail($id);
         $teamAnswer->correct = !($teamAnswer->correct);
         $teamAnswer->save();
+        broadcast(new UpdatedAnswer($teamAnswer));
         return $teamAnswer;
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\TeamAnswer  $teamAnswer
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(TeamAnswer $teamAnswer)
-    {
-        //
+    public function updatePowerUp($teamID, $roundID, $powerUp) {
+
+        TeamAnswer::where('team_id', $teamID)->where('round_id', $roundID)->update(['powerUp' => ($powerUp === 'Null') ? Null : $powerUp]);
+
+        foreach(TeamAnswer::where('team_id', $teamID)->where('round_id', $roundID)->get() as $answer) {
+            $this->updatePoints($answer);
+        }
+
+        return TeamAnswer::where('team_id', $teamID)->where('round_id', $roundID)->get();
+
     }
+
+    public function updatePoints(TeamAnswer $answer) {
+
+        if ($answer->correct === 1) {
+
+            if ($answer->powerUp === 'Double') {
+
+                $answer->points = 2;
+
+            } elseif ($answer->powerUp === 'Triple') {
+
+                $answer->points = 3;
+
+            } else {
+
+                $answer->points = 1;
+
+            }
+
+        } else {
+            $answer->points = 0;
+        }
+
+        $answer->save();
+    }
+
+
 }

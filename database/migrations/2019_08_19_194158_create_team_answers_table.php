@@ -17,6 +17,7 @@ class CreateTeamAnswersTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('team_id');
             $table->unsignedBigInteger('question_id');
+            $table->unsignedBigInteger('round_id');
             $table->string('gameCode');
             $table->string('answer');
             $table->boolean('correct');

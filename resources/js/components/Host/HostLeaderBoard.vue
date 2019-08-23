@@ -27,6 +27,12 @@
             }
         },
         mounted() {
+            axios.post('/api/team/'+ this.gameCode.code +'/leaderBoard')
+                .then (response => {
+                    console.log(response.data);
+                });
+
+
             if (this.roundPosition === this.rounds.length - 1) {
                 this.upNext = 'Game Over'
             } else {
@@ -49,6 +55,7 @@
         computed: {
             ...mapGetters('question', ['questions']),
             ...mapGetters('round', ['rounds']),
+            ...mapGetters('game', ['gameCode']),
             ...mapGetters('play', ['roundPosition', 'questionPosition', 'page']),
             playRoundPosition: {
                 get() {
