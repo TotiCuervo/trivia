@@ -7,22 +7,20 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row pt-4">
             <div class="col-md-12 text-center">
                 <h1>Round {{this.rounds[this.playRoundPosition].order_number}}</h1>
             </div>
         </div>
-        <div class="row">
+        <div class="row pb-2">
             <div class="col-md-12 text-center">
                 <h1 v-if="this.rounds[this.playRoundPosition].time">{{this.rounds[this.playRoundPosition].time}}s Questions</h1>
                 <h1 v-else>No Time Limit</h1>
             </div>
         </div>
-        <div class="row">
-            <div class v-for="question in this.questions">
-                <div class="col-md-12 pt-5" v-if="question.round_id === rounds[playRoundPosition].id">
-                    <h3>{{question.order_number}}. {{question.title}}</h3>
-                </div>
+        <div class="row pt-3" v-for="question in this.questions">
+            <div class="col-md-12 text-center" v-if="question.round_id === rounds[playRoundPosition].id">
+                <h3>{{question.order_number}}. {{question.title}}</h3>
             </div>
         </div>
     </div>
@@ -38,9 +36,10 @@
             }
         },
         mounted() {
-            axios.post('/api/host/'+ this.gameCode.code + '/startRound/' +this.playRoundPosition)
+
+            axios.post('/api/host/'+ this.gameCode.code + '/round/' + this.playRoundPosition +'/question/' + this.playQuestionPosition + '/currentPage/' + 'PlayRoundPreview')
                 .then(response => {
-                   console.log(response.data);
+                    // consolex.log(response.data);
                 });
 
         },

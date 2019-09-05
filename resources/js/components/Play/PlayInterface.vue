@@ -62,23 +62,20 @@
                         this.$store.commit('team/UPDATE_TEAM_ANSWER', e.answer);
                     }
                 })
-                //delete bottom listeners in future
-                .listen('StartRound', (e) => {
-                    // console.log(e);
-                    this.playRoundPosition = e.roundPosition;
-                    this.playQuestionPosition = 0;
-                    this.currentPage = 'PlayRoundPreview';
-                })
-                .listen('StartQuestion', (e) => {
-                    // console.log(e);
-                    console.log('just got new question');
-                    this.playRoundPosition = e.roundPosition;
-                    this.playQuestionPosition = e.questionPosition;
-                    this.currentPage = 'PlayQuestion';
-                })
-                .listen('RoundReview', (e) => {
-                    console.log('lets go to round review');
-                    this.currentPage = 'PlayRoundReview';
+                .listen('UpdateTeams', (e) => {
+                    this.$store.commit('team/SET_TEAMS', e.teams);
+
+                    if (e.teams.find(x => x.id === this.loggedTeam.id && x.name !== this.loggedTeam.name)) {
+                        this.loggedTeam = e.teams.find(x => x.id === this.loggedTeam.id);
+                    }
+
+                    if (!(e.teams.find(x => x.id === this.loggedTeam.id))) {
+                        this.currentPage = '';
+                        this.playQuestionPosition = '';
+                        this.playRoundPosition = '';
+                        this.$router.push({name: "playLogin"});
+                    }
+
                 });
         },
         created() {

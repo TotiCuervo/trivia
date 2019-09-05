@@ -34,9 +34,14 @@
                 <div class="row">
                     <div class="col-md-12 text-center">
                         <hr>
-                        <router-link :to="{ name: 'hostInterface', params: {id: game.id} }">
-                            <b-button block pill variant="primary">Play</b-button>
-                        </router-link>
+                        <!--opens in same tab-->
+                        <!--<router-link :to="{ name: 'hostInterface', params: {id: game.id} }">-->
+                            <!--<b-button block pill variant="primary">Play</b-button>-->
+                        <!--</router-link>-->
+
+                        <!--opens in different tab-->
+                        <b-button block pill variant="primary" @click="playGame()">Play</b-button>
+
                     </div>
                 </div>
             </div>
@@ -173,6 +178,12 @@
 
                     });
             },
+            playGame() {
+                //may need to change for production
+                let route = "app#/host/game/" + this.game.id;
+
+                window.open(route, "_blank");
+            }
         },
         props: ['game'],
         computed: {

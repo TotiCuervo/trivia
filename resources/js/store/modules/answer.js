@@ -1,7 +1,7 @@
 function initialState() {
     return {
         answers: [],
-        answer: null,
+        answer: '',
         form: [
             {
                 id: '',
@@ -59,6 +59,9 @@ function initialState() {
 const getters = {
     answers(state){
         return state.answers;
+    },
+    answer(state) {
+        return state.answer;
     },
     answerFields(state){
         return state.form;
@@ -174,8 +177,6 @@ const mutations = {
         state.form[order].correct = state.form[order+1].correct;
     },
     CLEAR_FORM(state, order){
-        console.log("Clearing:");
-        console.log(state.form[order]);
         state.form[order] = {
             id: '',
             title: '',

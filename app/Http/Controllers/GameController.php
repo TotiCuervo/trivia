@@ -113,7 +113,11 @@ class GameController extends Controller
     }
 
     public function teams($gameCode) {
-        return Team::where('gameCode', $gameCode)->where('loggedIn', 1)->get();
+//        return Team::where('gameCode', $gameCode)->where('loggedIn', 1)->get();
+
+        //i changed this to see if it would fix my host problem with getting teams
+        return Team::where('gameCode', $gameCode)->get();
+
     }
 
     public function teamAnswers($gameCode) {

@@ -76,10 +76,11 @@ Route::post('/team/checkIfExpired', 'TeamLoginController@checkIfExpired');
 Route::post('/team/registerOrLogin', 'TeamLoginController@registerOrLogin');
 Route::get('/team/{id}/pulse', 'TeamLoginController@getPulse');
 Route::post('/team/{id}/answers', 'TeamAnswerController@index');
+Route::post('/team/{id}/edit', 'TeamLoginController@edit');
+Route::post('/team/{id}/delete', 'TeamLoginController@delete');
 
 //TeamAnswers
 Route::post('/teamAnswers/store', 'TeamAnswerController@store');
 Route::post('/teamAnswers/{id}/updateCorrect', 'TeamAnswerController@updateCorrect');
 Route::post('/team/{teamID}/round/{roundID}/powerUp/{powerUp}', 'TeamAnswerController@updatePowerUp');
 Route::post('/team/{gameCode}/leaderBoard', 'TeamAnswerController@leaderBoard');
-

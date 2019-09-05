@@ -11,14 +11,19 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css" >
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="css/font-awesome-animation.min.css">
+    {{--<script defer src="https://use.fontawesome.com/releases/v5.10.2/js/all.js" integrity="sha384-QMu+Y+eu45Nfr9fmFOlw8EqjiUreChmoQ7k7C1pFNO8hEbGv9yzsszTmz+RzwyCh" crossorigin="anonymous"></script>--}}
+
     <title>Hello, world!!</title>
 </head>
 
 <body>
 
 @yield('layout')
-
 <script src="https://kit.fontawesome.com/88e5ca8568.js"></script>
+{{--<script defer src="https://use.fontawesome.com/releases/v5.10.2/js/all.js" integrity="sha384-QMu+Y+eu45Nfr9fmFOlw8EqjiUreChmoQ7k7C1pFNO8hEbGv9yzsszTmz+RzwyCh" crossorigin="anonymous"></script>--}}
+{{--<script src="https://kit.fontawesome.com/7d75c9db00.js"></script>--}}
+
+
 <script src="/js/app.js"></script>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Answer;
 use App\Events\NewTeamAnswer;
 use App\Events\UpdatedAnswer;
+use App\Events\UpdateTeams;
 use App\Team;
 use App\TeamAnswer;
 use Illuminate\Http\Request;
@@ -52,13 +53,18 @@ class TeamAnswerController extends Controller
             'correct' => ($matchIndex == 0) ? $answers[$answerPosition]->correct : false,
             'matchIndex' => $matchIndex,
             'gameCode' => $request->gameCode,
-            'points' => ($matchIndex == 0) ? 1 : 0,
+            'points' => 1,
             'question_id' => $request->question_id,
             'round_id' => $request->round_id,
 
         ]);
 
+        if ($teamAnswer->correct === 1) {
+            $this->addPointsToTeam($teamAnswer, 1);
+        }
+
         broadcast(new NewTeamAnswer($teamAnswer));
+
         return $teamAnswer;
 
     }
@@ -73,46 +79,136 @@ class TeamAnswerController extends Controller
         $teamAnswer = TeamAnswer::findorFail($id);
         $teamAnswer->correct = !($teamAnswer->correct);
         $teamAnswer->save();
+
+        Log::error($teamAnswer->correct);
+        Log::error('$teamAnswer->correct');
+
+
+        if ($teamAnswer->correct === true) {
+            $this->addPointsToTeam($teamAnswer, $teamAnswer->points);
+        } else {
+            $this->addPointsToTeam($teamAnswer, 0 - $teamAnswer->points);
+        }
+
         broadcast(new UpdatedAnswer($teamAnswer));
-        return $teamAnswer;
+
+        return Team::findorFail($teamAnswer->team_id);
     }
 
     public function updatePowerUp($teamID, $roundID, $powerUp) {
 
+        $teamAnswers = TeamAnswer::where('team_id', $teamID)->where('round_id', $roundID)->get();
+
+        $team = Team::where('id', $teamID)->first();
+
+        if ($powerUp === 'Double') {
+            $team->double = !($team->double);
+        } else if ($powerUp === 'Triple') {
+            $team->triple = !($team->triple);
+        } else {
+
+            if ($teamAnswers[0]->powerUp === 'Double') {
+                $team->double = false;
+            } else {
+                $team->triple = false;
+            }
+        }
+
         TeamAnswer::where('team_id', $teamID)->where('round_id', $roundID)->update(['powerUp' => ($powerUp === 'Null') ? Null : $powerUp]);
 
-        foreach(TeamAnswer::where('team_id', $teamID)->where('round_id', $roundID)->get() as $answer) {
+        $teamAnswers = TeamAnswer::where('team_id', $teamID)->where('round_id', $roundID)->get();
+
+        foreach($teamAnswers as $answer) {
+            if ($powerUp === 'Null') {
+                $this->addPointsToTeam($answer, 1 - $answer->points);
+            }
             $this->updatePoints($answer);
         }
 
-        return TeamAnswer::where('team_id', $teamID)->where('round_id', $roundID)->get();
+        $team->save();
+
+//        return TeamAnswer::where('team_id', $teamID)->where('round_id', $roundID)->orderBy('points', 'ASC')->get();
+
+        return $team;
 
     }
 
     public function updatePoints(TeamAnswer $answer) {
 
-        if ($answer->correct === 1) {
+//        if ($answer->correct === 1) {
+//
+//            if ($answer->powerUp === 'Double') {
+//                $answer->points = 2;
+//                $this->addPointsToTeam($answer, 1);
+//
+//            } elseif ($answer->powerUp === 'Triple') {
+//
+//                $answer->points = 3;
+//                $this->addPointsToTeam($answer, 2);
+//
+//            } else {
+//
+//                $answer->points = 1;
+//            }
+//
+//        } else {
+//            $answer->points = 0;
+//        }
 
-            if ($answer->powerUp === 'Double') {
+        if ($answer->powerUp === 'Double') {
+            $answer->points = 2;
+            $this->addPointsToTeam($answer, 1);
 
-                $answer->points = 2;
+        } elseif ($answer->powerUp === 'Triple') {
 
-            } elseif ($answer->powerUp === 'Triple') {
-
-                $answer->points = 3;
-
-            } else {
-
-                $answer->points = 1;
-
-            }
+            $answer->points = 3;
+            $this->addPointsToTeam($answer, 2);
 
         } else {
-            $answer->points = 0;
+
+            $answer->points = 1;
         }
+
 
         $answer->save();
     }
+
+    public function addPointsToTeam(TeamAnswer $answer, $points) {
+        $team = Team::where('id', $answer->team_id)->first();
+
+        Log::error('$points');
+        Log::error($points);
+
+        Log::error('$team->points');
+        Log::error($team->points);
+        Log::error($team);
+
+
+        $team->points = $team->points + $points;
+
+        $team->save();
+
+        return $team;
+    }
+
+    public function leaderBoard ($gameCode) {
+
+        $teams = Team::where('gameCode', $gameCode)->orderBy('points', 'desc')->get();
+        Log::error($teams);
+
+        broadcast(new UpdateTeams($teams, $gameCode));
+
+        return $teams;
+
+    }
+
+
+
+
+
+
+
+
 
 
 }

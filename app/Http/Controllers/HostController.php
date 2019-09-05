@@ -15,21 +15,21 @@ use Illuminate\Http\Request;
 class HostController extends Controller
 {
 
-    public function startRound($code, $roundPosition) {
-
-        broadcast(new StartRound($code, $roundPosition));
-        return 'Start Round Successful';
-    }
-
-    public function startQuestion($code, $roundPosition, $questionPosition) {
-        broadcast(new StartQuestion($code, $roundPosition, $questionPosition));
-        return 'startQuestion Successful';
-    }
-
-    public function roundReview($code) {
-        broadcast(new RoundReview($code));
-        return 'roundReview Successful';
-    }
+//    public function startRound($code, $roundPosition) {
+//
+//        broadcast(new StartRound($code, $roundPosition));
+//        return 'Start Round Successful';
+//    }
+//
+//    public function startQuestion($code, $roundPosition, $questionPosition) {
+//        broadcast(new StartQuestion($code, $roundPosition, $questionPosition));
+//        return 'startQuestion Successful';
+//    }
+//
+//    public function roundReview($code) {
+//        broadcast(new RoundReview($code));
+//        return 'roundReview Successful';
+//    }
 
     public function revealAnswer($gameCode, $questionPosition) {
         broadcast(new RevealAnswer($gameCode, $questionPosition));

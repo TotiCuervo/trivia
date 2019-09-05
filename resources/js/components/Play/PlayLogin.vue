@@ -1,41 +1,48 @@
 <template>
     <div>
         <div class="container">
+            <!--Header-->
             <div class="row pt-5">
                 <div class="col-md-8 offset-md-2 text-center pt-5">
                     <h1>Let's Play!</h1>
-                    <!--<h1>{{Auth::user()->name}}</h1>-->
                 </div>
             </div>
-            <!--<transition name="fade2">-->
-            <!--</transition>-->
+            <!--Player interaction-->
             <div class="row pt-5">
+                <!--Player Code-->
                 <div class="col-md-4 offset-md-4" v-if="this.validCode !== true">
+                    <label>Play Code:</label>
+                    <b-form-input
+                            v-model="gameCode"
+                            :state=validCode
+                            id="play-code"
+                            placeholder="Enter your Play Code"
+                            @click="validCode = ''"
+                    ></b-form-input>
+                    <b-form-invalid-feedback id="play-code">
+                        Sorry :( wrong play code
+                    </b-form-invalid-feedback>
+                </div>
+                <!--Player Login-->
+                <div class="col-md-4 offset-md-4" v-if="this.validCode === true">
+                    <!--Team Name-->
                     <div class="row">
-                        <div class="col-md-8 offset-md-2">
-                            <label>Play Code:</label>
-                            <b-form-input
-                                    v-model="gameCode"
-                                    :state=validCode
-                                    id="play-code"
-                                    placeholder="Enter your Play Code"
-                                    @click="validCode = ''"
-                            ></b-form-input>
-                            <b-form-invalid-feedback id="play-code">
-                                Sorry :( wrong play code
+                        <div class="col-md-12">
+                            <label>Team Name:</label>
+                            <b-form-input id="team-name"
+                                          placeholder="Enter your Team Name"
+                                          v-model="name"
+                                          :state="validName"
+                                          @input="checkName()">
+                            </b-form-input>
+                            <b-form-invalid-feedback id="team-name-too-long" v-if="this.validName === false">
+                                Sorry, your name is too long
                             </b-form-invalid-feedback>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4 offset-md-4" v-if="this.validCode === true">
-                    <div class="row">
-                        <div class="col-md-8 offset-md-2">
-                            <label>Team Name:</label>
-                            <b-form-input id="team-name" placeholder="Enter your Team Name" v-model="name"></b-form-input>
-                        </div>
-                    </div>
+                    <!--Team Password-->
                     <div class="row pt-3">
-                        <div class="col-md-8 offset-md-2">
+                        <div class="col-md-12">
                             <label>Team Password:</label>
                             <b-form-input id="team-password" placeholder="Password" type="password" v-model="password" :state=validPassword @click="resetInput()"> </b-form-input>
                             <b-form-text id="team-password">
@@ -47,19 +54,17 @@
                             <b-form-invalid-feedback v-if="this.error === 'alreadyLoggedIn'" id="team-password">
                                 Sorry, it seems like someone is already logged in. If this is a mistake, please see the trivia master.
                             </b-form-invalid-feedback>
-                            <!--<p>{ this.error === 'alreadyLoggedIn'}}</p>-->
                         </div>
                     </div>
                 </div>
             </div>
+            <!--Submit Buttons-->
             <div class="row pt-3">
                 <div class="col-md-4 offset-md-4">
-                    <div class="row">
-                        <div class="col-md-8 offset-md-2">
-                            <b-button block variant="primary" @click="checkPlayCode()" v-if="this.validCode !== true">Check Code</b-button>
-                            <b-button block variant="primary" @click="loginOrRegister()" v-if="this.validCode === true">Let's Play</b-button>
-                        </div>
-                    </div>
+                    <b-button block variant="primary" @click="checkPlayCode()" v-if="this.validCode !== true">Check Code</b-button>
+                    <b-button block variant="primary" @click="loginOrRegister()" v-if="this.validCode === true && this.validName !== false ">Let's Play</b-button>
+                    <b-button block disabled variant="primary" @click="loginOrRegister()" v-if="this.validCode === true && this.validName === false ">Let's Play</b-button>
+
                 </div>
             </div>
         </div>
@@ -74,6 +79,7 @@
             return {
                 validCode: '',
                 validPassword:'',
+                validName: '',
                 gameCode: '',
                 name: '',
                 password: '',
@@ -119,7 +125,8 @@
                             this.validPassword = false;
                         }
                         else {
-                            // console.log(response.data);
+                            console.log('here i go');
+                            console.log(response.data);
                             this.loggedTeam = response.data;
                             localStorage.setItem('user-token',  response.data.token);
                             this.$router.push({name: "playInterface"});
@@ -128,10 +135,11 @@
                     });
             },
             resetInput() {
-
                 this.validPassword = '';
                 this.error = '';
-
+            },
+            checkName() {
+                this.validName = (this.name.length <= 30) ? '' : false;
             }
         },
         computed: {

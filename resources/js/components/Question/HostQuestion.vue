@@ -1,18 +1,18 @@
 <template>
     <div>
+        <!--Navigation-->
         <div class="row">
-            <div class="col-md-12">
-                <small>Round {{this.rounds[this.playRoundPosition].order_number}}</small>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
+            <div class="col-5">
                 <div class="float-left">
-                    <h4>Question {{this.questions[this.playQuestionPosition].order_number}}</h4>
+                    <small>Round {{this.rounds[this.playRoundPosition].order_number}}</small>
+                    <p class="mb-0">Question {{this.questions[this.playQuestionPosition].order_number}}</p>
+                    <h5 class="mb-0">{{this.questions[this.playQuestionPosition].type}}</h5>
                 </div>
+            </div>
+            <div class="col-7">
                 <div class="float-right">
                     <div v-if="this.timer === 0">
-                        <button type="button" class="btn btn-success btn-lg mr-2" @click='onUpNext()'>Up Next: {{upNext}}</button>
+                        <button type="button" class="btn btn-success btn-lg mr-2" @click='onUpNext()'>{{upNext}}</button>
                     </div>
                     <div v-else>
                         <h4>Time Left: {{this.timer}}</h4>
@@ -20,10 +20,15 @@
                 </div>
             </div>
         </div>
-        <div class="row pt-3">
+        <!--Question Title-->
+        <div class="row pt-5">
             <div class="col-md-12 text-center pt-5">
-                <h1> {{this.questions[this.playQuestionPosition].title}}</h1>
+                <h2>{{this.questions[this.playQuestionPosition].title}}</h2>
             </div>
+        </div>
+        <!--Multiple Choice Answers Optional-->
+        <div class="pt-3" v-if="this.questions[this.playQuestionPosition].type === 'Multiple-Choice'">
+            <HostMultipleChoiceAnswerOptions></HostMultipleChoiceAnswerOptions>
         </div>
     </div>
 </template>
@@ -81,6 +86,7 @@
         },
         computed: {
             ...mapGetters('question', ['questions']),
+            ...mapGetters('answer', ['answers']),
             ...mapGetters('round', ['rounds']),
             ...mapGetters('play', ['roundPosition', 'questionPosition', 'page']),
             playRoundPosition: {

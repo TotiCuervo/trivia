@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\NewTeam;
+use App\Events\UpdateTeams;
 use App\Events\TeamLeaving;
 use Illuminate\Http\Request;
 
@@ -109,7 +110,7 @@ class TeamLoginController extends Controller
 
         $this->broadcastNewTeam($team);
 
-        return $team;
+        return Team::findorFail($team->id);
     }
 
     public function login(Request $request)
@@ -133,7 +134,7 @@ class TeamLoginController extends Controller
         $this->broadcastNewTeam($team);
 
         //if authorized, return the team
-        return $team;
+        return Team::findorFail($team->id);
     }
 
     public function logout($id){
@@ -146,6 +147,36 @@ class TeamLoginController extends Controller
         $this->broadcastTeamLeaving($team);
 
         return $team;
+    }
+
+    public function edit($id, Request $request) {
+
+        $team = Team::findorFail($id);
+        $team->name = $request->name;
+        $team->save();
+
+        $teams = Team::where('gameCode', $team->gameCode)->get();
+
+        broadcast(new UpdateTeams($teams, $team->gameCode));
+
+        return $teams;
+
+    }
+
+    public function delete($id) {
+        $team = Team::findorFail($id);
+
+        $gameCode = $team->gameCode;
+
+        $team->delete();
+
+        $teams = Team::where('gameCode', $gameCode)->get();
+
+        broadcast(new UpdateTeams($teams, $gameCode));
+
+        return $teams;
+
+
     }
 
     //broadcasts

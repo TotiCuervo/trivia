@@ -69,6 +69,33 @@ const actions = {
             console.log(error.response);
         });
     },
+    updateTeamAnswerCorrect({commit, state}, payload) {
+
+        axios.post('/api/teamAnswers/' + payload.answer.id + '/updateCorrect')
+            .then (response => {
+                commit('UPDATE_TEAM', response.data);
+                commit('SET_TEAM', response.data);s
+            });
+
+        commit('UPDATE_TEAM_ANSWER', {
+            answer: payload.answer.answer,
+            id: payload.answer.id,
+            question_id: payload.answer.question_id,
+            round_id: payload.answer.round_id,
+            team_id: payload.answer.team_id,
+            correct: !(payload.answer.correct) === true ? 1 : 0,
+            gameCode: payload.answer.gameCode,
+            matchIndex: payload.answer.matchIndex,
+            points: payload.answer.points,
+            powerUp: payload.answer.powerUp,
+        });
+    },
+    deleteTeam({commit, state}) {
+        axios.post('/api/team/'+ state.team.id +'/delete')
+            .then (response => {
+                commit('SET_TEAMS', response.data)
+            });
+    }
 
 
 };
@@ -78,28 +105,10 @@ const mutations = {
         state.loading = loading
     },
     SET_TEAM(state,team){
-        state.team.id = team.id;
-        state.team.name = team.name;
-        state.team.token = team.token;
-        state.team.gameCode = team.gameCode;
-        state.team.points = team.points;
-        state.team.double = team.double;
-        state.team.triple = team.triple;
+        state.team = team;
     },
     SET_TEAMS(state,teams) {
-
-        for (let $i=0; $i < teams.length; $i++) {
-
-            let $team = {
-                id: teams[$i].id,
-                name: teams[$i].name,
-                token: teams[$i].token,
-                gameCode: teams[$i].gameCode
-            };
-
-            state.teams.push($team);
-        }
-
+        state.teams = teams;
     },
     SET_TEAM_ANSWERS(state,answers) {
         for (let $i=0; $i < answers.length; $i++) {
@@ -113,15 +122,7 @@ const mutations = {
         state.team.name = name;
     },
     ADD_TEAM(state, team){
-
-        let $gameTeam = {
-            id: team.id,
-            name: team.name,
-            token: team.token,
-            gameCode: team.gameCode
-        };
-
-        state.teams.push($gameTeam);
+        state.teams.push(team);
     },
     REMOVE_TEAM(state, team) {
 
@@ -135,31 +136,28 @@ const mutations = {
     ADD_TEAM_ANSWER(state, answer) {
         state.answers.push(answer);
     },
-    UPDATE_TEAM_ANSWER_CORRECT(state, payload) {
-
-        axios.post('/api/teamAnswers/' + payload.answer.id + '/updateCorrect')
-            .then (response => {
-                // console.log(response.data);
-            });
-
-        Vue.set(state.answers, payload.order, {
-            answer: payload.answer.answer,
-            id: payload.answer.id,
-            question_id: payload.answer.question_id,
-            round_id: payload.answer.round_id,
-            team_id: payload.answer.team_id,
-            correct: !(payload.answer.correct) === true ? 1 : 0,
-            gameCode: payload.answer.gameCode,
-            matchIndex: payload.answer.matchIndex,
-            points: payload.answer.points,
-            powerUp: payload.answer.powerUp,
-        });
-    },
     UPDATE_TEAM_ANSWER(state, answer) {
 
         for (let $i=0; $i < state.answers.length; $i++) {
             if (answer.question_id === state.answers[$i].question_id) {
                 Vue.set(state.answers, $i, answer);
+                break;
+            }
+        }
+    },
+    UPDATE_TEAM_NAME(state, name) {
+        state.team.name = name;
+    },
+    UPDATE_DOUBLE(state, double) {
+        state.team.double = double;
+    },
+    UPDATE_TRIPLE(state, triple) {
+        state.team.triple = triple;
+    },
+    UPDATE_TEAM(state, team) {
+        for (let $i = 0; $i < state.teams.length; $i++) {
+            if (state.teams[$i].id === team.id) {
+                Vue.set(state.teams, $i, team);
                 break;
             }
         }

@@ -1,34 +1,24 @@
 <template>
     <div>
         <div class="row pb-4">
-            <div class="col-md-10">
+            <div class="col-6">
                 <h3>Teams: {{this.teams.length}} Teams</h3>
             </div>
-            <div class="col-md-2">
+            <div class="col-6">
                 <div class="float-right">
-                    <p class="mb-0">Show Game:</p>
-                    <div class="onoffswitch">
-                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" @click="toggleShowGame()">
-                        <label class="onoffswitch-label" for="myonoffswitch">
-                            <span class="onoffswitch-inner"></span>
-                            <span class="onoffswitch-switch"></span>
-                        </label>
-                    </div>
+                    <!--For Production-->
+                    <button type="button" class="btn btn-success btn-lg mr-2"  v-if="this.teams.length === 0" disabled>Waiting on Players</button>
+                    <button type="button" class="btn btn-success btn-lg mr-2" @click='goToStartGame()' v-else>Start Game</button>
+
+
+                    <!--For workaround in development-->
+                    <!--<button type="button" class="btn btn-success btn-lg mr-2" @click='goToStartGame()' v-if="currentPage === 'HostLobby'">Start Game</button>-->
                 </div>
             </div>
         </div>
-        <div class="row" v-if="this.showGame === false">
+        <div class="row">
             <div class="col-md-12">
-                <GameTeamIndex></GameTeamIndex>
-            </div>
-        </div>
-        <div class="row" v-if="this.showGame === true">
-            <div class="col-md-6 text-center">
-            <GameTeamIndex></GameTeamIndex>
-            </div>
-            <div class="col-md-6 vl">
-            <h1 class="text-center pb-3">Game outline</h1>
-            <HostGameOutline></HostGameOutline>
+                <GameTeamIndex :col="3"></GameTeamIndex>
             </div>
         </div>
     </div>
@@ -41,20 +31,28 @@
         data() {
             return {
                 params: '',
-                showGame: false,
             }
         },
         mounted() {
 
         },
         methods: {
-            toggleShowGame() {
-                this.showGame = ! this.showGame;
-            }
+            goToStartGame() {
+                this.currentPage = 'HostStartGame';
+            },
         },
         computed: {
             ...mapGetters('game', ['game', 'game_id', 'gameCode']),
             ...mapGetters('team', ['teams']),
+            ...mapGetters('play', ['roundPosition', 'questionPosition', 'page']),
+            currentPage: {
+                get() {
+                    return this.page;
+                },
+                set(value) {
+                    return this.$store.commit('play/SET_PAGE', value);
+                }
+            },
             game_code: {
                 get() {
                     return this.gameCode;

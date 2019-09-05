@@ -3,8 +3,6 @@ function initialState() {
         roundPosition: 0,
         questionPosition: 0,
         page: '',
-        //make myAnswers into an array when ready to implement
-        myAnswers: 'This is my Answer!',
         loading: false
     }
 }

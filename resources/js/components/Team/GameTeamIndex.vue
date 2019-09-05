@@ -6,7 +6,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-4 text-center" v-for="team in this.gameTeams">
+            <div class="text-center" v-bind:class="{'col-md-3': col === 3, 'col-md-8 offset-md-2': col === 8}" v-for="team in this.gameTeams">
                 <div class="pb-3">
                     <TriviaTeam :team="team"></TriviaTeam>
                 </div>
@@ -43,7 +43,8 @@
                     return this.$store.commit('team/ADD_TEAM', value);
                 }
             }
-        }
+        },
+        props: ['col'],
     }
 </script>
 

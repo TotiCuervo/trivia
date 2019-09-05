@@ -2,7 +2,12 @@
     <div>
         <div class="row pb-3">
             <div class="col-md-12">
-                <button type="button" class="btn btn-success btn-lg" @click="startRound()">Start Round 1</button>
+                <div class="float-left">
+                    <button type="button" class="btn btn-success btn-orange btn-lg mr-2" @click='goToHostLobby()' v-if="currentPage === 'HostStartGame'">Back</button>
+                </div>
+                <div class="float-right">
+                    <button type="button" class="btn btn-success btn-lg" @click="startRound()">Start Round 1</button>
+                </div>
             </div>
         </div>
         <div class="row">
@@ -31,7 +36,10 @@
             },
             startThisRound(index) {
                 this.playRoundPosition = index;
-            }
+            },
+            goToHostLobby() {
+                this.currentPage = 'HostLobby';
+            },
 
         },
         computed: {

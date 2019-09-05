@@ -1,10 +1,12 @@
 <template>
     <div>
+        <!--Round Header-->
         <div class="row pt-3">
             <div class="col-md-12 text-center">
                 <h3>Round {{this.rounds[this.roundPosition].order_number}} Answers</h3>
             </div>
         </div>
+        <!--Question index-->
         <div v-for="question in this.questions.filter(x => x.round_id === this.rounds[roundPosition].id)">
             <div class="row pt-3">
                 <div class="col-md-12 text-center">
@@ -22,23 +24,47 @@
                 </div>
             </div>
         </div>
+        <!--Round Modifier-->
         <div class="row pt-3">
             <div class="col-md-12">
                 <div class="row">
-                    <div class="col-md-8 offset-md-2 text-center" v-if="this.double === 0">
+                    <div class="col-md-8 offset-md-2 text-center">
                         <div class="fa-4x">
-                            <span class="fa-layers fa-fw clicker" v-bind:class="{'text-muted': clickedPowerUp !== 'Double'}"
-                                  @click="setPowerUp('Double')">
+
+                            <!--Double Badges-->
+                            <span class="fa-layers fa-fw clicker text-muted" v-if="this.clickedPowerUp !=='Double' && !(this.double)" @click="setPowerUp('Double')">
                                 <i class="fas fa-certificate"></i>
                                 <span class="fa-layers-text fa-inverse" data-fa-transform="shrink-11.5"
                                       style="font-weight:900">2X</span>
                             </span>
-                            <span class="fa-layers fa-fw clicker" v-bind:class="{'text-muted': clickedPowerUp !== 'Triple'}"
-                                  @click="setPowerUp('Triple')">
+                            <span class="fa-layers fa-fw clicker" v-if="this.clickedPowerUp === 'Double'">
+                                <i class="fas fa-certificate"></i>
+                                <span class="fa-layers-text fa-inverse" data-fa-transform="shrink-11.5"
+                                      style="font-weight:900">2X</span>
+                            </span>
+                            <span class="fa-layers fa-fw clicker text-really-muted" v-if="this.double && this.clickedPowerUp !== 'Double'" v-b-tooltip.bottom title="2X used">
+                                <i class="fas fa-certificate"></i>
+                                <span class="fa-layers-text fa-inverse" data-fa-transform="shrink-11.5"
+                                      style="font-weight:900">2X</span>
+                            </span >
+
+                            <!--Triple Badges-->
+                            <span class="fa-layers fa-fw clicker text-muted" v-if="this.clickedPowerUp !=='Triple' && !(this.triple) " @click="setPowerUp('Triple')">
                                 <i class="fas fa-certificate"></i>
                                 <span class="fa-layers-text fa-inverse" data-fa-transform="shrink-11.5"
                                       style="font-weight:900">3X</span>
                             </span>
+                            <span class="fa-layers fa-fw clicker" v-if="this.clickedPowerUp ==='Triple'">
+                                <i class="fas fa-certificate"></i>
+                                <span class="fa-layers-text fa-inverse" data-fa-transform="shrink-11.5"
+                                      style="font-weight:900">3X</span>
+                            </span>
+                            <span class="fa-layers fa-fw clicker text-really-muted" v-if="this.triple && this.clickedPowerUp !== 'Triple'" v-b-tooltip.bottom title="3X used">
+                                <i class="fas fa-certificate"></i>
+                                <span class="fa-layers-text fa-inverse" data-fa-transform="shrink-11.5"
+                                      style="font-weight:900">3X</span>
+                            </span>
+
                         </div>
                     </div>
                 </div>
@@ -79,10 +105,25 @@
 
                 axios.post('/api/team/'+ this.teamAnswers[0].team_id +'/round/'+ this.rounds[this.roundPosition].id +'/powerUp/'+$powerUp)
                     .then(response => {
-                        console.log(response.data);
                         this.undo = !(this.undo);
                         this.clickedPowerUp = (this.undo === false) ? '' : this.clickedPowerUp;
+                        this.loggedTeam = response.data;
                     });
+
+                // if (this.undo === true) {
+                //     if (this.clickedPowerUp === 'Double') {
+                //         this.teamDouble = 0;
+                //     } else {
+                //         this.teamTriple = 0;
+                //     }
+                // } else {
+                //     if ($powerUp === 'Double') {
+                //         this.teamDouble = 1;
+                //     } else {
+                //         this.teamTriple = 1;
+                //     }
+                // }
+
             }
         },
         computed: {
@@ -90,8 +131,16 @@
             ...mapGetters('question', ['questions']),
             ...mapGetters('answer', ['answers']),
             ...mapGetters('game', ['gameCode']),
-            ...mapGetters('team', ['teamAnswers', 'double', 'triple']),
+            ...mapGetters('team', ['team','teamAnswers', 'double', 'triple']),
             ...mapGetters('play', ['roundPosition', 'questionPosition', 'page']),
+            loggedTeam: {
+                get() {
+                    return this.team;
+                },
+                set(value) {
+                    return this.$store.commit('team/SET_TEAM', value);
+                }
+            },
         },
     }
 </script>

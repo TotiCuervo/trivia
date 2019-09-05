@@ -1,11 +1,11 @@
 <template>
     <div>
-        <div v-for="round in rounds">
+        <div v-for="(round, index) in rounds">
             <div class="row">
                 <div class="col-md-12">
-                    <h5 class="pb-3 text-center"><i>Round: {{round.order_number}}</i></h5>
+                    <h3><b>Round: {{round.order_number}}</b></h3>
                     <HostQuestionIndex :round="round"></HostQuestionIndex>
-                    <hr>
+                    <hr v-if="index !== rounds.length - 1">
                 </div>
             </div>
         </div>

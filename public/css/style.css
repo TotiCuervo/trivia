@@ -21,6 +21,14 @@
     color: black;
 }
 
+.fa-gray-white {
+    color: lightgray;
+    transition: 1s;
+}
+.fa-gray-white:hover {
+    color: white;
+}
+
 
 .round-button:hover {
     text-decoration: none;
@@ -224,6 +232,12 @@
     background-color: #FFF5D8;
 }
 
+.host-header {
+    box-shadow: 0 0.25rem 0.25rem rgba(0,0,0,.25), inset 0 -1px 5px rgba(0,0,0,.25);
+    background-color: #2566AC;
+    color:white;
+}
+
 /*Cards*/
 
 .game-card {
@@ -233,11 +247,35 @@
     /*border-radius: 10px;*/
 }
 
+.answer-card {
+    border: 0px solid rgba(0, 0, 0, 0.125) !important;
+    border-radius: 2.0rem !important;
+    box-shadow: 0px 1px 9px 0 rgba(0,0,0,0.2);
+}
+
 .fancy {
     /*box-shadow: 0px 4px 6px 0 rgba(0,0,0,0.1);*/
     box-shadow: 0px 4px 6px 0 rgba(0,0,0,0.5);
 
     transition: 0.5s;
+}
+
+.fancy3 {
+    border: 0px solid rgba(0, 0, 0, 0.125) !important;
+    border-radius: .7rem !important;
+    box-shadow: 0px 1px 9px 0 rgba(0,0,0,0.2) !important;
+}
+
+.team-card {
+    box-shadow: 0px 2px 8px 0 rgba(0,0,0,0.1);
+    transition: 0.5s;
+    border-radius: 5rem !important;
+}
+
+.team-card:hover {
+    box-shadow: 0px 2px 10px 0 rgba(0,0,0,0.3);
+    transition: 0.5s;
+    border-radius: 5rem !important;
 }
 
 .fancy-2 {
@@ -300,6 +338,22 @@
 }
 
 
+/*Hovers*/
+
+.hover-red:hover {
+    color: darkred;
+    transition: 1s;
+}
+
+.hover-yellow:hover {
+    color: orange;
+    transition: 0.5s;
+}
+
+.hover-green:hover {
+    color: green;
+    transition: 0.5s;
+}
 
 
 
@@ -354,6 +408,13 @@
     right: 0px;
 }
 
+
+/*Buttons*/
+.btn-orange {
+    background-color: #E7873E; !important;
+    border-color: #E7873E; !important;
+}
+
 /*other*/
 
 .isChosen {
@@ -363,4 +424,25 @@
 
 #reveal-answer {
     color:black;
+}
+
+.text-really-muted {
+    color: #6c757d4f !important;
+}
+
+
+.color-red {
+    color: red;
+}
+
+.color-blue{
+    color: blue;
+}
+
+.color-green {
+    color: green;
+}
+
+.color-yellow {
+    color: gold;
 }

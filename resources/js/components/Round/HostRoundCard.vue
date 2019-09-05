@@ -1,6 +1,6 @@
 <template>
     <div v-if="this.round">
-        <div class="card clicker" v-bind:class="{isChosen: this.round.order_number === this.rounds[this.roundPosition].order_number}">
+        <div class="fancy3 card clicker" v-bind:class="{isChosen: this.round.order_number === this.rounds[this.roundPosition].order_number}">
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-12 text-center">

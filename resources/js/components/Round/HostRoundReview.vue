@@ -1,34 +1,40 @@
 <template>
     <div>
+        <!--Navigation-->
         <div class="row">
-            <div class="col-md-12 text-center">
+            <div class="col-12 text-center">
                 <div class="float-right">
-                    <button type="button" class="btn btn-success btn-lg mr-2" @click='startAnswerReveal()'>Up Next: Question 1 Answer</button>
+                    <button type="button" class="btn btn-success btn-lg mr-2" @click='startAnswerReveal()'>Question 1 Answer</button>
                 </div>
             </div>
         </div>
+        <!--Round Title-->
         <div class="row pt-3">
-            <div class="col-md-12 text-center">
+            <div class="col-12 text-center">
                 <h3>Round Review</h3>
             </div>
         </div>
+        <!--Actual Round Review-->
         <div class="row pb-5">
-            <div class="col-md-8 offset-md-2">
+            <div class="col-8 offset-2">
                 <div class="pt-3" v-for="question in this.questions.filter(x => x.round_id === this.rounds[playRoundPosition].id)">
                     <div class="card">
                         <div class="card-body">
+                            <!--Question order-->
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-12">
                                     <small class="text-muted">Question {{question.order_number}}</small>
                                 </div>
                             </div>
+                            <!--Question Title-->
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-12">
                                     <h5 class="mb-0">{{question.title}}</h5>
                                 </div>
                             </div>
+                            <!--Question Possible Answers-->
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-12">
                                     <small class="text-muted" v-if="answers.filter(x => x.question_id === question.id && x.correct === 1).length === 1">
                                         <b>Possible Answer(s): </b>
                                         <span v-for="answer in answers.filter(x => x.question_id === question.id && x.correct === 1)">
@@ -43,49 +49,51 @@
                                     </small>
                                 </div>
                             </div>
+                            <!--Team Table Headers-->
                             <div class="row pt-4">
-                                <div class="col-md-5">
+                                <div class="col-5">
                                     <small class="text-muted">Team Name</small>
                                 </div>
-                                <div class="col-md-5">
+                                <div class="col-3 pr-2">
                                     <small class="text-muted">Answer</small>
                                 </div>
-                                <div class="col-md-2">
-                                    <small class="text-muted">Change Points</small>
+                                <div class="col-4">
+                                    <div class="float-right">
+                                        <small class="text-muted">Change Points</small>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="row pt-3" v-for="team in teams">
-                                <div class="col-md-5">
+                            <!--Team information-->
+                            <div class="row pt-3" v-for="team in teams" v-if="teams.length !== 0">
+                                <div class="col-5">
                                     <p class="m-0">{{team.name}}</p>
                                 </div>
-                                <div class="col-md-5">
+                                <div class="col-5">
                                     <div v-if="question.type === 'Fill-in-blank'">
-                                        <div class="col-md-5">
-                                            <div v-for="answer in teamAnswers.filter(x => x.team_id === team.id && x.question_id === question.id)">
-                                                <h5 class="mb-0 pointer" v-if="answer.matchIndex === 0" v-b-tooltip.left title="Correct">
+                                        <div v-for="answer in teamAnswers.filter(x => x.team_id === team.id && x.question_id === question.id)">
+                                            <h5 class="mb-0 pointer" v-if="answer.matchIndex === 0" v-b-tooltip.left title="Correct">
                                                     <span class="badge badge-success p-2">
                                                         {{answer.answer}}
                                                     </span>
-                                                </h5>
+                                            </h5>
 
-                                                <h5 class="mb-0 pointer" v-if="answer.matchIndex > 0 && answer.matchIndex <= 4" v-b-tooltip.left title="Probably correct">
+                                            <h5 class="mb-0 pointer" v-if="answer.matchIndex > 0 && answer.matchIndex <= 4" v-b-tooltip.left title="Probably correct">
                                                     <span class="badge list-group-item-success p-2">
                                                         {{answer.answer}}
                                                     </span>
-                                                </h5>
+                                            </h5>
 
-                                                <h5 class="mb-0 pointer" v-else-if="answer.matchIndex > 4 && answer.matchIndex <= 7" v-b-tooltip.left title="Maybe correct">
+                                            <h5 class="mb-0 pointer" v-else-if="answer.matchIndex > 4 && answer.matchIndex <= 7" v-b-tooltip.left title="Maybe correct">
                                                     <span class="badge list-group-item-warning p-2">
                                                         {{answer.answer}}
                                                     </span>
-                                                </h5>
+                                            </h5>
 
-                                                <h5 class="mb-0 pointer" v-else-if="answer.matchIndex > 8" v-b-tooltip.left title="Probably not correct">
+                                            <h5 class="mb-0 pointer" v-else-if="answer.matchIndex > 8" v-b-tooltip.left title="Probably not correct">
                                                     <span class="badge list-group-item-danger p-2">
                                                         {{answer.answer}}
                                                     </span>
-                                                </h5>
-                                            </div>
+                                            </h5>
                                         </div>
                                     </div>
                                     <div v-else>
@@ -110,14 +118,14 @@
                                             </span>
                                     </h5>
                                 </div>
-                                <div class="col-md-2">
-                                    <div v-for="answer in teamAnswers.filter(x => x.team_id === team.id && x.question_id === question.id)">
-                                        <i class="fas fa-check" v-bind:class="{'text-muted': answer.correct === 0, 'text-success': answer.correct === 1}"
-                                           v-b-tooltip.left title="Click to mark right" @click="changeAnswer(answer.id, 1)"></i>
-                                        <span> / </span>
-                                        <i class="fas fa-ban" v-bind:class="{'text-muted': answer.correct === 1, 'text-danger': answer.correct === 0}"
-                                           v-b-tooltip.right title="Click to mark wrong" @click="changeAnswer(answer.id, 0)"></i>
-                                    </div>
+                                <div class="col-2">
+                                    <HostChangeAnswer :team="team" :question="question"></HostChangeAnswer>
+                                </div>
+                            </div>
+                            <!--If there are no teams-->
+                            <div class="row pt-3" v-if="teams.length === 0">
+                                <div class="col-12 text-center">
+                                    <h5>No teams :( Sad Day</h5>
                                 </div>
                             </div>
                         </div>
@@ -138,10 +146,12 @@
             }
         },
         mounted() {
-            axios.post('/api/host/' + this.gameCode.code + '/roundReview')
-                .then(response => {
 
+            axios.post('/api/host/'+ this.gameCode.code + '/round/' + this.playRoundPosition +'/question/' + 0 + '/currentPage/' + 'PlayRoundReview')
+                .then(response => {
+                    // console.log(response.data);
                 });
+
         },
         methods: {
             startAnswerReveal() {
@@ -160,7 +170,6 @@
             },
             changeAnswer(id, change) {
                 if (this.teamAnswers.find(x => x.id === id && x.correct !== change)) {
-                    console.log('found it');
 
 
                     for (let $i = 0; $i < this.teamAnswers.length; $i++) {
