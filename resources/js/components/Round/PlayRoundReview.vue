@@ -103,7 +103,13 @@
 
                 let $powerUp = (this.undo === false) ? this.clickedPowerUp : 'Null';
 
-                axios.post('/api/team/'+ this.teamAnswers[0].team_id +'/round/'+ this.rounds[this.roundPosition].id +'/powerUp/'+$powerUp)
+                console.log('this.teamAnswers[0].team_id');
+                console.log(this.teamAnswers[0].team_id);
+
+                console.log('this.team');
+                console.log(this.team);
+
+                axios.post('/api/team/'+ this.loggedTeam.id +'/round/'+ this.rounds[this.roundPosition].id +'/powerUp/'+$powerUp)
                     .then(response => {
                         this.undo = !(this.undo);
                         this.clickedPowerUp = (this.undo === false) ? '' : this.clickedPowerUp;

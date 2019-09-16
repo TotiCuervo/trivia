@@ -125,8 +125,6 @@
                             this.validPassword = false;
                         }
                         else {
-                            console.log('here i go');
-                            console.log(response.data);
                             this.loggedTeam = response.data;
                             localStorage.setItem('user-token',  response.data.token);
                             this.$router.push({name: "playInterface"});

@@ -7,8 +7,12 @@
             <div class="col-6">
                 <div class="float-right">
                     <!--For Production-->
-                    <button type="button" class="btn btn-success btn-lg mr-2"  v-if="this.teams.length === 0" disabled>Waiting on Players</button>
-                    <button type="button" class="btn btn-success btn-lg mr-2" @click='goToStartGame()' v-else>Start Game</button>
+                    <button type="button" class="btn btn-success btn-lg mr-2" v-if="this.teams.length === 0" disabled>
+                        Waiting on Players
+                    </button>
+                    <button type="button" class="btn btn-success btn-lg mr-2" @click='goToStartGame()' v-else>Start
+                        Game
+                    </button>
 
 
                     <!--For workaround in development-->

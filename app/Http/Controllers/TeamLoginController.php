@@ -105,6 +105,7 @@ class TeamLoginController extends Controller
         $team->password = bcrypt($request->password);
         $team->identifier = $request->name.$request->gameCode;
         $team->token = Str::random(32);
+        $team->loggedIn = true;
 
         $team->save();
 
@@ -193,6 +194,12 @@ class TeamLoginController extends Controller
 
     public function getPulse($id) {
         return Team::findorFail($id)->first()->loggedIn;
+    }
+
+    public function iAmHere($id) {
+        $team = Team::findorFail($id);
+        $team->loggedIn = true;
+        $team->save();
     }
 
 }

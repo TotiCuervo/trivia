@@ -1,10 +1,10 @@
 <template>
     <div>
-        <div class="team-card card clicker"
-             @click="setTeam()"
-             v-b-modal.team>
+        <div class="team-card card clicker" @click="setTeam()" v-b-modal.team>
             <div class="card-body">
-                <h5 class="mb-0">{{team.name}}</h5>
+                <span class="mb-0 h5">
+                    <HostTeamName :team="this.team"></HostTeamName>
+                </span>
             </div>
         </div>
     </div>

@@ -62,50 +62,87 @@
     export default {
         data() {
             return {
-
+                acceptablePages: ['HostRoundPreview', 'HostRoundReview', 'HostLeaderBoard'],
             }
         },
         mounted() {
             Echo.join('game.'+this.gameCode.code)
                 .here((users) => {
+
+                    //Gets all the Teams
                     axios.get('/api/game/'+this.gameCode.code + '/teams')
                         .then(response => {
                             this.$store.commit('team/SET_TEAMS', response.data);
                         });
 
+                    //Gets all the Answers
                     axios.get('/api/game/' + this.gameCode.code + '/teamAnswers')
                         .then(response => {
                             this.$store.commit('team/SET_TEAM_ANSWERS', response.data);
                         });
                 })
                 .leaving((user) => {
-                    console.log('oh wow, someone is leaving and i caught them!');
-                    for (let $i=0; $i < this.gameTeams.length; $i++) {
-                        axios.get('/api/team/' + this.gameTeams[$i].id + '/pulse')
+
+                    //sets all teams to not logged in and sends request to log back in;
+                    axios.post('/api/host/game/'+this.gameCode.code+'/areYouThere');
+
+                    //Gets all the Teams
+                    let vm = this;
+                    setTimeout(function () {
+                        axios.get('/api/game/'+vm.gameCode.code + '/teams')
                             .then(response => {
-                                if (response.data === 0) {
-                                    this.$store.commit('team/REMOVE_TEAM', this.gameTeams[$i].team)
-                                }
+                                vm.$store.commit('team/SET_TEAMS', response.data);
                             });
-                    }
+                    }, 5000);
+
                 })
                 .listen('NewTeam', (e) => {
                     // console.log('made it in new team');
+
+                    //sets the add equal to true
                     let $add = true;
 
+                    //loops through the teams in the game
                     for (let $i=0; $i < this.gameTeams.length; $i++) {
+
+                        //if the team is in the list of current teams
                         if (this.gameTeams[$i].name === e.team.name) {
+
+                            //if this team is not logged in on our list, update it so it shows they are online
+                            if (!this.gameTeams[$i].loggedIn) {
+                                this.$store.commit('team/UPDATE_TEAM', e.team);
+                            }
+
+                            //make it so that this team does not get added twice
                             $add = false;
                         }
                     }
+
+                    //if this team is new, add them
                     if ($add === true) {
-                        // console.log(e);
                         this.gameTeams = e.team;
+
+                        if (this.currentPage !== 'HostLobby') {
+                            this.newPlayerToast(e.team);
+                        }
                     }
+
+                    this.catchUpTeam(e.team);
 
                 })
                 .listen('TeamLeaving', (e) => {
                     console.log('someone is leaving the game');
+
+                    //for now
+                    // this.$store.commit('team/REMOVE_TEAM', e.team)
+
+
+
+
+
+
+                //    Old Code:
+
                     // let vm = this;
                     // setTimeout(function () {
                     //     axios.get('/api/team/'+ e.team.id + '/pulse')
@@ -117,16 +154,10 @@
                     //         });
                     // }, 2000);
 
-                    this.$store.commit('team/REMOVE_TEAM', e.team)
-
                 })
                 .listen('NewTeamAnswer', (e) => {
                     this.$store.commit('team/ADD_TEAM_ANSWER', e.teamAnswer);
                 })
-                .listen('UpdateTeams', (e) => {
-                    console.log(e);
-                    this.$store.commit('team/SET_TEAMS', e.teams);
-                });
         },
         methods: {
             goToStartGame() {
@@ -135,6 +166,44 @@
             goToHostLobby() {
                 this.currentPage = 'HostLobby';
             },
+            catchUpTeam(team) {
+            // this is used to catch up a new user if they logged in
+
+                if (this.acceptablePages.find(x => x === this.currentPage)) {
+
+                    let $playerPage = '';
+
+                    switch (this.currentPage) {
+                        case 'HostRoundReview':
+                            $playerPage = 'PlayRoundReview';
+                            break;
+                        case 'HostRoundPreview':
+                            $playerPage = 'PlayRoundPreview';
+                            break;
+                        case 'HostLeaderBoard':
+                            $playerPage = 'PlayLeaderBoard';
+                            break;
+                    }
+
+                    console.log('made it to catchUpTeam. Sending:');
+                    console.log($playerPage);
+
+                    axios.post('/api/host/'+ this.gameCode.code + '/round/' + this.playRoundPosition +'/question/' + this.playQuestionPosition + '/currentPage/' + $playerPage);
+
+                    if ($playerPage === 'PlayLeaderBoard') {
+                        axios.post('/api/team/'+ this.gameCode.code +'/leaderBoard');
+                    }
+
+                }
+
+            },
+            newPlayerToast(team) {
+                this.$bvToast.toast(`${team.name} has joined the game!`, {
+                    title: `New Player!`,
+                    variant: 'info',
+                    solid: true
+                })
+            }
         },
         computed: {
             ...mapGetters('game', ['game', 'game_id', 'gameCode']),

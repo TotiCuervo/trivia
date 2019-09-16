@@ -51,6 +51,7 @@ files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 const router = new VueRouter({
+    // mode: 'history',
     routes: [
         {
             path: '/home',

@@ -1,11 +1,15 @@
 <template>
     <div>
-        <div v-for="answer in teamAnswers.filter(x => x.team_id === team.id && x.question_id === question.id)">
-            <i class="fas fa-check" v-bind:class="{'text-muted': answer.correct === 0, 'text-success': answer.correct === 1}"
-               v-b-tooltip.left title="Click to mark right" @click="changeAnswer(answer.id, 1)"></i>
+        <div v-if="this.answer">
+            <span class="clicker" v-bind:class="{'text-muted': !this.answer.correct, 'text-success': this.answer.correct}"
+                  v-b-tooltip.left title="Click to mark right" @click="changeAnswer(true)">
+                <i class="fas fa-check"></i>
+            </span>
             <span> / </span>
-            <i class="fas fa-ban" v-bind:class="{'text-muted': answer.correct === 1, 'text-danger': answer.correct === 0}"
-               v-b-tooltip.right title="Click to mark wrong" @click="changeAnswer(answer.id, 0)"></i>
+            <span class="clicker" v-bind:class="{'text-muted': this.answer.correct, 'text-danger': !this.answer.correct}"
+                  v-b-tooltip.right title="Click to mark wrong" @click="changeAnswer(false)">
+                <i class="fas fa-ban"></i>
+            </span>
         </div>
     </div>
 </template>
@@ -16,35 +20,41 @@
     export default {
         data() {
             return {
-
+                answer: ''
             }
         },
         mounted() {
-
+            this.getAnswer();
         },
         methods: {
             ...mapActions('team', ['updateTeamAnswerCorrect']),
-            changeAnswer(id, change) {
-                if (this.teamAnswers.find(x => x.id === id && x.correct !== change)) {
+            getAnswer() {
+                this.answer = this.teamAnswers.find(x => x.team_id === this.team.id && x.question_id === this.question.id);
 
-
-                    for (let $i = 0; $i < this.teamAnswers.length; $i++) {
-                        if (this.teamAnswers[$i].id === id) {
-
-                            this.updateTeamAnswerCorrect({
-                                answer: this.teamAnswers[$i],
-                                order: $i
-                            });
-                        }
-                    }
+            },
+            changeAnswer(change) {
+                if (!this.answer.correct === change) {
+                    this.updateTeamAnswerCorrect(this.answer);
                 }
-
             }
         },
         computed: {
             ...mapGetters('team', ['teams', 'teamAnswers']),
+            teamAnswer: {
+                get() {
+                    return this.teamAnswers.find(x => x.team_id === this.team.id && x.question_id === this.question.id);
+                },
+                set(value) {
+                    return null;
+                }
+            }
         },
-        props: ['team','question']
+        props: ['team','question'],
+        watch: {
+            teamAnswers: function () {
+                this.getAnswer();
+            },
+        }
     }
 </script>
 

@@ -36,7 +36,13 @@
                     this.endQuestion = false;
                     this.answer = '';
                     this.startTimer();
+                })
+                .listen('UpdateTime', (e) => {
+                    if (Number(e.teamID) === this.team.id) {
+                        this.time = parseInt(e.time);
+                    }
                 });
+
         },
         methods: {
             startTimer() {

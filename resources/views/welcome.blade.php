@@ -64,7 +64,7 @@
         </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
+        <div class="flex-center position-ref full-height babble">
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
@@ -79,7 +79,7 @@
                 </div>
             @endif
 
-            <div class="content">
+            <div class="content babble">
                 <div class="title m-b-md">
                     Trivia App
                 </div>

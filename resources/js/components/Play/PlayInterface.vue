@@ -38,45 +38,54 @@
         },
         mounted() {
 
-            this.fetchDataByGameCode(this.team.gameCode);
-            this.fetchRoundsByGameCode(this.team.gameCode);
-            this.fetchQuestionsByGameCode(this.team.gameCode);
-            this.fetchAnswersByGameCode(this.team.gameCode);
-            this.fetchTeamAnswers(this.team.id);
+            if(this.team.gameCode) {
+                this.fetchDataByGameCode(this.team.gameCode);
+                this.fetchRoundsByGameCode(this.team.gameCode);
+                this.fetchQuestionsByGameCode(this.team.gameCode);
+                this.fetchAnswersByGameCode(this.team.gameCode);
+                this.fetchTeamAnswers(this.team.id);
 
-            Echo.join('game.'+this.loggedTeam.gameCode)
-                .here((users) => {
 
-                })
-                .listen('NextStep', (e) => {
-                    this.playRoundPosition = e.roundPosition;
-                    this.playQuestionPosition = e.questionPosition;
-                    this.currentPage = e.currentPage;
-                })
-                .listen('RevealAnswer', (e) => {
-                    // console.log('time to show answer');
-                    this.revealAnswer = true;
-                })
-                .listen('UpdatedAnswer', (e) => {
-                    if (e.answer.team_id === this.loggedTeam.id) {
-                        this.$store.commit('team/UPDATE_TEAM_ANSWER', e.answer);
-                    }
-                })
-                .listen('UpdateTeams', (e) => {
-                    this.$store.commit('team/SET_TEAMS', e.teams);
+                Echo.join('game.' + this.loggedTeam.gameCode)
+                    .listen('NextStep', (e) => {
+                        console.log('got the page');
+                        console.log(e);
+                        this.playRoundPosition = e.roundPosition;
+                        this.playQuestionPosition = e.questionPosition;
+                        this.currentPage = e.currentPage;
+                    })
+                    .listen('RevealAnswer', (e) => {
+                        // console.log('time to show answer');
+                        this.revealAnswer = true;
+                    })
+                    .listen('UpdatedAnswer', (e) => {
+                        if (e.answer.team_id === this.loggedTeam.id) {
+                            this.$store.commit('team/UPDATE_TEAM_ANSWER', e.answer);
+                        }
+                    })
+                    .listen('UpdateTeams', (e) => {
+                        console.log('Updated Teams:');
+                        console.log(e.teams);
+                        this.$store.commit('team/SET_TEAMS', e.teams);
 
-                    if (e.teams.find(x => x.id === this.loggedTeam.id && x.name !== this.loggedTeam.name)) {
-                        this.loggedTeam = e.teams.find(x => x.id === this.loggedTeam.id);
-                    }
+                        if (e.teams.find(x => x.id === this.loggedTeam.id && x.name !== this.loggedTeam.name)) {
+                            this.loggedTeam = e.teams.find(x => x.id === this.loggedTeam.id);
+                        }
 
-                    if (!(e.teams.find(x => x.id === this.loggedTeam.id))) {
-                        this.currentPage = '';
-                        this.playQuestionPosition = '';
-                        this.playRoundPosition = '';
-                        this.$router.push({name: "playLogin"});
-                    }
+                        if (!(e.teams.find(x => x.id === this.loggedTeam.id))) {
+                            console.log('you were logged off');
+                            this.currentPage = '';
+                            this.playQuestionPosition = '';
+                            this.playRoundPosition = '';
+                            this.$router.push({name: "playLogin"});
+                        }
 
-                });
+                    })
+                    .listen('AreYouThere', (e) => {
+                        console.log("I am here");
+                        axios.post('/api/team/' + this.team.id + '/iAmHere');
+                    });
+            }
         },
         created() {
             window.addEventListener('beforeunload', this.leaving);

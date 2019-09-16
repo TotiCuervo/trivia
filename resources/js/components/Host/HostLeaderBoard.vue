@@ -31,13 +31,6 @@
             }
         },
         mounted() {
-            axios.post('/api/team/'+ this.gameCode.code +'/leaderBoard')
-                .then (response => {
-                    // console.log(response.data);
-                    // this.$store.commit('team/SET_TEAMS', response.data);
-                });
-
-
             if (this.roundPosition === this.rounds.length - 1) {
                 this.upNext = 'Game Over'
             } else {

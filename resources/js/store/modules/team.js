@@ -69,28 +69,30 @@ const actions = {
             console.log(error.response);
         });
     },
-    updateTeamAnswerCorrect({commit, state}, payload) {
+    updateTeamAnswerCorrect({commit, state}, answer) {
 
-        axios.post('/api/teamAnswers/' + payload.answer.id + '/updateCorrect')
+        axios.post('/api/teamAnswers/' + answer.id + '/updateCorrect')
             .then (response => {
+
                 commit('UPDATE_TEAM', response.data);
-                commit('SET_TEAM', response.data);s
+                commit('SET_TEAM', response.data);
             });
 
         commit('UPDATE_TEAM_ANSWER', {
-            answer: payload.answer.answer,
-            id: payload.answer.id,
-            question_id: payload.answer.question_id,
-            round_id: payload.answer.round_id,
-            team_id: payload.answer.team_id,
-            correct: !(payload.answer.correct) === true ? 1 : 0,
-            gameCode: payload.answer.gameCode,
-            matchIndex: payload.answer.matchIndex,
-            points: payload.answer.points,
-            powerUp: payload.answer.powerUp,
+            answer: answer.answer,
+            id: answer.id,
+            question_id: answer.question_id,
+            round_id: answer.round_id,
+            team_id: answer.team_id,
+            correct: !(answer.correct) === true ? 1 : 0,
+            gameCode: answer.gameCode,
+            matchIndex: answer.matchIndex,
+            points: answer.points,
+            powerUp: answer.powerUp,
         });
     },
     deleteTeam({commit, state}) {
+        console.log('deleted a team');
         axios.post('/api/team/'+ state.team.id +'/delete')
             .then (response => {
                 commit('SET_TEAMS', response.data)
@@ -139,7 +141,7 @@ const mutations = {
     UPDATE_TEAM_ANSWER(state, answer) {
 
         for (let $i=0; $i < state.answers.length; $i++) {
-            if (answer.question_id === state.answers[$i].question_id) {
+            if (answer.id === state.answers[$i].id) {
                 Vue.set(state.answers, $i, answer);
                 break;
             }

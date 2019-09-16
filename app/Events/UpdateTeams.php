@@ -3,6 +3,7 @@
 namespace App\Events;
 
 use Illuminate\Broadcasting\Channel;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -31,8 +32,6 @@ class UpdateTeams implements ShouldBroadcast
         $this->teams = $teams;
         $this->gameCode = $gameCode;
 
-        Log::error('broadcasting teams');
-        Log::error($teams);
     }
 
     /**
@@ -47,6 +46,6 @@ class UpdateTeams implements ShouldBroadcast
 
     public function broadcastWith()
     {
-        return ["teams" => $this->teams];
+        return ["teams" => Team::where('gameCode', $this->gameCode)->orderBy('points', 'desc')->get()];
     }
 }

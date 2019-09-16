@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\AreYouThere;
 use App\Events\NextStep;
+use App\Events\UpdateTime;
 use App\Events\StartQuestion;
 use App\Events\StartRound;
 use App\Events\RoundReview;
 use App\Events\RevealAnswer;
+
+use App\Team;
 
 use App\Round;
 
@@ -39,6 +43,15 @@ class HostController extends Controller
     public function navigateHandler($code, $roundPosition, $questionPosition, $currentPage) {
         broadcast(new NextStep($code, $roundPosition, $questionPosition, $currentPage));
         return 'success';
+    }
+
+    public function updateTime($code, $teamID, $time) {
+        broadcast(new UpdateTime($teamID, $time, $code));
+    }
+
+    public function areYouThere($gameCode) {
+        Team::where('gameCode', $gameCode)->update(['loggedIn' => false]);
+        broadcast(new AreYouThere($gameCode));
     }
 
 

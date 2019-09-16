@@ -5,7 +5,7 @@
                 <div class="float-left">
                     <small>Round {{this.rounds[this.playRoundPosition].order_number}}</small>
                     <p class="mb-0">Question {{this.questions[this.playQuestionPosition].order_number}}</p>
-                    <h5 class="mb-0">{{this.questions[this.playQuestionPosition].type}}</h5>
+                    <h6 class="mb-0 pb-2">{{this.questions[this.playQuestionPosition].type}}</h6>
                 </div>
             </div>
         </div>

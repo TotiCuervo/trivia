@@ -176,13 +176,12 @@ class TeamAnswerController extends Controller
     public function addPointsToTeam(TeamAnswer $answer, $points) {
         $team = Team::where('id', $answer->team_id)->first();
 
-        Log::error('$points');
-        Log::error($points);
-
-        Log::error('$team->points');
-        Log::error($team->points);
-        Log::error($team);
-
+//        Log::error('$points');
+//        Log::error($points);
+//
+//        Log::error('$team->points');
+//        Log::error($team->points);
+//        Log::error($team);
 
         $team->points = $team->points + $points;
 
@@ -194,6 +193,8 @@ class TeamAnswerController extends Controller
     public function leaderBoard ($gameCode) {
 
         $teams = Team::where('gameCode', $gameCode)->orderBy('points', 'desc')->get();
+
+        Log::error('Here are the teams:');
         Log::error($teams);
 
         broadcast(new UpdateTeams($teams, $gameCode));

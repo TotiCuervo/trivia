@@ -6,7 +6,8 @@
                 <div class="float-left">
                     <small>Round {{this.rounds[this.playRoundPosition].order_number}}</small>
                     <p class="mb-0">Question {{this.questions[this.playQuestionPosition].order_number}}</p>
-                    <h5 class="mb-0">{{this.questions[this.playQuestionPosition].type}}</h5>
+                    <h6 class="mb-0">{{this.questions[this.playQuestionPosition].type}}</h6>
+                    <h5 class="pt-2 mb-0" id="answer-popover" @click="$bvToast.show('example-toast')">0/8 Answers</h5>
                 </div>
             </div>
             <div class="col-7">
@@ -30,6 +31,9 @@
         <div class="pt-3" v-if="this.questions[this.playQuestionPosition].type === 'Multiple-Choice'">
             <HostMultipleChoiceAnswerOptions></HostMultipleChoiceAnswerOptions>
         </div>
+        <div class="pt-5">
+            <HostTeamAnswerPool></HostTeamAnswerPool>
+        </div>
     </div>
 </template>
 
@@ -45,7 +49,28 @@
             }
         },
         mounted() {
+
+            // this.timer = this.rounds[this.playRoundPosition].time;
+
             this.startTimer();
+
+            Echo.join('game.'+this.gameCode.code)
+                .listen('NewTeam', (e) => {
+
+                    if (this.currentPage === 'HostQuestion') {
+                        console.log('made it to Host Question NewTeam:');
+                        console.log('sending PlayQuestion');
+
+                        axios.post('/api/host/'+ this.gameCode.code + '/round/' + this.playRoundPosition +'/question/' + this.playQuestionPosition + '/currentPage/' + 'PlayQuestion')
+                            .then (response => {
+                                console.log('sending this time:');
+                                console.log(this.timer);
+
+                                axios.post('/api/host/'+ this.gameCode.code + '/team/' + e.team.id +'/time/'+this.timer)
+                            });
+                    }
+
+                });
         },
         methods: {
             startTimer() {
@@ -82,11 +107,20 @@
                     this.playQuestionPosition = 0;
                     this.currentPage = 'HostRoundReview';
                 }
+            },
+            teamAnswerPoolToast() {
+                this.$bvToast.toast(`Team Answer Pool`, {
+                    title: `b-toaster-bottom-center`,
+                    toaster: toaster,
+                    solid: true,
+                    appendToast: append
+                })
             }
         },
         computed: {
             ...mapGetters('question', ['questions']),
             ...mapGetters('answer', ['answers']),
+            ...mapGetters('game', ['gameCode']),
             ...mapGetters('round', ['rounds']),
             ...mapGetters('play', ['roundPosition', 'questionPosition', 'page']),
             playRoundPosition: {

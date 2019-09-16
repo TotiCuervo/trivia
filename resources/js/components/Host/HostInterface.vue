@@ -34,7 +34,6 @@
         <b-modal id="leaderBoard" title="Leaderboard" size="lg" hide-footer>
             <LeaderBoardIndex></LeaderBoardIndex>
         </b-modal>
-
         <b-modal id="gameOutline" title="Game Outline" size="lg" hide-footer>
             <HostGameOutline></HostGameOutline>
         </b-modal>

@@ -58,11 +58,13 @@ Route::delete('/answer/{id}/destroy', 'AnswerController@destroy');
 Route::post('/play/checkCode', 'PlayController@checkCode');
 
 //Host
-Route::post('/host/{code}/startRound/{roundPosition}', 'HostController@startRound');
-Route::post('/host/{code}/round/{roundPosition}/startQuestion/{questionPosition}', 'HostController@startQuestion');
-Route::post('/host/{code}/roundReview', 'HostController@roundReview');
+//Route::post('/host/{code}/startRound/{roundPosition}', 'HostController@startRound');
+//Route::post('/host/{code}/round/{roundPosition}/startQuestion/{questionPosition}', 'HostController@startQuestion');
+//Route::post('/host/{code}/roundReview', 'HostController@roundReview');
 Route::post('/host/{gameCode}/round/{roundPosition}/question/{questionPosition}/currentPage/{currentPage}', 'HostController@navigateHandler');
+Route::post('/host/{gameCode}/team/{teamID}/time/{time}', 'HostController@updateTime');
 Route::post('/host/game/{gameCode}/question/{questionPosition}/revealAnswer', 'HostController@revealAnswer');
+Route::post('/host/game/{gameCode}/areYouThere', 'HostController@areYouThere');
 
 //GameCode
 Route::get('/game/{id}/gameCode', 'GameCodeController@show');
@@ -78,6 +80,7 @@ Route::get('/team/{id}/pulse', 'TeamLoginController@getPulse');
 Route::post('/team/{id}/answers', 'TeamAnswerController@index');
 Route::post('/team/{id}/edit', 'TeamLoginController@edit');
 Route::post('/team/{id}/delete', 'TeamLoginController@delete');
+Route::post('/team/{id}/iAmHere', 'TeamLoginController@iAmHere');
 
 //TeamAnswers
 Route::post('/teamAnswers/store', 'TeamAnswerController@store');

@@ -74,6 +74,25 @@
         },
         mounted() {
 
+            Echo.join('game.'+this.gameCode.code)
+                .listen('NewTeam', (e) => {
+                    if(this.currentPage === 'HostAnswerReveal') {
+                        console.log('current page');
+                        console.log(this.currentPage);
+
+                        console.log('sent this:');
+                        console.log('PlayRevealAnswer');
+
+                        axios.post('/api/host/'+ this.gameCode.code + '/round/' + this.playRoundPosition +'/question/' + this.playQuestionPosition + '/currentPage/' + 'PlayRevealAnswer')
+                            .then (response => {
+                                if (this.revealAnswer) {
+                                    axios.post('/api/host/game/'+ this.gameCode.code +'/question/'+ this.questionPosition +'/revealAnswer');
+                                }
+                            });
+                    }
+
+                });
+
         },
         methods: {
 
