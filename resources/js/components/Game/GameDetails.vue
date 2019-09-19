@@ -117,15 +117,6 @@
                 }
             }
         },
-        beforeDestroy() {
-            this.$store.commit('round/CLEAR_ROUNDS');
-            document.querySelector('body').style.backgroundColor = '';
-        },
-        watch: {
-            game: function () {
-                document.querySelector('body').style.backgroundColor = this.game.bodyColor;
-            }
-        }
     }
 </script>
 

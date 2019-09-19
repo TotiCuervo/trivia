@@ -1,6 +1,6 @@
 <template>
 
-    <div class="fancy card" @click="clickToEdit()">
+    <div class="round-card card" @click="clickToEdit()">
         <div class="p-4">
             <div class="round-details">
                 <div class="row pb-3" v-show="(this.current_Round.order_number !== this.round.order_number)">
@@ -15,11 +15,11 @@
                     </div>
                 </div>
                 <div class="row pb-3" v-show="(this.current_Round.order_number === this.round.order_number)">
-                    <div class="col-md-2 pr-0">
+                    <div class="col-3 col-sm-2 col-md-2 pr-0">
                         <h6 class="float-left font-weight-bold mt-2">Round: {{this.round.order_number}}</h6>
                     </div>
                     <!--Round Description-->
-                    <div class="col-md-3 pl-0">
+                    <div class="col-4 col-md-3 pl-0">
                         <b-form  @submit.stop.prevent>
                             <b-input
                                 v-model="round_Title"
@@ -47,7 +47,7 @@
                         </b-form>
                     </div>
                     <!--Time Limit-->
-                    <div class="col-md-3 pl-0">
+                    <div class="col-3 col-md-3 pl-0">
                         <b-form-select
                             v-model="round_Time"
                             size="sm"
@@ -56,7 +56,7 @@
                         </b-form-select>
                     </div>
                     <!--Delete Round-->
-                    <div class="col-md-4">
+                    <div class="col-2 col-md-4">
                         <span class="size-1x5 first-gray then-black trans-1 clicker float-right" v-b-modal.delete-round>
                             <i class="far fa-times-circle"></i>
                         </span>
