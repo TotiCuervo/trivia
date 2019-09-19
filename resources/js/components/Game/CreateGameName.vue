@@ -1,13 +1,13 @@
 <template>
     <div>
-        <div class="row no-gutters">
-           <div class="game-header text-center col-md-12 pt-5 pb-5" v-bind:class="[headClass]">
-               <h1>New Game</h1>
-           </div>
-        </div>
         <div class="container">
             <div class="row pt-5">
-                <div class="col-md-6 offset-md-3">
+                <div class="col-md-12 text-center">
+                    <h1>New Game</h1>
+                </div>
+            </div>
+            <div class="row pt-3">
+                <div class="col-md-10 offset-md-1">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
@@ -33,39 +33,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row pt-4 pb-4">
                         <div class="col-md-12">
-                            <label>Pick Color Scheme</label>
-                        </div>
-                    </div>
-                    <div class="row pb-4">
-                        <div class="col-md-2 offset-md-2 text-center">
-                            <i class="fas fa-circle fa-2x" style="color: #D1504F;" @click="setRed()" v-if=" this.headClass !== 'bc-header-red' "></i>
-                            <i class="fas fa-circle fa-stack-2x" style="color: #D1504F;" v-if=" this.headClass === 'bc-header-red' "></i>
-                            <i class="far fa-circle fa-stack-2x" v-if=" this.headClass === 'bc-header-red' "></i>
-                        </div>
-                        <div class="col-md-2 text-center">
-                            <i class="fas fa-circle fa-2x" style="color: #4FA1D1;" @click="setBlue()" v-if=" this.headClass !== 'bc-header-blue' "></i>
-                            <i class="fas fa-circle fa-stack-2x" style="color: #4FA1D1;" @click="setBlue()" v-if=" this.headClass === 'bc-header-blue' "></i>
-                            <i class="far fa-circle fa-stack-2x" v-if=" this.headClass === 'bc-header-blue' "></i>
-
-                        </div>
-                        <div class="col-md-2 text-center">
-                            <i class="fas fa-circle fa-2x" style="color: #4FD17C;" @click="setGreen()" v-if=" this.headClass !== 'bc-header-green' "></i>
-                            <i class="fas fa-circle fa-stack-2x" style="color: #4FD17C;" @click="setGreen()" v-if=" this.headClass === 'bc-header-green' "></i>
-                            <i class="far fa-circle fa-stack-2x" v-if=" this.headClass === 'bc-header-green' "></i>
-
-                        </div>
-                        <div class="col-md-2 text-center">
-                            <i class="fas fa-circle fa-2x" style="color: #FFCD2B;" @click="setYellow()" v-if=" this.headClass !== 'bc-header-yellow' "></i>
-                            <i class="fas fa-circle fa-stack-2x" style="color: #FFCD2B;" @click="setYellow()" v-if=" this.headClass === 'bc-header-yellow' "></i>
-                            <i class="far fa-circle fa-stack-2x" v-if=" this.headClass === 'bc-header-yellow' "></i>
-
-                        </div>
-                    </div>
-                    <div class="row pt-4">
-                        <div class="col-md-12">
-                            <button @click="newGame()" class="btn btn-primary">Submit</button>
+                            <button @click="newGame()" class="btn btn-primary float-right">Submit</button>
                         </div>
                     </div>
                 </div>
@@ -91,8 +61,6 @@
             }
         },
         mounted() {
-            document.querySelector('body').style.backgroundColor = '#FAEDED';
-
         },
         methods: {
             ...mapActions('round', ['addRound']),
@@ -142,9 +110,6 @@
         computed: {
             ...mapGetters('user', ['user_id']),
 
-        },
-        beforeDestroy() {
-            document.querySelector('body').style.backgroundColor = '';
         },
     }
 </script>

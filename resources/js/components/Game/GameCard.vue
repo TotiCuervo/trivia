@@ -1,18 +1,19 @@
 <template>
 
-    <div class="card">
+    <div class="trivalo-card card">
         <div class="card-body">
             <div class="row">
                 <div class="col-md-12">
-                    <i class="fas fa-trash-alt fa-1x float-right fa-gray-black clicker" v-b-tooltip.top
-                       title="Delete Game" v-b-modal.delete-game @click="setGame()"></i>
-                    <i class="fas fa-clone fa-1x float-right fa-gray-black pr-2 clicker" v-b-tooltip.top
-                       title="Copy Game" @click="copyGame()"></i>
+                    <span class="fa-1x float-right first-gray then-black trans-1 clicker" v-b-tooltip.top title="Delete Game" v-b-modal.delete-game @click="setGame()">
+                        <i class="fas fa-trash-alt"></i>
+                    </span>
+                    <span class="fa-1x float-right first-gray then-black trans-1 pr-2 clicker" v-b-tooltip.top title="Copy Game" @click="copyGame()">
+                        <i class="fas fa-clone"></i>
+                    </span>
                 </div>
             </div>
             <div class="container">
-                <router-link :to="{ name: 'gameDetails', params: {id: game.id} }"
-                             style="text-decoration:none; color:black;">
+                <router-link :to="{ name: 'gameDetails', params: {id: game.id} }" style="text-decoration:none; color:black;">
                     <div class="row pb-2">
                         <div class="col-md-12 text-center">
                             <div class="circle-text mx-auto no-dec" v-bind:class="game.headClass">{{this.name}}</div>
