@@ -479,6 +479,10 @@
     color: blue;
 }
 
+.color-green {
+    color: green;
+}
+
 .first-gray {
     color: lightgray;
 }
@@ -502,4 +506,10 @@
     outline: 0px !important;
     -webkit-appearance: none;
     box-shadow: none !important;
+}
+
+/*Sizes*/
+
+.size-1x5 {
+    font-size: 1.5em;
 }

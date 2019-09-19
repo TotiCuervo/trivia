@@ -5,10 +5,9 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Game/CreateGameName.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Game/CreateGameName.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Game/GameCard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Game/GameCard.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Game/TriviaIndex.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Game/TriviaIndex.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Home.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Question/QuestionIndex.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Question/QuestionIndex.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Question/QuestionIndexCard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Question/QuestionIndexCard.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Round/RoundDetails.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Round/RoundDetails.vue" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -258,7 +257,7 @@
       <workItem from="1567450546059" duration="50596000" />
       <workItem from="1568243555286" duration="38923000" />
       <workItem from="1568873829217" duration="1736000" />
-      <workItem from="1568909364461" duration="4640000" />
+      <workItem from="1568909364461" duration="7629000" />
     </task>
     <servers />
   </component>

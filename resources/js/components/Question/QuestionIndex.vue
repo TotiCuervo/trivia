@@ -3,7 +3,6 @@
 
         <div class="container">
             <!--if there are questions in the array-->
-
             <draggable v-model="roundQuestions">
                 <div v-for="question in roundQuestions" :key="question.id">
                     <!--and they match the round id of this round-->
