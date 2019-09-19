@@ -66,6 +66,8 @@
             }
         },
         mounted() {
+            console.log('hello boopy poopy');
+
             Echo.join('game.'+this.gameCode.code)
                 .here((users) => {
 

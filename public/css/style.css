@@ -448,3 +448,15 @@
     url("/images/frontPage2.jpg");
 }
 
+/*New CSS*/
+
+/*Card*/
+.hostQuestion-card {
+    box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
+    border-radius: .7rem !important;
+    border: 0px solid rgba(0, 0, 0, 0) !important;
+}
+
+.trivalo-background {
+    background: rgb(240, 243, 247);
+}

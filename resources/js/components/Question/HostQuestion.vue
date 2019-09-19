@@ -7,7 +7,7 @@
                     <small>Round {{this.rounds[this.playRoundPosition].order_number}}</small>
                     <p class="mb-0">Question {{this.questions[this.playQuestionPosition].order_number}}</p>
                     <h6 class="mb-0">{{this.questions[this.playQuestionPosition].type}}</h6>
-                    <h5 class="pt-2 mb-0" id="answer-popover" @click="$bvToast.show('example-toast')">0/8 Answers</h5>
+                    <TeamAnswerCount></TeamAnswerCount>
                 </div>
             </div>
             <div class="col-7">
@@ -23,16 +23,26 @@
         </div>
         <!--Question Title-->
         <div class="row pt-5">
-            <div class="col-md-12 text-center pt-5">
-                <h2>{{this.questions[this.playQuestionPosition].title}}</h2>
+            <div class="col-md-8 offset-md-2 pt-5">
+                <div class="hostQuestion-card card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <span class="small text-muted">Round {{this.rounds[this.playRoundPosition].order_number}} / Question {{this.questions[this.playQuestionPosition].order_number}} / {{this.questions[this.playQuestionPosition].type}}</span>
+                            </div>
+                        </div>
+                        <div class="row p-5">
+                            <div class="col-md-12 text-center">
+                                <h2 class="m-0">{{this.questions[this.playQuestionPosition].title}}</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <!--Multiple Choice Answers Optional-->
         <div class="pt-3" v-if="this.questions[this.playQuestionPosition].type === 'Multiple-Choice'">
             <HostMultipleChoiceAnswerOptions></HostMultipleChoiceAnswerOptions>
-        </div>
-        <div class="pt-5">
-            <HostTeamAnswerPool></HostTeamAnswerPool>
         </div>
     </div>
 </template>
@@ -108,14 +118,6 @@
                     this.currentPage = 'HostRoundReview';
                 }
             },
-            teamAnswerPoolToast() {
-                this.$bvToast.toast(`Team Answer Pool`, {
-                    title: `b-toaster-bottom-center`,
-                    toaster: toaster,
-                    solid: true,
-                    appendToast: append
-                })
-            }
         },
         computed: {
             ...mapGetters('question', ['questions']),

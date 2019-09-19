@@ -2,57 +2,33 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f562f43b-05cf-4003-ae95-b369e5751c9b" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/resources/js/components/Answer/PlayRevealAnswerFIB.vue" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/resources/js/components/Answer/PlayRevealAnswerMC.vue" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/resources/js/components/HomeNav.vue" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/resources/js/components/HomePage.vue" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/resources/js/components/Host/HostTeamAnswerPool.vue" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/resources/js/components/Host/HostTeamName.vue" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/resources/js/components/Host/HostTriviaTeamAnswer.vue" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/resources/js/components/Round/HostRoundReviewTeamRow.vue" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/resources/views/homePage.blade.php" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/app/Events/UpdateTeams.php" afterPath="$PROJECT_DIR$/app/Events/UpdateTeams.php" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HostController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/HostController.php" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TeamAnswerController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/TeamAnswerController.php" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TeamLoginController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/TeamLoginController.php" />
-      <change beforePath="$PROJECT_DIR$/public/css/style.css" afterPath="$PROJECT_DIR$/public/css/style.css" />
-      <change beforePath="$PROJECT_DIR$/public/js/app.js" afterPath="$PROJECT_DIR$/public/js/app.js" />
-      <change beforePath="$PROJECT_DIR$/resources/js/app.js" afterPath="$PROJECT_DIR$/resources/js/app.js" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Answer/HostAnswerReveal.vue" afterPath="$PROJECT_DIR$/resources/js/components/Answer/HostAnswerReveal.vue" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Answer/HostTeamAnswerIndex.vue" afterPath="$PROJECT_DIR$/resources/js/components/Answer/HostTeamAnswerIndex.vue" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Answer/PlayRevealAnswer.vue" afterPath="$PROJECT_DIR$/resources/js/components/Answer/PlayRevealAnswer.vue" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Host/HostChangeAnswer.vue" afterPath="$PROJECT_DIR$/resources/js/components/Host/HostChangeAnswer.vue" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Host/HostHeader.vue" afterPath="$PROJECT_DIR$/resources/js/components/Host/HostHeader.vue" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Host/HostInterface.vue" afterPath="$PROJECT_DIR$/resources/js/components/Host/HostInterface.vue" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Host/HostLeaderBoard.vue" afterPath="$PROJECT_DIR$/resources/js/components/Host/HostLeaderBoard.vue" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Host/HostLobby.vue" afterPath="$PROJECT_DIR$/resources/js/components/Host/HostLobby.vue" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Play/PlayInterface.vue" afterPath="$PROJECT_DIR$/resources/js/components/Play/PlayInterface.vue" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Play/PlayLeaderBoard.vue" afterPath="$PROJECT_DIR$/resources/js/components/Play/PlayLeaderBoard.vue" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Play/PlayLogin.vue" afterPath="$PROJECT_DIR$/resources/js/components/Play/PlayLogin.vue" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Question/HostQuestion.vue" afterPath="$PROJECT_DIR$/resources/js/components/Question/HostQuestion.vue" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Question/HostQuestionPreview.vue" afterPath="$PROJECT_DIR$/resources/js/components/Question/HostQuestionPreview.vue" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Question/PlayQuestion/QuestionProgressBar.vue" afterPath="$PROJECT_DIR$/resources/js/components/Question/PlayQuestion/QuestionProgressBar.vue" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Round/HostRoundReview.vue" afterPath="$PROJECT_DIR$/resources/js/components/Round/HostRoundReview.vue" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Round/PlayRoundReview.vue" afterPath="$PROJECT_DIR$/resources/js/components/Round/PlayRoundReview.vue" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Team/GameTeamIndex.vue" afterPath="$PROJECT_DIR$/resources/js/components/Team/GameTeamIndex.vue" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Team/HostTeamProfile.vue" afterPath="$PROJECT_DIR$/resources/js/components/Team/HostTeamProfile.vue" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Team/LeaderBoardIndex.vue" afterPath="$PROJECT_DIR$/resources/js/components/Team/LeaderBoardIndex.vue" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Team/TriviaTeam.vue" afterPath="$PROJECT_DIR$/resources/js/components/Team/TriviaTeam.vue" />
-      <change beforePath="$PROJECT_DIR$/resources/js/store/modules/team.js" afterPath="$PROJECT_DIR$/resources/js/store/modules/team.js" />
-      <change beforePath="$PROJECT_DIR$/resources/views/host.blade.php" afterPath="$PROJECT_DIR$/resources/views/host.blade.php" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" />
-      <change beforePath="$PROJECT_DIR$/resources/views/team/login.blade.php" afterPath="$PROJECT_DIR$/resources/views/team/login.blade.php" />
-      <change beforePath="$PROJECT_DIR$/resources/views/welcome.blade.php" afterPath="$PROJECT_DIR$/resources/views/welcome.blade.php" />
-      <change beforePath="$PROJECT_DIR$/routes/api.php" afterPath="$PROJECT_DIR$/routes/api.php" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" afterPath="$PROJECT_DIR$/routes/web.php" />
+      <change afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/Answer/TeamAnswerCount.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/trivia.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/trivia.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.rnd" beforeDir="false" afterPath="$PROJECT_DIR$/.rnd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Host/HostHeader.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Host/HostHeader.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Host/HostInterface.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Host/HostInterface.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Question/HostQuestion.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Question/HostQuestion.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
-    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
+    <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
+    <execution>
+      <executable />
+    </execution>
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -69,82 +45,6 @@
   <component name="FavoritesManager">
     <favorites_list name="trivia" />
   </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="HostQuestion.vue" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/js/components/Question/HostQuestion.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="33" column="24" lean-forward="false" selection-start-line="33" selection-start-column="24" selection-end-line="33" selection-end-column="24" />
-              <folding>
-                <element signature="n#div#1;n#div#0;n#template#0;n#!!top" expanded="false" />
-                <element signature="n#div#2;n#div#0;n#template#0;n#!!top" expanded="false" />
-                <element signature="e#2906#3958#0" expanded="false" />
-                <element signature="e#3983#4341#0" expanded="false" />
-                <element signature="e#4980#5213#0" expanded="false" />
-                <element signature="e#5249#5488#0" expanded="false" />
-                <element signature="e#5515#5729#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="HostTeamAnswerPool.vue" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/js/components/Host/HostTeamAnswerPool.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="32" column="41" lean-forward="false" selection-start-line="32" selection-start-column="41" selection-end-line="32" selection-end-column="41" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PlayQuestion.vue" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/js/components/Question/PlayQuestion/PlayQuestion.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1094">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="HostTriviaTeamAnswer.vue" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/js/components/Host/HostTriviaTeamAnswer.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="36">
-              <caret line="2" column="30" lean-forward="false" selection-start-line="2" selection-start-column="30" selection-end-line="2" selection-end-column="30" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="app.blade.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/resources/views/layouts/app.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="596">
-              <caret line="40" column="20" lean-forward="false" selection-start-line="40" selection-start-column="20" selection-end-line="40" selection-end-column="20" />
-              <folding>
-                <marker date="1568655952969" expanded="true" signature="229:243" ph="..." />
-                <marker date="1568655952969" expanded="true" signature="295:319" ph="..." />
-                <marker date="1568655952969" expanded="true" signature="1386:1394" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="HomeNav.vue" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/js/components/HomeNav.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="61" lean-forward="false" selection-start-line="5" selection-start-column="61" selection-end-line="5" selection-end-column="61" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
-  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -154,115 +54,8 @@
       </list>
     </option>
   </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>play-lobby</find>
-      <find>gameTeams</find>
-      <find>vm</find>
-      <find>game</find>
-      <find>code</find>
-      <find>value</find>
-      <find>team_id</find>
-      <find>cursor</find>
-      <find>clicker</find>
-      <find>circle-</find>
-      <find>red</find>
-      <find>edit</find>
-      <find>hover-</find>
-      <find>No Answer</find>
-      <find>variantColor</find>
-      <find>isCh</find>
-      <find>isChos</find>
-      <find>fancy3</find>
-      <find>length</find>
-      <find>powerUp</find>
-      <find>pulse</find>
-      <find>hover</find>
-      <find>team-card</find>
-      <find>card</find>
-      <find>94</find>
-      <find>fade</find>
-      <find>babble</find>
-      <find>vl</find>
-      <find>leader</find>
-      <find>pointer</find>
-    </findStrings>
-    <replaceStrings>
-      <replace>title</replace>
-      <replace>questions</replace>
-      <replace>question</replace>
-      <replace>type</replace>
-      <replace>answer</replace>
-      <replace>ANSWER</replace>
-      <replace>game</replace>
-      <replace>this</replace>
-      <replace>playRoundPosition</replace>
-      <replace>clicker</replace>
-    </replaceStrings>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/resources/js/components/Round/HostRoundCard.vue" />
-        <option value="$PROJECT_DIR$/app/Events/AreYouThere.php" />
-        <option value="$PROJECT_DIR$/resources/js/components/Team/TriviaTeam.vue" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/TeamLoginController.php" />
-        <option value="$PROJECT_DIR$/resources/js/components/Team/GameTeamIndex.vue" />
-        <option value="$PROJECT_DIR$/routes/web.php" />
-        <option value="$PROJECT_DIR$/resources/js/components/Host/HostLobby.vue" />
-        <option value="$PROJECT_DIR$/resources/js/components/Host/HostTeamName.vue" />
-        <option value="$PROJECT_DIR$/resources/js/components/Question/PlayQuestion/PlayQuestion.vue" />
-        <option value="$PROJECT_DIR$/routes/api.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/HostController.php" />
-        <option value="$PROJECT_DIR$/app/Events/UpdateTime.php" />
-        <option value="$PROJECT_DIR$/resources/js/components/Question/PlayQuestion/QuestionProgressBar.vue" />
-        <option value="$PROJECT_DIR$/resources/js/components/Team/HostTeamProfile.vue" />
-        <option value="$PROJECT_DIR$/resources/views/dashboard.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/welcome.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/host.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/team/login.blade.php" />
-        <option value="$PROJECT_DIR$/resources/js/app.js" />
-        <option value="$PROJECT_DIR$/resources/js/components/HomeNav.vue" />
-        <option value="$PROJECT_DIR$/resources/views/homePage.blade.php" />
-        <option value="$PROJECT_DIR$/resources/js/components/HomePage.vue" />
-        <option value="$PROJECT_DIR$/resources/js/components/Play/PlayLeaderBoard.vue" />
-        <option value="$PROJECT_DIR$/resources/js/components/Host/HostLeaderBoard.vue" />
-        <option value="$PROJECT_DIR$/resources/js/components/Play/PlayLogin.vue" />
-        <option value="$PROJECT_DIR$/resources/js/components/Answer/HostAnswerReveal.vue" />
-        <option value="$PROJECT_DIR$/resources/js/components/Answer/PlayRevealAnswerMC.vue" />
-        <option value="$PROJECT_DIR$/resources/js/components/Answer/PlayRevealAnswer.vue" />
-        <option value="$PROJECT_DIR$/resources/js/components/Answer/PlayRevealAnswerFIB.vue" />
-        <option value="$PROJECT_DIR$/resources/js/components/Host/HostHeader.vue" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/TeamAnswerController.php" />
-        <option value="$PROJECT_DIR$/app/Events/UpdateTeams.php" />
-        <option value="$PROJECT_DIR$/resources/js/components/Play/PlayInterface.vue" />
-        <option value="$PROJECT_DIR$/resources/js/components/Round/PlayRoundReview.vue" />
-        <option value="$PROJECT_DIR$/resources/js/components/Team/LeaderBoardIndex.vue" />
-        <option value="$PROJECT_DIR$/resources/js/components/Round/HostRoundReviewTeamRow.vue" />
-        <option value="$PROJECT_DIR$/resources/js/components/Round/HostRoundReview.vue" />
-        <option value="$PROJECT_DIR$/resources/js/store/modules/team.js" />
-        <option value="$PROJECT_DIR$/resources/js/components/Answer/HostTeamAnswerIndex.vue" />
-        <option value="$PROJECT_DIR$/resources/js/components/Host/HostChangeAnswer.vue" />
-        <option value="$PROJECT_DIR$/resources/js/components/Question/HostQuestionPreview.vue" />
-        <option value="$PROJECT_DIR$/resources/js/components/Host/HostInterface.vue" />
-        <option value="$PROJECT_DIR$/resources/js/components/Question/HostQuestion.vue" />
-        <option value="$PROJECT_DIR$/resources/js/components/Answer/HostTeamAnswerPoolHasAnswered.vue" />
-        <option value="$PROJECT_DIR$/resources/js/components/Answer/HostTeamAnswerPoolHasNotAnswered.vue" />
-        <option value="$PROJECT_DIR$/resources/js/components/Answer/HasNotAnswered.vue" />
-        <option value="$PROJECT_DIR$/resources/js/components/Answer/HasAnswered.vue" />
-        <option value="$PROJECT_DIR$/public/css/style.css" />
-        <option value="$PROJECT_DIR$/resources/js/components/Host/HostTeamAnswerPool.vue" />
-        <option value="$PROJECT_DIR$/resources/js/components/Host/HostTriviaTeamAnswer.vue" />
-        <option value="$PROJECT_DIR$/resources/views/layouts/app.blade.php" />
-      </list>
-    </option>
-  </component>
-  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER">
-    <package-json value="$PROJECT_DIR$/package.json" />
   </component>
   <component name="JsFlowSettings">
     <service-enabled>true</service-enabled>
@@ -270,132 +63,124 @@
     <other-services-enabled>true</other-services-enabled>
     <auto-save>true</auto-save>
   </component>
-  <component name="JsGulpfileManager">
-    <detection-done>true</detection-done>
-    <sorting>DEFINITION_ORDER</sorting>
-  </component>
-  <component name="NodeModulesDirectoryManager">
-    <handled-path value="$PROJECT_DIR$/node_modules" />
-  </component>
   <component name="PhpServers">
     <servers />
   </component>
-  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
-  <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="x" value="59" />
-    <option name="y" value="98" />
-    <option name="width" value="1440" />
-    <option name="height" value="877" />
+  <component name="PhpWorkspaceProjectConfiguration">
+    <include_path>
+      <path value="$PROJECT_DIR$/vendor/symfony/console" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/lexer" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/inflector" />
+      <path value="$PROJECT_DIR$/vendor/firebase/php-jwt" />
+      <path value="$PROJECT_DIR$/vendor/lcobucci/jwt" />
+      <path value="$PROJECT_DIR$/vendor/fideloper/proxy" />
+      <path value="$PROJECT_DIR$/vendor/moontoast/math" />
+      <path value="$PROJECT_DIR$/vendor/paragonie/random_compat" />
+      <path value="$PROJECT_DIR$/vendor/paragonie/sodium_compat" />
+      <path value="$PROJECT_DIR$/vendor/phpoption/phpoption" />
+      <path value="$PROJECT_DIR$/vendor/phpseclib/phpseclib" />
+      <path value="$PROJECT_DIR$/vendor/ralouphie/getallheaders" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/promises" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/psr7" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/guzzle" />
+      <path value="$PROJECT_DIR$/vendor/swiftmailer/swiftmailer" />
+      <path value="$PROJECT_DIR$/vendor/tijsverkoyen/css-to-inline-styles" />
+      <path value="$PROJECT_DIR$/vendor/dragonmantank/cron-expression" />
+      <path value="$PROJECT_DIR$/vendor/jakub-onderka/php-console-color" />
+      <path value="$PROJECT_DIR$/vendor/jakub-onderka/php-console-highlighter" />
+      <path value="$PROJECT_DIR$/vendor/composer" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/vendor/psr/simple-cache" />
+      <path value="$PROJECT_DIR$/vendor/psy/psysh" />
+      <path value="$PROJECT_DIR$/vendor/opis/closure" />
+      <path value="$PROJECT_DIR$/vendor/nikic/php-parser" />
+      <path value="$PROJECT_DIR$/vendor/defuse/php-encryption" />
+      <path value="$PROJECT_DIR$/vendor/erusev/parsedown" />
+      <path value="$PROJECT_DIR$/vendor/league/flysystem" />
+      <path value="$PROJECT_DIR$/vendor/league/oauth2-server" />
+      <path value="$PROJECT_DIR$/vendor/league/event" />
+      <path value="$PROJECT_DIR$/vendor/nesbot/carbon" />
+      <path value="$PROJECT_DIR$/vendor/ramsey/uuid" />
+      <path value="$PROJECT_DIR$/vendor/vlucas/phpdotenv" />
+      <path value="$PROJECT_DIR$/vendor/dnoegel/php-xdg-base-dir" />
+      <path value="$PROJECT_DIR$/vendor/egulias/email-validator" />
+      <path value="$PROJECT_DIR$/vendor/laravel/tinker" />
+      <path value="$PROJECT_DIR$/vendor/laravel/framework" />
+      <path value="$PROJECT_DIR$/vendor/laravel/telescope" />
+      <path value="$PROJECT_DIR$/vendor/monolog/monolog" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-iconv" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php73" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-ctype" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php72" />
+      <path value="$PROJECT_DIR$/vendor/symfony/translation" />
+      <path value="$PROJECT_DIR$/vendor/symfony/translation-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher" />
+      <path value="$PROJECT_DIR$/vendor/symfony/var-dumper" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn" />
+      <path value="$PROJECT_DIR$/vendor/symfony/css-selector" />
+      <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/finder" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-kernel" />
+      <path value="$PROJECT_DIR$/vendor/symfony/mime" />
+      <path value="$PROJECT_DIR$/vendor/symfony/routing" />
+      <path value="$PROJECT_DIR$/vendor/symfony/service-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-foundation" />
+      <path value="$PROJECT_DIR$/vendor/symfony/process" />
+      <path value="$PROJECT_DIR$/vendor/symfony/debug" />
+      <path value="$PROJECT_DIR$/vendor/laravel/passport" />
+      <path value="$PROJECT_DIR$/vendor/pusher/pusher-php-server" />
+      <path value="$PROJECT_DIR$/vendor/smartins/passport-multiauth" />
+      <path value="$PROJECT_DIR$/vendor/symfony/psr-http-message-bridge" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-factory" />
+      <path value="$PROJECT_DIR$/vendor/zendframework/zend-diactoros" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-timer" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-token-stream" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/phpunit" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-text-template" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-code-coverage" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-file-iterator" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/comparator" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/global-state" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/object-enumerator" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/object-reflector" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/code-unit-reverse-lookup" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/diff" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/recursion-context" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/version" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/environment" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/exporter" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/resource-operations" />
+      <path value="$PROJECT_DIR$/vendor/theseer/tokenizer" />
+      <path value="$PROJECT_DIR$/vendor/fzaninotto/faker" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/instantiator" />
+      <path value="$PROJECT_DIR$/vendor/webmozart/assert" />
+      <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-common" />
+      <path value="$PROJECT_DIR$/vendor/phpdocumentor/type-resolver" />
+      <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-docblock" />
+      <path value="$PROJECT_DIR$/vendor/nunomaduro/collision" />
+      <path value="$PROJECT_DIR$/vendor/mockery/mockery" />
+      <path value="$PROJECT_DIR$/vendor/filp/whoops" />
+      <path value="$PROJECT_DIR$/vendor/phar-io/manifest" />
+      <path value="$PROJECT_DIR$/vendor/phar-io/version" />
+      <path value="$PROJECT_DIR$/vendor/beyondcode/laravel-dump-server" />
+      <path value="$PROJECT_DIR$/vendor/myclabs/deep-copy" />
+      <path value="$PROJECT_DIR$/vendor/phpspec/prophecy" />
+      <path value="$PROJECT_DIR$/vendor/hamcrest/hamcrest-php" />
+    </include_path>
   </component>
+  <component name="ProjectId" id="1R2mz2MOda4Zi6gGxb8Uo27xyFc" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
-  <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1">
-      <flattenPackages />
-      <showMembers />
-      <showModules />
-      <showLibraryContents />
-      <hideEmptyPackages />
-      <abbreviatePackageNames />
-      <autoscrollToSource />
-      <autoscrollFromSource />
-      <sortByType />
-      <manualOrder />
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="Scope" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="trivia" type="b2602c69:ProjectViewProjectNode" />
-              <item name="trivia" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="trivia" type="b2602c69:ProjectViewProjectNode" />
-              <item name="trivia" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="public" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="trivia" type="b2602c69:ProjectViewProjectNode" />
-              <item name="trivia" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="public" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="css" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="trivia" type="b2602c69:ProjectViewProjectNode" />
-              <item name="trivia" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="public" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="images" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="trivia" type="b2602c69:ProjectViewProjectNode" />
-              <item name="trivia" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="resources" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="trivia" type="b2602c69:ProjectViewProjectNode" />
-              <item name="trivia" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="resources" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="js" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="trivia" type="b2602c69:ProjectViewProjectNode" />
-              <item name="trivia" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="resources" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="js" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="components" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="trivia" type="b2602c69:ProjectViewProjectNode" />
-              <item name="trivia" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="resources" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="js" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="components" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Answer" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="trivia" type="b2602c69:ProjectViewProjectNode" />
-              <item name="trivia" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="resources" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="js" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="components" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Round" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="trivia" type="b2602c69:ProjectViewProjectNode" />
-              <item name="trivia" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="resources" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="trivia" type="b2602c69:ProjectViewProjectNode" />
-              <item name="trivia" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="resources" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="layouts" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="trivia" type="b2602c69:ProjectViewProjectNode" />
-              <item name="trivia" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="resources" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="team" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scratches" />
-    </panes>
-  </component>
   <component name="PropertiesComponent">
+    <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="SearchEverywhereHistoryKey" value="app&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/views/layouts/app.blade.php&#10;playque&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Question/PlayQuestion/PlayQuestion.vue&#10;style&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/public/css/style.css&#10;nav&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/HomeNav.vue&#10;host&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Host/HostTeamName.vue&#10;hostteamname&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Host/HostTeamName.vue&#10;hosttriviateamanswer&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Host/HostTriviaTeamAnswer.vue&#10;homenav&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/HomeNav.vue&#10;hostteamanswerpool&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Host/HostTeamAnswerPool.vue&#10;hostinter&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Host/HostInterface.vue&#10;hostquesti&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Question/HostQuestionPreview.vue&#10;hostquestion&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Question/HostQuestion.vue&#10;team&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/store/modules/team.js&#10;hostchangean&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Host/HostChangeAnswer.vue&#10;hostques&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Question/HostQuestion.vue&#10;hostroundrevi&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Round/HostRoundReview.vue&#10;team.j&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/store/modules/team.js&#10;revealanswer&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Answer/PlayRevealAnswerMC.vue&#10;team.js&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/store/modules/team.js&#10;hostteaman&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Answer/HostTeamAnswerIndex.vue&#10;hostteamans&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Host/HostTriviaTeamAnswer.vue&#10;hostchange&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Host/HostChangeAnswer.vue&#10;playround&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Round/PlayRoundReview.vue&#10;updateteam&#9;null&#9;null&#10;api&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/routes/api.php&#10;leaderboard&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Team/LeaderBoardIndex.vue&#10;hostlea&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Host/HostLeaderBoard.vue&#10;teamanswercon&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/app/Http/Controllers/TeamAnswerController.php&#10;playlead&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Play/PlayLeaderBoard.vue&#10;hostteampro&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Team/HostTeamProfile.vue&#10;playinte&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Play/PlayInterface.vue&#10;playquest&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Question/PlayQuestion/PlayQuestion.vue&#10;hostanswe&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Answer/HostAnswerReveal.vue&#10;hosthea&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Host/HostHeader.vue&#10;playinter&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Play/PlayInterface.vue&#10;playreveal&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Answer/PlayRevealAnswer.vue&#10;playlogin&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Play/PlayLogin.vue&#10;play.vue&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Play/Play.vue&#10;hostquest&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Question/HostQuestion.vue&#10;playhome&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Play/PlayHomeScreen.vue&#10;playlob&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Play/PlayLobby.vue&#10;hostheader&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Host/HostHeader.vue&#10;hostcon&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/app/Http/Controllers/HostController.php&#10;leader&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Team/LeaderBoardIndex.vue&#10;hostle&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Host/HostLeaderBoard.vue&#10;playin&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Play/PlayInterface.vue&#10;hostrevea&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Answer/HostAnswerReveal.vue&#10;hosthead&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Host/HostHeader.vue&#10;hostreveal&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Answer/HostAnswerReveal.vue&#10;leaderboardin&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Team/LeaderBoardIndex.vue" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
-    <property name="SearchEverywhereHistoryKey" value="app&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/views/layouts/app.blade.php&#10;playque&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Question/PlayQuestion/PlayQuestion.vue&#10;style&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/public/css/style.css&#10;nav&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/HomeNav.vue&#10;host&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Host/HostTeamName.vue&#10;hostteamname&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Host/HostTeamName.vue&#10;hosttriviateamanswer&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Host/HostTriviaTeamAnswer.vue&#10;homenav&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/HomeNav.vue&#10;hostteamanswerpool&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Host/HostTeamAnswerPool.vue&#10;hostinter&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Host/HostInterface.vue&#10;hostquesti&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Question/HostQuestionPreview.vue&#10;hostquestion&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Question/HostQuestion.vue&#10;team&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/store/modules/team.js&#10;hostchangean&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Host/HostChangeAnswer.vue&#10;hostques&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Question/HostQuestion.vue&#10;hostroundrevi&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Round/HostRoundReview.vue&#10;team.j&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/store/modules/team.js&#10;revealanswer&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Answer/PlayRevealAnswerMC.vue&#10;team.js&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/store/modules/team.js&#10;hostteaman&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Answer/HostTeamAnswerIndex.vue&#10;hostteamans&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Host/HostTriviaTeamAnswer.vue&#10;hostchange&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Host/HostChangeAnswer.vue&#10;playround&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Round/PlayRoundReview.vue&#10;updateteam&#9;null&#9;null&#10;api&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/routes/api.php&#10;leaderboard&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Team/LeaderBoardIndex.vue&#10;hostlea&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Host/HostLeaderBoard.vue&#10;teamanswercon&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/app/Http/Controllers/TeamAnswerController.php&#10;playlead&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Play/PlayLeaderBoard.vue&#10;hostteampro&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Team/HostTeamProfile.vue&#10;playinte&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Play/PlayInterface.vue&#10;playquest&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Question/PlayQuestion/PlayQuestion.vue&#10;hostanswe&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Answer/HostAnswerReveal.vue&#10;hosthea&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Host/HostHeader.vue&#10;playinter&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Play/PlayInterface.vue&#10;playreveal&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Answer/PlayRevealAnswer.vue&#10;playlogin&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Play/PlayLogin.vue&#10;play.vue&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Play/Play.vue&#10;hostquest&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Question/HostQuestion.vue&#10;playhome&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Play/PlayHomeScreen.vue&#10;playlob&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Play/PlayLobby.vue&#10;hostheader&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Host/HostHeader.vue&#10;hostcon&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/app/Http/Controllers/HostController.php&#10;leader&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Team/LeaderBoardIndex.vue&#10;hostle&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Host/HostLeaderBoard.vue&#10;playin&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Play/PlayInterface.vue&#10;hostrevea&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Answer/HostAnswerReveal.vue&#10;hosthead&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Host/HostHeader.vue&#10;hostreveal&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Answer/HostAnswerReveal.vue&#10;leaderboardin&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Team/LeaderBoardIndex.vue" />
     <property name="settings.editor.selected.configurable" value="preferences.fileTypes" />
-    <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -422,8 +207,21 @@
       </list>
     </option>
   </component>
-  <component name="ShelveChangesManager" show_recycled="false">
-    <option name="remove_strategy" value="false" />
+  <component name="RunManager">
+    <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <TestRunner scope="XML" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="allServicesViewState">
+      <serviceView>
+        <treeState>
+          <expand />
+          <select />
+        </treeState>
+      </serviceView>
+    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -466,11 +264,10 @@
       <workItem from="1566489050001" duration="65341000" />
       <workItem from="1567450546059" duration="50596000" />
       <workItem from="1568243555286" duration="38923000" />
+      <workItem from="1568873829217" duration="1736000" />
+      <workItem from="1568909364461" duration="2442000" />
     </task>
     <servers />
-  </component>
-  <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="714047000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -481,600 +278,20 @@
       <is-autoscroll-to-source value="true" />
     </todo-panel>
   </component>
-  <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
-    <editor active="true" />
-    <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27825466" sideWeight="0.49576783" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.32889965" sideWeight="0.49713877" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.426844" sideWeight="0.54291844" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32889965" sideWeight="0.49427754" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.426844" sideWeight="0.45708156" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27539343" sideWeight="0.50423217" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32889965" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-    </layout>
-  </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <option name="time" value="80" />
-    </breakpoint-manager>
-    <watches-manager />
-  </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/resources/views/host.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-          <folding>
-            <marker date="1568310343787" expanded="true" signature="9:28" ph="..." />
-            <marker date="1568310343787" expanded="true" signature="40:49" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/play.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1565738199880" expanded="true" signature="9:28" ph="..." />
-            <marker date="1565738199880" expanded="true" signature="40:49" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/layouts/main.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1561488009202" expanded="true" signature="9:22" ph="..." />
-            <marker date="1561488009202" expanded="true" signature="34:42" ph="..." />
-            <marker date="1561488009202" expanded="true" signature="195:205" ph="..." />
-            <marker date="1561488009202" expanded="true" signature="228:259" ph="..." />
-            <marker date="1561488009202" expanded="true" signature="492:517" ph="..." />
-            <marker date="1561488009202" expanded="true" signature="1072:1088" ph="..." />
-            <marker date="1561488009202" expanded="true" signature="1094:1107" ph="..." />
-            <marker date="1561488009202" expanded="true" signature="1173:1195" ph="..." />
-            <marker date="1561488009202" expanded="true" signature="1307:1326" ph="..." />
-            <marker date="1561488009202" expanded="true" signature="1332:1348" ph="..." />
-            <marker date="1561488009202" expanded="true" signature="1746:1766" ph="..." />
-            <marker date="1561488009202" expanded="true" signature="2005:2022" ph="..." />
-            <marker date="1561488009202" expanded="true" signature="2211:2225" ph="..." />
-            <marker date="1561488009202" expanded="true" signature="2331:2348" ph="..." />
-            <marker date="1561488009202" expanded="true" signature="2741:2750" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/team/play.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/TeamLoginController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="113" column="43" lean-forward="false" selection-start-line="113" selection-start-column="43" selection-end-line="113" selection-end-column="43" />
-          <folding>
-            <element signature="e#601#717#0#PHP" expanded="false" />
-            <element signature="e#724#915#0#PHP" expanded="false" />
-            <element signature="e#921#991#0#PHP" expanded="false" />
-            <element signature="e#997#1332#0#PHP" expanded="false" />
-            <element signature="e#1338#1729#0#PHP" expanded="false" />
-            <element signature="e#1735#2072#0#PHP" expanded="false" />
-            <element signature="e#3242#3481#0#PHP" expanded="false" />
-            <element signature="e#4103#4277#0#PHP" expanded="false" />
-            <element signature="e#4283#4520#0#PHP" expanded="false" />
-            <element signature="e#4526#4620#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/team/login.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="5" lean-forward="true" selection-start-line="4" selection-start-column="5" selection-end-line="4" selection-end-column="5" />
-          <folding>
-            <marker date="1568310405981" expanded="true" signature="9:23" ph="..." />
-            <marker date="1568310405981" expanded="true" signature="35:44" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/layouts/play.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1566335608105" expanded="true" signature="229:243" ph="..." />
-            <marker date="1566335608105" expanded="true" signature="295:319" ph="..." />
-            <marker date="1566335608105" expanded="true" signature="892:901" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/web.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="5" lean-forward="false" selection-start-line="0" selection-start-column="5" selection-end-line="0" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-7">
-          <caret line="40" column="25" lean-forward="false" selection-start-line="40" selection-start-column="25" selection-end-line="40" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/Home.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/Game/TriviaIndex.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-5">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/Game/GameCard.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="182" column="16" lean-forward="false" selection-start-line="182" selection-start-column="16" selection-end-line="184" selection-end-column="45" />
-          <folding>
-            <element signature="e#3354#7816#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/HomePage.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="189" column="21" lean-forward="false" selection-start-line="189" selection-start-column="21" selection-end-line="189" selection-end-column="21" />
-          <folding>
-            <element signature="n#style#0;n#h1#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#p#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#div#1;n#div#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#small#0;n#div#3;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#div#2;n#div#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#small#0;n#div#3;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#div#3;n#div#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#small#0;n#div#3;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#3;n#div#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/homePage.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="15" lean-forward="false" selection-start-line="0" selection-start-column="15" selection-end-line="0" selection-end-column="15" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#main#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <marker date="1568323833985" expanded="true" signature="229:243" ph="..." />
-            <marker date="1568323833985" expanded="true" signature="295:319" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/HostController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="34" column="42" lean-forward="false" selection-start-line="34" selection-start-column="42" selection-end-line="34" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/Play/PlayLobby.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="20" lean-forward="true" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/Play/PlayHomeScreen.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/Play/PlayLogin.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="550">
-          <caret line="126" column="30" lean-forward="false" selection-start-line="126" selection-start-column="30" selection-end-line="126" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/Play/Play.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="205">
-          <caret line="19" column="14" lean-forward="false" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/Answer/PlayRevealAnswerFIB.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="654">
-          <caret line="86" column="36" lean-forward="false" selection-start-line="86" selection-start-column="36" selection-end-line="86" selection-end-column="36" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/Answer/PlayRevealAnswer.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="44" column="0" lean-forward="false" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
-          <folding>
-            <element signature="n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/Answer/HostAnswerReveal.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="669">
-          <caret line="90" column="31" lean-forward="false" selection-start-line="90" selection-start-column="31" selection-end-line="90" selection-end-column="31" />
-          <folding>
-            <element signature="n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#div#4;n#div#0;n#template#0;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/Play/PlayLeaderBoard.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="44" column="35" lean-forward="false" selection-start-line="44" selection-start-column="35" selection-end-line="44" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/Team/HostTeamProfile.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-161">
-          <caret line="63" column="20" lean-forward="false" selection-start-line="63" selection-start-column="20" selection-end-line="63" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Events/UpdateTeams.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="29" column="32" lean-forward="false" selection-start-line="29" selection-start-column="32" selection-end-line="29" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/Host/HostLeaderBoard.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="445">
-          <caret line="57" column="48" lean-forward="false" selection-start-line="57" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/Team/LeaderBoardIndex.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="43" column="72" lean-forward="false" selection-start-line="43" selection-start-column="72" selection-end-line="43" selection-end-column="72" />
-          <folding>
-            <element signature="n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#div#3;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="e#6166#6260#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/TeamAnswerController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="431">
-          <caret line="194" column="86" lean-forward="false" selection-start-line="194" selection-start-column="17" selection-end-line="194" selection-end-column="86" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/Round/PlayRoundReview.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-5">
-          <caret line="82" column="8" lean-forward="false" selection-start-line="82" selection-start-column="8" selection-end-line="82" selection-end-column="8" />
-          <folding>
-            <element signature="n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#div#1;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#span#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#span#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#span#2;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#span#3;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#span#4;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#span#5;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="e#6743#6957#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/Play/PlayInterface.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="385">
-          <caret line="75" column="63" lean-forward="false" selection-start-line="75" selection-start-column="63" selection-end-line="75" selection-end-column="63" />
-          <folding>
-            <element signature="n#PlayHomeScreen#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#PlayRoundPreview#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#PlayLeaderBoard#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#PlayQuestion#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="e#2075#2211#0" expanded="false" />
-            <element signature="e#2265#2470#0" expanded="false" />
-            <element signature="e#3412#3563#0" expanded="false" />
-            <element signature="e#3706#4407#0" expanded="false" />
-            <element signature="e#5039#5272#0" expanded="false" />
-            <element signature="e#5308#5547#0" expanded="false" />
-            <element signature="e#5574#5788#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/Host/HostHeader.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="497">
-          <caret line="159" column="18" lean-forward="false" selection-start-line="159" selection-start-column="18" selection-end-line="159" selection-end-column="18" />
-          <folding>
-            <element signature="n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="e#2769#3343#0" expanded="false" />
-            <element signature="e#2929#3037#0" expanded="false" />
-            <element signature="e#3208#3323#0" expanded="false" />
-            <element signature="e#3380#3965#0" expanded="false" />
-            <element signature="e#4009#5265#0" expanded="false" />
-            <element signature="e#4285#4886#0" expanded="false" />
-            <element signature="e#5313#6064#0" expanded="false" />
-            <element signature="e#6114#6211#0" expanded="false" />
-            <element signature="e#6271#6338#0" expanded="false" />
-            <element signature="e#6368#6431#0" expanded="false" />
-            <element signature="e#6463#7658#0" expanded="false" />
-            <element signature="e#7693#7913#0" expanded="false" />
-            <element signature="e#8235#8468#0" expanded="false" />
-            <element signature="e#8504#8743#0" expanded="false" />
-            <element signature="e#8528#8597#0" expanded="false" />
-            <element signature="e#8770#8984#0" expanded="false" />
-            <element signature="e#8794#8851#0" expanded="false" />
-            <element signature="e#9009#9224#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/api.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="648">
-          <caret line="88" column="72" lean-forward="false" selection-start-line="88" selection-start-column="66" selection-end-line="88" selection-end-column="72" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/Answer/PlayRevealAnswerMC.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1">
-          <caret line="66" column="10" lean-forward="false" selection-start-line="66" selection-start-column="10" selection-end-line="66" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/store/modules/team.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
-          <caret line="97" column="50" lean-forward="false" selection-start-line="97" selection-start-column="50" selection-end-line="97" selection-end-column="50" />
-          <folding>
-            <element signature="e#829#1163#0" expanded="false" />
-            <element signature="e#1205#1576#0" expanded="false" />
-            <element signature="e#2608#2647#0" expanded="false" />
-            <element signature="e#2673#2707#0" expanded="false" />
-            <element signature="e#2736#2772#0" expanded="false" />
-            <element signature="e#2810#2924#0" expanded="false" />
-            <element signature="e#2953#2994#0" expanded="false" />
-            <element signature="e#3021#3060#0" expanded="false" />
-            <element signature="e#3087#3126#0" expanded="false" />
-            <element signature="e#3157#3344#0" expanded="false" />
-            <element signature="e#3381#3424#0" expanded="false" />
-            <element signature="e#3719#3758#0" expanded="false" />
-            <element signature="e#3793#3836#0" expanded="false" />
-            <element signature="e#3871#3914#0" expanded="false" />
-            <element signature="e#3945#4155#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/Round/HostRoundReviewTeamRow.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-594">
-          <caret line="0" column="10" lean-forward="false" selection-start-line="0" selection-start-column="10" selection-end-line="0" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/Round/HostRoundReview.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-          <folding>
-            <element signature="n#div#1;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#div#3;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="e#5822#6055#0" expanded="false" />
-            <element signature="e#6091#6330#0" expanded="false" />
-            <element signature="e#6357#6571#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.dom.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="487">
-          <caret line="15108" column="58" lean-forward="true" selection-start-line="15108" selection-start-column="58" selection-end-line="15108" selection-end-column="58" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/Host/HostChangeAnswer.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="34" column="33" lean-forward="false" selection-start-line="34" selection-start-column="33" selection-end-line="34" selection-end-column="33" />
-          <folding>
-            <element signature="e#1194#1345#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/Answer/HostTeamAnswerIndex.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="603">
-          <caret line="60" column="22" lean-forward="false" selection-start-line="60" selection-start-column="22" selection-end-line="60" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/Host/HostInterface.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="30" column="14" lean-forward="false" selection-start-line="30" selection-start-column="14" selection-end-line="30" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/Host/HostTeamName.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/Answer/HasNotAnswered.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="32" lean-forward="false" selection-start-line="2" selection-start-column="32" selection-end-line="2" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/Answer/HasAnswered.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="18" lean-forward="false" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/Question/HostQuestionPreview.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="24" lean-forward="false" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/HomeNav.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="61" lean-forward="false" selection-start-line="5" selection-start-column="61" selection-end-line="5" selection-end-column="61" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/css/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="271">
-          <caret line="367" column="0" lean-forward="false" selection-start-line="367" selection-start-column="0" selection-end-line="367" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/Question/HostQuestion.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="33" column="24" lean-forward="false" selection-start-line="33" selection-start-column="24" selection-end-line="33" selection-end-column="24" />
-          <folding>
-            <element signature="n#div#1;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#div#2;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="e#2906#3958#0" expanded="false" />
-            <element signature="e#3983#4341#0" expanded="false" />
-            <element signature="e#4980#5213#0" expanded="false" />
-            <element signature="e#5249#5488#0" expanded="false" />
-            <element signature="e#5515#5729#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/Host/HostTeamAnswerPool.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="32" column="41" lean-forward="false" selection-start-line="32" selection-start-column="41" selection-end-line="32" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/Question/PlayQuestion/PlayQuestion.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1094">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/Host/HostTriviaTeamAnswer.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="2" column="30" lean-forward="false" selection-start-line="2" selection-start-column="30" selection-end-line="2" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/layouts/app.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="596">
-          <caret line="40" column="20" lean-forward="false" selection-start-line="40" selection-start-column="20" selection-end-line="40" selection-end-column="20" />
-          <folding>
-            <marker date="1568655952969" expanded="true" signature="229:243" ph="..." />
-            <marker date="1568655952969" expanded="true" signature="295:319" ph="..." />
-            <marker date="1568655952969" expanded="true" signature="1386:1394" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
