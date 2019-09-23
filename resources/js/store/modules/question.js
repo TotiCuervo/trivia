@@ -90,7 +90,7 @@ const actions = {
         });
     },
 
-newQuestion({commit, state}) {
+    newQuestion({commit, state}) {
         commit('setLoading', true);
         axios.post('/api/question/create', state.form)
             .then(response => {
@@ -130,14 +130,7 @@ const mutations = {
         state.questions = questions;
     },
     SET_QUESTION_FORM(state, question){
-
-        state.form = {
-            id: question.id,
-            title: question.title,
-            type: question.type,
-            round_id: question.round_id,
-            order_number: question.order_number
-        };
+        state.form = question;
     },
     UPDATE_TITLE(state,title){
         state.form.title = title;
@@ -189,7 +182,39 @@ const mutations = {
     },
     DELETE_FROM_QUESTIONS(state, question){
 
-        let $roundQuestions = [];
+        console.log(question);
+
+        // let $roundQuestions = [];
+        //
+        // for (let $i = 0; $i < state.questions.length; $i++) {
+        //
+        //     if (state.questions[$i].id === question.id) {
+        //         state.questions.splice($i,1);
+        //     }
+        //
+        //     if (state.questions[$i].round_id) {
+        //         if (state.questions[$i].round_id === question.round_id) {
+        //             $roundQuestions.push(state.questions[$i]);
+        //         }
+        //     }
+        // }
+        //
+        // for (let $i = question.order_number-1; $i < $roundQuestions.length; $i++) {
+        //
+        //     $roundQuestions[$i].order_number = $roundQuestions[$i].order_number - 1;
+        //
+        //     axios.post('/api/question/' + $roundQuestions[$i].id, {
+        //         data: $roundQuestions[$i],
+        //         _method: 'patch'
+        //     })
+        //         .then(response => {
+        //             // console.log(response.data);
+        //         })
+        //         .catch(error => {
+        //             console.log(error);
+        //         });
+        //
+        // }
 
         for (let $i = 0; $i < state.questions.length; $i++) {
 
@@ -197,17 +222,31 @@ const mutations = {
                 state.questions.splice($i,1);
             }
 
-            if (state.questions[$i].round_id === question.round_id) {
-                $roundQuestions.push(state.questions[$i]);
-            }
         }
+        console.log('question.order_number-1');
+        console.log(question.order_number-1);
+        console.log('state.questions.filter(x => x.round_id === question.round_id)');
+        console.log(state.questions.filter(x => x.round_id === question.round_id));
 
-        for (let $i = question.order_number-1; $i < $roundQuestions.length; $i++) {
+        console.log('state.questions.filter(x => x.round_id === question.round_id)[$i].id');
+        console.log(state.questions.filter(x => x.round_id === question.round_id)[0].id);
 
-            $roundQuestions[$i].order_number = $roundQuestions[$i].order_number - 1;
 
-            axios.post('/api/question/' + $roundQuestions[$i].id, {
-                data: $roundQuestions[$i],
+        for (let $i = question.order_number-1; $i < state.questions.filter(x => x.round_id === question.round_id).length; $i++) {
+            console.log('$i');
+            console.log($i);
+            console.log('state.questions.filter(x => x.round_id === question.round_id)');
+            console.log(state.questions.filter(x => x.round_id === question.round_id));
+
+
+            axios.post('/api/question/' + state.questions.filter(x => x.round_id === question.round_id)[$i].id, {
+                data: {
+                    id: state.questions.filter(x => x.round_id === question.round_id)[$i].id,
+                    title: state.questions.filter(x => x.round_id === question.round_id)[$i].title,
+                    type: state.questions.filter(x => x.round_id === question.round_id)[$i].type,
+                    round_id: state.questions.filter(x => x.round_id === question.round_id)[$i].round_id,
+                    order_number: state.questions.filter(x => x.round_id === question.round_id)[$i].order_number-1,
+                },
                 _method: 'patch'
             })
                 .then(response => {
@@ -223,7 +262,6 @@ const mutations = {
     },
     CLEAR_CURRENT_QUESTION(state){
 
-        console.log('make it to clear current question');
         state.question = {
             id: '',
             title: '',

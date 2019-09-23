@@ -33,16 +33,16 @@
                     </div>
                 </router-link>
                 <div class="row">
-                    <div class="col-md-12 text-center">
+                    <div class="col-md-12">
                         <hr>
-                        <!--opens in same tab-->
-                        <!--<router-link :to="{ name: 'hostInterface', params: {id: game.id} }">-->
-                            <!--<b-button block pill variant="primary">Play</b-button>-->
-                        <!--</router-link>-->
-
+                    </div>
+                    <div class="col p-1 text-center">
+                        <!--opens in different tab-->
+                        <b-button block pill variant="outline-primary" @click="playGame()">Edit</b-button>
+                    </div>
+                    <div class="col p-1 text-center">
                         <!--opens in different tab-->
                         <b-button block pill variant="primary" @click="playGame()">Play</b-button>
-
                     </div>
                 </div>
             </div>

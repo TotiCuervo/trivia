@@ -486,6 +486,10 @@
     color: white;
 }
 
+.then-white {
+    color: white;
+}
+
 .color-blue {
     color: blue;
 }
@@ -498,12 +502,16 @@
     color: lightgray;
 }
 
-.first-gray {
-    color: lightgray;
+.then-green:hover {
+    color:green
 }
 
 .then-black:hover {
     color: black;
+}
+
+.then-red:hover {
+    color: darkred;
 }
 
 
@@ -525,10 +533,93 @@
     box-shadow: none !important;
 }
 
+.form-control.form-control-delete {
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
+}
+
+.form-control.form-control-correct {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
+}
+
 .list-group-item {
     border-top: 0 !important;
     background: rgb(240, 243, 247) !important;
 }
+
+.custom-select {
+    background-color: hsl(210, 9%, 96%) !important;
+    border-radius: 0.7rem !important;
+    border: 0 !important;
+    outline: 0 !important;
+    -webkit-appearance: none !important;
+    box-shadow: none !important;
+}
+
+.modal-header {
+    border-bottom: none !important;
+    padding-bottom: 0 !important;
+}
+
+.btn-circle.btn-xl {
+    width: 70px;
+    height: 70px;
+    padding: 10px 16px;
+    border-radius: 35px;
+    font-size: 24px;
+    line-height: 1.33;
+    box-shadow: 0 6px 8px 0 hsla(0, 0%, 0%, 0.20);
+}
+
+.form-button-delete {
+    border-left: none !important;
+    background: hsl(210, 9%, 96%) !important;
+    border-radius: 0 0.7rem 0.7rem 0 !important;
+    border-color: hsl(210, 9%, 96%) !important;
+}
+
+.form-button-delete:hover {
+    background: #dc3545!important
+}
+
+.form-button-success {
+    border-right: none !important;
+    background: hsl(210, 9%, 96%) !important;
+    border-radius: 0.7rem 0 0 0.7rem!important;
+    border-color: hsl(210, 9%, 96%) !important;
+}
+
+.form-button-success:hover {
+    background: #28a745!important;
+}
+
+.form-button-success-clicked {
+    background: #28a745!important;
+    border-radius: 0.7rem 0 0 0.7rem!important;
+    border-right: none !important;
+}
+
+.form-button-success .fa-check-circle {
+    color:lightgrey !important;
+}
+
+.form-button-success:hover .fa-check-circle {
+    color:white !important;
+}
+
+.form-button-delete .fa-trash-alt {
+    color:lightgrey !important;
+}
+
+.form-button-delete:hover .fa-trash-alt {
+    color:white !important;
+}
+
+
+
 
 /*Sizes*/
 

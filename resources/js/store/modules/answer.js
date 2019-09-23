@@ -31,27 +31,6 @@ function initialState() {
                 round_id: '',
                 correct: false,
             },
-            {
-                id: '',
-                title: '',
-                question_id: '',
-                round_id: '',
-                correct: false,
-            },
-            {
-                id: '',
-                title: '',
-                question_id: '',
-                round_id: '',
-                correct: false,
-            },
-            {
-                id: '',
-                title: '',
-                question_id: '',
-                round_id: '',
-                correct: false,
-            }
         ]
     }
 }
@@ -110,7 +89,7 @@ const actions = {
 
     deletedAnswer({commit,state}, order_num) {
 
-        while (order_num < 6)
+        while (order_num < state.form.length - 1)
         {
             commit('DELETED_ANSWER', order_num);
 
@@ -150,17 +129,26 @@ const mutations = {
     },
     UPDATE_TITLE(state, payload){
         let $form = {
-            id: '',
+            id: state.form[payload.order].id,
             title: payload.title,
-            question_id: '',
-            round_id: '',
-            correct: false,
+            question_id: state.form[payload.order].question_id,
+            round_id: state.form[payload.order].round_id,
+            correct: state.form[payload.order].correct,
         };
 
         Vue.set(state.form, payload.order, $form );
 
     },
     UPDATE_ANSWERS(state,answer){
+        for (let $i=0; $i < state.answers.length; $i++) {
+
+            if (answer.id === state.answers[$i].id) {
+                Vue.set(state.answers, $i, answer);
+                break;
+            }
+        }
+    },
+    ADD_TO_ANSWERS(state,answer){
         state.answers.push(answer);
     },
     UPDATE_QUESTION_ID(state,payload){
@@ -175,6 +163,12 @@ const mutations = {
     DELETED_ANSWER(state, order){
         state.form[order].title = state.form[order+1].title;
         state.form[order].correct = state.form[order+1].correct;
+    },
+    DELETE_FROM_ANSWERS(state, question) {
+
+        for (let $i=0; $i < state.answers.length; $i++) {
+            if (question.id === state.answers[$i].id) {state.answers.splice($i,1); break;}
+        }
     },
     CLEAR_FORM(state, order){
         state.form[order] = {
@@ -215,27 +209,6 @@ const mutations = {
                 round_id: '',
                 correct: false,
             },
-            {
-                id: '',
-                title: '',
-                question_id: '',
-                round_id: '',
-                correct: false,
-            },
-            {
-                id: '',
-                title: '',
-                question_id: '',
-                round_id: '',
-                correct: false,
-            },
-            {
-                id: '',
-                title: '',
-                question_id: '',
-                round_id: '',
-                correct: false,
-            }
         ]
     },
 };

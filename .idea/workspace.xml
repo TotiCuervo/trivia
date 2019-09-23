@@ -2,12 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f562f43b-05cf-4003-ae95-b369e5751c9b" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/resources/js/components/Question/CreateQAFormModal.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/Question/EditQAFormModal.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AnswerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AnswerController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/QuestionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/QuestionController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Answer/AnswerIndex.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Answer/AnswerIndex.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Answer/AnswerField.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Answer/AnswerField.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Answer/CreateAnswer.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Answer/CreateAnswer.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Game/AddRound.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Game/AddRound.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Game/GameCard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Game/GameCard.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/Game/GameDetails.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Game/GameDetails.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Game/GameHeader.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Game/GameHeader.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Question/CreateQAForm.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Question/CreateQAForm.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Question/CreateQuestion.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Question/CreateQuestion.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Question/EditQAForm.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Question/EditQAForm.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Question/QuestionIndexCard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Question/QuestionIndexCard.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/Round/RoundDetails.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Round/RoundDetails.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Round/RoundIndex.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Round/RoundIndex.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/layouts/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/layouts/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/store/modules/answer.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/store/modules/answer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/store/modules/question.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/store/modules/question.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -257,18 +273,10 @@
       <workItem from="1567450546059" duration="50596000" />
       <workItem from="1568243555286" duration="38923000" />
       <workItem from="1568873829217" duration="1736000" />
-      <workItem from="1568909364461" duration="10799000" />
+      <workItem from="1568909364461" duration="39893000" />
+      <workItem from="1569199346657" duration="12646000" />
     </task>
     <servers />
-  </component>
-  <component name="TodoView">
-    <todo-panel id="selected-file">
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
-    <todo-panel id="all">
-      <are-packages-shown value="true" />
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />

@@ -125,5 +125,6 @@ class AnswerController extends Controller
         $answer = Answer::findorFail($id);
 
         $answer->delete();
+
     }
 }

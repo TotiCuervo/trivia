@@ -12,20 +12,20 @@
                     <!--if current round-->
                     <div class="col-8 col-sm-9 col-md-9 pr-0" v-if="this.currentRound.id === this.round_id">
                         <div v-if="question.type === 'Fill-in-blank' ">
-                            <span class="text-muted">(Fill In The Blank)</span>
+                            <span class="small text-muted">Fill In The Blank</span>
                         </div>
                         <div v-else>
-                            <span class="text-muted">(Multiple Choice)</span>
+                            <span class="small text-muted">Multiple Choice</span>
                         </div>
                         <p class="m-0"><b>{{question.title}}</b></p>
                     </div>
                     <!--if not current round-->
                     <div class="col-10 col-sm-9 col-md-11 pr-0" v-else>
                         <div v-if="question.type === 'Fill-in-blank' ">
-                            <span class="text-muted">(Fill In The Blank)</span>
+                            <span class="small text-muted">Fill In The Blank</span>
                         </div>
                         <div v-else>
-                            <span class="text-muted">(Multiple Choice)</span>
+                            <span class="small text-muted">Multiple Choice</span>
                         </div>
                         <p class="m-0"><b>{{question.title}}</b></p>
                     </div>
@@ -33,12 +33,15 @@
                     <div class="col-2 col-md-2 pl-0">
                         <div class="float-right" v-show="this.currentRound.id === this.round_id">
                             <div class="dropdown dropleft">
-                                <router-link :to="{ name: 'editQAForm', params: { id: id.id, round_id: round_id, question_id: question.id } }" class="clicker">
-                                    <span class="fa-1x first-gray then-black trans-1" v-b-tooltip.left title="Edit question">
-                                        <i class="fas fa-pen"></i>
-                                    </span>
-                                </router-link>
-                                <span class="fa-1x mt-2 first-gray then-black trans-1" v-b-tooltip.left title="Delete question" v-b-modal.delete-question>
+<!--                                <router-link :to="{ name: 'editQAForm', params: { id: id.id, round_id: round_id, question_id: question.id } }" class="clicker">-->
+<!--                                    <span class="fa-1x first-gray then-black trans-1 clicker" v-b-tooltip.top title="Edit question" v-b-modal.edit-question>-->
+<!--                                        <i class="fas fa-pen"></i>-->
+<!--                                    </span>-->
+<!--                                </router-link>-->
+                                <span class="fa-1x first-gray then-black trans-1 clicker" v-b-tooltip.top title="Edit question" @click="loadEditData()" v-b-modal.edit-question>
+                                    <i class="fas fa-pen"></i>
+                                </span>
+                                <span class="fa-1x mt-2 first-gray then-black trans-1 clicker" v-b-tooltip.top title="Delete question" v-b-modal.delete-question>
                                     <i class="fas fa-trash-alt"></i>
                                 </span>
                             </div>
@@ -91,11 +94,16 @@
                 //     });
 
 
+            },
+            loadEditData() {
+                this.$store.commit('question/SET_QUESTION_FORM', this.question);
+                this.$store.commit('answer/SET_ANSWERS_FORM', this.answers.filter(x => x.question_id === this.question.id));
             }
         },
         computed: {
             ...mapGetters('round', ['currentRound']),
             ...mapGetters('question', ['currentQuestion']),
+            ...mapGetters('answer', ['answers']),
             current_Question: {
                 get() {
                     return this.currentQuestion;

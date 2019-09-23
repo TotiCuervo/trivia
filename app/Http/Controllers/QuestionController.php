@@ -7,6 +7,7 @@ use App\Question;
 use App\Round;
 use App\Game;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class QuestionController extends Controller
 {
@@ -53,10 +54,12 @@ class QuestionController extends Controller
     {
         $round = Round::findorFail($request->round_id);
 
+        $orderNumber = Question::where('round_id', $request->round_id)->get();
+
         $question = $round->questions()->create([
             'title' => $request->title,
             'type' => $request->type,
-            'order_number' => $request->order_number,
+            'order_number' => $orderNumber->count() + 1,
         ]);
 
         return $question;

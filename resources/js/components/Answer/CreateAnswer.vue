@@ -1,33 +1,31 @@
 <template>
     <div>
+        <!--Type Selections-->
+        <div class="row pb-3">
 
-        <div class="row">
-            <div class="col-md-6 offset-md-1">
-                <select class="form-control mt-2" v-model="questionType" @change="changeOrderNumber">
-                    <option value='' disabled>Choose Answer Type</option>
+            <!--Type-->
+            <div class="col-6 offset-1">
+                <select class="custom-select mt-2" v-model="questionType" @change="changeOrderNumber">
+                    <option value='' disabled>Choose Question Type</option>
                     <option value='Fill-in-blank' selected>Fill In The Blank</option>
                     <option value="Multiple-Choice">Multiple Choice</option>
                 </select>
             </div>
-            <div class="col-md-4">
-                <div v-if="this.order_number === 7">
-                    <button type="button" class="btn btn-danger w-100 mt-2">Cut off: 7 Answers</button>
+
+            <!--Add Answers-->
+            <div class="col-4">
+                <div v-if="this.order_number === 4">
+                    <button type="button" class="btn btn-success w-100 mt-2 p" disabled>Max 4</button>
                 </div>
                 <div v-else>
                     <button type="button" class="btn btn-outline-success w-100 mt-2" @click="addAnswerOrder">Add Answer</button>
                 </div>
             </div>
         </div>
-        <div class="pt-3">
-            <div v-for="(n, index) in this.order_number">
-                <div class="row">
-                    <div class="col-md-12">
-                        <AnswerField :order_number="index" @deleted="deletedWasClicked"></AnswerField>
-                    </div>
-                </div>
-            </div>
+        <!--AnswerFields-->
+        <div v-for="(n, index) in this.order_number">
+            <AnswerField :order_number="index" @deleted="deletedWasClicked"></AnswerField>
         </div>
-
 
     </div>
 </template>
@@ -39,26 +37,24 @@
         data() {
             return {
                 order_number: 1,
+                type: 0
             }
         },
         mounted() {
-
-            for (let $i = 1; $i <= 6; $i++ ){
-
-                if (!(this.answerForm[$i].title === ''))
-                {
-                    this.order_number++;
-                }
-            }
-
-            this.questionType = "Fill-in-blank";
-
-
+            this.checkOrderNumber();
+            this.type= 1;
         },
         methods:{
+            checkOrderNumber() {
+                for (let $i = 1; $i <= 3; $i++ ){
 
-            addAnswerOrder()
-            {
+                    if (!(this.answerForm[$i].title === ''))
+                    {
+                        this.order_number++;
+                    }
+                }
+            },
+            addAnswerOrder() {
                 this.order_number++;
             },
             changeOrderNumber() {
@@ -95,6 +91,14 @@
                 get() {
                     return this.answerFields;
                 },
+            },
+        },
+        watch: {
+            type: function () {
+
+                if (this.questionType === '') {
+                    this.questionType = 'Fill-in-blank'
+                }
             },
         }
     }

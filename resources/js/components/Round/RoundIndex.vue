@@ -3,31 +3,19 @@
 
         <!--wait until the rounds have been loaded-->
         <div v-if="!(this.id == null)">
-
             <!--if there are no rounds, show this-->
-            <div v-if="this.rounds.length === 0">
-                <div class="row pb-4">
-                    <div class="col-md-12">
-                        Add a round now!
-                    </div>
+            <div class="row pb-4" v-if="this.rounds.length === 0">
+                <div class="col-md-12">
+                    Add a round now!
                 </div>
             </div>
-            <!--else, do this-->
-            <div v-else>
-                <div class="row no-gutters">
-                    <div class="col-md-8 offset-md-2">
-                        <!--for every round that there is, create a new round component-->
-
-                        <draggable v-model="game_rounds">
-                            <div v-for="round in game_rounds" class="round-row pb-3" :key="round.id">
-                                <RoundDetails :round="round"></RoundDetails>
-                                <!--<AddRound></AddRound>-->
-                            </div>
-                        </draggable>
-
+            <draggable v-model="game_rounds" v-else>
+                <div class="row no-gutters pb-3" v-for="round in game_rounds" :key="round.id">
+                    <div class="pr-2 pl-2 col-sm-10 offset-sm-1 col-md-8 offset-md-2">
+                        <RoundDetails :round="round"></RoundDetails>
                     </div>
                 </div>
-            </div>
+            </draggable>
         </div>
     </div>
 </template>

@@ -1,6 +1,6 @@
 <template>
 
-    <div class="round-card card" @click="clickToEdit()">
+    <div class="round-card card" v-bind:class="{'clicker': this.current_Round.order_number !== this.round.order_number}" @click="clickToEdit()">
         <div class="p-4">
             <div class="round-details">
                 <div class="row pb-3" v-show="(this.current_Round.order_number !== this.round.order_number)">
@@ -47,7 +47,7 @@
                         </b-form>
                     </div>
                     <!--Time Limit-->
-                    <div class="col-3 col-md-3 pl-0">
+                    <div class="col-2 col-md-2 pl-0">
                         <b-form-select
                             v-model="round_Time"
                             size="sm"
@@ -56,7 +56,7 @@
                         </b-form-select>
                     </div>
                     <!--Delete Round-->
-                    <div class="col-2 col-md-4">
+                    <div class="col-3 col-md-5">
                         <span class="size-1x5 first-gray then-black trans-1 clicker float-right" v-b-modal.delete-round>
                             <i class="far fa-times-circle"></i>
                         </span>
@@ -67,15 +67,13 @@
             <div class="question-index pt-4">
                 <QuestionIndex :round_id="this.round.id"></QuestionIndex>
             </div>
-            <!--add question-->
+            <!--add question via modal-->
             <div class="add-question" v-show="this.current_Round.order_number === this.round.order_number">
                 <div class="row pt-3">
                     <div class="col-md-12 text-center">
-                        <router-link :to="{ name: 'createQaForm', params: { id: id.id, round_id: this.round.id } }">
-                            <span class="fa-2x color-green" v-b-tooltip.hover title="Add Question!">
-                                <i class="fas fa-plus-circle"></i>
-                            </span>
-                        </router-link>
+                        <span class="fa-2x color-green" v-b-tooltip.hover title="Add Question!" v-b-modal.add-question>
+                            <i class="fas fa-plus-circle"></i>
+                        </span>
                     </div>
                 </div>
             </div>

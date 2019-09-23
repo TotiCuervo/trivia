@@ -1,7 +1,7 @@
 <template>
 
     <div>
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm" v-if="!(noNav.includes(this.$route.name))">
+        <nav class="navbar navbar-expand-md navbar-light bg-light shadow-sm" v-if="!(noNav.includes(this.$route.name))">
             <div class="container">
                 <!--<router-link :to="{ name: 'home' }" class="nav-link"><span style="color:white">Create Trivia Game!</span></router-link>-->
                 <a class="navbar-brand" href="/app#/home">
