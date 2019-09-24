@@ -128,15 +128,14 @@ const mutations = {
         }
     },
     UPDATE_TITLE(state, payload){
-        let $form = {
+
+        Vue.set(state.form, payload.order, {
             id: state.form[payload.order].id,
-            title: payload.title,
+            title: (payload.order === 0 && payload.title === '') ? " " : payload.title,
             question_id: state.form[payload.order].question_id,
             round_id: state.form[payload.order].round_id,
             correct: state.form[payload.order].correct,
-        };
-
-        Vue.set(state.form, payload.order, $form );
+        });
 
     },
     UPDATE_ANSWERS(state,answer){

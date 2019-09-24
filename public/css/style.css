@@ -327,9 +327,6 @@
     transition: 0.5s;
 }
 
-.blank-card {
-    border: 0 !important;
-}
 .question-card {
     /*box-shadow: 0px 0px 0px 0 rgba(0,0,0,0);*/
     /*border: 0 !important;*/
@@ -462,6 +459,22 @@
     border: 0 !important;
 }
 
+.blank-card {
+    border: 0 !important;
+    /*background: rgb(240, 243, 247) !important;*/
+    /*border-radius: 0.7rem !important;*/
+    /*outline: 0px !important;*/
+    /*-webkit-appearance: none;*/
+    /*box-shadow: none !important;*/
+}
+
+.add-question-card {
+    background: hsl(210, 9%, 96%) !important;
+    box-shadow: 0 2px 4px 0 hsla(0, 0%, 0%, 0.18);
+    border-radius: .7rem !important;
+    border: 0 !important;
+}
+
 /*Utilities*/
 
 .trivalo-background {
@@ -479,6 +492,10 @@
     color: #6c757d4f !important;
 }
 
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
 
 /*Colors*/
 

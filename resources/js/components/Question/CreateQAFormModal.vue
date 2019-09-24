@@ -1,6 +1,7 @@
 <template>
     <div class="container">
-        <CreateQuestion></CreateQuestion>
+
+        <CreateQuestion title="New Question"></CreateQuestion>
         <CreateAnswer></CreateAnswer>
 
         <div class="row pt-5 pb-5">
@@ -23,12 +24,6 @@
             }
         },
         mounted() {
-
-            //clears the form of the question store
-            this.$store.commit('question/CLEAR_FORM');
-
-            //Clears all the forms for the answers;
-            this.$store.commit('answer/CLEAR_ALL_FORM');
 
             //Sets the order number that this would be;
             this.$store.commit('question/UPDATE_ORDER_NUMBER', this.questions.filter(x => x.round_id === this.currentRound.id).length + 1);
@@ -56,7 +51,7 @@
                     .then(response => {
 
                         //updates the question array with the newly made question
-                        this.$store.commit('question/UPDATE_QUESTIONS', response.data);
+                        this.$store.commit('question/ADD_QUESTION_TO_QUESTIONS', response.data);
 
                         //going to add questions
                         this.addAnswer(response.data);
@@ -137,7 +132,7 @@
             validation() {
 
                 if (this.questionForm.type === 'Multiple-Choice') {
-                    return this.answerForm[0].title.length > 0 && this.answerForm[1].title.length > 0 && this.questionForm.title.length > 0 && this.questionForm.title.length < 100;
+                    return this.answerForm[0].title.length > 0 && this.answerForm[1].title.length > 0 && this.questionForm.title.length > 0 && this.questionForm.title.length < 100 && (this.answerForm.find(x => x.correct) ? true: false);
                 }
                 else {
 

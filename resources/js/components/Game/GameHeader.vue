@@ -8,7 +8,7 @@
                         {{game.name}}<span v-if="game.description">: {{game.description}}</span>
                         <span class="text-muted h5" v-if="game.company"><i>- {{game.company}}</i></span>
                     </span>
-                    <span class="fa-1x first-gray then-black trans-1 clicker" v-b-tooltip.top title="Edit game">
+                    <span class="fa-1x first-gray then-black trans-1 clicker" v-b-tooltip.top title="Edit game" v-b-modal.edit-game>
                         <i class="fas fa-pen"></i>
                     </span>
                     <hr>

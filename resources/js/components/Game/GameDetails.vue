@@ -17,7 +17,7 @@
         </div>
 
 
-        <b-modal id="delete-round"  hide-footer hide-header centered visible-close>
+        <b-modal id="delete-round"  hide-footer  centered visible-close>
             <template slot="default" slot-scope="{ close }">
                 <div class="row">
                     <div class="col-md-12">
@@ -30,7 +30,7 @@
                 <b-button class="mt-3" block variant="danger" @click="delete_Round()">Delete Round</b-button>
             </template>
         </b-modal>
-        <b-modal id="delete-question" hide-footer hide-header centered visible-close>
+        <b-modal id="delete-question" hide-footer centered visible-close>
             <template slot="default" slot-scope="{ close }">
                 <div class="row">
                     <div class="col-md-12">
@@ -49,6 +49,10 @@
         <b-modal id="edit-question"  hide-footer centered visible-close>
             <EditQAFormModal></EditQAFormModal>
         </b-modal>
+        <b-modal id="edit-game"  hide-footer centered visible-close>
+            <EditGameName></EditGameName>
+        </b-modal>
+
     </div>
 </template>
 

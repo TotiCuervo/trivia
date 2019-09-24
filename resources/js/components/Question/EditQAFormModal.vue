@@ -1,6 +1,6 @@
 <template>
     <div class="container" v-if="!(this.answerForm[0].title === '')">
-        <CreateQuestion></CreateQuestion>
+        <CreateQuestion title="Edit Question"></CreateQuestion>
         <CreateAnswer></CreateAnswer>
 
         <div class="row pt-5 pb-5">
@@ -42,11 +42,6 @@
             };
 
         },
-        beforeDestroy() {
-            this.$store.commit('question/CLEAR_CURRENT_QUESTION');
-            //clears the form of the question store
-            this.$store.commit('question/CLEAR_FORM');
-        },
         methods: {
             ...mapActions('question', ['fetchQuestion','question']),
             ...mapActions('answer', ['fetchQuestionAnswers', 'CLEAR_ALL_FORM']),
@@ -73,6 +68,7 @@
                     })
                         .then(response => {
                             this.$store.commit('question/CLEAR_FORM');
+                            this.$store.commit('question/UPDATE_QUESTION_IN_QUESTIONS', response.data);
                         })
                         .catch(error => {
                             console.log(error);
@@ -187,11 +183,11 @@
             validation() {
 
                 if (this.questionForm.type === 'Multiple-Choice') {
-                    return this.answerForm[0].title.length > 0 && this.answerForm[1].title.length > 0 && this.questionForm.title.length > 0 && this.questionForm.title.length < 100;
+                    return this.answerForm[0].title !== ' ' && this.answerForm[0].title.length > 0 && this.answerForm[1].title.length > 0 && this.questionForm.title.length > 0 && this.questionForm.title.length < 100 && (this.answerForm.find(x => x.correct) ? true: false);
                 }
                 else {
 
-                    return this.answerForm[0].title.length > 0 && this.questionForm.title.length > 0 && this.questionForm.title.length < 100;
+                    return this.answerForm[0].title !== ' ' && this.answerForm[0].title.length > 0 && this.questionForm.title.length > 0 && this.questionForm.title.length < 100;
 
                 }
             }

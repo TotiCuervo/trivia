@@ -1,11 +1,11 @@
 <template>
     <div class="row pb-4">
         <div class="col-10 offset-1">
-            <h1>New Question:</h1>
+            <h1>{{this.title}}:</h1>
             <b-form-group>
                 <b-form-textarea
                     id="textarea-state"
-                    v-model="questionTitle"
+                    v-model.trim="questionTitle"
                     :state="null"
                     placeholder="Enter Question"
                     rows="2"
@@ -15,7 +15,7 @@
                 ></b-form-textarea>
                 <b-form-textarea
                     id="textarea-state"
-                    v-model="questionTitle"
+                    v-model.trim="questionTitle"
                     :state="validation"
                     placeholder="Enter Question"
                     rows="4"
@@ -48,6 +48,7 @@
         },
         methods:{
         },
+        props: ['title'],
         computed: {
             ...mapGetters('question', ['formTitle']),
 

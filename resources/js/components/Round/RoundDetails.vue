@@ -3,7 +3,7 @@
     <div class="round-card card" v-bind:class="{'clicker': this.current_Round.order_number !== this.round.order_number}" @click="clickToEdit()">
         <div class="p-4">
             <div class="round-details">
-                <div class="row pb-3" v-show="(this.current_Round.order_number !== this.round.order_number)">
+                <div class="row pb-4" v-show="(this.current_Round.order_number !== this.round.order_number)">
                     <!--Round index-->
                     <div class="col-12 pr-0">
                         <span class="font-weight-bold mt-2 h6">
@@ -64,19 +64,25 @@
                 </div>
             </div>
             <!--question index-->
-            <div class="question-index pt-4">
+            <div class="question-index pt-2">
                 <QuestionIndex :round_id="this.round.id"></QuestionIndex>
             </div>
-            <!--add question via modal-->
             <div class="add-question" v-show="this.current_Round.order_number === this.round.order_number">
-                <div class="row pt-3">
+                <div class="row">
                     <div class="col-md-12 text-center">
-                        <span class="fa-2x color-green" v-b-tooltip.hover title="Add Question!" v-b-modal.add-question>
+                        <span class="fa-2x color-green" v-b-tooltip.hover title="Add Question!" v-b-modal.add-question @click="addQuestion">
                             <i class="fas fa-plus-circle"></i>
                         </span>
                     </div>
                 </div>
             </div>
+<!--            <div class="add-question" v-show="this.current_Round.order_number === this.round.order_number">-->
+<!--                <div class="row">-->
+<!--                    <div class="col-md-3 col-centered text-center">-->
+<!--                        <b-button pill size="sm">Add Question</b-button>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
         </div>
     </div>
 
@@ -169,6 +175,13 @@
             delete_Round(){
                 this.deleteRound();
             },
+            addQuestion() {
+                //clears the form of the question store
+                this.$store.commit('question/CLEAR_FORM');
+
+                //Clears all the forms for the answers;
+                this.$store.commit('answer/CLEAR_ALL_FORM');
+            }
         },
         computed: {
             ...mapGetters('round', ['currentRound']),

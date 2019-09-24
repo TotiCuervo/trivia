@@ -23,10 +23,12 @@
             </div>
         </div>
         <!--AnswerFields-->
+        <div class="col-10 offset-1" v-if="this.formType === 'Multiple-Choice'">
+            <small class="form-text text-center text-muted mt-0 pb-2">At least one answer must be correct</small>
+        </div>
         <div v-for="(n, index) in this.order_number">
             <AnswerField :order_number="index" @deleted="deletedWasClicked"></AnswerField>
         </div>
-
     </div>
 </template>
 
