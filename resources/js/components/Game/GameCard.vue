@@ -1,55 +1,43 @@
 <template>
-
     <div class="trivalo-card card">
         <div class="card-body">
             <div class="row">
-                <div class="col-md-12">
-                    <span class="fa-1x float-right first-gray then-black trans-1 clicker" v-b-tooltip.top title="Delete Game" v-b-modal.delete-game @click="setGame()">
-                        <i class="fas fa-trash-alt"></i>
-                    </span>
-                    <span class="fa-1x float-right first-gray then-black trans-1 pr-2 clicker" v-b-tooltip.top title="Copy Game" @click="copyGame()">
-                        <i class="fas fa-clone"></i>
+                <div class="col-9 pr-0">
+                    <button type="button" style="margin-left: -40px" class="btn btn-primary btn-circle btn-lg" v-b-tooltip.left title="Play Game" @click="playGame()">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    <span class="pl-3">
+                        <span class="h6"><span class="font-weight-normal">{{this.game.name}}</span><span class="font-weight-normal" v-if="this.game.description">: {{this.game.description}}</span> <span v-if="this.game.company"> @ {{this.game.company}}</span> </span>
                     </span>
                 </div>
-            </div>
-            <div class="container">
-                <router-link :to="{ name: 'gameDetails', params: {id: game.id} }" style="text-decoration:none; color:black;">
-                    <div class="row pb-2">
-                        <div class="col-md-12 text-center">
-                            <div class="circle-text mx-auto no-dec" v-bind:class="game.headClass">{{this.name}}</div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 text-center">
+                <div class="col-3 pl-0">
+                    <div class="float-right">
+                        <router-link :to="{ name: 'gameDetails', params: {id: game.id} }">
+                            <button type="button" class="btn btn-outline-primary">Edit</button>
+                        </router-link>
 
-                            <p class="m-0">{{game.name}}</p>
-                            <small v-if="game.description">{{game.description}}</small>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 text-center">
-                            <small class="text-muted" v-if="game.company">{{game.company}}</small>
-                        </div>
-                    </div>
-                </router-link>
-                <div class="row">
-                    <div class="col-md-12">
-                        <hr>
-                    </div>
-                    <div class="col p-1 text-center">
-                        <!--opens in different tab-->
-                        <b-button block pill variant="outline-primary" @click="playGame()">Edit</b-button>
-                    </div>
-                    <div class="col p-1 text-center">
-                        <!--opens in different tab-->
-                        <b-button block pill variant="primary" @click="playGame()">Play</b-button>
+                        <b-dropdown variant="link" toggle-class="text-decoration-none p-0" no-caret id="dropdown-right" right >
+                            <template v-slot:button-content>
+                                <span class="align-middle ml-3 color-black"><i class="fas fa-ellipsis-v" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i></span>
+                            </template>
+                            <b-dropdown-item href="#">
+                                    <span class="fa-1x clicker" v-b-modal.delete-game @click="setGame()">
+                                        <span class="pr-2"><i class="fas fa-trash-alt"></i></span> Delete Game
+                                    </span>
+                            </b-dropdown-item>
+                            <b-dropdown-item href="#">
+                                    <span class="fa-1x clicker" @click="copyGame()">
+                                        <span class="pr-2"><i class="fas fa-clone"></i></span> Copy Game
+                                    </span>
+                            </b-dropdown-item>
+                        </b-dropdown>
+
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <!--<router-link :to="{ name: 'gameDetails', params: {id: game.id} }" class="nav-link">-->
 
 </template>
 

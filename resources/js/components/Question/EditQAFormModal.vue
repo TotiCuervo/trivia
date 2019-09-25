@@ -21,6 +21,7 @@
             return {
                 oldAnswerForm: [],
                 oldQuestionForm: {},
+                answerCC: 30,
             }
         },
         mounted() {
@@ -183,12 +184,22 @@
             validation() {
 
                 if (this.questionForm.type === 'Multiple-Choice') {
-                    return this.answerForm[0].title !== ' ' && this.answerForm[0].title.length > 0 && this.answerForm[1].title.length > 0 && this.questionForm.title.length > 0 && this.questionForm.title.length < 100 && (this.answerForm.find(x => x.correct) ? true: false);
+                    return this.answerForm[0].title !== ' '
+                        && this.answerForm[0].title.length > 0
+                        && this.answerForm[1].title.length > 0
+                        && this.questionForm.title.length > 0
+                        && this.questionForm.title.length < 100
+                        && (!!this.answerForm.find(x => x.correct))
+                        && (!this.answerForm.find(x => x.title.length > this.answerCC));
+
                 }
                 else {
 
-                    return this.answerForm[0].title !== ' ' && this.answerForm[0].title.length > 0 && this.questionForm.title.length > 0 && this.questionForm.title.length < 100;
-
+                    return this.answerForm[0].title !== ' '
+                        && this.answerForm[0].title.length > 0
+                        && this.questionForm.title.length > 0
+                        && this.questionForm.title.length < 100
+                        && (!this.answerForm.find(x => x.title.length > this.answerCC));
                 }
             }
         },

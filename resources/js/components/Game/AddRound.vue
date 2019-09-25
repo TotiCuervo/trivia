@@ -1,15 +1,4 @@
 <template>
-<!--    <div class="row no-gutters pt-2 pb-5">-->
-<!--        <div class="col-md-10 offset-md-1">-->
-<!--            <div class="row">-->
-<!--                <div class="col-md-8 offset-md-2">-->
-<!--                    <b-button pill class="w-100 h-100 pt-4 pb-4" variant="outline-dark" @click="newRound">-->
-<!--                        Add Round-->
-<!--                    </b-button>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
     <div class="row no-gutters pt-2 pb-5">
         <div class="col-md-10 offset-md-1">
             <div class="row">
@@ -19,7 +8,6 @@
                     </button>
                 </div>
             </div>
-
         </div>
     </div>
 </template>

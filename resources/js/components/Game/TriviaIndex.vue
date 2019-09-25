@@ -1,49 +1,19 @@
 <template>
-    <div>
+    <div class="container-fluid">
         <div class="row pl-4 pr-4 pt-3">
-            <div class="col-md-4">
-                <h3>My Games</h3>
-                <hr>
-            </div>
-        </div>
-        <div class="row pl-4 pr-4">
-            <div class="col-md-3 pb-3">
-<!--                <router-link :to="{ name: 'createGameName' }">-->
-<!--                    <div class="fancy-2 card" style="padding:20px;">-->
-<!--                        <div class="card-body">-->
-<!--                            <div class="container">-->
-<!--                                <div class="row">-->
-<!--                                    <div class="col-md-12 text-center">-->
-<!--                                        <span class="color-blue fa-3x"><i class="fas fa-plus"></i></span>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                                <div class="row">-->
-<!--                                    <div class="col-md-12 text-center">-->
-<!--                                        <small class="text-muted">Add a new Trivia Game!</small>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </router-link>-->
-                <div class="fancy-2 card clicker" style="padding:20px;" v-b-modal.create-game>
-                    <div class="card-body">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-12 text-center">
-                                    <span class="color-blue fa-3x"><i class="fas fa-plus"></i></span>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 text-center">
-                                    <small class="text-muted">Add a new Trivia Game!</small>
-                                </div>
-                            </div>
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="d-flex align-items-baseline">
+                            <span class="h5 m-0" style="flex-grow:1">My Games</span>
+                            <button type="button" class="btn btn-info float-right" v-b-modal.create-game>New Game</button>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 pb-3" v-for="game in games">
+        </div>
+        <div class="row pl-4 pr-4 pt-4">
+            <div class="col-md-12 pb-3" v-for="game in games">
                 <GameCard :game="game"></GameCard>
             </div>
         </div>

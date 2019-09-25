@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="container">
-            <div class="row pt-5">
+            <div class="row">
                 <div class="col-md-12 text-center">
                     <h1>New Game</h1>
                 </div>
@@ -12,8 +12,11 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>Name</label>
-                                <input type="text" class="form-control" id="name" aria-describedby="name"
-                                       placeholder="Enter Name" v-model="name">
+                                <b-input v-model.trim="name" v-if="name.length <= nameCC" placeholder="Trivia Name"></b-input>
+                                <b-input v-model.trim="name" :state="!(name.length > nameCC)" v-else></b-input>
+                                <b-form-invalid-feedback :state="!(name.length > nameCC)" >
+                                    {{nameCC - name.length}}
+                                </b-form-invalid-feedback>
                             </div>
                         </div>
                     </div>
@@ -21,21 +24,29 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Description (Optional)</label>
-                                <input type="text" class="form-control" id="description" aria-describedby="name"
-                                       placeholder="Enter Name" v-model="description">
+                                <b-input v-model.trim="description" v-if="description.length <= descriptionCC" placeholder="Description"></b-input>
+                                <b-input v-model.trim="description" :state="!(description.length > descriptionCC)" v-else></b-input>
+                                <b-form-invalid-feedback :state="!(description.length > descriptionCC)" >
+                                    {{descriptionCC - description.length}}
+                                </b-form-invalid-feedback>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Company (Optional)</label>
-                                <input type="text" class="form-control" id="company" aria-describedby="name"
-                                       placeholder="Enter Name" v-model="company">
+                                <b-input v-model.trim="company" v-if="company.length <= companyCC" placeholder="Company Name"></b-input>
+                                <b-input v-model.trim="company" :state="!(company.length > companyCC)" v-else></b-input>
+                                <b-form-invalid-feedback :state="!(company.length > companyCC)" >
+                                    {{companyCC - company.length}}
+                                </b-form-invalid-feedback>
                             </div>
                         </div>
                     </div>
                     <div class="row pt-4 pb-4">
                         <div class="col-md-12">
-                            <button @click="newGame()" class="btn btn-primary float-right">Submit</button>
+                            <button @click="newGame()" v-if="validation" class="btn btn-primary float-right">Submit</button>
+                            <button v-if="!validation" disabled class="btn btn-primary float-right">Submit</button>
+
                         </div>
                     </div>
                 </div>
@@ -52,12 +63,14 @@
     export default {
         data() {
             return {
-                name: null,
-                description: null,
-                company: null,
+                name: '',
+                description: '',
+                company: '',
                 bodyColor: '#FAEDED',
                 headClass: 'bc-header-red',
-
+                nameCC: 40,
+                descriptionCC: 20,
+                companyCC: 20,
             }
         },
         mounted() {
@@ -109,7 +122,10 @@
         },
         computed: {
             ...mapGetters('user', ['user_id']),
-
+            //For Validation
+            validation() {
+                return this.name.length > 0 && this.name.length <= this.nameCC && this.description.length <= this.descriptionCC && this.company.length <= this.companyCC;
+            }
         },
     }
 </script>

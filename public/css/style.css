@@ -523,6 +523,10 @@
     color:green
 }
 
+.color-black {
+    color: black;
+}
+
 .then-black:hover {
     color: black;
 }
@@ -562,6 +566,10 @@
     box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
 }
 
+.form-control.is-invalid {
+    background-color: hsl(0, 100%, 93%) !important;
+}
+
 .list-group-item {
     border-top: 0 !important;
     background: rgb(240, 243, 247) !important;
@@ -581,13 +589,33 @@
     padding-bottom: 0 !important;
 }
 
+#delete-round___BV_modal_body_.modal-body {
+    padding: 0 !important;
+}
+
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    padding: 5px 0px 6px 2px !important;
+    border-radius: 15px !important;
+    text-align: center !important;
+    font-size: 12px !important;
+    line-height: 1.42857 !important;
+}
+
+.btn-circle.btn-lg {
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 20px !important;
+}
+
 .btn-circle.btn-xl {
-    width: 70px;
-    height: 70px;
-    padding: 10px 16px;
-    border-radius: 35px;
-    font-size: 24px;
-    line-height: 1.33;
+    width: 70px !important;
+    height: 70px !important;
+    padding: 10px 16px !important;
+    border-radius: 35px !important;
+    font-size: 24px !important;
+    line-height: 1.33 !important;
     box-shadow: 0 6px 8px 0 hsla(0, 0%, 0%, 0.20);
 }
 
@@ -602,6 +630,11 @@
     background: #dc3545!important
 }
 
+.form-button-delete.is-invalid {
+    border-color: hsl(0, 100%, 93%) !important;
+    background-color: hsl(0, 100%, 93%) !important;
+}
+
 .form-button-success {
     border-right: none !important;
     background: hsl(210, 9%, 96%) !important;
@@ -611,6 +644,11 @@
 
 .form-button-success:hover {
     background: #28a745!important;
+}
+
+.form-button-success.is-invalid {
+    border-color: hsl(0, 100%, 93%) !important;
+    background-color: hsl(0, 100%, 93%) !important;
 }
 
 .form-button-success-clicked {
