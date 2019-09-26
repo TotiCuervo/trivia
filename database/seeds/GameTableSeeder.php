@@ -16,9 +16,6 @@ class GameTableSeeder extends Seeder
             'user_id' => '1',
             'description' => 'Winter is Coming',
             'company' => 'Railgarten',
-            'headClass' => 'bc-header-red',
-            'bodyColor' => '#FAEDED'
-
         ]);
 
         DB::table('rounds')->insert([

@@ -16,9 +16,9 @@
         </div>
         <!--Actual Round Review-->
         <div class="row pb-5">
-            <div class="col-8 offset-2">
+            <div class="col-sm-10 offset-sm-1 col-md-8 offset-md-2">
                 <div class="pt-3" v-for="question in this.questions.filter(x => x.round_id === this.rounds[playRoundPosition].id)">
-                    <div class="card">
+                    <div class="trivalo-card card">
                         <div class="card-body">
                             <!--Question order-->
                             <div class="row">
@@ -49,15 +49,19 @@
                                     </small>
                                 </div>
                             </div>
-                            <!--Team Table Headers-->
+                            <!--Team Headers-->
                             <div class="row pt-4">
-                                <div class="col-5">
+                                <div class="col-4 col-md-3">
                                     <small class="text-muted">Team Name</small>
                                 </div>
-                                <div class="col-3 pr-2">
+                                <div class="col-4 col-md-4 pr-2">
                                     <small class="text-muted">Answer</small>
                                 </div>
-                                <div class="col-4">
+                                <!--Disappears when screen is too small-->
+                                <div class="col-2 pr-2 d-none d-md-flex">
+                                    <small class="text-muted">Grade</small>
+                                </div>
+                                <div class="col-4 col-md-3">
                                     <div class="float-right">
                                         <small class="text-muted">Change Points</small>
                                     </div>

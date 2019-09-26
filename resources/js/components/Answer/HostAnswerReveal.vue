@@ -35,8 +35,8 @@
                         <h2>Answers:</h2>
                     </div>
                 </div>
-                <div class="row pb-3" v-for="answer in this.answers">
-                    <div class="col-12 col-sm-8 offset-sm-2 col-md-4 offset-md-4 text-center" v-if="answer.question_id === questions[playQuestionPosition].id">
+                <div class="row pb-3" v-for="answer in this.answers.filter(x => x.question_id === questions[playQuestionPosition].id)">
+                    <div class="col-12 col-sm-8 offset-sm-2 col-md-4 offset-md-4 text-center">
                         <div class="answer-card card">
                             <div class="card-body p-2">
                                 <div class="row">

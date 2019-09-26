@@ -22,8 +22,8 @@
             </div>
         </div>
         <!--Question Title-->
-        <div class="row pt-5">
-            <div class="col-md-8 offset-md-2 pt-5">
+        <div class="row pt-2">
+            <div class="col-md-8 offset-md-2 pt-3">
                 <div class="hostQuestion-card card">
                     <div class="card-body">
                         <div class="row">
@@ -41,7 +41,7 @@
             </div>
         </div>
         <!--Multiple Choice Answers Optional-->
-        <div class="pt-3" v-if="this.questions[this.playQuestionPosition].type === 'Multiple-Choice'">
+        <div class="pt-3 pb-3" v-if="this.questions[this.playQuestionPosition].type === 'Multiple-Choice'">
             <HostMultipleChoiceAnswerOptions></HostMultipleChoiceAnswerOptions>
         </div>
     </div>

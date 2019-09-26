@@ -56,49 +56,53 @@
                 showGame: false,
             }
         },
+        created() {
+            document.addEventListener('beforeunload', this.handler)
+        },
         mounted() {
+
+            //New Version please refer to old commits to find past version
+            //Gets the parameters from the route
             this.params = this.$route.params;
+
+            //fetches the game information
             this.fetchData(this.params);
+
+            //fetches the round information
             this.fetchRounds(this.params);
-            //for Questions
+
+            //fetches the question information
             this.fetchQuestions(this.params.id);
 
-            //for Answers
+            //fetches the answer information
             this.fetchAnswers(this.params.id);
 
-            //get the game code
-            axios.get('/api/game/' + this.params.id + '/gameCode', {
-            })
-                .then(response => {
-
-                    if (response.data === false) {
-                        axios.post('/api/gameCode/' + this.params.id + '/create', {
-                        })
-                            .then(response => {
-                                this.game_code = response.data;
-                            })
-                            .catch(error => {
-                                console.log(error);
-                            });
-                    } else {
-                        // console.log(response.data);
-                        this.game_code = response.data[0];
-                    }
-
-                })
-                .catch(error => {
-                    console.log(error);
-                });
+            if (!localStorage.getItem('gameCode')) {
+                this.createFreshGameCode(this.params);
+            } else {
+                console.log('already have a gameCode');
+                console.log(localStorage.getItem('gameCode'));
+                this.game_code = JSON.parse(localStorage.getItem('gameCode'));
+            }
 
             this.currentPage = 'HostLobby';
+
+            window.onbeforeunload = function(e) {
+                return 'Dialog text here.';
+            };
         },
         methods: {
-            ...mapActions('game', ['fetchData']),
+            ...mapActions('game', ['fetchData', 'createFreshGameCode']),
             ...mapActions('round', ['fetchRounds']),
             ...mapActions('question', ['fetchQuestions']),
             ...mapActions('answer', ['fetchAnswers']),
             onGameOver(){
                 console.log('Game Over');
+            },
+            handler: function handler(event) {
+                window.onbeforeunload = function() {
+                    return "You're leaving the site.";
+                };
             },
         },
         computed: {

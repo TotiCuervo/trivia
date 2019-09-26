@@ -673,7 +673,27 @@
     color:white !important;
 }
 
+#delete-question___BV_modal_body_.modal-body {
+    padding-bottom: 0 !important;
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+}
 
+#delete-game___BV_modal_body_.modal-body {
+    padding-bottom: 0 !important;
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+}
+
+.trivalo-card .card-header {
+    border-top-right-radius: .7rem !important;
+    border-top-left-radius: .7rem !important;
+
+}
+
+.badge {
+    border-radius: 0.7rem !important;
+}
 
 
 /*Sizes*/

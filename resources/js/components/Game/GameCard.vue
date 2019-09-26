@@ -31,8 +31,6 @@
                                     </span>
                             </b-dropdown-item>
                         </b-dropdown>
-
-
                     </div>
                 </div>
             </div>
@@ -67,7 +65,7 @@
 
         },
         methods: {
-            ...mapActions('game', ['newGame']),
+            ...mapActions('game', ['newGame', 'createFreshGameCode']),
             ...mapActions('round', ['fetchRounds']),
             ...mapActions('question', ['fetchQuestions']),
             ...mapActions('answer', ['fetchAnswers']),
@@ -84,7 +82,13 @@
                 this.fetchAnswers(this.game.id);
 
                 //New Game
-                axios.post('/api/game/create', this.game)
+                axios.post('/api/game/create', {
+                    name: this.game.name + ' (Copy)',
+                    user_id: this.game.user_id,
+                    description: this.game.description,
+                    company: this.game.company,
+
+                })
                     .then(response => {
                         let $newGame = response.data;
 
@@ -156,8 +160,10 @@
                             });
                         }
 
-                        this.$router.push({name: "editGameName", params: {id: $newGame.id}});
+                        this.$store.commit('game/ADD_GAME', $newGame);
 
+
+                        // this.$router.push({name: "gameDetails", params: {id: $newGame.id}});
                         // // this.createGameOrder(game.id);
                         // this.$store.commit('round/UPDATE_GAME_ID', $game.id);
                         //
@@ -168,6 +174,13 @@
                     });
             },
             playGame() {
+
+                //Gets rid of the gameCode already in local storage
+                localStorage.removeItem('gameCode');
+
+                //Sets a new gameCode to localStorage
+                this.createFreshGameCode(this.game);
+
                 //may need to change for production
                 let route = "app#/host/game/" + this.game.id;
 

@@ -76,13 +76,6 @@
                     </div>
                 </div>
             </div>
-<!--            <div class="add-question" v-show="this.current_Round.order_number === this.round.order_number">-->
-<!--                <div class="row">-->
-<!--                    <div class="col-md-3 col-centered text-center">-->
-<!--                        <b-button pill size="sm">Add Question</b-button>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
         </div>
     </div>
 

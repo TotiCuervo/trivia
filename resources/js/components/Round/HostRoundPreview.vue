@@ -2,6 +2,9 @@
     <div>
         <div class="row">
             <div class="col-md-12">
+                <div class="float-left">
+                    <button type="button" class="btn btn-outline-success btn-orange btn-lg mr-2" @click='goToStartGame()'>Select Round</button>
+                </div>
                 <div class="float-right">
                     <button type="button" class="btn btn-success btn-lg mr-2" @click='upNext()'>Question 1</button>
                 </div>
@@ -52,6 +55,9 @@
                 }
                 this.currentPage = 'HostQuestionPreview';
             },
+            goToStartGame() {
+                this.currentPage = 'HostStartGame';
+            }
         },
         computed: {
             ...mapGetters('round', ['rounds']),

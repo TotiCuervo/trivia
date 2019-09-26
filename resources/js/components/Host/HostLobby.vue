@@ -1,22 +1,22 @@
 <template>
     <div>
         <div class="row pb-4">
-            <div class="col-6">
-                <h3>Teams: {{this.teams.length}} Teams</h3>
-            </div>
-            <div class="col-6">
-                <div class="float-right">
-                    <!--For Production-->
-                    <button type="button" class="btn btn-success btn-lg mr-2" v-if="this.teams.length === 0" disabled>
-                        Waiting on Players
-                    </button>
-                    <button type="button" class="btn btn-success btn-lg mr-2" @click='goToStartGame()' v-else>Start
-                        Game
-                    </button>
+            <div class="col-12">
+                <div class="d-flex align-items-end">
+                    <h5 class="m-0 float-left" style="flex-grow:1">Teams: {{this.teams.length}} Teams</h5>
+                    <div class="float-right">
+                        <!--For Production-->
+                        <button type="button" class="btn btn-success btn-lg mr-2" v-if="this.teams.length === 0" disabled>
+                            Waiting on Players
+                        </button>
+                        <button type="button" class="btn btn-success btn-lg mr-2" @click='goToStartGame()' v-else>Start
+                            Game
+                        </button>
 
 
-                    <!--For workaround in development-->
-                    <!--<button type="button" class="btn btn-success btn-lg mr-2" @click='goToStartGame()' v-if="currentPage === 'HostLobby'">Start Game</button>-->
+                        <!--For workaround in development-->
+                        <!--<button type="button" class="btn btn-success btn-lg mr-2" @click='goToStartGame()' v-if="currentPage === 'HostLobby'">Start Game</button>-->
+                    </div>
                 </div>
             </div>
         </div>

@@ -44,9 +44,8 @@ class GameCodeController extends Controller
 
         $gameCode = $game->gameCodes()->create([
             'code' => strtoupper(Str::random(5)),
-            'expirationTime' => date("Y-m-d H:m:s", strtotime('+8 hours')),
+            'expirationTime' => date("Y-m-d H:m:s", strtotime('+24 hours')),
         ]);
-
 
         return $gameCode;
 

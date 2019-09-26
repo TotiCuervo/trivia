@@ -66,8 +66,6 @@
                 name: '',
                 description: '',
                 company: '',
-                bodyColor: '#FAEDED',
-                headClass: 'bc-header-red',
                 nameCC: 40,
                 descriptionCC: 20,
                 companyCC: 20,
@@ -83,8 +81,6 @@
                     description: this.description,
                     company: this.company,
                     user_id: this.user_id,
-                    headClass: this.headClass,
-                    bodyColor: this.bodyColor,
                 }).then(response => {
                     let $game = response.data;
                     // this.createGameOrder(game.id);
@@ -92,32 +88,6 @@
                     this.addRound();
                     this.$router.push({ name: "gameDetails", params: { id: $game.id }});
                 });
-            },
-            setRed() {
-                this.headClass = 'bc-header-red';
-                document.querySelector('body').style.backgroundColor = '#FAEDED';
-                this.bodyColor = '#FAEDED';
-
-            },
-            setBlue() {
-                this.headClass = 'bc-header-blue';
-                document.querySelector('body').style.backgroundColor = '#EFF6FA';
-                this.bodyColor = '#EFF6FA';
-
-            },
-            setGreen() {
-                this.headClass = 'bc-header-green';
-                document.querySelector('body').style.backgroundColor = '#EFFAF3';
-                this.bodyColor = '#EFFAF3';
-
-
-            },
-            setYellow() {
-                this.headClass = 'bc-header-yellow';
-                document.querySelector('body').style.backgroundColor = '#FFF5D8';
-                this.bodyColor = '#FFF5D8';
-
-
             },
         },
         computed: {
@@ -134,5 +104,3 @@
 
 
 </style>
-
-<!--v-bind:style="{backgroundColor: headColor}"-->

@@ -1,17 +1,17 @@
 <template>
     <div>
-        <div class="row pb-3">
+        <div class="row pb-4">
             <div class="col-md-12">
                 <div class="float-left">
-                    <button type="button" class="btn btn-success btn-orange btn-lg mr-2" @click='goToHostLobby()' v-if="currentPage === 'HostStartGame'">Back</button>
+                    <button type="button" class="btn btn-outline-success btn-orange btn-lg mr-2" @click='goToHostLobby()' v-if="currentPage === 'HostStartGame'">Back</button>
                 </div>
                 <div class="float-right">
-                    <button type="button" class="btn btn-success btn-lg" @click="startRound()">Start Round 1</button>
+                    <button type="button" class="btn btn-success btn-lg" @click="startRound()">Start Round {{this.rounds[this.roundPosition].order_number}}</button>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-4" v-for="(round, index) in this.rounds" @click="startThisRound(index)">
+            <div class="col-md-4 pb-3" v-for="(round, index) in this.rounds" @click="startThisRound(index)">
                 <HostRoundCard :round="round" :roundPosition="playRoundPosition"></HostRoundCard>
             </div>
         </div>

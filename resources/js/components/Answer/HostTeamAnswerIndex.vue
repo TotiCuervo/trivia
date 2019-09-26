@@ -8,7 +8,7 @@
                     </div>
                 </div>
                 <div class="row pb-5">
-                    <div class="col-10 offset-1">
+                    <div class="col-11 col-centered">
                         <div class="pt-3" v-for="question in questions.filter(x => x.round_id === round.id)">
                             <div class="card">
                                 <div class="card-body">
@@ -38,14 +38,19 @@
                                             </small>
                                         </div>
                                     </div>
+                                    <!--Team Headers-->
                                     <div class="row pt-4">
-                                        <div class="col-5">
-                                            <small class="text-muted">Team</small>
+                                        <div class="col-4 col-md-3">
+                                            <small class="text-muted">Team Name</small>
                                         </div>
-                                        <div class="col-5">
+                                        <div class="col-4 col-md-4 pr-2">
                                             <small class="text-muted">Answer</small>
                                         </div>
-                                        <div class="col-2">
+                                        <!--Disappears when screen is too small-->
+                                        <div class="col-2 pr-2 d-none d-md-flex">
+                                            <small class="text-muted">Grade</small>
+                                        </div>
+                                        <div class="col-4 col-md-3">
                                             <div class="float-right">
                                                 <small class="text-muted">Change Points</small>
                                             </div>

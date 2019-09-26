@@ -2,7 +2,7 @@
     <div>
         <div class="row pb-3" v-if="showLeaderBoard" v-for="team in this.leaderBoard">
             <div class="col-md-12">
-                <div class="card">
+                <div class="trivalo-card card">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-1 pr-0">

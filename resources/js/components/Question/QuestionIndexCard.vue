@@ -11,12 +11,12 @@
 <!--                        <span v-show="this.round_id === this.currentRound.id"><i class="fas fa-arrows-alt"></i></span>-->
 <!--                    </div>-->
                     <!--if current round-->
-                    <div class="col-8 col-sm-9 col-md-9 pr-0" v-if="this.currentRound.id === this.round_id">
+                    <div class="col-8 col-sm-9 col-md-10 pr-0" v-if="this.currentRound.id === this.round_id">
                         <div v-if="question.type === 'Fill-in-blank' ">
-                            <span class="small text-muted">Fill In The Blank</span>
+                            <span class="small text-muted">Question {{question.order_number}}: Fill In The Blank</span>
                         </div>
                         <div v-else>
-                            <span class="small text-muted">Multiple Choice</span>
+                            <span class="small text-muted">Question {{question.order_number}}: Multiple Choice</span>
                         </div>
                         <p class="m-0"><b>{{question.title}}</b></p>
                     </div>

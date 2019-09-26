@@ -130,6 +130,19 @@ const actions = {
             .then(response => {
                 return response.data;
         });
+    },
+
+    createFreshGameCode({commit, state}, game) {
+        axios.post('/api/gameCode/' + game.id + '/create', {
+        })
+            .then(response => {
+                console.log(response.data);
+                localStorage.setItem('gameCode', JSON.stringify(response.data));
+                commit('SET_GAME_CODE', response.data);
+            })
+            .catch(error => {
+                console.log(error);
+            });
     }
 
 };
@@ -144,6 +157,9 @@ const mutations = {
     SET_GAMES(state, games) {
         state.games = games;
     },
+    ADD_GAME(state,game) {
+        state.games.push(game);
+    },
     SET_GAME_CODE(state,code) {
         state.gameCode = code;
     },
@@ -155,12 +171,6 @@ const mutations = {
     },
     UPDATE_GAME_COMPANY(state,company) {
         state.game.company = company;
-    },
-    UPDATE_GAME_HEAD_CLASS(state,headClass) {
-        state.game.headClass = headClass;
-    },
-    UPDATE_GAME_BODY_COLOR(state,bodyColor) {
-        state.game.bodyColor = bodyColor;
     },
     DELETE_FROM_GAMES(state,game) {
 
