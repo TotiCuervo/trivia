@@ -5,13 +5,8 @@
              v-bind:class="{ 'blank-card': (this.currentRound.id !== this.round_id) }">
             <div class="card-body p-2">
                 <div class="row">
-                    <!--Question index-->
-<!--                    <div class="col-2 col-sm-1 col-md-1 pr-0">-->
-<!--                        <p class="m-0">Q{{question.order_number}}:</p>-->
-<!--                        <span v-show="this.round_id === this.currentRound.id"><i class="fas fa-arrows-alt"></i></span>-->
-<!--                    </div>-->
                     <!--if current round-->
-                    <div class="col-8 col-sm-9 col-md-10 pr-0" v-if="this.currentRound.id === this.round_id">
+                    <div class="col-10 col-sm-9 col-md-10 pr-0" v-if="this.currentRound.id === this.round_id">
                         <div v-if="question.type === 'Fill-in-blank' ">
                             <span class="small text-muted">Question {{question.order_number}}: Fill In The Blank</span>
                         </div>
@@ -31,7 +26,7 @@
                         <p class="m-0"><b>{{question.title}}</b></p>
                     </div>
 
-                    <div class="col-2 col-md-2 pl-0">
+                    <div class="col-2 col-sm-3 col-md-2 pl-0">
                         <div class="float-right" v-show="this.currentRound.id === this.round_id">
                             <div class="dropdown dropleft">
                                 <span class="fa-1x first-gray then-black trans-1 clicker" v-b-tooltip.top

@@ -4,10 +4,10 @@
         <div class="row">
             <div class="col-5">
                 <div class="float-left">
-                    <small>Round {{this.rounds[this.playRoundPosition].order_number}}</small>
+                    <p class="mb-0">Round {{this.rounds[this.playRoundPosition].order_number}}</p>
                     <p class="mb-0">Question {{this.questions[this.playQuestionPosition].order_number}}</p>
-                    <h6 class="mb-0">{{this.questions[this.playQuestionPosition].type}}</h6>
-                    <TeamAnswerCount></TeamAnswerCount>
+                    <p class="mb-0" v-if="this.questions[this.playQuestionPosition].type === 'Multiple-Choice'">Multiple Choice</p>
+                    <p class="mb-0" v-if="this.questions[this.playQuestionPosition].type === 'Fill-in-blank'">Fill In The Blank</p>
                 </div>
             </div>
             <div class="col-7">
@@ -21,9 +21,14 @@
                 </div>
             </div>
         </div>
+        <div class="row pt-2">
+            <div class="col-md-8 offset-md-2">
+                <TeamAnswerCount></TeamAnswerCount>
+            </div>
+        </div>
         <!--Question Title-->
         <div class="row pt-2">
-            <div class="col-md-8 offset-md-2 pt-3">
+            <div class="col-md-8 offset-md-2 pt-2">
                 <div class="hostQuestion-card card">
                     <div class="card-body">
                         <div class="row">

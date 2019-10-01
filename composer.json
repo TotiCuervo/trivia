@@ -15,7 +15,8 @@
         "laravel/telescope": "^2.0",
         "laravel/tinker": "^1.0",
         "pusher/pusher-php-server": "^4.0",
-        "smartins/passport-multiauth": "^4.1"
+        "smartins/passport-multiauth": "^4.1",
+        "twbs/bootstrap": "4.3.1"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

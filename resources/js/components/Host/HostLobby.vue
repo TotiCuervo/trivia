@@ -2,7 +2,7 @@
     <div>
         <div class="row pb-4">
             <div class="col-12">
-                <div class="d-flex align-items-end">
+                <div class="d-flex align-items-center">
                     <h5 class="m-0 float-left" style="flex-grow:1">Teams: {{this.teams.length}} Teams</h5>
                     <div class="float-right">
                         <!--For Production-->

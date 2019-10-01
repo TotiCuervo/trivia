@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="row no-gutters pl-4 pr-4 pt-3">
+        <div class="row no-gutters pl-4 pr-4 pt-4 pb-2">
             <div class="col-12">
                 <h5 class="font-weight-normal">Dashboard</h5>
                 <hr>
@@ -60,7 +60,7 @@
                             <button type="button" class="btn btn-link text-decoration-none" @click="close()"><span class="color-black">Cancel</span></button>
                         </div>
                         <div class="col-4">
-                            <b-button class="float-right" block variant="danger" @click="delete_Round()">Delete</b-button>
+                            <b-button class="float-right" block variant="danger" @click="delete_Game()">Delete</b-button>
                         </div>
                     </div>
                 </div>

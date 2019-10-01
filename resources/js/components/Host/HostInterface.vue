@@ -56,9 +56,6 @@
                 showGame: false,
             }
         },
-        created() {
-            document.addEventListener('beforeunload', this.handler)
-        },
         mounted() {
 
             //New Version please refer to old commits to find past version
@@ -88,7 +85,7 @@
             this.currentPage = 'HostLobby';
 
             window.onbeforeunload = function(e) {
-                return 'Dialog text here.';
+                return 'Are you sure you want to leave? You will lose all game data';
             };
         },
         methods: {
@@ -98,11 +95,6 @@
             ...mapActions('answer', ['fetchAnswers']),
             onGameOver(){
                 console.log('Game Over');
-            },
-            handler: function handler(event) {
-                window.onbeforeunload = function() {
-                    return "You're leaving the site.";
-                };
             },
         },
         computed: {

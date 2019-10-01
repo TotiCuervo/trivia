@@ -154,15 +154,21 @@ class TeamAnswerController extends Controller
 //        } else {
 //            $answer->points = 0;
 //        }
+        Log::error('$answer');
+        Log::error($answer);
 
         if ($answer->powerUp === 'Double') {
             $answer->points = 2;
-            $this->addPointsToTeam($answer, 1);
+
+            if ($answer->correct) {
+                $this->addPointsToTeam($answer, 1);
+            }
 
         } elseif ($answer->powerUp === 'Triple') {
-
             $answer->points = 3;
-            $this->addPointsToTeam($answer, 2);
+            if ($answer->correct) {
+                $this->addPointsToTeam($answer, 2);
+            }
 
         } else {
 
@@ -175,13 +181,6 @@ class TeamAnswerController extends Controller
 
     public function addPointsToTeam(TeamAnswer $answer, $points) {
         $team = Team::where('id', $answer->team_id)->first();
-
-//        Log::error('$points');
-//        Log::error($points);
-//
-//        Log::error('$team->points');
-//        Log::error($team->points);
-//        Log::error($team);
 
         $team->points = $team->points + $points;
 
