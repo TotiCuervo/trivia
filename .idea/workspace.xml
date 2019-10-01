@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f562f43b-05cf-4003-ae95-b369e5751c9b" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Question/HostQuestion.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Question/HostQuestion.vue" afterDir="false" />
-    </list>
+    <list default="true" id="f562f43b-05cf-4003-ae95-b369e5751c9b" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -260,7 +258,7 @@
       <workItem from="1568909364461" duration="39893000" />
       <workItem from="1569199346657" duration="66161000" />
       <workItem from="1569884747705" duration="20000" />
-      <workItem from="1569884815013" duration="6680000" />
+      <workItem from="1569884815013" duration="6824000" />
     </task>
     <servers />
   </component>
