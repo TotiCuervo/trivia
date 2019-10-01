@@ -27,7 +27,7 @@
             </div>
         </div>
         <!--Question Title-->
-        <div class="row pt-2">
+        <div class="row">
             <div class="col-md-8 offset-md-2 pt-2">
                 <div class="hostQuestion-card card">
                     <div class="card-body">
