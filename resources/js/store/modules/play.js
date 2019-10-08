@@ -1,5 +1,6 @@
 function initialState() {
     return {
+        darkMode: true,
         roundPosition: 0,
         questionPosition: 0,
         page: '',
@@ -23,6 +24,9 @@ const getters = {
     loading(state){
         return state.loading;
     },
+    darkMode(state) {
+        return state.darkMode;
+    }
 };
 
 const actions = {

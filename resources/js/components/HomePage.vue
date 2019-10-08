@@ -1,18 +1,20 @@
 <template>
     <div>
         <!--Beta Test Jumbotron-->
-        <div class="jumbotron jumbotron-fluid vh-100 mb-0" style="background-color: #00CBFF">
+        <div class="jumbotron jumbotron-fluid vh-100 mb-0" style="background-color: rgb(252, 240, 232)">
             <div class="container cover">
-                <div class="row text-white">
+                <div class="row">
                     <div class="col-md-12 text-center" style="font-family: 'Pacifico', cursive;">
-                        <h1 style="color: white; font-size: 100px !important;">Trivalo</h1>
+                        <h1 class="d-md-block d-none" style="font-size:180px !important;">Trivalo</h1>
+                        <h1 class="d-md-none d-sm-block d-none" style="font-size:130px !important;">Trivalo</h1>
+                        <h1 class="d-sm-none d-block" style="font-size:100px !important;">Trivalo</h1>
                         <p>Beta Version 1.0</p>
 
                     </div>
                 </div>
                 <div class="row pt-2 text-white">
                     <div class="col-7 col-centered col-sm-4 offset-sm-4 text-center">
-                        <b-button block pill variant="primary" size="lg" @click="goToPlay()">Let's Play</b-button></div>
+                        <b-button block pill class="triv-blue" variant="primary" size="lg" @click="goToPlay()">Let's Play</b-button></div>
                 </div>
                 <div style="bottom:0; position:fixed;">
                     <div class="row">

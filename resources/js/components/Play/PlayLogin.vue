@@ -4,7 +4,7 @@
             <!--Header-->
             <div class="row pt-5">
                 <div class="col-md-8 offset-md-2 text-center pt-5">
-                    <h1>Let's Play!</h1>
+                    <h1 class="display-3" style="font-family: 'Pacifico', cursive;">Trivalo</h1>
                 </div>
             </div>
             <!--Player interaction-->
@@ -62,9 +62,24 @@
             <div class="row pt-3">
                 <div class="col-md-4 offset-md-4">
                     <b-button block variant="primary" @click="checkPlayCode()" v-if="this.validCode !== true">Check Code</b-button>
-                    <b-button block variant="primary" @click="loginOrRegister()" v-if="this.validCode === true && this.validName !== false ">Let's Play</b-button>
+                    <b-button block variant="primary" @click="loginOrRegister()" v-if="this.validCode === true && this.validName !== false && !this.clicked ">Let's Play</b-button>
+                    <b-button block variant="primary" v-if="this.clicked"><b-spinner small label="Spinning"></b-spinner></b-button>
                     <b-button block disabled variant="primary" @click="loginOrRegister()" v-if="this.validCode === true && this.validName === false ">Let's Play</b-button>
 
+                </div>
+            </div>
+            <!--Dark Mode-->
+
+            <div style="bottom:0; position:fixed;">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <ToggleDarkMode></ToggleDarkMode>
+                    </div>
+                </div>
+            </div>
+            <div class="row pt-5">
+                <div class="col-4 offset-8 text-center">
+                    <ToggleDarkMode></ToggleDarkMode>
                 </div>
             </div>
         </div>
@@ -83,7 +98,8 @@
                 gameCode: '',
                 name: '',
                 password: '',
-                error: ''
+                error: '',
+                clicked: false
             }
         },
         mounted() {
@@ -105,6 +121,7 @@
                     });
             },
             loginOrRegister() {
+                this.clicked = true;
 
                 let $team = {
                     name: this.name,
@@ -131,6 +148,8 @@
 
                         }
                     });
+
+                this.clicked = false;
             },
             resetInput() {
                 this.validPassword = '';

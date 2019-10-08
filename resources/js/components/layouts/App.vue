@@ -1,47 +1,37 @@
 <template>
 
     <div>
-        <nav class="navbar navbar-expand-md navbar-light bg-light shadow-sm" v-if="!(noNav.includes(this.$route.name))">
-            <div class="container">
-                <!--<router-link :to="{ name: 'home' }" class="nav-link"><span style="color:white">Create Trivia Game!</span></router-link>-->
-                <a class="navbar-brand" href="/app#/home">
-                    Trivia
+        <nav class="navbar navbar-expand-md navbar-light pt-3" v-if="!(noNav.includes(this.$route.name))">
+            <div class="container-fluid">
+
+                <a class="clicker mb-0 text-decoration-none" v-bind:class="{'color-black then-black': !this.darkMode, 'color-white then-white': this.darkMode}" href="/app#/home" style="font-family: 'Pacifico', cursive;">
+                    <h2>Trivalo</h2>
                 </a>
+
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                         aria-controls="navbarSupportedContent" aria-expanded="false">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <!--<ul class="navbar-nav mr-auto ml-auto">-->
-                        <!--<li>-->
-                            <!--<button type="button" class="btn btn-success">-->
-                                <!--<router-link :to="{ name: 'createGameName' }" class="nav-link"><span style="color:white">Create Trivia Game!</span></router-link>-->
-                            <!--</button>-->
-                        <!--</li>-->
-                    <!--</ul>-->
-
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                 <span class="caret"></span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#" @click.prevent="logout">
-                                   Logout
-                                </a>
-                            </div>
-                        </li>
+
+                        <ToggleDarkMode></ToggleDarkMode>
+
+                        <a class="dropdown-item triv-nav-dropdown dropdown-blue" v-bind:class="{'darkMode': this.darkMode}" href="#">
+                            <span class=""><i class="fas fa-user"></i></span>
+                            My Account
+                        </a>
+
+                        <a class="dropdown-item dropdown-blue triv-nav-dropdown"v-bind:class="{'darkMode': this.darkMode}"  href="#" @click.prevent="logout">
+                            <span class=""><i class="fas fa-sign-out-alt"></i></span>
+                            Logout
+                        </a>
                     </ul>
                 </div>
             </div>
         </nav>
-        <!--<div class="container-fluid pr-0 pl-0">-->
-            <!--<router-view></router-view>-->
-        <!--</div>-->
         <b-container fluid class="pl-0 pr-0">
             <router-view></router-view>
         </b-container>
@@ -73,7 +63,7 @@
             },
         },
         computed: {
-            ...mapGetters('user', ['user_id']),
+            ...mapGetters('user', ['user_id','darkMode']),
         },
     }
 </script>

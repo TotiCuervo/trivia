@@ -420,10 +420,6 @@
     color: blue;
 }
 
-.color-green {
-    color: green;
-}
-
 .color-yellow {
     color: gold;
 }
@@ -460,11 +456,12 @@
 
 .blank-card {
     border: 0 !important;
-    /*background: rgb(240, 243, 247) !important;*/
-    /*border-radius: 0.7rem !important;*/
-    /*outline: 0px !important;*/
-    /*-webkit-appearance: none;*/
-    /*box-shadow: none !important;*/
+}
+
+.login-card {
+    box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.20) !important;
+    border-radius: .7rem !important;
+    border: 0 !important;
 }
 
 .add-question-card {
@@ -477,7 +474,24 @@
 /*Utilities*/
 
 .trivalo-background {
-    background: rgb(240, 243, 247);
+    background: rgb(252, 240, 232);
+}
+
+.trivalo-darkMode {
+    background: #1C2532;
+    color: white;
+}
+
+.login-background {
+background: #0FABFF;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #0fa0ff, #0FABFF);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #0fa0ff, #0FABFF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.register-background {
+    background: #E54040;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #E54040, #0FABFF);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #E54040, #0FABFF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 .circle-icon-game {
@@ -502,7 +516,7 @@
     color: white;
 }
 
-.then-white {
+.then-white:hover {
     color: white;
 }
 
@@ -511,7 +525,8 @@
 }
 
 .color-green {
-    color: green;
+    /*color: green;*/
+    color: #00C434;
 }
 
 .color-gray {
@@ -519,7 +534,9 @@
 }
 
 .then-green:hover {
-    color:green
+    /*color:green*/
+    color: #00C434;
+
 }
 
 .color-black {
@@ -547,9 +564,9 @@
 .form-control {
     background: hsl(210, 9%, 96%) !important;
     border-radius: 0.7rem !important;
-    border: 0 !important;
-    outline: 0px !important;
-    -webkit-appearance: none;
+    /*border: 0 !important;*/
+    /*outline: 0px !important;*/
+    /*-webkit-appearance: none;*/
     box-shadow: none !important;
 }
 
@@ -577,9 +594,6 @@
 .custom-select {
     background-color: hsl(210, 9%, 96%) !important;
     border-radius: 0.7rem !important;
-    border: 0 !important;
-    outline: 0 !important;
-    -webkit-appearance: none !important;
     box-shadow: none !important;
 }
 
@@ -630,7 +644,7 @@
 }
 
 .form-button-delete:hover {
-    background: #dc3545!important
+    background: #E54040 !important
 }
 
 .form-button-delete.is-invalid {
@@ -642,7 +656,7 @@
     border-right: none !important;
     background: hsl(210, 9%, 96%) !important;
     border-radius: 0.7rem 0 0 0.7rem!important;
-    border-color: hsl(210, 9%, 96%) !important;
+    border-color:#ced4da !important;
 }
 
 .form-button-success:hover {
@@ -704,4 +718,177 @@
 .size-1x5 {
     font-size: 1.5em;
 }
+
+
+/*Trivalo Customs*/
+
+.triv-blue {
+    background-color: #0FABFF!important;
+    border-color: #0FABFF !important;
+    color: white !important;
+}
+
+.triv-blue:hover {
+    background-color: #0194ef !important;
+}
+
+.triv-outline-blue {
+    color: #0FABFF!important;
+    border-color: #0FABFF!important;
+}
+
+.triv-outline-blue:hover {
+    background-color: #0FABFF!important;
+    border-color: #0FABFF !important;
+    color:white !important;
+}
+
+.dropdown-blue:hover {
+    background-color: #0FABFF !important;
+}
+
+.triv-nav-dropdown {
+    border-radius: 20px !important;
+}
+
+.triv-nav-dropdown:hover {
+    box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2) !important;
+    transition: 0.4s;
+    color: white !important;
+}
+
+/*DarkMode*/
+
+.darkMode {
+
+}
+
+.darkMode-text-white {
+    color:white !important;
+}
+
+.darkMode-bc {
+    background: #1C2532;
+    color: white;
+}
+
+.btn.btn-outline-primary-darkMode {
+    color: white;
+    border-color: #1C2532;
+}
+
+.darkMode-card {
+    /*background: #323E4F;*/
+    background: #283243 !important;
+
+}
+
+.darkMode-card.card {
+    /*background: #323E4F;*/
+    background: #283243;
+
+}
+
+.darkMode-card-2.card {
+    /*background: #323E4F;*/
+    background: #323E4F;
+
+}
+
+.darkMode.blank-card {
+    background-color:#323E4F;
+}
+
+.darkMode.triv-blue {
+    background-color: #0194ef!important;
+    border-color: #0194ef !important;
+    color: white !important;
+}
+
+.darkMode.triv-blue:hover {
+    background-color: #0FABFF !important;
+}
+
+
+.darkMode .dropdown-menu {
+    background: #283243;
+}
+
+.darkMode .dropdown-item {
+    color:white;
+}
+
+.darkMode .dropdown-item:hover {
+    background: #323E4F;
+    color:white;
+}
+
+.darkMode.triv-nav-dropdown {
+    color:white !important;
+}
+
+.darkMode .dropdown-blue:hover {
+    background: #0194ef;
+}
+
+.darkMode .triv-outline-blue {
+    color:white !important;
+}
+
+.darkMode-card .form-control {
+    background-color: #323E4F !important;
+    color: white;
+}
+
+.darkMode-card .form-control:focus {
+    color: white !important;
+}
+
+.darkMode-card .custom-select {
+    background-color: #323E4F !important;
+    color: white;
+}
+
+.darkMode .list-group-item {
+    background: #1C2532 !important;
+}
+
+.darkMode-card .form-button-delete {
+    background-color: #323E4F !important;
+}
+
+.darkMode-card .form-button-delete:hover {
+    background-color: #E54040 !important;
+}
+
+.darkMode-card.modal-content .close {
+    color:white !important;
+}
+
+/*transitions*/
+.bounce-enter-active {
+    animation: bounce-in 1.5s;
+}
+.bounce-leave-active {
+    animation: bounce-in 1.5s reverse;
+}
+@keyframes bounce-in {
+    0% {
+        transform: scale(0);
+    }
+    50% {
+        transform: scale(1.5);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.fade-enter-active, .fade-leave-active {
+    transition: opacity 2s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+}
+
 

@@ -6,7 +6,7 @@
                     <div class="col-12">
                         <div class="d-flex align-items-baseline">
                             <span class="h5 m-0" style="flex-grow:1">My Games</span>
-                            <button type="button" class="btn btn-info float-right" v-b-modal.create-game>New Game</button>
+                            <button type="button" class="btn triv-blue float-right" v-bind:class="{'darkMode': this.darkMode}" v-b-modal.create-game>New Game</button>
                         </div>
                     </div>
                 </div>
@@ -40,7 +40,7 @@
             ...mapActions('game', ['fetchGames']),
         },
         computed: {
-            ...mapGetters('user', ['user_id']),
+            ...mapGetters('user', ['user_id', 'darkMode']),
             ...mapGetters('game', ['games']),
         },
     }

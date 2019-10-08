@@ -5,17 +5,8 @@
                 <div class="d-flex align-items-center">
                     <h5 class="m-0 float-left" style="flex-grow:1">Teams: {{this.teams.length}} Teams</h5>
                     <div class="float-right">
-                        <!--For Production-->
-                        <button type="button" class="btn btn-success btn-lg mr-2" v-if="this.teams.length === 0" disabled>
-                            Waiting on Players
-                        </button>
-                        <button type="button" class="btn btn-success btn-lg mr-2" @click='goToStartGame()' v-else>Start
-                            Game
-                        </button>
-
-
-                        <!--For workaround in development-->
-                        <!--<button type="button" class="btn btn-success btn-lg mr-2" @click='goToStartGame()' v-if="currentPage === 'HostLobby'">Start Game</button>-->
+                        <b-button pill variant="primary" v-if="this.teams.length === 0" disabled>Waiting for players</b-button>
+                        <b-button pill variant="primary" @click='goToStartGame()' v-else>Start Game</b-button>
                     </div>
                 </div>
             </div>

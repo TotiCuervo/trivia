@@ -3,22 +3,22 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="float-left">
-                    <button type="button" class="btn btn-outline-success btn-orange btn-lg mr-2" @click='goToStartGame()'>Select Round</button>
+                    <b-button pill variant="outline-primary" @click='goToStartGame()'>Select Round</b-button>
                 </div>
                 <div class="float-right">
-                    <button type="button" class="btn btn-success btn-lg mr-2" @click='upNext()'>Question 1</button>
+                    <b-button pill variant="primary" @click='upNext()'>Question 1</b-button>
                 </div>
             </div>
         </div>
         <div class="row pt-4">
             <div class="col-md-12 text-center">
-                <h1>Round {{this.rounds[this.playRoundPosition].order_number}}</h1>
+                <h3>Round {{this.rounds[this.playRoundPosition].order_number}}</h3>
             </div>
         </div>
         <div class="row pb-2">
             <div class="col-md-12 text-center">
-                <h1 v-if="this.rounds[this.playRoundPosition].time">{{this.rounds[this.playRoundPosition].time}}s Questions</h1>
-                <h1 v-else>No Time Limit</h1>
+                <h3 v-if="this.rounds[this.playRoundPosition].time">{{this.rounds[this.playRoundPosition].time}}s Questions</h3>
+                <h3 v-else>No Time Limit</h3>
             </div>
         </div>
         <div class="row pt-3" v-for="question in this.questions">

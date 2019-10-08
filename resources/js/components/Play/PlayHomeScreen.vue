@@ -2,7 +2,7 @@
     <div>
         <div class="row pt-4">
             <div class="col-md-12 text-center">
-                <h1>{{this.game.name}} Trivia</h1>
+                <h3>{{this.game.name}} Trivia</h3>
             </div>
         </div>
         <div class="row pt-2" v-if="this.game.company">

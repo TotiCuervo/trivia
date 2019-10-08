@@ -3,7 +3,7 @@
         <div class="col-md-10 offset-md-1">
             <div class="row">
                 <div class="col-3 offset-9 col-sm-2 offset-sm-9 col-md-2 offset-md-9">
-                    <button type="button" class=" mr-2 float-right btn btn-info btn-circle btn-xl" @click="newRound" v-b-tooltip.hover.left title="Add Round">
+                    <button type="button" class=" mr-2 float-right btn triv-blue btn-circle btn-xl" @click="newRound" v-b-tooltip.hover.left title="Add Round">
                         <i class="fas fa-plus"></i>
                     </button>
                 </div>

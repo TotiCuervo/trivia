@@ -6,7 +6,9 @@ function initialState() {
             id: null
         },
         loading: false,
+        darkMode: false,
         form:{
+
         }
     }
 }
@@ -27,6 +29,9 @@ const getters = {
     loading(state){
         return state.loading;
     },
+    darkMode(state) {
+        return state.darkMode;
+    }
 };
 
 const actions = {
@@ -45,6 +50,10 @@ const actions = {
         });
     },
 
+    toggleDarkMode({commit, state}) {
+        commit('TOGGLE_DARK_MODE');
+    }
+
 };
 
 const mutations = {
@@ -56,7 +65,11 @@ const mutations = {
     },
     SET_USER_ID(state, user_id){
         state.user.id = user_id;
+    },
+    TOGGLE_DARK_MODE(state) {
+        state.darkMode = !state.darkMode;
     }
+
 
 };
 

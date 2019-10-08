@@ -1,9 +1,9 @@
 <template>
-    <div class="trivalo-card card">
+    <div class="trivalo-card card" v-bind:class="{'darkMode-card': this.darkMode}">
         <div class="card-body">
             <div class="row">
                 <div class="col-9 pr-0">
-                    <button type="button" style="margin-left: -40px" class="btn btn-primary btn-circle btn-lg" v-b-tooltip.left title="Play Game" @click="playGame()">
+                    <button type="button" style="margin-left: -40px" class="btn triv-blue btn-primary btn-circle btn-lg" v-bind:class="{'darkMode': this.darkMode}" v-b-tooltip.left title="Play Game" @click="playGame()">
                         <i class="fas fa-play"></i>
                     </button>
                     <span class="pl-3">
@@ -13,12 +13,12 @@
                 <div class="col-3 pl-0">
                     <div class="float-right">
                         <router-link :to="{ name: 'gameDetails', params: {id: game.id} }">
-                            <button type="button" class="btn btn-outline-primary">Edit</button>
+                            <button type="button" class="btn btn-outline-primary triv-outline-blue" v-bind:class="{'darkMode darkMode-text-white': this.darkMode}">Edit</button>
                         </router-link>
 
-                        <b-dropdown variant="link" toggle-class="text-decoration-none p-0" no-caret id="dropdown-right" right >
+                        <b-dropdown variant="link" toggle-class="text-decoration-none p-0" v-bind:class="{'darkMode': this.darkMode}" no-caret id="dropdown-right" right >
                             <template v-slot:button-content>
-                                <span class="align-middle ml-3 color-black"><i class="fas fa-ellipsis-v" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i></span>
+                                <span class="align-middle ml-3" v-bind:class="{'color-white': darkMode, 'color-black': !darkMode}"><i class="fas fa-ellipsis-v" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i></span>
                             </template>
                             <b-dropdown-item href="#">
                                     <span class="fa-1x clicker" v-b-modal.delete-game @click="setGame()">
@@ -192,6 +192,8 @@
             ...mapGetters('round', ['rounds']),
             ...mapGetters('question', ['questions']),
             ...mapGetters('answer', ['answers']),
+            ...mapGetters('user', ['darkMode']),
+
 
 
         },

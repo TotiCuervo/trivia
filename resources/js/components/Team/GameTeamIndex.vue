@@ -2,7 +2,7 @@
     <div>
         <div class="row pt-3 pb-3">
             <div class="col-md-12 text-center">
-                <h3>This Trivia game can be joined using this code: <u><b>{{this.gameCode.code}}</b></u></h3>
+                <h5>This Trivia game can be joined using this code: <u><b>{{this.gameCode.code}}</b></u></h5>
             </div>
         </div>
         <div class="row pt-3">

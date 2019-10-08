@@ -1,21 +1,31 @@
 <template>
     <div>
-        <div class="row pt-4">
+        <div class="row pt-4 text-center">
+            <div class="col-md-12">
+                <h2 style="font-size:6rem">Round</h2>
+            </div>
+            <div class="col-md-12">
+                <h2 style="font-size:6rem">{{this.rounds[this.playRoundPosition].order_number}}</h2>
+            </div>
+
+        </div>
+        <div class="row pb-3 pt-5" v-if="this.rounds[this.playRoundPosition].title">
             <div class="col-md-12 text-center">
-                <h1>Round {{this.rounds[this.playRoundPosition].order_number}}</h1>
+                <transition name="fade">
+                    <h2 v-if="show_description">{{this.rounds[this.playRoundPosition].title}}</h2>
+                </transition>
             </div>
         </div>
-        <div class="row pb-3 pt-3" v-if="this.rounds[this.playRoundPosition].title">
+        <div class="row pt-1">
             <div class="col-md-12 text-center">
-                <h1>{{this.rounds[this.playRoundPosition].title}}</h1>
+                <transition name="fade">
+                    <h2 v-if="show_time && this.rounds[this.playRoundPosition].time">{{this.rounds[this.playRoundPosition].time}} second questions</h2>
+                    <h2 v-if="show_time && !this.rounds[this.playRoundPosition].time">No Time Limit</h2>
+                </transition>
+
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <h1 v-if="this.rounds[this.playRoundPosition].time">{{this.rounds[this.playRoundPosition].time}} seconds per Questions</h1>
-                <h1 v-else>No Time Limit</h1>
-            </div>
-        </div>
+
     </div>
 </template>
 
@@ -25,23 +35,24 @@
     export default {
         data() {
             return {
+                show_description: false,
+                show_time: false,
 
             }
         },
         mounted() {
+            let vm = this;
+            setTimeout(function(){
+                vm.show_description = true;
+            }, 1000);
+
+            setTimeout(function(){
+                vm.show_time = true;
+            }, 2000);
 
         },
         methods: {
-            // upNext() {
-            //     let questionPosition = '';
-            //
-            //     for (let $i=0; $i < this.questions.length; $i++) {
-            //         if (this.questions[$i].round_id === this.rounds[this.roundPosition].id && this.questions[$i].order_number === 1) {
-            //             questionPosition = $i;
-            //         }
-            //     }
-            //     this.$emit('goToDestination', this.roundPosition, questionPosition, 'HostQuestionPreview');
-            // },
+
         },
         computed: {
             ...mapGetters('round', ['rounds']),

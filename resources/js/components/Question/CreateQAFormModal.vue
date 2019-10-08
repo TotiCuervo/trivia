@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container" v-bind:class="{'darkMode': this.darkMode}">
         <CreateQuestion title="New Question"></CreateQuestion>
         <CreateAnswer></CreateAnswer>
 
@@ -24,6 +24,11 @@
             }
         },
         mounted() {
+
+            //checks to see if nightMode is on
+            if (this.darkMode) {
+                document.getElementById('add-question___BV_modal_content_').className = 'darkMode-card modal-content';
+            }
 
             //Sets the order number that this would be;
             this.$store.commit('question/UPDATE_ORDER_NUMBER', this.questions.filter(x => x.round_id === this.currentRound.id).length + 1);
@@ -115,6 +120,8 @@
             ...mapGetters('question', ['questions', 'questionFields']),
             ...mapGetters('answer', ['answerFields']),
             ...mapGetters('round', ['currentRound']),
+            ...mapGetters('user', ['darkMode']),
+
 
             //Questions
             questionForm: {

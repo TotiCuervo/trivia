@@ -58,9 +58,6 @@ Route::delete('/answer/{id}/destroy', 'AnswerController@destroy');
 Route::post('/play/checkCode', 'PlayController@checkCode');
 
 //Host
-//Route::post('/host/{code}/startRound/{roundPosition}', 'HostController@startRound');
-//Route::post('/host/{code}/round/{roundPosition}/startQuestion/{questionPosition}', 'HostController@startQuestion');
-//Route::post('/host/{code}/roundReview', 'HostController@roundReview');
 Route::post('/host/{gameCode}/round/{roundPosition}/question/{questionPosition}/currentPage/{currentPage}', 'HostController@navigateHandler');
 Route::post('/host/{gameCode}/team/{teamID}/time/{time}', 'HostController@updateTime');
 Route::post('/host/game/{gameCode}/question/{questionPosition}/revealAnswer', 'HostController@revealAnswer');
@@ -86,4 +83,6 @@ Route::post('/team/{id}/iAmHere', 'TeamLoginController@iAmHere');
 Route::post('/teamAnswers/store', 'TeamAnswerController@store');
 Route::post('/teamAnswers/{id}/updateCorrect', 'TeamAnswerController@updateCorrect');
 Route::post('/team/{teamID}/round/{roundID}/powerUp/{powerUp}', 'TeamAnswerController@updatePowerUp');
+Route::post('/team/{teamID}/round/{roundID}/undo/{powerUp}', 'TeamAnswerController@undoPowerUp');
+
 Route::post('/team/{gameCode}/leaderBoard', 'TeamAnswerController@leaderBoard');

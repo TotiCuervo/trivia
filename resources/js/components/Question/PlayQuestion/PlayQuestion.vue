@@ -9,7 +9,7 @@
                 <div class="col-md-8 offset-md-2 text-center">
                     <div class="row">
                         <div class="col-md-12">
-                            <h3>{{this.questions[questionPosition].title}}</h3>
+                            <h5>{{this.questions[questionPosition].title}}</h5>
                         </div>
                     </div>
                 </div>
