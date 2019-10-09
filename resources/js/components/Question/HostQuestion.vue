@@ -13,7 +13,7 @@
             <div class="col-7">
                 <div class="float-right">
                     <div v-if="this.timer === 0">
-                        <button type="button" class="btn btn-success btn-lg mr-2" @click='onUpNext()'>{{upNext}}</button>
+                        <b-button pill variant="primary" @click='onUpNext()'>{{upNext}}</b-button>
                     </div>
                     <div v-else>
                         <h4>Time Left: {{this.timer}}</h4>
@@ -22,23 +22,18 @@
             </div>
         </div>
         <div class="row pt-2">
-            <div class="col-md-8 offset-md-2">
+            <div class="col-md-6 offset-md-3">
                 <TeamAnswerCount></TeamAnswerCount>
             </div>
         </div>
         <!--Question Title-->
         <div class="row">
-            <div class="col-md-8 offset-md-2 pt-2">
+            <div class="col-md-6 offset-md-3 pt-2">
                 <div class="hostQuestion-card card">
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <span class="small text-muted">Round {{this.rounds[this.playRoundPosition].order_number}} / Question {{this.questions[this.playQuestionPosition].order_number}} / {{this.questions[this.playQuestionPosition].type}}</span>
-                            </div>
-                        </div>
                         <div class="row p-5">
                             <div class="col-md-12 text-center">
-                                <h2 class="m-0">{{this.questions[this.playQuestionPosition].title}}</h2>
+                                <h4 class="m-0">{{this.questions[this.playQuestionPosition].title}}</h4>
                             </div>
                         </div>
                     </div>

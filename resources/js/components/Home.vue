@@ -1,41 +1,46 @@
 <template>
     <div>
-        <div class="row no-gutters pl-4 pr-4 pt-4 pb-2">
-            <div class="col-12">
-                <h5 class="font-weight-normal">Dashboard</h5>
-                <hr>
-            </div>
-        </div>
-        <div class="row no-gutters">
-            <div class="col-md-4 col-sm-10 offset-sm-1 offset-md-0 order-2 order-md-1">
-                <div class="container-fluid pr-4 pl-4">
-                    <div class="row pt-3">
-                        <div class="col-12">
-                            <div class="d-flex align-items-baseline">
-                                <span class="h5">Events Calendar</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row pt-1">
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h1>Calendar</h1>
-                                </div>
-                                <div class="card-body">
-                                    <h1>Calendar and shit</h1>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-8 col-sm-10 offset-sm-1 offset-md-0 order-1 order-md-2">
+
+        <div class="row no-gutters pt-3 justify-content-center">
+            <div class="col-md-8 col-sm-10">
                 <div v-if="!(this.user_id == null)">
                     <TriviaIndex></TriviaIndex>
                 </div>
             </div>
         </div>
+
+
+        <!--        For future-->
+<!--        <div class="row no-gutters pt-3">-->
+<!--            <div class="col-md-4 col-sm-10 offset-sm-1 offset-md-0 order-2 order-md-1">-->
+<!--                <div class="container-fluid pr-4 pl-4">-->
+<!--                    <div class="row pt-3">-->
+<!--                        <div class="col-12">-->
+<!--                            <div class="d-flex align-items-baseline">-->
+<!--                                <span class="h5">Events Calendar</span>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="row pt-1">-->
+<!--                        <div class="col-12">-->
+<!--                            <div class="card">-->
+<!--                                <div class="card-header">-->
+<!--                                    <h1>Calendar</h1>-->
+<!--                                </div>-->
+<!--                                <div class="card-body">-->
+<!--                                    <h1>Calendar and shit</h1>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-md-8 col-sm-10 offset-sm-1 offset-md-0 order-1 order-md-2">-->
+<!--                <div v-if="!(this.user_id == null)">-->
+<!--                    <TriviaIndex></TriviaIndex>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
 
 
 

@@ -13,22 +13,17 @@
             </div>
         </div>
         <div class="row pt-2">
-            <div class="col-md-8 offset-md-2">
+            <div class="col-md-6 offset-md-3">
                 <TeamAnswerCount></TeamAnswerCount>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-8 offset-md-2 pt-2">
+            <div class="col-md-6 offset-md-3 pt-2">
                 <div class="hostQuestion-card card">
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <span class="small text-muted">Round {{this.rounds[this.playRoundPosition].order_number}} / Question {{this.questions[this.playQuestionPosition].order_number}} / {{this.questions[this.playQuestionPosition].type}}</span>
-                            </div>
-                        </div>
                         <div class="row p-5">
                             <div class="col-md-12 text-center">
-                                <h2 class="m-0">{{this.questions[this.playQuestionPosition].title}}</h2>
+                                <h4 class="m-0">{{this.questions[this.playQuestionPosition].title}}</h4>
                             </div>
                         </div>
                     </div>
@@ -36,7 +31,7 @@
             </div>
         </div>
         <div class="row pt-5">
-            <div class="col-md-8 offset-md-2">
+            <div class="col-md-6 offset-md-3">
                 <b-progress height="3rem" :max="max" :striped=true :animated=true>
                     <b-progress-bar :value="value" variant="success">
                     </b-progress-bar>

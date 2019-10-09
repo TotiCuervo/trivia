@@ -77,8 +77,6 @@
             if (!localStorage.getItem('gameCode')) {
                 this.createFreshGameCode(this.params);
             } else {
-                console.log('already have a gameCode');
-                console.log(localStorage.getItem('gameCode'));
                 this.game_code = JSON.parse(localStorage.getItem('gameCode'));
             }
 

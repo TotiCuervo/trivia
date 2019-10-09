@@ -1,6 +1,6 @@
 <template>
 
-    <div class="round-card card" v-bind:class="{'clicker': this.current_Round.order_number !== this.round.order_number}" @click="clickToEdit()">
+    <div class="round-card card" v-bind:class="{'clicker': this.current_Round.order_number !== this.round.order_number, 'darkMode-card': this.darkMode}" @click="clickToEdit()">
         <div class="p-4">
             <div class="round-details">
                 <div class="row pb-4" v-show="(this.current_Round.order_number !== this.round.order_number)">
@@ -57,7 +57,7 @@
                     </div>
                     <!--Delete Round-->
                     <div class="col-3 col-md-5">
-                        <span class="size-1x5 first-gray then-black trans-1 clicker float-right" v-b-modal.delete-round>
+                        <span class="size-1x5 first-gray trans-1 clicker float-right" v-bind:class="{'then-black': !this.darkMode, 'then-white': this.darkMode}" v-b-modal.delete-round>
                             <i class="far fa-times-circle"></i>
                         </span>
                     </div>
@@ -178,6 +178,8 @@
         },
         computed: {
             ...mapGetters('round', ['currentRound']),
+            ...mapGetters('user', ['darkMode']),
+
             round_Title: {
                 get() {
                     return this.currentRound.title;

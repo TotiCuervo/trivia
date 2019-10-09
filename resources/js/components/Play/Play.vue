@@ -1,6 +1,16 @@
 <template>
     <div>
         <router-view></router-view>
+        <!--Dark Mode-->
+        <div class="fixed-bottom">
+            <div class="row">
+                <div class="col-4 offset-8">
+                    <div class="float-right pr-1">
+                        <DarkModeSwitch></DarkModeSwitch>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -13,6 +23,14 @@
             }
         },
         mounted() {
+
+            //checks for darkMode
+            // if (this.darkMode) {
+            //     document.querySelector('body').style.backgroundColor = '#18191A';
+            //     document.querySelector('body').style.color = '#FFFFFF';
+            // }
+
+
             this.token = localStorage.getItem('user-token') || '';
 
             //for development
@@ -44,6 +62,7 @@
         },
         computed: {
             ...mapGetters('team', ['team']),
+            ...mapGetters('play', ['darkMode']),
             loggedTeam: {
                 get() {
                     return this.team;

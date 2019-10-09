@@ -97,65 +97,77 @@ class TeamAnswerController extends Controller
 
     public function updatePowerUp($teamID, $roundID, $powerUp) {
 
+//      Get the teamAnswers
         $teamAnswers = TeamAnswer::where('team_id', $teamID)->where('round_id', $roundID)->get();
 
+//      get the team
         $team = Team::where('id', $teamID)->first();
 
+//      change the teams powerUp to true depending on the powerUp
         if ($powerUp === 'Double') {
-            $team->double = !($team->double);
+            $team->double = true;
         } else if ($powerUp === 'Triple') {
-            $team->triple = !($team->triple);
-        } else {
-
-            if ($teamAnswers[0]->powerUp === 'Double') {
-                $team->double = false;
-            } else {
-                $team->triple = false;
-            }
+            $team->triple = true;
         }
 
-        TeamAnswer::where('team_id', $teamID)->where('round_id', $roundID)->update(['powerUp' => ($powerUp === 'Null') ? Null : $powerUp]);
+//      update the team answers to reflect the powerUp
+        TeamAnswer::where('team_id', $teamID)->where('round_id', $roundID)->update(['powerUp' => $powerUp]);
 
+//      get the answers again
         $teamAnswers = TeamAnswer::where('team_id', $teamID)->where('round_id', $roundID)->get();
 
+//      update the answers based on the powerUp
         foreach($teamAnswers as $answer) {
-            if ($powerUp === 'Null') {
-                $this->addPointsToTeam($answer, 1 - $answer->points);
-            }
             $this->updatePoints($answer);
         }
 
         $team->save();
 
-//        return TeamAnswer::where('team_id', $teamID)->where('round_id', $roundID)->orderBy('points', 'ASC')->get();
+        return $team;
+
+    }
+
+    public function undoPowerUp($teamID, $roundID, $powerUp) {
+
+//      get all the team answers
+        $teamAnswers = TeamAnswer::where('team_id', $teamID)->where('round_id', $roundID)->get();
+
+//      get the team
+        $team = Team::where('id', $teamID)->first();
+
+//      update the team based on the powerUp
+        if ($powerUp === 'Double') {
+            $team->double = false;
+        } else if ($powerUp === 'Triple') {
+            $team->triple = false;
+        }
+
+//      go through each answer, update the team points
+        foreach($teamAnswers as $answer) {
+            if ($answer->correct) {
+                Log::error('made it to the place');
+                $this->addPointsToTeam($answer, 1 - $answer->points);
+            }
+        }
+
+//      change the powerUp on each answer for that round
+        TeamAnswer::where('team_id', $teamID)->where('round_id', $roundID)->update(['powerUp' =>  Null ]);
+
+        //get the answers again
+        $teamAnswers = TeamAnswer::where('team_id', $teamID)->where('round_id', $roundID)->get();
+
+//      update the point depending on the powerUp that was changed
+        foreach($teamAnswers as $answer) {
+            $this->updatePoints($answer);
+        }
+
+        $team->save();
 
         return $team;
 
     }
 
     public function updatePoints(TeamAnswer $answer) {
-
-//        if ($answer->correct === 1) {
-//
-//            if ($answer->powerUp === 'Double') {
-//                $answer->points = 2;
-//                $this->addPointsToTeam($answer, 1);
-//
-//            } elseif ($answer->powerUp === 'Triple') {
-//
-//                $answer->points = 3;
-//                $this->addPointsToTeam($answer, 2);
-//
-//            } else {
-//
-//                $answer->points = 1;
-//            }
-//
-//        } else {
-//            $answer->points = 0;
-//        }
-        Log::error('$answer');
-        Log::error($answer);
 
         if ($answer->powerUp === 'Double') {
             $answer->points = 2;
@@ -175,12 +187,14 @@ class TeamAnswerController extends Controller
             $answer->points = 1;
         }
 
-
         $answer->save();
     }
 
     public function addPointsToTeam(TeamAnswer $answer, $points) {
         $team = Team::where('id', $answer->team_id)->first();
+        Log::error('$team->points = $team->points + $points;');
+        Log::error($team->points);
+        Log::error($points);
 
         $team->points = $team->points + $points;
 

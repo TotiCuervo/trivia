@@ -3,15 +3,18 @@
         <div class="row pb-4">
             <div class="col-md-12">
                 <div class="float-left">
-                    <button type="button" class="btn btn-outline-success btn-orange btn-lg mr-2" @click='goToHostLobby()' v-if="currentPage === 'HostStartGame'">Back</button>
+                    <b-button pill variant="outline-primary" @click='goToHostLobby()' v-if="currentPage === 'HostStartGame'">Back</b-button>
                 </div>
                 <div class="float-right">
-                    <button type="button" class="btn btn-success btn-lg" @click="startRound()">Start Round {{this.rounds[this.roundPosition].order_number}}</button>
+                    <b-button pill variant="primary" @click="startRound()">Start Round {{this.rounds[this.roundPosition].order_number}}</b-button>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-4 pb-3" v-for="(round, index) in this.rounds" @click="startThisRound(index)">
+        <div class="row justify-content-center pt-3">
+            <div class="col-12 text-center pb-3">
+                <h3>Select round:</h3>
+            </div>
+            <div class="col-md-10 pb-4" v-for="(round, index) in this.rounds" @click="startThisRound(index)">
                 <HostRoundCard :round="round" :roundPosition="playRoundPosition"></HostRoundCard>
             </div>
         </div>

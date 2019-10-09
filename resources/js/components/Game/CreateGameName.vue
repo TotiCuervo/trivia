@@ -72,6 +72,11 @@
             }
         },
         mounted() {
+
+            //checks to see if nightMode is on
+            if (this.darkMode) {
+                document.getElementById('create-game___BV_modal_content_').className = 'darkMode-card modal-content';
+            }
         },
         methods: {
             ...mapActions('round', ['addRound']),
@@ -91,7 +96,7 @@
             },
         },
         computed: {
-            ...mapGetters('user', ['user_id']),
+            ...mapGetters('user', ['user_id','darkMode']),
             //For Validation
             validation() {
                 return this.name.length > 0 && this.name.length <= this.nameCC && this.description.length <= this.descriptionCC && this.company.length <= this.companyCC;
