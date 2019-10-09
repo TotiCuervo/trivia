@@ -1,34 +1,17 @@
 <template>
     <div v-if="this.game.name !== ''">
-        <div class="game-intro pt-2 pb-2">
+        <div class="container pt-2 pb-2">
 
-            <div class="row no-gutters">
-
-                <div class="col-md-12 text-center">
-
-                    <div class="game-header">
-
-                        <div v-if="game.name">
-                            <h1 style="font-size: 50px;">{{ game.name }}</h1>
-                        </div>
-
-                        <!--Added layer of protection agaisnt null values-->
-                        <div v-if="game.description">
-                            <h3>
-                                {{ game.description }}
-                                <router-link :to="{ name: 'editGameName', params: {id: game.id} }" style="text-decoration:none; color:white;">
-                                    <i class="far fa-edit clicker"></i>
-                                </router-link>
-                            </h3>
-                        </div>
-                        <div v-else>
-                            <h3 class="text-muted">
-                                Edit to add Description
-                                <i class="far fa-edit clicker"></i>
-                            </h3>
-                        </div>
-
-                    </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <span class="h5">
+                        {{game.name}}<span v-if="game.description">: {{game.description}}</span>
+                        <span class="text-muted h5" v-if="game.company"><i> @ {{game.company}}</i></span>
+                    </span>
+                    <span class="fa-1x first-gray then-black trans-1 clicker" v-b-tooltip.top title="Edit game" v-b-modal.edit-game>
+                        <i class="fas fa-pen"></i>
+                    </span>
+                    <hr>
                 </div>
             </div>
         </div>

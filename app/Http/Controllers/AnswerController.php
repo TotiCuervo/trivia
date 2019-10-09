@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\GameCode;
 use App\Answer;
 use App\Question;
 use App\Game;
@@ -31,6 +32,13 @@ class AnswerController extends Controller
 
         return $answers;
 
+    }
+
+    public function indexByCode($gameCode)
+    {
+        $gameCode = GameCode::where('code', $gameCode)->first();
+        $game = Game::findorFail($gameCode->game_id);
+        return $game->answers()->get();
     }
 
     /**
@@ -117,5 +125,6 @@ class AnswerController extends Controller
         $answer = Answer::findorFail($id);
 
         $answer->delete();
+
     }
 }

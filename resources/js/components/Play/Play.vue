@@ -1,22 +1,77 @@
 <template>
     <div>
         <router-view></router-view>
+        <!--Dark Mode-->
+        <div class="fixed-bottom">
+            <div class="row">
+                <div class="col-4 offset-8">
+                    <div class="float-right pr-1">
+                        <DarkModeSwitch></DarkModeSwitch>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
+    import {mapActions, mapGetters} from 'vuex';
     export default {
         data() {
             return {
-                validCode: '',
-                gameCode: '',
-                name: '',
-                password: ''
+                token: ''
             }
         },
         mounted() {
+
+            //checks for darkMode
+            // if (this.darkMode) {
+            //     document.querySelector('body').style.backgroundColor = '#18191A';
+            //     document.querySelector('body').style.color = '#FFFFFF';
+            // }
+
+
+            this.token = localStorage.getItem('user-token') || '';
+
+            //for development
+            // if (this.token) {
+            //
+            //     axios.post('api/team/checkIfExpired', {
+            //         token: localStorage.getItem('user-token')
+            //     }).then(response => {
+            //
+            //         if(response.data === 'expired') {
+            //             localStorage.removeItem('user-token');
+            //             this.$store.commit('team/CLEAR_FORM');
+            //             this.$router.push({name: "playLogin"});
+            //         }
+            //         else {
+            //             this.loggedTeam = response.data;
+            //             this.$router.push({name: "playLobby"});
+            //         }
+            //
+            //     });
+            // }
+            // else {
+            //     this.$router.push({name: "playLogin"});
+            // }
+
+            //for production
             this.$router.push({name: "playLogin"});
-        }
+
+        },
+        computed: {
+            ...mapGetters('team', ['team']),
+            ...mapGetters('play', ['darkMode']),
+            loggedTeam: {
+                get() {
+                    return this.team;
+                },
+                set(value) {
+                    return this.$store.commit('team/SET_TEAM', value);
+                }
+            }
+        },
     }
 </script>
 

@@ -3,15 +3,11 @@
 
         <div class="container">
             <!--if there are questions in the array-->
-
             <draggable v-model="roundQuestions">
-                <div v-for="question in roundQuestions" :key="question.id">
-                    <!--and they match the round id of this round-->
-                    <div v-if="question.round_id === round_id">
-                        <div class="row pb-3">
-                            <div class="col-md-12 pr-2">
-                                <QuestionIndexCard :question="question" :round_id="round_id"></QuestionIndexCard>
-                            </div>
+                <div v-for="(question, index) in roundQuestions.filter(x => x.round_id === round_id)" :key="question.id">
+                    <div class="row" v-bind:class="{'pb-4': index < roundQuestions.filter(x => x.round_id === round_id).length-1, 'pb-3': index >= roundQuestions.filter(x => x.round_id === round_id).length-1}">
+                        <div class="col-md-12 pr-2">
+                            <QuestionIndexCard :question="question" :round_id="round_id"></QuestionIndexCard>
                         </div>
                     </div>
                 </div>

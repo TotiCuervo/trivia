@@ -16,10 +16,15 @@ Vue.use(VueRouter);
 import Vue from 'vue'
 import BootstrapVue from 'bootstrap-vue'
 
-Vue.use(BootstrapVue)
+import CircularCountDownTimer from "vue-circular-count-down-timer";
+Vue.use(CircularCountDownTimer);
+
+Vue.use(BootstrapVue);
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+
+
 
 
 //component names
@@ -30,7 +35,10 @@ import GameDetails from './components/Game/GameDetails.vue'
 import GameReview from './components/Game/GameReview.vue'
 import CreateQAForm from './components/Question/CreateQAForm.vue'
 import HostLobby from './components/Host/HostLobby.vue'
+import HostInterface from './components/Host/HostInterface.vue'
+import PlayInterface from './components/Play/PlayInterface'
 import PlayLogin from './components/Play/PlayLogin.vue'
+import PlayLobby from './components/Play/PlayLobby.vue'
 import Home from './components/Home.vue'
 import  {store} from './store'
 
@@ -43,6 +51,7 @@ files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 const router = new VueRouter({
+    // mode: 'history',
     routes: [
         {
             path: '/home',
@@ -74,11 +83,16 @@ const router = new VueRouter({
             name:  'hostLobby',
             component: HostLobby
         },
-        // {
-        //     path: '/play/lobby',
-        //     name:  'playLobby',
-        //     component: PlayLobby
-        // },
+        {
+            path: '/host/game/:id',
+            name:  'hostInterface',
+            component: HostInterface
+        },
+        {
+            path: '/play/goodLuck',
+            name:  'playInterface',
+            component: PlayInterface
+        },
         {
             path: '/play/login',
             name:  'playLogin',

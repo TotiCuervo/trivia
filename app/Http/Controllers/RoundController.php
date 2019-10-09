@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Game;
 use App\Round;
+use App\GameCode;
 use Illuminate\Http\Request;
 
 class RoundController extends Controller
@@ -18,6 +19,16 @@ class RoundController extends Controller
         $trivia = Game::findorFail($id);
 
         $rounds = $trivia->rounds()->orderBy('order_number', 'ASC')->get();
+
+        return $rounds;
+    }
+
+    public function indexByCode($gameCode)
+    {
+        $gameCode = GameCode::where('code', $gameCode)->first();
+        $game = Game::findorFail($gameCode->game_id);
+
+        $rounds = $game->rounds()->orderBy('order_number', 'ASC')->get();
 
         return $rounds;
     }

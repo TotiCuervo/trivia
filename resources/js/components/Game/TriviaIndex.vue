@@ -1,33 +1,19 @@
 <template>
-    <div>
+    <div class="container-fluid">
         <div class="row pl-4 pr-4 pt-3">
-            <div class="col-md-4">
-                <h3>My Games</h3>
-                <hr >
-            </div>
-        </div>
-        <div class="row pl-4 pr-4">
-            <div class="col-md-3 pb-3">
-                <router-link :to="{ name: 'createGameName' }">
-                    <div class="fancy-2 card" style="padding:20px;">
-                        <div class="card-body">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-12 text-center">
-                                        <i class="fas fa-plus circle-icon-game fa-2x fa-white"></i>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12 text-center">
-                                        <small class="text-muted">Add a new Trivia Game!</small>
-                                    </div>
-                                </div>
-                            </div>
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="d-flex align-items-baseline">
+                            <span class="h5 m-0" style="flex-grow:1">My Games</span>
+                            <button type="button" class="btn triv-blue float-right" v-bind:class="{'darkMode': this.darkMode}" v-b-modal.create-game>New Game</button>
                         </div>
                     </div>
-                </router-link>
+                </div>
             </div>
-            <div class="col-md-3 pb-3" v-for="game in games">
+        </div>
+        <div class="row pl-4 pr-4 pt-4">
+            <div class="col-md-12 pb-3" v-for="game in games">
                 <GameCard :game="game"></GameCard>
             </div>
         </div>
@@ -54,7 +40,7 @@
             ...mapActions('game', ['fetchGames']),
         },
         computed: {
-            ...mapGetters('user', ['user_id']),
+            ...mapGetters('user', ['user_id', 'darkMode']),
             ...mapGetters('game', ['games']),
         },
     }

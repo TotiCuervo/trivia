@@ -3,11 +3,13 @@
         <div>
             <div class="row no-gutters pt-5 pb-5">
                 <div class="col-md-6 offset-md-3">
-                    <div class="card">
+                    <div class="trivalo-card card">
                         <div class="card-body">
                             <div class="container">
                                 <div class="row">
-                                    <i class="far fa-times-circle fa-2x clicker fa-gray fa-hover-black" @click="exitPage"></i>
+                                    <div class="col-md-12">
+                                        <span class="float-right fa-2x clicker color-gray then-black trans-1" @click="exitPage"><i class="far fa-times-circle"></i></span>
+                                    </div>
                                 </div>
                                 <div class="row pt">
                                     <div class="col-md-10 offset-md-1">
@@ -223,11 +225,6 @@
                 }
             }
         },
-        watch: {
-            game: function () {
-                document.querySelector('body').style.backgroundColor = this.game.bodyColor;
-            }
-        }
     }
 </script>
 

@@ -1,6 +1,10 @@
 <template>
     <div>
-        <h1>I am the lobby</h1>
+        <TeamPlayHeader></TeamPlayHeader>
+        <PlayHomeScreen v-if="this.game.name !== ''"></PlayHomeScreen>
+        <!--<div class="btn btn-primary" @click="logout()">Logout</div>-->
+        <!--<div class="btn btn-primary" @click="leaving()">Logout2</div>-->
+
     </div>
 </template>
 
@@ -15,24 +19,47 @@
             }
         },
         mounted() {
-            axios.get('/api/team/user')
-                .then(response => {
-                    console.log(response.data);
-                    console.log('Made it');
 
+            this.fetchDataByGameCode(this.team.gameCode);
+
+            Echo.join('game.'+this.loggedTeam.gameCode)
+                .here((users) => {
+
+                })
+                .listen('NewTeam', (e) => {
+                    // console.log(e);
+                    console.log('WOW A NEW TEAM');
                 });
         },
+        created() {
+            window.addEventListener('beforeunload', this.leaving);
+        },
         methods: {
-            ...mapActions('user', ['fetchData']),
+            ...mapActions('game', ['fetchDataByGameCode']),
+
             logout(){
-                axios.post('/logout')
-                    .then(() => {
-                        window.location = window.location.protocol + "/login";
+                localStorage.removeItem('user-token');
+                this.$store.commit('team/CLEAR_FORM');
+                this.$router.push({name: "playLogin"});
+            },
+            leaving() {
+                axios.post('/api/team/logout/'+ this.loggedTeam.id)
+                    .then(response => {
+
                     });
             },
         },
         computed: {
-            ...mapGetters('user', ['user']),
+            ...mapGetters('team', ['team']),
+            ...mapGetters('game', ['game']),
+            loggedTeam: {
+                get() {
+                    return this.team;
+                },
+                set(value) {
+                    return this.$store.commit('team/SET_TEAM', value);
+                }
+            }
         },
     }
 </script>

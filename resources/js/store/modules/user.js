@@ -6,7 +6,9 @@ function initialState() {
             id: null
         },
         loading: false,
+        darkMode: false,
         form:{
+
         }
     }
 }
@@ -27,6 +29,9 @@ const getters = {
     loading(state){
         return state.loading;
     },
+    darkMode(state) {
+        return state.darkMode;
+    }
 };
 
 const actions = {
@@ -37,8 +42,6 @@ const actions = {
         axios.get('/api/user')
             .then(response => {
                 let user = response.data;
-                console.log('Made it');
-                console.log(response.data);
                 commit('SET_USER', response.data);
                 commit('SET_USER_ID', user.id);
                 commit('setLoading', false);
@@ -46,6 +49,10 @@ const actions = {
             console.log(error.response);
         });
     },
+
+    toggleDarkMode({commit, state}) {
+        commit('TOGGLE_DARK_MODE');
+    }
 
 };
 
@@ -58,7 +65,11 @@ const mutations = {
     },
     SET_USER_ID(state, user_id){
         state.user.id = user_id;
+    },
+    TOGGLE_DARK_MODE(state) {
+        state.darkMode = !state.darkMode;
     }
+
 
 };
 

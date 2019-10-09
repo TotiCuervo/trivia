@@ -2,18 +2,52 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NewTeam;
+use App\Events\UpdateTeams;
+use App\Events\TeamLeaving;
 use Illuminate\Http\Request;
 
+use Str;
+
 use App\Team;
+use App\User;
 use App\GameCode;
+use App\Model\Authenticator;
+use Illuminate\Auth\AuthenticationException;
+
+
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Hashing\HashManager;
+use Illuminate\Support\Facades\Log;
+
+
 
 
 class TeamLoginController extends Controller
 {
+
+    private $authenticator;
+
+    public function __construct(Authenticator $authenticator)
+    {
+        $this->authenticator = $authenticator;
+    }
+
+
+    public function team(Request $request)
+    {
+        $team = Team::where('token', $request->token)->first();
+
+        $team->loggedIn = 1;
+        $team->save();
+
+        return $team;
+
+    }
+
     public function index()
     {
         return view('team/login');
@@ -25,53 +59,42 @@ class TeamLoginController extends Controller
 
         for ($i = 0; $i < count($gameCodes); $i++) {
 
-            if ($request->gameCode === $gameCodes[$i]->code) {
-                return $this->registerOrLogin($request);
+            if ($request->code === $gameCodes[$i]->code) {
+                return 'true';
             }
         }
 
-        $messages = array(
-            'gameCode' => 'Sorry, this seems to be the wrong game code',
-        );
+        return 'false';
+    }
 
-        return Redirect::back()->withErrors($messages);
+    public function checkIfExpired(Request $request)
+    {
+        $team = Team::where('token', $request->token)->first();
+
+        if (! GameCode::where('code', $team->gameCode)->exists()) {
+            return 'expired';
+        }
+        else {
+            $team->loggedIn = 1;
+
+            $team->save();
+
+            $this->broadcastNewTeam($team);
+
+            return $team;
+        }
     }
 
     public function registerOrLogin(Request $request) {
 
-        $teams = Team::where('gameCode', $request->gameCode)->get();
-
-        for ($i = 0; $i < count($teams); $i++) {
-
-            if($request->name === $teams[$i]->name) {
-//                return 'trying to login';
-                return $this->login($request);
-            }
+        //if this team exists log them in
+        if ($teams = Team::where('gameCode', $request->gameCode)->where('name', $request->name)->first()) {
+            return $this->login($request);
         }
 
+        //if not, register them
         return $this->Register($request);
 
-    }
-
-    public function login(Request $request)
-    {
-
-        $request->validate([
-            'name' =>'required',
-            'password' => 'required',
-        ]);
-
-        if(Auth::guard('team')->attempt(['name' => $request->name, 'password' => $request->password, 'identifier' => $request->name.$request->gameCode], true)) {
-            return redirect()->intended(route('play-lobby'));
-
-//            dd(Auth::guard('team')->user());
-        }
-
-        $messages = array(
-            'password' => 'Sorry, wrong password :(',
-        );
-
-        return Redirect::back()->withErrors($messages);
     }
 
     public function register(Request $request)
@@ -79,11 +102,104 @@ class TeamLoginController extends Controller
         $team = new Team;
         $team->name = $request->name;
         $team->gameCode = $request->gameCode;
-        $team->password = Hash::make($request->password);
+        $team->password = bcrypt($request->password);
         $team->identifier = $request->name.$request->gameCode;
+        $team->token = Str::random(32);
+        $team->loggedIn = true;
 
         $team->save();
 
-        return $this->login($request);
+        $this->broadcastNewTeam($team);
+
+        return Team::findorFail($team->id);
     }
+
+    public function login(Request $request)
+    {
+        //get the credentials
+        $credentials = array_values($request->only('name', 'password', 'provider', 'identifier'));
+
+        //attempt to authorize, if not return unauthorized
+        if (! $team = $this->authenticator->attempt(...$credentials)) {
+            return 'unauthorized';
+        }
+
+//        Log::error($team->loggedIn);
+        if ($team->loggedIn === 1) {
+            return 'alreadyLoggedIn';
+        } else {
+            $team->loggedIn = true;
+            $team->save();
+        }
+
+        $this->broadcastNewTeam($team);
+
+        //if authorized, return the team
+        return Team::findorFail($team->id);
+    }
+
+    public function logout($id){
+        Log::error('made it to logout');
+
+        $team = Team::findorFail($id);
+        $team->loggedIn = false;
+        $team->save();
+
+        $this->broadcastTeamLeaving($team);
+
+        return $team;
+    }
+
+    public function edit($id, Request $request) {
+
+        $team = Team::findorFail($id);
+        $team->name = $request->name;
+        $team->save();
+
+        $teams = Team::where('gameCode', $team->gameCode)->get();
+
+        broadcast(new UpdateTeams($teams, $team->gameCode));
+
+        return $teams;
+
+    }
+
+    public function delete($id) {
+        $team = Team::findorFail($id);
+
+        $gameCode = $team->gameCode;
+
+        $team->delete();
+
+        $teams = Team::where('gameCode', $gameCode)->get();
+
+        broadcast(new UpdateTeams($teams, $gameCode));
+
+        return $teams;
+
+
+    }
+
+    //broadcasts
+    public function broadcastNewTeam($team) {
+        $broadTeam = Team::where('identifier', $team->identifier)->first();
+        return broadcast(new NewTeam($broadTeam));
+    }
+
+    public function broadcastTeamLeaving($team) {
+        Log::error('made it to TeamLeaving broadcat');
+        $broadTeam = Team::where('identifier', $team->identifier)->first();
+        return broadcast(new TeamLeaving($broadTeam));
+    }
+
+    public function getPulse($id) {
+        return Team::findorFail($id)->first()->loggedIn;
+    }
+
+    public function iAmHere($id) {
+        $team = Team::findorFail($id);
+        $team->loggedIn = true;
+        $team->save();
+    }
+
 }

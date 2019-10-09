@@ -5,10 +5,12 @@ namespace App;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use SMartins\PassportMultiauth\HasMultiAuthApiTokens;
+
 
 class Team extends Authenticatable
 {
-    use HasApiTokens, Notifiable;
+    use HasMultiAuthApiTokens, Notifiable;
 
     protected $guard = 'team';
 
@@ -18,7 +20,7 @@ class Team extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'password', 'gameCode'
+        'name', 'password', 'gameCode', 'points', 'double', 'triple'
     ];
 
     /**
@@ -38,5 +40,9 @@ class Team extends Authenticatable
 //    protected $casts = [
 //        'email_verified_at' => 'datetime',
 //    ];
+
+    public function teamAnswers() {
+        return $this->hasMany(TeamAnswer::class);
+    }
 
 }

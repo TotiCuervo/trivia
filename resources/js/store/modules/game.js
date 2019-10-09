@@ -7,6 +7,7 @@ function initialState() {
             id: null,
             company: null
         },
+        gameCode: '',
         loading: false,
         form:{
             name: null,
@@ -26,6 +27,9 @@ const getters = {
     },
     name(state){
         return state.game.name;
+    },
+    gameCode(state){
+        return state.gameCode;
     },
     description(state){
         return state.game.description;
@@ -63,6 +67,19 @@ const actions = {
         commit('setLoading', true);
 
         axios.get('/api/game/'+id.id)
+            .then(response => {
+                commit('SET_GAME', response.data);
+                commit('setLoading', false);
+            })
+            .catch( error => {
+                console.log(error.response);
+            });
+    },
+
+    fetchDataByGameCode({ commit, state}, gameCode) {
+        commit('setLoading', true);
+
+        axios.get('/api/game/'+ gameCode + '/code')
             .then(response => {
                 commit('SET_GAME', response.data);
                 commit('setLoading', false);
@@ -112,15 +129,20 @@ const actions = {
         axios.post('/api/game/create', state.game)
             .then(response => {
                 return response.data;
-                // let $game = response.data;
-                // // this.createGameOrder(game.id);
-                // this.$store.commit('round/UPDATE_GAME_ID', $game.id);
-                //
-                // this.addRound();
-                //
-                // this.$router.push({ name: "gameDetails", params: { id: $game.id }});
-
         });
+    },
+
+    createFreshGameCode({commit, state}, game) {
+        axios.post('/api/gameCode/' + game.id + '/create', {
+        })
+            .then(response => {
+                console.log(response.data);
+                localStorage.setItem('gameCode', JSON.stringify(response.data));
+                commit('SET_GAME_CODE', response.data);
+            })
+            .catch(error => {
+                console.log(error);
+            });
     }
 
 };
@@ -135,6 +157,12 @@ const mutations = {
     SET_GAMES(state, games) {
         state.games = games;
     },
+    ADD_GAME(state,game) {
+        state.games.push(game);
+    },
+    SET_GAME_CODE(state,code) {
+        state.gameCode = code;
+    },
     UPDATE_GAME_NAME(state,name) {
         state.game.name = name;
     },
@@ -143,12 +171,6 @@ const mutations = {
     },
     UPDATE_GAME_COMPANY(state,company) {
         state.game.company = company;
-    },
-    UPDATE_GAME_HEAD_CLASS(state,headClass) {
-        state.game.headClass = headClass;
-    },
-    UPDATE_GAME_BODY_COLOR(state,bodyColor) {
-        state.game.bodyColor = bodyColor;
     },
     DELETE_FROM_GAMES(state,game) {
 

@@ -1,27 +1,21 @@
 <template>
-    <div class="pr-3 pl-3" v-if="this.gameCode.code !== ''">
-        <div class="row" v-bind:class="this.game.headClass">
+    <div>
+        <div class="row pb-4">
+            <div class="col-12">
+                <div class="d-flex align-items-center">
+                    <h5 class="m-0 float-left" style="flex-grow:1">Teams: {{this.teams.length}} Teams</h5>
+                    <div class="float-right">
+                        <b-button pill variant="primary" v-if="this.teams.length === 0" disabled>Waiting for players</b-button>
+                        <b-button pill variant="primary" @click='goToStartGame()' v-else>Start Game</b-button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-md-12">
-                <HostGameHeader></HostGameHeader>
-            </div>
-            <div class="col-md-12 text-center" style="color:white;">
-                <h3>This Trivia game can be joined using this code: <u><b>{{this.gameCode.code}}</b></u></h3>
+                <GameTeamIndex :col="3"></GameTeamIndex>
             </div>
         </div>
-        <div class="row pt-3">
-            <div class="col-md-6 text-center">
-                <h1>Incoming players</h1>
-            </div>
-            <div class="col-md-6 vl">
-                <h1 class="text-center pb-3">Game outline</h1>
-                <HostGameOutline></HostGameOutline>
-            </div>
-        </div>
-        <!--<div class="row">-->
-            <!--<div class="col-md-8 offset-md-2">-->
-                <!--<b-button block pill variant="success">Let's Play!</b-button>-->
-            <!--</div>-->
-        <!--</div>-->
     </div>
 </template>
 
@@ -32,67 +26,36 @@
         data() {
             return {
                 params: '',
-                gameCode: {
-                    code: '',
-                    expirationTime: ''
-                },
             }
         },
         mounted() {
-            this.params = this.$route.params;
-            this.fetchData(this.params);
 
-            axios.get('api/user')
-                .then( response => {
-                    console.log(response.data);
-                });
-
-            //get the game code
-            axios.get('/api/game/' + this.params.id + '/gameCode', {
-            })
-                .then(response => {
-
-                    if (response.data === false) {
-
-                        axios.post('/api/gameCode/' + this.params.id + '/create', {
-                        })
-                            .then(response => {
-                                this.gameCode = response.data;
-                            })
-                            .catch(error => {
-                                console.log(error);
-                            });
-
-                    } else {
-                        // console.log(response.data);
-                        this.gameCode = response.data[0];
-                    }
-
-
-                })
-                .catch(error => {
-                    console.log(error);
-                });
-        },
-        beforeDestroy() {
-
-            //changes the value to false
-            axios.post('/api/game/' + this.game.id + '/gameOver', {
-                _method: 'patch'
-            })
-                .then(response => {
-                    // console.log(response.data);
-                })
-                .catch(error => {
-                    console.log(error);
-                });
         },
         methods: {
-            ...mapActions('game', ['fetchData']),
-
+            goToStartGame() {
+                this.currentPage = 'HostStartGame';
+            },
         },
         computed: {
-            ...mapGetters('game', ['game', 'game_id']),
+            ...mapGetters('game', ['game', 'game_id', 'gameCode']),
+            ...mapGetters('team', ['teams']),
+            ...mapGetters('play', ['roundPosition', 'questionPosition', 'page']),
+            currentPage: {
+                get() {
+                    return this.page;
+                },
+                set(value) {
+                    return this.$store.commit('play/SET_PAGE', value);
+                }
+            },
+            game_code: {
+                get() {
+                    return this.gameCode;
+                },
+                set(value) {
+                    return this.$store.commit('game/SET_GAME_CODE', value);
+                }
+            }
 
         }
 

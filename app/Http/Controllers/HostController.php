@@ -2,83 +2,57 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\AreYouThere;
+use App\Events\NextStep;
+use App\Events\UpdateTime;
+use App\Events\StartQuestion;
+use App\Events\StartRound;
+use App\Events\RoundReview;
+use App\Events\RevealAnswer;
+
+use App\Team;
+
+use App\Round;
+
 use Illuminate\Http\Request;
 
 class HostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        return view('host');
+
+//    public function startRound($code, $roundPosition) {
+//
+//        broadcast(new StartRound($code, $roundPosition));
+//        return 'Start Round Successful';
+//    }
+//
+//    public function startQuestion($code, $roundPosition, $questionPosition) {
+//        broadcast(new StartQuestion($code, $roundPosition, $questionPosition));
+//        return 'startQuestion Successful';
+//    }
+//
+//    public function roundReview($code) {
+//        broadcast(new RoundReview($code));
+//        return 'roundReview Successful';
+//    }
+
+    public function revealAnswer($gameCode, $questionPosition) {
+        broadcast(new RevealAnswer($gameCode, $questionPosition));
+        return 'revealAnswer Succcessful!';
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function navigateHandler($code, $roundPosition, $questionPosition, $currentPage) {
+        broadcast(new NextStep($code, $roundPosition, $questionPosition, $currentPage));
+        return 'success';
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+    public function updateTime($code, $teamID, $time) {
+        broadcast(new UpdateTime($teamID, $time, $code));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+    public function areYouThere($gameCode) {
+        Team::where('gameCode', $gameCode)->update(['loggedIn' => false]);
+        broadcast(new AreYouThere($gameCode));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

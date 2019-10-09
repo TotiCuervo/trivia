@@ -66,9 +66,21 @@ const actions = {
         });
     },
 
-    fetchQuestions({ commit, state }, trivia_id) {
+    fetchQuestions({ commit, state }, game_id) {
         commit('setLoading', true);
-        axios.get('/api/trivia/' + trivia_id + '/questions')
+        axios.get('/api/game/' + game_id + '/questions')
+            .then(response => {
+                commit('SET_QUESTIONS', response.data);
+                commit('setLoading', false);
+                commit('SET_LOADED', true);
+            }).catch( error => {
+            console.log(error.response);
+        });
+    },
+
+    fetchQuestionsByGameCode({ commit, state }, gameCode) {
+        commit('setLoading', true);
+        axios.get('/api/game/' + gameCode + '/questionsByCode')
             .then(response => {
                 commit('SET_QUESTIONS', response.data);
                 commit('setLoading', false);
@@ -118,14 +130,7 @@ const mutations = {
         state.questions = questions;
     },
     SET_QUESTION_FORM(state, question){
-
-        state.form = {
-            id: question.id,
-            title: question.title,
-            type: question.type,
-            round_id: question.round_id,
-            order_number: question.order_number
-        };
+        state.form = question;
     },
     UPDATE_TITLE(state,title){
         state.form.title = title;
@@ -136,7 +141,17 @@ const mutations = {
     UPDATE_QUESTION(state,question){
         state.question = question;
     },
-    UPDATE_QUESTIONS(state,question){
+    UPDATE_QUESTION_IN_QUESTIONS(state,question) {
+
+        for (let $i=0; $i < state.questions.length; $i++) {
+
+            if (state.questions[$i].id === question.id) {
+                Vue.set(state.questions, $i, question);
+                break;
+            }
+        }
+    },
+    ADD_QUESTION_TO_QUESTIONS(state,question){
         state.questions.push(question);
     },
     UPDATE_TYPE(state,type){
@@ -183,8 +198,11 @@ const mutations = {
 
             if (state.questions[$i].id === question.id) {
                 state.questions.splice($i,1);
+                break;
             }
+        }
 
+        for (let $i = 0; $i < state.questions.length; $i++) {
             if (state.questions[$i].round_id === question.round_id) {
                 $roundQuestions.push(state.questions[$i]);
             }
@@ -207,11 +225,9 @@ const mutations = {
 
         }
 
-
     },
     CLEAR_CURRENT_QUESTION(state){
 
-        console.log('make it to clear current question');
         state.question = {
             id: '',
             title: '',

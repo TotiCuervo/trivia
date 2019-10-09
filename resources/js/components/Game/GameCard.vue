@@ -1,49 +1,41 @@
 <template>
-
-    <div class="card">
+    <div class="trivalo-card card" v-bind:class="{'darkMode-card': this.darkMode}">
         <div class="card-body">
             <div class="row">
-                <div class="col-md-12">
-                    <i class="fas fa-trash-alt fa-1x float-right fa-gray-black clicker" v-b-tooltip.top
-                       title="Delete Game" v-b-modal.delete-game @click="setGame()"></i>
-                    <i class="fas fa-clone fa-1x float-right fa-gray-black pr-2 clicker" v-b-tooltip.top
-                       title="Copy Game" @click="copyGame()"></i>
+                <div class="col-9 pr-0">
+                    <button type="button" style="margin-left: -40px" class="btn triv-blue btn-primary btn-circle btn-lg" v-bind:class="{'darkMode': this.darkMode}" v-b-tooltip.left title="Play Game" @click="playGame()">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    <span class="pl-3">
+                        <span class="h6"><span class="font-weight-normal">{{this.game.name}}</span><span class="font-weight-normal" v-if="this.game.description">: {{this.game.description}}</span> <span v-if="this.game.company"> @ {{this.game.company}}</span> </span>
+                    </span>
                 </div>
-            </div>
-            <div class="container">
-                <router-link :to="{ name: 'gameDetails', params: {id: game.id} }"
-                             style="text-decoration:none; color:black;">
-                    <div class="row pb-2">
-                        <div class="col-md-12 text-center">
-                            <div class="circle-text mx-auto no-dec" v-bind:class="game.headClass">{{this.name}}</div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 text-center">
-
-                            <p class="m-0">{{game.name}}</p>
-                            <small v-if="game.description">{{game.description}}</small>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 text-center">
-                            <small class="text-muted" v-if="game.company">{{game.company}}</small>
-                        </div>
-                    </div>
-                </router-link>
-                <div class="row">
-                    <div class="col-md-12 text-center">
-                        <hr>
-                        <router-link :to="{ name: 'hostLobby', params: {id: game.id} }">
-                            <b-button block pill variant="primary">Play</b-button>
+                <div class="col-3 pl-0">
+                    <div class="float-right">
+                        <router-link :to="{ name: 'gameDetails', params: {id: game.id} }">
+                            <button type="button" class="btn btn-outline-primary triv-outline-blue" v-bind:class="{'darkMode darkMode-text-white': this.darkMode}">Edit</button>
                         </router-link>
+
+                        <b-dropdown variant="link" toggle-class="text-decoration-none p-0" v-bind:class="{'darkMode': this.darkMode}" no-caret id="dropdown-right" right >
+                            <template v-slot:button-content>
+                                <span class="align-middle ml-3" v-bind:class="{'color-white': darkMode, 'color-black': !darkMode}"><i class="fas fa-ellipsis-v" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i></span>
+                            </template>
+                            <b-dropdown-item href="#">
+                                    <span class="fa-1x clicker" v-b-modal.delete-game @click="setGame()">
+                                        <span class="pr-2"><i class="fas fa-trash-alt"></i></span> Delete Game
+                                    </span>
+                            </b-dropdown-item>
+                            <b-dropdown-item href="#">
+                                    <span class="fa-1x clicker" @click="copyGame()">
+                                        <span class="pr-2"><i class="fas fa-clone"></i></span> Copy Game
+                                    </span>
+                            </b-dropdown-item>
+                        </b-dropdown>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <!--<router-link :to="{ name: 'gameDetails', params: {id: game.id} }" class="nav-link">-->
 
 </template>
 
@@ -73,7 +65,7 @@
 
         },
         methods: {
-            ...mapActions('game', ['newGame']),
+            ...mapActions('game', ['newGame', 'createFreshGameCode']),
             ...mapActions('round', ['fetchRounds']),
             ...mapActions('question', ['fetchQuestions']),
             ...mapActions('answer', ['fetchAnswers']),
@@ -90,7 +82,13 @@
                 this.fetchAnswers(this.game.id);
 
                 //New Game
-                axios.post('/api/game/create', this.game)
+                axios.post('/api/game/create', {
+                    name: this.game.name + ' (Copy)',
+                    user_id: this.game.user_id,
+                    description: this.game.description,
+                    company: this.game.company,
+
+                })
                     .then(response => {
                         let $newGame = response.data;
 
@@ -162,8 +160,10 @@
                             });
                         }
 
-                        this.$router.push({name: "editGameName", params: {id: $newGame.id}});
+                        this.$store.commit('game/ADD_GAME', $newGame);
 
+
+                        // this.$router.push({name: "gameDetails", params: {id: $newGame.id}});
                         // // this.createGameOrder(game.id);
                         // this.$store.commit('round/UPDATE_GAME_ID', $game.id);
                         //
@@ -173,12 +173,27 @@
 
                     });
             },
+            playGame() {
+
+                //Gets rid of the gameCode already in local storage
+                localStorage.removeItem('gameCode');
+
+                //Sets a new gameCode to localStorage
+                this.createFreshGameCode(this.game);
+
+                //may need to change for production
+                let route = "app#/host/game/" + this.game.id;
+
+                window.open(route, "_blank");
+            }
         },
         props: ['game'],
         computed: {
             ...mapGetters('round', ['rounds']),
             ...mapGetters('question', ['questions']),
             ...mapGetters('answer', ['answers']),
+            ...mapGetters('user', ['darkMode']),
+
 
 
         },

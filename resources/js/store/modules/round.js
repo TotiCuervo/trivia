@@ -54,7 +54,20 @@ const actions = {
     fetchRounds({ commit, state }, game) {
 
         commit('setLoading', true);
-        axios.get('/api/trivia/'+game.id+'/rounds')
+        axios.get('/api/game/'+game.id+'/rounds')
+            .then(response => {
+                commit('SET_ROUNDS', response.data);
+                commit('UPDATE_ORDER_NUMBER');
+                commit('setLoading', false);
+            }).catch( error => {
+            console.log(error.response);
+        });
+    },
+
+    fetchRoundsByGameCode({ commit, state }, gameCode) {
+
+        commit('setLoading', true);
+        axios.get('/api/game/'+gameCode+'/roundsByCode')
             .then(response => {
                 commit('SET_ROUNDS', response.data);
                 commit('UPDATE_ORDER_NUMBER');

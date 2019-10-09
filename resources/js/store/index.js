@@ -6,12 +6,11 @@ Vue.use(Vuex);
 
 import user from './modules/user';
 import game from './modules/game';
-import gameOrder from './modules/gameOrder';
 import round from './modules/round';
 import question from './modules/question';
 import answer from './modules/answer';
-
-
+import team from './modules/team';
+import play from './modules/play'
 
 
 
@@ -22,10 +21,11 @@ export const store = new Vuex.Store({
     modules: {
         user,
         game,
-        gameOrder,
         round,
         question,
-        answer
+        answer,
+        team,
+        play
     },
     strict: debug
 });

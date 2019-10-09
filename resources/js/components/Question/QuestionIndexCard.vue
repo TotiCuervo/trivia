@@ -1,43 +1,51 @@
 <template>
     <div v-if="this.id">
 
-        <div class="card" @click="clickQuestion()" v-bind:class="{ 'blank-card': (this.currentRound.id !== this.round_id), 'question-card': (this.currentRound.id === this.round_id && this.current_Question.id !== this.question.id) }">
+        <div class="card" @click="clickQuestion()"
+             v-bind:class="{ 'blank-card': (this.currentRound.id !== this.round_id), 'darkMode': this.darkMode ,'darkMode-card-2': this.darkMode && (this.currentRound.id === this.round_id)}">
             <div class="card-body p-2">
                 <div class="row">
-                    <div class="col-md-1">
-                        <p class="m-0">Q{{question.order_number}}:</p>
-                        <i class="fas fa-arrows-alt" v-show="this.round_id === this.currentRound.id"></i>
-
-                    </div>
-                    <div class="col-md-10 clicker">
+                    <!--if current round-->
+                    <div class="col-10 col-sm-9 col-md-10 pr-0" v-if="this.currentRound.id === this.round_id">
                         <div v-if="question.type === 'Fill-in-blank' ">
-                            <span class="text-muted">(Fill In The Blank)</span>
+                            <span class="small text-muted">Question {{question.order_number}}: Fill In The Blank</span>
                         </div>
                         <div v-else>
-                            <span class="text-muted">(Multiple Choice)</span>
+                            <span class="small text-muted">Question {{question.order_number}}: Multiple Choice</span>
                         </div>
                         <p class="m-0"><b>{{question.title}}</b></p>
                     </div>
-                    <div class="col-md-1">
-                        <div class="float-right" v-show="this.current_Question.id === this.question.id">
-                            <div class="dropdown dropleft">
-                                <router-link :to="{ name: 'editQAForm', params: { id: id.id, round_id: round_id, question_id: question.id } }" class="clicker">
-                                    <i class="fas fa-pen fa-white fa-1x circle-icon-edit" v-b-tooltip.left title="Edit question"></i>
-                                </router-link>
+                    <!--if not current round-->
+                    <div class="col-10 col-sm-9 col-md-11 pr-0" v-else>
+                        <div v-if="question.type === 'Fill-in-blank' ">
+                            <span class="small text-muted">Question {{question.order_number}}: Fill In The Blank</span>
+                        </div>
+                        <div v-else>
+                            <span class="small text-muted">Question {{question.order_number}}: Multiple Choice</span>
+                        </div>
+                        <p class="m-0"><b>{{question.title}}</b></p>
+                    </div>
 
-                                <i class="fas fa-trash-alt fa-white fa-1x circle-icon-delete mt-2" v-b-tooltip.left title="Delete question" v-b-modal.delete-question ></i>
+                    <div class="col-2 col-sm-3 col-md-2 pl-0">
+                        <div class="float-right" v-show="this.currentRound.id === this.round_id">
+                            <div class="dropdown dropleft">
+                                <span class="fa-1x first-gray trans-1 clicker" v-bind:class="{'then-black': !this.darkMode, 'then-white': this.darkMode}" v-b-tooltip.top  title="Edit question" @click="loadEditData()" v-b-modal.edit-question>
+                                    <i class="fas fa-pen"></i>
+                                </span>
+                                <span class="fa-1x mt-2 first-gray trans-1 clicker" v-bind:class="{'then-black': !this.darkMode, 'then-white': this.darkMode}" v-b-tooltip.top title="Delete question" v-b-modal.delete-question>
+                                    <i class="fas fa-trash-alt"></i>
+                                </span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <ul v-show="this.current_Question.id === this.question.id" class="list-group list-group-flush">
+            <ul v-show="this.currentRound.id === this.round_id" class="list-group list-group-flush">
                 <li class="list-group-item">
                     <AnswerIndex :question="question"></AnswerIndex>
                 </li>
             </ul>
         </div>
-
     </div>
 </template>
 
@@ -56,32 +64,34 @@
         },
         methods: {
             ...mapActions('question', ['deleteQuestion']),
-            clickQuestion(){
+            clickQuestion() {
                 this.current_Question = this.question;
             },
-            toggleClicked(){
+            toggleClicked() {
                 this.clicked = !(this.clicked);
             },
             delete_Question() {
 
                 this.deleteQuestion();
 
-                // axios.delete('/api/question/' + this.question.id +'/destroy')
-                //     .then(response => {
-                //         console.log(this.question.order_number);
-                //         this.$store.commit('question/DELETE_FROM_QUESTIONS', this.question.order_number);
-                //         // this.$router.push({name: "gameDetails", params: {id: this.id.id}});
-                //     })
-                //     .catch(error => {
-                //         console.log(error);
-                //     });
-
-
+            },
+            loadEditData() {
+                this.$store.commit('question/SET_QUESTION_FORM', {
+                    id: this.question.id,
+                    title: this.question.title,
+                    type: this.question.type,
+                    round_id: this.question.round_id,
+                    order_number: this.question.order_number,
+                });
+                this.$store.commit('answer/SET_ANSWERS_FORM', this.answers.filter(x => x.question_id === this.question.id));
             }
         },
         computed: {
             ...mapGetters('round', ['currentRound']),
             ...mapGetters('question', ['currentQuestion']),
+            ...mapGetters('answer', ['answers']),
+            ...mapGetters('user', ['darkMode']),
+
             current_Question: {
                 get() {
                     return this.currentQuestion;
@@ -92,7 +102,7 @@
             }
 
         },
-        props: ['question','round_id'],
+        props: ['question', 'round_id'],
     }
 </script>
 
