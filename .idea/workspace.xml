@@ -1,25 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f562f43b-05cf-4003-ae95-b369e5751c9b" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/js/components/DarkMode/DarkModeSwitch.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/DarkMode/ToggleDarkMode.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Answer/PlayRevealAnswer.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Answer/PlayRevealAnswer.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Answer/PlayRevealAnswerMC.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Answer/PlayRevealAnswerMC.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Play/Play.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Play/Play.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Play/PlayInterface.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Play/PlayInterface.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Play/PlayLeaderBoard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Play/PlayLeaderBoard.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Play/PlayLogin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Play/PlayLogin.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Question/PlayQuestion/MCInput.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Question/PlayQuestion/MCInput.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Question/PlayQuestion/PlayQuestion.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Question/PlayQuestion/PlayQuestion.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Round/PlayRoundPreview.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Round/PlayRoundPreview.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Round/PlayRoundReview.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Round/PlayRoundReview.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Team/TeamPlayHeader.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Team/TeamPlayHeader.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/ToggleDarkMode.vue" beforeDir="false" />
-    </list>
+    <list default="true" id="f562f43b-05cf-4003-ae95-b369e5751c9b" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
