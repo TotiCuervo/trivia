@@ -2,10 +2,10 @@
     <div>
         <div class="row pt-4 text-center">
             <div class="col-md-12">
-                <h2 style="font-size:6rem">Round</h2>
+                <h2 style="font-size:5rem">Round</h2>
             </div>
             <div class="col-md-12">
-                <h2 style="font-size:6rem">{{this.rounds[this.playRoundPosition].order_number}}</h2>
+                <h2 style="font-size:5rem">{{this.rounds[this.playRoundPosition].order_number}}</h2>
             </div>
 
         </div>

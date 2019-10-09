@@ -154,7 +154,6 @@
             questionPosition: function () {
                 if (this.revealAnswer === true) {
                     this.revealAnswer = false;
-                    document.querySelector('body').style.backgroundColor = 'white';
                 }
             },
         }

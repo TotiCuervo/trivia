@@ -2,48 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f562f43b-05cf-4003-ae95-b369e5751c9b" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/js/components/ToggleDarkMode.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/layouts/login.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/layouts/register.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/DarkMode/DarkModeSwitch.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/DarkMode/ToggleDarkMode.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TeamAnswerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TeamAnswerController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/Answer/PlayRevealAnswer.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Answer/PlayRevealAnswer.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Answer/PlayRevealAnswerFIB.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Answer/PlayRevealAnswerFIB.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Game/AddRound.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Game/AddRound.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Game/CreateGameName.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Game/CreateGameName.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Game/GameCard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Game/GameCard.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Game/TriviaIndex.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Game/TriviaIndex.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Home.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/HomePage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/HomePage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Host/HostHeader.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Host/HostHeader.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Host/HostInterface.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Host/HostInterface.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Host/HostLobby.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Host/HostLobby.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Host/HostStartGame.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Host/HostStartGame.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Answer/PlayRevealAnswerMC.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Answer/PlayRevealAnswerMC.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/Play/Play.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Play/Play.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Play/PlayHomeScreen.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Play/PlayHomeScreen.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Play/PlayInterface.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Play/PlayInterface.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Play/PlayLeaderBoard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Play/PlayLeaderBoard.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/Play/PlayLogin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Play/PlayLogin.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Question/CreateQAFormModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Question/CreateQAFormModal.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Question/HostQuestion.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Question/HostQuestion.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Question/HostQuestionPreview.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Question/HostQuestionPreview.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Question/PlayQuestion/MCInput.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Question/PlayQuestion/MCInput.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/Question/PlayQuestion/PlayQuestion.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Question/PlayQuestion/PlayQuestion.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Question/QuestionIndexCard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Question/QuestionIndexCard.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Round/HostRoundCard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Round/HostRoundCard.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Round/HostRoundPreview.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Round/HostRoundPreview.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/Round/PlayRoundPreview.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Round/PlayRoundPreview.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/Round/PlayRoundReview.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Round/PlayRoundReview.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Round/RoundDetails.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Round/RoundDetails.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Team/GameTeamIndex.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Team/GameTeamIndex.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/layouts/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/layouts/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/store/modules/play.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/store/modules/play.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/store/modules/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/store/modules/user.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/login.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/register.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/register.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/main.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/main.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/play.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/play.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Team/TeamPlayHeader.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Team/TeamPlayHeader.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/ToggleDarkMode.vue" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -211,21 +186,22 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="SearchEverywhereHistoryKey" value="app&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/views/layouts/app.blade.php&#10;playque&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Question/PlayQuestion/PlayQuestion.vue&#10;style&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/public/css/style.css&#10;nav&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/HomeNav.vue&#10;host&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Host/HostTeamName.vue&#10;hostteamname&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Host/HostTeamName.vue&#10;hosttriviateamanswer&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Host/HostTriviaTeamAnswer.vue&#10;homenav&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/HomeNav.vue&#10;hostteamanswerpool&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Host/HostTeamAnswerPool.vue&#10;hostinter&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Host/HostInterface.vue&#10;hostquesti&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Question/HostQuestionPreview.vue&#10;hostquestion&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Question/HostQuestion.vue&#10;team&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/store/modules/team.js&#10;hostchangean&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Host/HostChangeAnswer.vue&#10;hostques&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Question/HostQuestion.vue&#10;hostroundrevi&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Round/HostRoundReview.vue&#10;team.j&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/store/modules/team.js&#10;revealanswer&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Answer/PlayRevealAnswerMC.vue&#10;team.js&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/store/modules/team.js&#10;hostteaman&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Answer/HostTeamAnswerIndex.vue&#10;hostteamans&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Host/HostTriviaTeamAnswer.vue&#10;hostchange&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Host/HostChangeAnswer.vue&#10;playround&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Round/PlayRoundReview.vue&#10;updateteam&#9;null&#9;null&#10;api&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/routes/api.php&#10;leaderboard&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Team/LeaderBoardIndex.vue&#10;hostlea&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Host/HostLeaderBoard.vue&#10;teamanswercon&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/app/Http/Controllers/TeamAnswerController.php&#10;playlead&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Play/PlayLeaderBoard.vue&#10;hostteampro&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Team/HostTeamProfile.vue&#10;playinte&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Play/PlayInterface.vue&#10;playquest&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Question/PlayQuestion/PlayQuestion.vue&#10;hostanswe&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Answer/HostAnswerReveal.vue&#10;hosthea&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Host/HostHeader.vue&#10;playinter&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Play/PlayInterface.vue&#10;playreveal&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Answer/PlayRevealAnswer.vue&#10;playlogin&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Play/PlayLogin.vue&#10;play.vue&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Play/Play.vue&#10;hostquest&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Question/HostQuestion.vue&#10;playhome&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Play/PlayHomeScreen.vue&#10;playlob&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Play/PlayLobby.vue&#10;hostheader&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Host/HostHeader.vue&#10;hostcon&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/app/Http/Controllers/HostController.php&#10;leader&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Team/LeaderBoardIndex.vue&#10;hostle&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Host/HostLeaderBoard.vue&#10;playin&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Play/PlayInterface.vue&#10;hostrevea&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Answer/HostAnswerReveal.vue&#10;hosthead&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Host/HostHeader.vue&#10;hostreveal&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Answer/HostAnswerReveal.vue&#10;leaderboardin&#9;FILE&#9;file:///Users/toticuervo/Workspace/trivia/resources/js/components/Team/LeaderBoardIndex.vue" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/js/components/DarkMode" />
     <property name="list.type.of.created.stylesheet" value="SCSS" />
     <property name="settings.editor.selected.configurable" value="preferences.fileTypes" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/app" />
-      <recent name="$PROJECT_DIR$/resources/js/components/store" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/resources/js/components/DarkMode" />
       <recent name="$PROJECT_DIR$/resources/js/components/Question/PlayQuestion" />
       <recent name="$PROJECT_DIR$/app/Model" />
       <recent name="$PROJECT_DIR$/resources/js/components/Answer" />
       <recent name="$PROJECT_DIR$/resources/js/components/ThrowAways" />
-      <recent name="$PROJECT_DIR$/resources/js" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/resources/js/components/DarkMode" />
+      <recent name="$PROJECT_DIR$/app" />
+      <recent name="$PROJECT_DIR$/resources/js/components/store" />
     </key>
   </component>
   <component name="RunDashboard">

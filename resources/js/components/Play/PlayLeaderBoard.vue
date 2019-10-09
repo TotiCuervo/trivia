@@ -8,7 +8,7 @@
         </div>
         <div class="row pb-3" v-for="team in this.leaderBoard">
             <div class="col-md-6 offset-md-3">
-                <div class="card" v-bind:class="{isChosen: team.id === loggedTeam.id}">
+                <div class="card" v-bind:class="{isChosen: team.id === loggedTeam.id && !darkMode, 'darkMode-card': team.id !== loggedTeam.id && darkMode, 'darkMode-answer-card': team.id === loggedTeam.id && darkMode}">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-1 pr-0">
@@ -46,6 +46,8 @@
         },
         computed: {
             ...mapGetters('team', ['teams', 'team']),
+            ...mapGetters('user', ['darkMode']),
+
             loggedTeam: {
                 get() {
                     return this.team;

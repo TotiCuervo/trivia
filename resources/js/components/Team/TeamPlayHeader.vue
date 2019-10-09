@@ -1,5 +1,5 @@
 <template>
-    <div class="row no-gutters" style="color:white; background-color:black">
+    <div class="row no-gutters" v-bind:class="{'darkMode-card': darkMode}" style="color:white; background-color:black">
         <div class="container">
             <div class="col-md-12 text-center">
                 <h1>{{this.loggedTeam.name}}</h1>
@@ -19,6 +19,7 @@
         },
         computed: {
             ...mapGetters('team', ['team']),
+            ...mapGetters('user', ['darkMode']),
             loggedTeam: {
                 get() {
                     return this.team;

@@ -65,21 +65,6 @@
                     <b-button block variant="primary" @click="loginOrRegister()" v-if="this.validCode === true && this.validName !== false && !this.clicked ">Let's Play</b-button>
                     <b-button block variant="primary" v-if="this.clicked"><b-spinner small label="Spinning"></b-spinner></b-button>
                     <b-button block disabled variant="primary" @click="loginOrRegister()" v-if="this.validCode === true && this.validName === false ">Let's Play</b-button>
-
-                </div>
-            </div>
-            <!--Dark Mode-->
-
-            <div style="bottom:0; position:fixed;">
-                <div class="row">
-                    <div class="col-12 text-center">
-                        <ToggleDarkMode></ToggleDarkMode>
-                    </div>
-                </div>
-            </div>
-            <div class="row pt-5">
-                <div class="col-4 offset-8 text-center">
-                    <ToggleDarkMode></ToggleDarkMode>
                 </div>
             </div>
         </div>
