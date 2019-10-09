@@ -35,6 +35,8 @@ return [
 
     'connections' => [
 
+//        for dev
+
         'sqlite' => [
             'driver' => 'sqlite',
             'url' => env('DATABASE_URL'),
@@ -92,6 +94,8 @@ return [
         ],
 
     ],
+
+
 
     /*
     |--------------------------------------------------------------------------
