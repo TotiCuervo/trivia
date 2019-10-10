@@ -85,6 +85,7 @@ class GKGame1TableSeeder extends Seeder
             'title' => 'What was the first product to have its barcode scanned at purchase?',
             'type' => 'Multiple-Choice'
         ]);
+//        answer
 
         DB::table('answers')->insert([
             'question_id' => 6,

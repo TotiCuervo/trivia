@@ -2,32 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f562f43b-05cf-4003-ae95-b369e5751c9b" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/js/components/DarkMode/HostDarkModeIcon.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/Question/QuestionProgressWarning.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Answer/HostAnswerReveal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Answer/HostAnswerReveal.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Answer/PlayRevealAnswer.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Answer/PlayRevealAnswer.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Answer/PlayRevealAnswerFIB.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Answer/PlayRevealAnswerFIB.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Answer/PlayRevealAnswerMC.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Answer/PlayRevealAnswerMC.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/DarkMode/DarkModeSwitch.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/DarkMode/DarkModeSwitch.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/DarkMode/ToggleDarkMode.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/DarkMode/ToggleDarkMode.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Host/HostHeader.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Host/HostHeader.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Host/HostInterface.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Host/HostInterface.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Host/HostLeaderBoard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Host/HostLeaderBoard.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Host/HostLobby.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Host/HostLobby.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Host/HostStartGame.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Host/HostStartGame.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Question/HostQuestion.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Question/HostQuestion.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Question/HostQuestionPreview.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Question/HostQuestionPreview.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Question/PlayQuestion/PlayQuestion.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Question/PlayQuestion/PlayQuestion.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Round/HostRoundPreview.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Round/HostRoundPreview.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Round/HostRoundReview.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Round/HostRoundReview.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Round/HostRoundReviewTeamRow.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Round/HostRoundReviewTeamRow.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Round/PlayRoundReview.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Round/PlayRoundReview.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Round/RoundDetails.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Round/RoundDetails.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Team/GameTeamIndex.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Team/GameTeamIndex.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeds/GKGame1TableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/GKGame1TableSeeder.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
