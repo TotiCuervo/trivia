@@ -1,18 +1,19 @@
 <template>
     <div>
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <div class="float-right">
-                    <button type="button" class="btn btn-success btn-lg mr-2" @click='onUpNext()'>{{this.upNext}}</button>
+        <!--SubHeader-->
+        <div class="row pb-3 pt-3 host-subHeader">
+            <div class="col-12">
+                <div class="d-flex align-items-center justify-content-center">
+
+                    <!--left-->
+                    <h6 class="mb-0 flex-grow-1">Leaderboard</h6>
+
+                    <!--right-->
+                    <b-button pill variant="primary" class="float-right" @click='onUpNext()'>{{upNext}}</b-button>
                 </div>
             </div>
         </div>
         <div class="row pt-3">
-            <div class="col-md-12 text-center">
-                <h3>Leaderboard:</h3>
-            </div>
-        </div>
-        <div class="row">
             <div class="col-md-8 offset-md-2">
                 <LeaderBoardIndex></LeaderBoardIndex>
             </div>

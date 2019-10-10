@@ -1,35 +1,33 @@
 <template>
     <div>
-        <!--Navigation-->
-        <div class="row">
-            <div class="col-12 text-center">
-                <div class="float-right">
-                    <button type="button" class="btn btn-success btn-lg mr-2" @click='startAnswerReveal()'>Question 1 Answer</button>
+        <!--SubHeader-->
+        <div class="row pb-3 pt-3 host-subHeader">
+            <div class="col-12">
+                <div class="d-flex align-items-center justify-content-between">
+
+                    <!--left-->
+                    <h5 class="m-0">Round Review</h5>
+
+                    <!--right-->
+                    <div class="flex-grow-1">
+                        <b-button pill class="float-right" variant="primary" @click='startAnswerReveal()'>Question 1 Answer</b-button>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <!--Content-->
         <!--Round Title-->
-        <div class="row pt-3">
-            <div class="col-12 text-center">
-                <h3>Round Review</h3>
-            </div>
-        </div>
         <!--Actual Round Review-->
-        <div class="row pb-5">
+        <div class="row pb-5 pt-3">
             <div class="col-sm-10 offset-sm-1 col-md-8 offset-md-2">
                 <div class="pt-3" v-for="question in this.questions.filter(x => x.round_id === this.rounds[playRoundPosition].id)">
                     <div class="trivalo-card card">
                         <div class="card-body">
-                            <!--Question order-->
-                            <div class="row">
-                                <div class="col-12">
-                                    <small class="text-muted">Question {{question.order_number}}</small>
-                                </div>
-                            </div>
                             <!--Question Title-->
                             <div class="row">
                                 <div class="col-12">
-                                    <h5 class="mb-0">{{question.title}}</h5>
+                                    <h6 class="mb-0"><b>Question {{question.order_number}}:</b> {{question.title}}</h6>
                                 </div>
                             </div>
                             <!--Question Possible Answers-->
@@ -50,7 +48,7 @@
                                 </div>
                             </div>
                             <!--Team Headers-->
-                            <div class="row pt-4">
+                            <div class="row pt-4 pb-4">
                                 <div class="col-4 col-md-3">
                                     <small class="text-muted">Team Name</small>
                                 </div>
@@ -68,8 +66,8 @@
                                 </div>
                             </div>
                             <!--Team information-->
-                            <div class="pt-3" v-for="team in teams" v-if="teams.length !== 0">
-                                <HostRoundReviewTeamRow :team="team" :question="question"></HostRoundReviewTeamRow>
+                            <div v-for="(team, index) in teams" v-if="teams.length !== 0">
+                                <HostRoundReviewTeamRow :team="team" :question="question" :index="index"></HostRoundReviewTeamRow>
                             </div>
                             <!--If there are no teams-->
                             <div class="row pt-3" v-if="teams.length === 0">

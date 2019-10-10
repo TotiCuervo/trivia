@@ -1,27 +1,24 @@
 <template>
     <div>
-        <!--Navigation-->
-        <div class="row">
-            <div class="col-5">
-                <div class="float-left">
-                    <p class="mb-0">Round {{this.rounds[this.playRoundPosition].order_number}}</p>
-                    <p class="mb-0">Question {{this.questions[this.playQuestionPosition].order_number}}</p>
-                    <p class="mb-0" v-if="this.questions[this.playQuestionPosition].type === 'Multiple-Choice'">Multiple Choice</p>
-                    <p class="mb-0" v-if="this.questions[this.playQuestionPosition].type === 'Fill-in-blank'">Fill In The Blank</p>
-                </div>
-            </div>
-            <div class="col-7">
-                <div class="float-right">
-                    <div v-if="this.timer === 0">
-                        <b-button pill variant="primary" @click='onUpNext()'>{{upNext}}</b-button>
-                    </div>
-                    <div v-else>
-                        <h4>Time Left: {{this.timer}}</h4>
-                    </div>
+        <!--Sub header-->
+        <div class="row pb-3 pt-3 host-subHeader">
+            <div class="col-12">
+                <div class="d-flex align-items-center justify-content-center justify-content-sm-between">
+                    <!--float-left-->
+<!--                    <h6 class="mb-0 float-left flex-grow-1 flex-sm-grow-0 float-md-0"><i class="fas fa-stopwatch"></i>: {{this.timer}}</h6>-->
+                    <span class="mb-0 float-left flex-grow-1 flex-sm-grow-0 float-md-0" v-b-tooltip.left title='Stopwatch for this question' tabindex="0"><span class="h4"><i class="fas fa-stopwatch"></i></span> <span class="h5"> {{this.timer}}</span></span>
+
+                    <!--stays in center-->
+                    <h6 class="mb-0 d-none d-sm-flex" v-if="this.questions[this.playQuestionPosition].type === 'Fill-in-blank'"> Round {{this.rounds[this.playRoundPosition].order_number}} Question {{this.questions[this.playQuestionPosition].order_number}} Fill In The Blank </h6>
+                    <h6 class="mb-0 d-none d-sm-flex" v-if="this.questions[this.playQuestionPosition].type === 'Multiple-Choice'"> Round {{this.rounds[this.playRoundPosition].order_number}} Question {{this.questions[this.playQuestionPosition].order_number}} Multiple Choice </h6>
+
+                    <!--float-right-->
+                    <b-button pill class="float-right" variant="primary" v-if="this.timer === 0" @click='onUpNext()'>{{upNext}}</b-button>
+                    <b-button disabled pill class="float-right" variant="primary" v-if="this.timer !== 0">{{upNext}}</b-button>
                 </div>
             </div>
         </div>
-        <div class="row pt-2">
+        <div class="row pt-4">
             <div class="col-md-6 offset-md-3">
                 <TeamAnswerCount></TeamAnswerCount>
             </div>
@@ -61,7 +58,7 @@
         mounted() {
 
             // this.timer = this.rounds[this.playRoundPosition].time;
-
+            this.decideUpNext();
             this.startTimer();
 
             Echo.join('game.'+this.gameCode.code)
@@ -83,6 +80,26 @@
                 });
         },
         methods: {
+            decideUpNext() {
+                if (this.playQuestionPosition + 1 === this.questions.length) {
+
+                    this.upNext = 'Round ' + this.rounds[this.playRoundPosition].order_number + ' Review'
+
+                } else {
+
+                    if (this.questions[this.playQuestionPosition + 1].round_id === this.rounds[this.playRoundPosition].id) {
+
+                        this.upNext = 'Question ' + this.questions[this.playQuestionPosition + 1].order_number;
+                        this.newQuestionPosition = this.playQuestionPosition + 1;
+
+                    } else {
+
+                        this.upNext = 'Round ' + this.rounds[this.playRoundPosition].order_number + ' Review'
+
+                    }
+
+                }
+            },
             startTimer() {
 
                 let vm = this;
@@ -95,17 +112,6 @@
 
                         vm.startTimer();
 
-                    } else {
-                        if (vm.playQuestionPosition + 1 === vm.questions.length) {
-                            vm.upNext = 'Round ' + vm.rounds[vm.playRoundPosition].order_number + ' Review'
-                        } else {
-                            if (vm.questions[vm.playQuestionPosition + 1].round_id === vm.rounds[vm.playRoundPosition].id) {
-                                vm.upNext = 'Question ' + vm.questions[vm.playQuestionPosition + 1].order_number;
-                                vm.newQuestionPosition = vm.playQuestionPosition + 1;
-                            } else {
-                                vm.upNext = 'Round ' + vm.rounds[vm.playRoundPosition].order_number + ' Review'
-                            }
-                        }
                     }
                 }, 1000);
             },

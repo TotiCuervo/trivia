@@ -5,13 +5,13 @@
             <div class="col-md-10 offset-md-1">
                 <div class="row">
                     <div class="col-md-12 text-center">
-                        <h5>Team Answer:</h5>
+                        <h5 v-bind:class="{'text-white': this.darkMode}">Team Answer:</h5>
                     </div>
                 </div>
                 <div class="row pt-3">
                     <div class="col-10 offset-1">
                         <!--if there is an answer-->
-                        <div class="fancy3 card" v-if="this.teamAnswer" style="padding: 50px 0px;" v-bind:class="{'bg-success text-white': this.teamAnswer.correct && revealAnswer,'bg-danger text-white': !this.teamAnswer.correct && revealAnswer}">
+                        <div class="fancy3 card" v-if="this.teamAnswer" style="padding: 50px 0px;" v-bind:class="{'darkMode-card text-white': this.darkMode,'bg-success text-white': this.teamAnswer.correct && revealAnswer,'bg-danger text-white': !this.teamAnswer.correct && revealAnswer}">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-12 text-center">
@@ -27,7 +27,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-12 text-center">
-                                        <h5 class="m-0">
+                                        <h5 class="m-0" v-bind:class="{'text-white': this.darkMode}">
                                             No Answer :/
                                         </h5>
                                     </div>
@@ -38,7 +38,7 @@
                 </div>
             </div>
         </div>
-        <div class="row pt-5" v-if="revealAnswer">
+        <div class="row pt-5" v-if="revealAnswer" v-bind:class="{'text-white': this.darkMode}">
             <div class="col-md-12 text-center">
                 <h5>Correct Answers:</h5>
             </div>
@@ -79,6 +79,8 @@
             ...mapGetters('game', ['gameCode']),
             ...mapGetters('team', ['teamAnswers']),
             ...mapGetters('play', ['roundPosition', 'questionPosition', 'page', 'myAnswers']),
+            ...mapGetters('user', ['darkMode']),
+
         },
         props: ['revealAnswer'],
         watch: {

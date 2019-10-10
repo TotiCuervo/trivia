@@ -1,8 +1,8 @@
 <template>
     <div>
-        <div class="row pt-3 pb-3">
+        <div class="row pt-1 pb-3">
             <div class="col-md-12 text-center">
-                <h5>This Trivia game can be joined using this code: <u><b>{{this.gameCode.code}}</b></u></h5>
+                <h3>Teams:</h3>
             </div>
         </div>
         <div class="row pt-3">

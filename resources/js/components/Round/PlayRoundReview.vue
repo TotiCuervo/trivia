@@ -72,7 +72,7 @@
                                 <button type="button" class="btn btn-block" v-bind:class="powerUpButtonBind()" v-if="this.clickedPowerUp !==''" @click="clickedNo()">No</button>
                             </div>
                             <div class="col-12" v-if="undo">
-                                <button type="button" class="btn btn-dark btn-block" @click="undoPowerUp()">Undo</button>
+                                <button type="button" class="btn btn-block" v-bind:class="powerUpButtonBind()" @click="undoPowerUp()">Undo</button>
                             </div>
                         </div>
                     </div>

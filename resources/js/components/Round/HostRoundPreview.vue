@@ -1,6 +1,7 @@
 <template>
     <div>
-        <div class="row">
+        <!--Sub Header-->
+        <div class="row pb-3 pt-3 host-subHeader">
             <div class="col-md-12">
                 <div class="float-left">
                     <b-button pill variant="outline-primary" @click='goToStartGame()'>Select Round</b-button>
@@ -10,19 +11,31 @@
                 </div>
             </div>
         </div>
+
+        <!--Content-->
+
+        <!--Round Header-->
         <div class="row pt-4">
             <div class="col-md-12 text-center">
                 <h3>Round {{this.rounds[this.playRoundPosition].order_number}}</h3>
             </div>
         </div>
+        <!--Round Timer-->
+        <div class="row pb-2" v-if="this.rounds[this.playRoundPosition].title">
+            <div class="col-md-12 text-center">
+                <h3>{{this.rounds[this.playRoundPosition].title}}</h3>
+            </div>
+        </div>
+        <!--Round Timer-->
         <div class="row pb-2">
             <div class="col-md-12 text-center">
-                <h3 v-if="this.rounds[this.playRoundPosition].time">{{this.rounds[this.playRoundPosition].time}}s Questions</h3>
+                <h3 v-if="this.rounds[this.playRoundPosition].time">{{this.rounds[this.playRoundPosition].time}} second questions</h3>
                 <h3 v-else>No Time Limit</h3>
             </div>
         </div>
-        <div class="row pt-3" v-for="question in this.questions">
-            <div class="col-md-12 text-center" v-if="question.round_id === rounds[playRoundPosition].id">
+        <!--Round Questions-->
+        <div class="row pt-3" v-for="question in this.questions.filter(x => x.round_id === rounds[playRoundPosition].id)">
+            <div class="col-md-12 text-center">
                 <h3>{{question.order_number}}. {{question.title}}</h3>
             </div>
         </div>

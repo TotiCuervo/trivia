@@ -47,6 +47,9 @@
                     <HostChangeAnswer :team="team" :question="question"></HostChangeAnswer>
                 </div>
             </div>
+            <div class="col-12" v-if="this.index + 1 !== this.teams.length">
+                <hr>
+            </div>
         </div>
 
         <!--For md and larger-->
@@ -103,6 +106,9 @@
                     <HostChangeAnswer :team="team" :question="question"></HostChangeAnswer>
                 </div>
             </div>
+            <div class="col-12" v-if="this.index + 1 !== this.teams.length">
+                <hr>
+            </div>
         </div>
     </div>
 </template>
@@ -122,7 +128,7 @@
         methods: {
 
         },
-        props: ['team', 'question'],
+        props: ['team', 'question', 'index'],
         computed: {
             ...mapGetters('question', ['questions']),
             ...mapGetters('team', ['teams', 'teamAnswers']),
