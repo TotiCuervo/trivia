@@ -1,16 +1,8 @@
 <template>
-    <div>
-        <a class="dropdown-item dropdown-blue triv-nav-dropdown clicker" @click="toggleDM()">
-        <span class="" v-show="!darkMode">
-            <i class="fas fa-sun"></i>
-        Light
-        </span>
-            <span class="" v-show="darkMode">
-            <i class="fas fa-moon"></i>
-            Dark
-        </span>
-        </a>
-    </div>
+    <a class="dropdown-item dropdown-blue triv-nav-dropdown clicker" @click="toggleDM()">
+        <span class="" v-show="!darkMode"><i class="fas fa-sun"></i>Light</span>
+        <span class="" v-show="darkMode"><i class="fas fa-moon"></i>Dark</span>
+    </a>
 </template>
 
 <script>

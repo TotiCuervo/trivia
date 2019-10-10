@@ -1,28 +1,42 @@
 <template>
     <div>
-        <!--Navigation-->
-        <div class="row">
-            <div class="col-5">
-                <div class="float-left">
-                    <small>Round {{this.rounds[this.playRoundPosition].order_number}}</small>
-                    <p class="mb-0">Question {{this.questions[this.playQuestionPosition].order_number}}</p>
-                    <h5 class="mb-0">{{this.questions[this.playQuestionPosition].type}}</h5>
+        <!--SubHeader-->
+        <div class="row pb-3 pt-3 host-subHeader">
+            <div class="col-12">
+                <div class="d-flex align-items-center justify-content-between">
+
+                    <!--left-->
+                    <h5 class="mb-0">Answer Reveal</h5>
+
+                    <!--Center-->
+                    <h6 class="mb-0 d-none d-sm-flex" v-if="this.questions[this.playQuestionPosition].type === 'Fill-in-blank'"> Round {{this.rounds[this.playRoundPosition].order_number}} Question {{this.questions[this.playQuestionPosition].order_number}} Fill In The Blank </h6>
+                    <h6 class="mb-0 d-none d-sm-flex" v-if="this.questions[this.playQuestionPosition].type === 'Multiple-Choice'"> Round {{this.rounds[this.playRoundPosition].order_number}} Question {{this.questions[this.playQuestionPosition].order_number}} Multiple Choice </h6>
+
+                    <!--right-->
+                    <b-button pill variant="primary" @click='onUpNext()' v-if="this.revealAnswer">{{upNext}}</b-button>
+
+                    <span v-b-tooltip.left title='Reveal answer to continue' tabindex="0" v-else>
+                        <b-button pill  disabled variant="primary">{{upNext}}</b-button>
+                    </span>
                 </div>
             </div>
-            <div class="col-7">
-                <div class="float-right">
-                    <div v-if="this.revealAnswer === true">
-                        <button type="button" class="btn btn-success btn-lg mr-2" @click='onUpNext()'>{{upNext}}</button>
+        </div>
+
+        <!--Question Title-->
+        <div class="row pt-5">
+            <div class="col-md-6 offset-md-3 pt-3">
+                <div class="hostQuestion-card card">
+                    <div class="card-body">
+                        <div class="row p-5">
+                            <div class="col-md-12 text-center">
+                                <h4 class="m-0">{{this.questions[this.playQuestionPosition].title}}</h4>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!--Question Title-->
-        <div class="row pt-3">
-            <div class="col-md-12 pt-5 text-center">
-                <h2>{{this.questions[this.playQuestionPosition].title}}</h2>
-            </div>
-        </div>
+
         <!--Multiple Choice Optional-->
         <div class="pt-3" v-if="this.questions[this.playQuestionPosition].type === 'Multiple-Choice'">
             <HostMultipleChoiceAnswerOptions :revealAnswer="revealAnswer"></HostMultipleChoiceAnswerOptions>
@@ -30,9 +44,9 @@
         <!--Fill In The Blank-->
         <div v-if="revealAnswer === true && this.questions[this.playQuestionPosition].type === 'Fill-in-blank' ">
             <div class="col-md-12 text-center pt-5">
-                <div class="row pb-4">
+                <div class="row pb-2">
                     <div class="col-md-12">
-                        <h2>Answers:</h2>
+                        <h5>Answer(s):</h5>
                     </div>
                 </div>
                 <div class="row pb-3" v-for="answer in this.answers.filter(x => x.question_id === questions[playQuestionPosition].id)">
@@ -41,7 +55,7 @@
                             <div class="card-body p-2">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <h4 class="m-0">{{answer.title}}</h4>
+                                        <h5 class="m-0">{{answer.title}}</h5>
                                     </div>
                                 </div>
                             </div>
@@ -53,7 +67,7 @@
         <!--Answer Reveal-->
         <div class="row pt-3">
             <!--Reveal Button-->
-            <div class="col-md-8 offset-md-2 text-center pt-5" v-if="revealAnswer === false">
+            <div class="col-md-6 offset-md-3 text-center pt-3" v-if="revealAnswer === false">
                 <button type="button" class="btn btn-success btn-lg btn-block" @click="showAnswer">Reveal Answer</button>
                 <small class="form-text text-muted">Press this when you are ready to show the Teams the correct answer</small>
             </div>
@@ -73,6 +87,7 @@
             }
         },
         mounted() {
+            this.decideUpNext();
 
             Echo.join('game.'+this.gameCode.code)
                 .listen('NewTeam', (e) => {
@@ -95,7 +110,22 @@
 
         },
         methods: {
+            decideUpNext() {
+                if (this.playQuestionPosition + 1 === this.questions.length) {
+                    this.newQuestionPosition = '';
+                    this.upNext = 'Leaderboard';
+                } else {
 
+                    if (this.questions[this.playQuestionPosition + 1].round_id === this.rounds[this.playRoundPosition].id) {
+                        this.upNext = 'Question ' + this.questions[this.playQuestionPosition + 1].order_number + ' Answer';
+                        this.newQuestionPosition = this.playQuestionPosition + 1;
+                    } else {
+                        this.newQuestionPosition = '';
+                        this.upNext = 'Leaderboard';
+                    }
+
+                }
+            },
             onUpNext() {
 
                 this.revealAnswer = false;
@@ -123,21 +153,6 @@
                 axios.post('/api/host/game/'+ this.gameCode.code +'/question/'+ this.questionPosition +'/revealAnswer');
 
                 this.revealAnswer = true;
-
-                if (this.playQuestionPosition + 1 === this.questions.length) {
-                    this.newQuestionPosition = '';
-                    this.upNext = 'Leaderboard';
-                } else {
-
-                    if (this.questions[this.playQuestionPosition + 1].round_id === this.rounds[this.playRoundPosition].id) {
-                        this.upNext = 'Question ' + this.questions[this.playQuestionPosition + 1].order_number + ' Answer';
-                        this.newQuestionPosition = this.playQuestionPosition + 1;
-                    } else {
-                        this.newQuestionPosition = '';
-                        this.upNext = 'Leaderboard';
-                    }
-
-                }
             }
         },
         computed: {
@@ -171,6 +186,11 @@
                 }
             }
         },
+        watch: {
+            playQuestionPosition: function() {
+                this.decideUpNext();
+            }
+        }
     }
 </script>
 

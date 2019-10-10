@@ -2,28 +2,35 @@
     <div v-if="this.game_code">
         <HostHeader></HostHeader>
 
-        <div class="pr-3 pl-3 pt-3">
+        <div class="pr-3 pl-3">
             <HostLobby
-                    v-if="currentPage === 'HostLobby'">
+                v-if="currentPage === 'HostLobby'">
             </HostLobby>
+
             <HostStartGame
                     v-if="currentPage === 'HostStartGame'">
             </HostStartGame>
+
             <HostRoundPreview
                     v-if="currentPage === 'HostRoundPreview'">
             </HostRoundPreview>
+
             <HostQuestionPreview
                     v-if="currentPage === 'HostQuestionPreview'">
             </HostQuestionPreview>
+
             <HostQuestion
                     v-if="currentPage === 'HostQuestion'">
             </HostQuestion>
+
             <HostRoundReview
                     v-if="currentPage === 'HostRoundReview'">
             </HostRoundReview>
+
             <HostAnswerReveal
                     v-if="currentPage === 'HostAnswerReveal'">
             </HostAnswerReveal>
+
             <HostLeaderBoard
                     v-if="currentPage === 'HostLeaderBoard'"
                     @gameOver="onGameOver">
@@ -57,6 +64,8 @@
             }
         },
         mounted() {
+            document.querySelector('body').className = 'host-background';
+
 
             //New Version please refer to old commits to find past version
             //Gets the parameters from the route

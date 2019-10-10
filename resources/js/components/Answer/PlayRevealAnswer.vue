@@ -54,13 +54,17 @@
             }
         },
         mounted() {
-            this.show_loading = false;
+            this.runTransitions();
+        },
+        methods: {
+            runTransitions() {
+                this.show_loading = false;
 
-            let vm = this;
-            setTimeout(function(){
-                vm.show_answer = true;
-            }, 2000);
-
+                let vm = this;
+                setTimeout(function(){
+                    vm.show_answer = true;
+                }, 2000);
+            },
         },
         computed: {
             ...mapGetters('round', ['rounds']),
@@ -76,6 +80,8 @@
             questionPosition: function () {
                 this.show_loading = true;
                 this.show_answer = false;
+                this.runTransitions();
+
             },
         }
 

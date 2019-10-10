@@ -572,13 +572,6 @@ background: linear-gradient(to right, #0fa0ff, #0FABFF); /* W3C, IE 10+/ Edge, F
 }
 
 
-/*Transitions*/
-
-.trans-1 {
-    transition: 1s;
-}
-
-
 /*Bootstrap overrides*/
 
 .form-control {
@@ -897,7 +890,12 @@ background: linear-gradient(to right, #0fa0ff, #0FABFF); /* W3C, IE 10+/ Edge, F
     background-color: #8EACC5 !important;
 }
 
-/*transitions*/
+/*Transitions*/
+
+.trans-1 {
+    transition: 1s;
+}
+
 .bounce-enter-active {
     animation: bounce-in 1.5s;
 }
@@ -975,6 +973,22 @@ background: linear-gradient(to right, #0fa0ff, #0FABFF); /* W3C, IE 10+/ Edge, F
 
 .darkMode.onoffswitch-label {
     border-color: white !important;
+}
+
+/*Host Interface*/
+
+.host-header {
+    background: rgb(69, 132, 246);
+    color:white;
+}
+
+.host-subHeader {
+    background:white;
+    box-shadow: 0 2px 4px 0 hsla(0, 0%, 0%, 0.18);
+}
+
+.host-background {
+    background: rgb(240, 246, 249);
 }
 
 

@@ -42,7 +42,7 @@
 
                             </b-input>
                             <b-form-invalid-feedback :state="validation">
-                                Cannot be longer than 20 characters.
+                                Cannot be longer than 25 characters.
                             </b-form-invalid-feedback>
                         </b-form>
                     </div>
@@ -208,7 +208,7 @@
             validation() {
 
                 if (this.round_Title !== null) {
-                    return this.round_Title.length < 20
+                    return this.round_Title.length < 26
                 }
 
             }
