@@ -1,16 +1,6 @@
 <template>
     <div>
         <router-view></router-view>
-        <!--Dark Mode-->
-        <div class="fixed-bottom">
-            <div class="row">
-                <div class="col-4 offset-8">
-                    <div class="float-right pr-1">
-                        <DarkModeSwitch></DarkModeSwitch>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </template>
 

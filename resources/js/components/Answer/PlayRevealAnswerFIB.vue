@@ -23,7 +23,7 @@
                             </div>
                         </div>
                         <!--if there is no answer-->
-                        <div class="fancy3 card" v-else style="padding: 50px 0px;" v-bind:class="{'bg-danger text-white': revealAnswer}">
+                        <div class="fancy3 card" v-else style="padding: 50px 0px;" v-bind:class="{'darkMode-card text-white': this.darkMode, 'bg-danger text-white': revealAnswer}">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-12 text-center">

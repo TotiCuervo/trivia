@@ -23,6 +23,7 @@
             <PlayQuestion
                     v-if="this.currentPage === 'PlayQuestion'">
             </PlayQuestion>
+            <PlayGameOver v-if="this.currentPage === 'PlayGameOver'"></PlayGameOver>
         </div>
     </div>
 </template>
@@ -48,7 +49,7 @@
 
                 Echo.join('game.' + this.loggedTeam.gameCode)
                     .listen('NextStep', (e) => {
-                        console.log('got the page');
+                        // console.log('got the page');
                         console.log(e);
                         this.playRoundPosition = e.roundPosition;
                         this.playQuestionPosition = e.questionPosition;
@@ -73,7 +74,7 @@
                         }
 
                         if (!(e.teams.find(x => x.id === this.loggedTeam.id))) {
-                            console.log('you were logged off');
+                            // console.log('you were logged off');
                             this.currentPage = '';
                             this.playQuestionPosition = '';
                             this.playRoundPosition = '';
@@ -82,7 +83,7 @@
 
                     })
                     .listen('AreYouThere', (e) => {
-                        console.log("I am here");
+                        // console.log("I am here");
                         axios.post('/api/team/' + this.team.id + '/iAmHere');
                     });
             }

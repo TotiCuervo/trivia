@@ -15,6 +15,11 @@
                 <h5>This game will begin shortly</h5>
             </div>
         </div>
+        <div class="row pt-3">
+            <div class="col-md-12 text-center">
+                <h5>Want to play in Dark Mode? Double tap your team name to activate it.</h5>
+            </div>
+        </div>
     </div>
 </template>
 

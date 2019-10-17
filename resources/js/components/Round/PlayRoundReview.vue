@@ -22,7 +22,7 @@
                 <!--Round Header-->
                 <div class="row pt-3">
                     <div class="col-md-12 text-center">
-                        <h3>Round {{this.rounds[this.roundPosition].order_number}} Answers:</h3>
+                        <h5 class="m-0">Round {{this.rounds[this.roundPosition].order_number}} Answers:</h5>
                     </div>
                 </div>
                 <!--Question index-->
@@ -61,15 +61,15 @@
                                     {{clickedPowerUp}} points this round?
                                 </h5>
                             </div>
-                            <div class="col-6 pr-1" v-if="!undo">
+                            <div class="col-sm-6 pb-3" v-if="!undo">
                                 <button type="button" class="btn btn-block" v-bind:class="powerUpButtonBind()" v-if="this.clickedPowerUp === '' && !(this.double)" @click="setPowerUp('Double')">2X Points</button>
                                 <button type="button" class="btn btn-block" v-bind:class="powerUpButtonBind()" disabled v-else-if="this.clickedPowerUp === '' && this.double">2X Used</button>
-                                <button type="button" class="btn btn-block" v-bind:class="powerUpButtonBind()" v-else-if="this.clickedPowerUp !== ''" @click="updatePowerUp">Yes</button>
+                                <button type="button" class="btn btn-block" v-bind:class="{'btn-dark': !this.darkMode,'btn-primary triv-blue darkMode darkMode-text-white': this.darkMode }" v-else-if="this.clickedPowerUp !== ''" @click="updatePowerUp">Yes</button>
                             </div>
-                            <div class="col-6 pl-1" v-if="!undo">
+                            <div class="col-sm-6" v-if="!undo">
                                 <button type="button" class="btn btn-block" v-bind:class="powerUpButtonBind()" v-if="this.clickedPowerUp ==='' && !(this.triple)" @click="setPowerUp('Triple')">3X Points</button>
                                 <button type="button" class="btn btn-block" v-bind:class="powerUpButtonBind()" disabled v-if="this.clickedPowerUp ==='' && this.triple">3X Points</button>
-                                <button type="button" class="btn btn-block" v-bind:class="powerUpButtonBind()" v-if="this.clickedPowerUp !==''" @click="clickedNo()">No</button>
+                                <button type="button" class="btn btn-block" v-bind:class="{'btn-outline-dark': !this.darkMode,'btn-outline-primary triv-outline-blue darkMode darkMode-text-white': this.darkMode }" v-if="this.clickedPowerUp !==''" @click="clickedNo()">No</button>
                             </div>
                             <div class="col-12" v-if="undo">
                                 <button type="button" class="btn btn-block" v-bind:class="powerUpButtonBind()" @click="undoPowerUp()">Undo</button>

@@ -543,6 +543,18 @@ background: linear-gradient(to right, #0fa0ff, #0FABFF); /* W3C, IE 10+/ Edge, F
 
 }
 
+.color-gold {
+    color: gold;
+}
+
+.color-silver {
+    color: silver;
+}
+
+.color-bronze {
+    color: saddlebrown;
+}
+
 .color-black {
     color: black;
 }
