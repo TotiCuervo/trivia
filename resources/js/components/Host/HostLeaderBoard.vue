@@ -42,14 +42,20 @@
         methods: {
             onUpNext() {
                 if (this.upNext === 'Game Over') {
-                    this.currentPage = "HostLobby";
+                    axios.post('/api/host/'+ this.gameCode.code + '/round/' + this.playRoundPosition +'/question/' + this.playQuestionPosition + '/currentPage/' + 'PlayGameOver')
+                        .then (response => {
+                            console.log('sending this time:');
+                            console.log(this.timer);
+
+                            axios.post('/api/host/'+ this.gameCode.code + '/team/' + e.team.id +'/time/'+this.timer)
+                        });
+                    this.currentPage = "HostGameOver";
                     this.playRoundPosition = 0;
                     this.playQuestionPosition = 0;
                 } else {
                     this.playRoundPosition = this.newRoundPosition;
                     this.playQuestionPosition = 0;
                     this.currentPage = "HostRoundPreview";
-                    // this.$emit('goToDestination', this.newRoundPosition, 0, 'HostRoundPreview');
                 }
             }
         },

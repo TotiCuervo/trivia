@@ -13,7 +13,7 @@
                 <div class="col-md-4 offset-md-4" v-if="this.validCode !== true">
                     <label>Play Code:</label>
                     <b-form-input
-                            v-model="gameCode"
+                            v-model.trim="gameCode"
                             :state=validCode
                             id="play-code"
                             placeholder="Enter your Play Code"
@@ -65,6 +65,16 @@
                     <b-button block variant="primary" @click="loginOrRegister()" v-if="this.validCode === true && this.validName !== false && !this.clicked ">Let's Play</b-button>
                     <b-button block variant="primary" v-if="this.clicked"><b-spinner small label="Spinning"></b-spinner></b-button>
                     <b-button block disabled variant="primary" @click="loginOrRegister()" v-if="this.validCode === true && this.validName === false ">Let's Play</b-button>
+                </div>
+            </div>
+            <!--Dark Mode-->
+            <div class="fixed-bottom">
+                <div class="row">
+                    <div class="col-4 offset-8">
+                        <div class="float-right pr-1">
+                            <DarkModeSwitch></DarkModeSwitch>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

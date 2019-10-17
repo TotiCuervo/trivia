@@ -9,7 +9,7 @@
             <div class="col-12 col-md-3 order-3 order-md-2 text-center text-md-left">
                 <p class="mb-0 mt-1">Game Code: <u><b>{{this.gameCode.code}}</b></u></p>
             </div>
-            <div class="col-12 col-sm-4 float-right offset-md-0 order-1 order-md-3">
+            <div class="col-12 col-md-4 float-right offset-md-0 order-1 order-md-3">
 <!--                <HostDarkModeIcon></HostDarkModeIcon>-->
                 <span class="fa-stack fa-1 first-white then-black clicker float-right pr-2"
                           style="vertical-align: top;"

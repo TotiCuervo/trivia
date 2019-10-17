@@ -35,6 +35,8 @@
                     v-if="currentPage === 'HostLeaderBoard'"
                     @gameOver="onGameOver">
             </HostLeaderBoard>
+
+            <HostGameOver v-if="currentPage === 'HostGameOver'"></HostGameOver>
         </div>
 
         <!--Modals-->

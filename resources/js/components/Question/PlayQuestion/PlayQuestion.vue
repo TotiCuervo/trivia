@@ -38,8 +38,6 @@
                     <h5>Your answer has been submitted!</h5>
                 </div>
             </div>
-            <!--Progress Warning-->
-            <QuestionProgressWarning></QuestionProgressWarning>
         </div>
     </div>
 </template>

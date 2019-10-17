@@ -2,9 +2,6 @@
     <div>
         <TeamPlayHeader></TeamPlayHeader>
         <PlayHomeScreen v-if="this.game.name !== ''"></PlayHomeScreen>
-        <!--<div class="btn btn-primary" @click="logout()">Logout</div>-->
-        <!--<div class="btn btn-primary" @click="leaving()">Logout2</div>-->
-
     </div>
 </template>
 
