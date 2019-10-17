@@ -1,5 +1,5 @@
 <template>
-    <div class="row no-gutters clicker" v-bind:class="{'darkMode-card': darkMode}" style="color:white; background-color:black" @dblclick="toggleDM()">
+    <div class="row no-gutters clicker" v-bind:class="{'darkMode-card': darkMode}" style="color:white; background-color:black" @click="toggleDM()">
         <div class="container">
             <div class="col-md-12 text-center">
                 <h1>{{this.loggedTeam.name}}</h1>

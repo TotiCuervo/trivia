@@ -17,7 +17,7 @@
         </div>
         <div class="row pt-3">
             <div class="col-md-12 text-center">
-                <h5>Want to play in Dark Mode? Double tap your team name to activate it.</h5>
+                <h5>Want to play in Dark Mode? Tap your team name to activate Dark Mode!</h5>
             </div>
         </div>
     </div>
