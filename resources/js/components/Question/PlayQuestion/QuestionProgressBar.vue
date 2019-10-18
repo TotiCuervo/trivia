@@ -27,11 +27,15 @@
             }
         },
         mounted() {
+            let vm = this;
+
+            // let timer = setTimeout(function() {
+            //     vm.startTimer();
+            // }, 5000);
             this.startTimer();
 
             Echo.join('game.'+this.team.gameCode)
                 .listen('StartQuestion', (e) => {
-                    console.log('just got new question');
                     this.variantColor = 'success';
                     this.endQuestion = false;
                     this.answer = '';
@@ -66,8 +70,6 @@
                         clearInterval(vm.timer);
 
                         vm.$emit('endTheQuestion');
-                        // vm.endQuestion = true;
-                        // this.submitAnswer();
                     }
                 }, 1000);
             },

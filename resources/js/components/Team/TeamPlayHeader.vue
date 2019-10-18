@@ -21,7 +21,7 @@
             ...mapActions('user', ['toggleDarkMode']),
             toggleDM() {
                 this.toggleDarkMode();
-                document.querySelector('body').className = (this.darkMode) ? 'trivalo-darkMode' : 'host-background';
+                document.querySelector('body').className = (this.darkMode) ? 'trivalo-darkMode' : 'trivalo-background';
             }
         },
         computed: {

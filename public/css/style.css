@@ -747,6 +747,10 @@ background: linear-gradient(to right, #0fa0ff, #0FABFF); /* W3C, IE 10+/ Edge, F
 
 /*Trivalo Customs*/
 
+.tf {
+    font-family: 'Pacifico', cursive;
+}
+
 .triv-blue {
     background-color: #0FABFF!important;
     border-color: #0FABFF !important;
@@ -780,6 +784,50 @@ background: linear-gradient(to right, #0fa0ff, #0FABFF); /* W3C, IE 10+/ Edge, F
     box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2) !important;
     transition: 0.4s;
     color: white !important;
+}
+
+.correct-answer {
+    display: inline-block;
+    font-weight: 200;
+    color: green;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    border: 10px solid green;
+    padding: 0.35rem 0.75em;
+    font-size: 2rem;
+    line-height: 1.5;
+    border-radius: 0.90rem;
+    font-family: 'Pacifico', cursive;
+    margin-bottom: -43px;
+    margin-left: 247px;
+    transform: rotate(-16deg);
+}
+
+.wrong-answer {
+    display: inline-block;
+    font-weight: 200;
+    color: #ed5565;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    border: 10px solid #ed5565;
+    padding: 0.35rem 0.75em;
+    font-size: 2rem;
+    line-height: 1.5;
+    border-radius: 0.90rem;
+    font-family: 'Pacifico', cursive;
+    margin-bottom: -43px;
+    margin-left: 247px;
+    transform: rotate(-16deg);
 }
 
 /*DarkMode*/
@@ -933,6 +981,31 @@ background: linear-gradient(to right, #0fa0ff, #0FABFF); /* W3C, IE 10+/ Edge, F
     opacity: 0;
 }
 
+.fade2-enter-active, .fade2-leave-active {
+    transition: opacity 2s;
+}
+.fade2-enter, .fade2-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+}
+
+.flip-enter-active, .flip-leave-active {
+    transition: all 0.2s;
+}
+
+.flip-enter {
+    transform: rotateX(-90deg);
+
+}
+
+.flip-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    transform: rotateX(90deg);
+}
+
+.scene {
+    perspective: 600px;
+    transform-style: preserve-3d;
+}
+
 /*Dark Mode Toggle*/
 .onoffswitch {
     position: relative; width: 90px;
@@ -1002,5 +1075,89 @@ background: linear-gradient(to right, #0fa0ff, #0FABFF); /* W3C, IE 10+/ Edge, F
 .host-background {
     background: rgb(240, 246, 249);
 }
+
+
+/*SVG animations*/
+
+.path {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: dash 3hos linear alternate infinite;
+}
+
+@keyframes dash {
+    from {
+        stroke-dashoffset: 1000;
+    }
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+.cls-1, .cls-11, .cls-13, .cls-15, .cls-3, .cls-7, .cls-9 {
+    fill: none;
+}
+
+.cls-2 {
+    clip-path: url(#clip-path);
+}
+
+.cls-11, .cls-13, .cls-15, .cls-3, .cls-7, .cls-9 {
+    stroke: #000;
+}
+
+.cls-11, .cls-3 {
+    stroke-miterlimit: 10;
+}
+
+.cls-3 {
+    stroke-width: 85px;
+}
+
+.cls-4 {
+    clip-path: url(#clip-path-2);
+}
+
+.cls-5 {
+    clip-path: url(#clip-path-3);
+}
+
+.cls-6 {
+    clip-path: url(#clip-path-4);
+}
+
+.cls-7 {
+    stroke-width: 78px;
+}
+
+.cls-8 {
+    clip-path: url(#clip-path-5);
+}
+
+.cls-9 {
+    stroke-width: 70px;
+}
+
+.cls-10 {
+    clip-path: url(#clip-path-6);
+}
+
+.cls-11, .cls-15 {
+    stroke-width: 67px;
+}
+
+.cls-12 {
+    clip-path: url(#clip-path-7);
+}
+
+.cls-13 {
+    stroke-width: 87px;
+}
+
+.cls-14 {
+    clip-path: url(#clip-path-8);
+}
+
+
 
 
