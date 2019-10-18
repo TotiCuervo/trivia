@@ -24,6 +24,16 @@
                 <GameTeamIndex :col="3"></GameTeamIndex>
             </div>
         </div>
+        <div class="row pt-5">
+            <div class="col-12 text-center">
+                <div class="correct-answer">Correct</div>
+            </div>
+        </div>
+        <div class="row pt-5">
+            <div class="col-12 text-center">
+                <div class="wrong-answer">Wrong</div>
+            </div>
+        </div>
     </div>
 </template>
 

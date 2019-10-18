@@ -4,9 +4,7 @@
 
     <main class="">
         <div id="app">
-            <div class="">
-                @yield('content')
-            </div>
+            @yield('content')
         </div>
     </main>
 

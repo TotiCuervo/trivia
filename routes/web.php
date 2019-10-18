@@ -12,12 +12,12 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/homePage', function () {
     return view('homePage');
 });
+
+//Route::get('/homePage', function () {
+//    return view('homePage');
+//});
 
 //Route::get('/play', 'PlayController@index')->name('play');
 

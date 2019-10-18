@@ -63,7 +63,7 @@
                 <div class="col-md-4 offset-md-4">
                     <b-button block variant="primary" @click="checkPlayCode()" v-if="this.validCode !== true">Check Code</b-button>
                     <b-button block variant="primary" @click="loginOrRegister()" v-if="this.validCode === true && this.validName !== false && !this.clicked ">Let's Play</b-button>
-                    <b-button block variant="primary" v-if="this.clicked"><b-spinner small label="Spinning"></b-spinner></b-button>
+                    <b-button block variant="primary" v-show="this.clicked"><b-spinner small label="Spinning"></b-spinner></b-button>
                     <b-button block disabled variant="primary" @click="loginOrRegister()" v-if="this.validCode === true && this.validName === false ">Let's Play</b-button>
                 </div>
             </div>

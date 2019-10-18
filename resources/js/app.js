@@ -21,6 +21,11 @@ Vue.use(CircularCountDownTimer);
 
 Vue.use(BootstrapVue);
 
+import 'vue-loaders/dist/vue-loaders.css';
+import VueLoaders from 'vue-loaders';
+
+Vue.use(VueLoaders);
+
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 

@@ -6,8 +6,6 @@
                 <div class="d-flex align-items-center justify-content-center justify-content-sm-between">
                     <!--float-left-->
                     <span class="mb-0 float-left flex-grow-1 flex-sm-grow-0 float-md-0"><span class="h4"><i class="fas fa-stopwatch"></i></span> <span class="h5"> {{this.timer}}</span></span>
-<!--                    <h6 class="mb-0 float-left flex-grow-1 flex-sm-grow-0 float-md-0"><i class="fas fa-stopwatch"></i>: {{this.timer}}</h6>-->
-
                     <!--stays in center-->
                     <h6 class="mb-0 d-none d-sm-flex" v-if="this.questions[this.playQuestionPosition].type === 'Fill-in-blank'"> Round {{this.rounds[this.playRoundPosition].order_number}} Question {{this.questions[this.playQuestionPosition].order_number}} Fill In The Blank </h6>
                     <h6 class="mb-0 d-none d-sm-flex" v-if="this.questions[this.playQuestionPosition].type === 'Multiple-Choice'"> Round {{this.rounds[this.playRoundPosition].order_number}} Question {{this.questions[this.playQuestionPosition].order_number}} Multiple Choice </h6>
@@ -45,7 +43,7 @@
         </div>
         <div class="row pt-1">
             <div class="col-12 text-center">
-                <h4>(Players will see question when loading is done)</h4>
+                <h6>(Players will see question when loading is done)</h6>
             </div>
         </div>
     </div>

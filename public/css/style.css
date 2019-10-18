@@ -747,6 +747,10 @@ background: linear-gradient(to right, #0fa0ff, #0FABFF); /* W3C, IE 10+/ Edge, F
 
 /*Trivalo Customs*/
 
+.tf {
+    font-family: 'Pacifico', cursive;
+}
+
 .triv-blue {
     background-color: #0FABFF!important;
     border-color: #0FABFF !important;
@@ -780,6 +784,44 @@ background: linear-gradient(to right, #0fa0ff, #0FABFF); /* W3C, IE 10+/ Edge, F
     box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2) !important;
     transition: 0.4s;
     color: white !important;
+}
+
+.correct-answer {
+    display: inline-block;
+    font-weight: 200;
+    color: green;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    border: 10px solid green;
+    padding: 0.35rem 0.75em;
+    font-size: 2rem;
+    line-height: 1.5;
+    border-radius: 0.90rem;
+    font-family: 'Pacifico', cursive;
+}
+
+.wrong-answer {
+    display: inline-block;
+    font-weight: 200;
+    color: #ed5565;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    border: 10px solid #ed5565;
+    padding: 0.35rem 0.75em;
+    font-size: 2rem;
+    line-height: 1.5;
+    border-radius: 0.90rem;
+    font-family: 'Pacifico', cursive;
 }
 
 /*DarkMode*/
@@ -931,6 +973,31 @@ background: linear-gradient(to right, #0fa0ff, #0FABFF); /* W3C, IE 10+/ Edge, F
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
     opacity: 0;
+}
+
+.fade2-enter-active, .fade2-leave-active {
+    transition: opacity 2s;
+}
+.fade2-enter, .fade2-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+}
+
+.flip-enter-active {
+    transition: all 0.5s;
+    /*transition-delay: 1s;*/
+}
+
+.flip-leave-active {
+    transition: all 0.5s;
+}
+
+.flip-enter, .flip-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    transform: rotateX(90deg);
+}
+
+.scene {
+    perspective: 600px;
+    transform-style: preserve-3d;
 }
 
 /*Dark Mode Toggle*/
