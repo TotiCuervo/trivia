@@ -84,7 +84,7 @@
             </g>
             <g id="T-grp">
                 <g class="cls-14">
-                    <path id="T-path" class="cls-15"
+                    <path id="T-path path" class="cls-15"
                           d="M32.51,179.59s-44.08-44.11,20-64.5c44-14,143.5,5.5,143.5,5.5s7.5-24.5-85-27c0,0-31.5,78.5-35.5,190.5"
                           transform="translate(15.77 -47.75)"/>
                 </g>

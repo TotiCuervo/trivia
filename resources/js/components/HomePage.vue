@@ -5,7 +5,7 @@
             <div class="container cover">
                 <div class="row">
                     <div class="col-md-12 text-center" style="font-family: 'Pacifico', cursive;">
-<!--                        <TrivaloLogoAnimation></TrivaloLogoAnimation>-->
+                        <TrivaloLogoAnimation></TrivaloLogoAnimation>
                         <h1 class="d-md-block d-none" style="font-size:180px !important;">Trivalo</h1>
                         <h1 class="d-md-none d-sm-block d-none" style="font-size:130px !important;">Trivalo</h1>
                         <h1 class="d-sm-none d-block" style="font-size:100px !important;">Trivalo</h1>

@@ -1082,7 +1082,7 @@ background: linear-gradient(to right, #0fa0ff, #0FABFF); /* W3C, IE 10+/ Edge, F
 .path {
     stroke-dasharray: 1000;
     stroke-dashoffset: 1000;
-    animation: dash 3hos linear alternate infinite;
+    animation: dash 3s linear alternate infinite;
 }
 
 @keyframes dash {
