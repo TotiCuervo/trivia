@@ -12,10 +12,8 @@
     {{--    <link rel="stylesheet" href="css/font-awesome-animation.min.css">--}}
     {{--    <script defer src="https://use.fontawesome.com/releases/v5.10.2/js/all.js" integrity="sha384-QMu+Y+eu45Nfr9fmFOlw8EqjiUreChmoQ7k7C1pFNO8hEbGv9yzsszTmz+RzwyCh" crossorigin="anonymous"></script>--}}
 
-    <link href="{{asset('animate.min.css')}}" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{asset('loaders.min.css')}}" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
 {{--    <link rel="stylesheet" href="font-awesome-animation.min.css">--}}
 
