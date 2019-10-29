@@ -104,6 +104,9 @@
                 .listen('NewTeamAnswer', (e) => {
                     this.$store.commit('team/ADD_TEAM_ANSWER', e.teamAnswer);
                 })
+                .listen('WhereAreWe', (e) => {
+                    this.catchUpTeam(e.team);
+                });
 
         },
         methods: {

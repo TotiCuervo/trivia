@@ -2,25 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f562f43b-05cf-4003-ae95-b369e5751c9b" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/js/components/Host/HostModals.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/Host/HostPageNav.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/Host/HostPresenceChannel.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/Play/IdleWatcher.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PlayController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PlayController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Answer/PlayRevealAnswerFIB.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Answer/PlayRevealAnswerFIB.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Host/HostHeader.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Host/HostHeader.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Host/HostInterface.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Host/HostInterface.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Host/HostPresenceChannel.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Host/HostPresenceChannel.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Play/IdleWatcher.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Play/IdleWatcher.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/Play/Play.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Play/Play.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/Play/PlayInterface.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Play/PlayInterface.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Play/PlayLeaderBoard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Play/PlayLeaderBoard.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Play/PlayLogin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Play/PlayLogin.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Round/HostRoundReview.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Round/HostRoundReview.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Round/HostRoundReviewTeamRow.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Round/HostRoundReviewTeamRow.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -284,7 +273,7 @@
       <workItem from="1569884747705" duration="20000" />
       <workItem from="1569884815013" duration="6680000" />
       <workItem from="1571796652487" duration="2672000" />
-      <workItem from="1571931565999" duration="9612000" />
+      <workItem from="1571931565999" duration="14342000" />
     </task>
     <servers />
   </component>
@@ -311,6 +300,18 @@
           <url>file://$PROJECT_DIR$/resources/js/components/Play/PlayGameOver.vue</url>
           <line>95</line>
           <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/resources/js/components/Play/PlayInterface.vue</url>
+          <line>143</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/resources/js/components/Host/HostPresenceChannel.vue</url>
+          <line>15</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="18" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -15,12 +15,6 @@
         },
         mounted() {
 
-            //checks for darkMode
-            // if (this.darkMode) {
-            //     document.querySelector('body').style.backgroundColor = '#18191A';
-            //     document.querySelector('body').style.color = '#FFFFFF';
-            // }
-
 
             this.token = localStorage.getItem('user-token') || '';
 

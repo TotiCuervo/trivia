@@ -56,6 +56,7 @@ Route::delete('/answer/{id}/destroy', 'AnswerController@destroy');
 
 //Play
 Route::post('/play/checkCode', 'PlayController@checkCode');
+Route::post('/play/game/{teamID}/whereAreWe', 'PlayController@whereAreWe');
 
 //Host
 Route::post('/host/{gameCode}/round/{roundPosition}/question/{questionPosition}/currentPage/{currentPage}', 'HostController@navigateHandler');

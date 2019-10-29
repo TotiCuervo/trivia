@@ -1,5 +1,6 @@
 <template>
     <div>
+        <IdleWatcher></IdleWatcher>
         <TeamPlayHeader></TeamPlayHeader>
         <div>
             <div class="container">
@@ -20,9 +21,7 @@
                         v-if="this.currentPage === 'PlayLeaderBoard'">
                 </PlayLeaderBoard>
             </div>
-            <PlayQuestion
-                    v-if="this.currentPage === 'PlayQuestion'">
-            </PlayQuestion>
+            <PlayQuestion v-if="this.currentPage === 'PlayQuestion'"></PlayQuestion>
             <PlayGameOver v-if="this.currentPage === 'PlayGameOver'"></PlayGameOver>
         </div>
     </div>
@@ -49,13 +48,11 @@
 
                 Echo.join('game.' + this.loggedTeam.gameCode)
                     .listen('NextStep', (e) => {
-                        console.log(e);
                         this.playRoundPosition = e.roundPosition;
                         this.playQuestionPosition = e.questionPosition;
                         this.currentPage = e.currentPage;
                     })
                     .listen('RevealAnswer', (e) => {
-                        // console.log('time to show answer');
                         this.revealAnswer = true;
                     })
                     .listen('UpdatedAnswer', (e) => {
@@ -82,20 +79,9 @@
 
                     })
                     .listen('AreYouThere', (e) => {
-                        // console.log("I am here");
                         axios.post('/api/team/' + this.team.id + '/iAmHere');
                     });
 
-                let timeout;
-
-                function refresh(){
-                    clearTimeout(timeout);
-                    timeout = setTimeout(() => {
-                        console.log('hello made it to refresh');
-                    }, 2 * 60 * 1000)
-                }
-                refresh();
-                document.addEventListener('click', refresh)
             }
         },
         created() {

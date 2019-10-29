@@ -1,26 +1,44 @@
 <template>
-    <div class="row pt-5">
-        <div class="col-12 text-center">
-            <p>
-                {{ messageStr }}
-            </p>
-        </div>
-    </div>
+    <b-modal id="idleWarning" title="Idle" size="lg" hide-footer>
+        <p>
+            Hello World
+        </p>
+    </b-modal>
 </template>
 
 <script>
+    import {mapActions, mapGetters} from 'vuex';
+
     export default {
         data() {
             return {
-                messageStr: 'Hello'
+                messageStr: 'Hello',
+                counter: 0,
+                countTime: false,
             }
         },
         onIdle() {
-            this.messageStr = 'ZZZ'
+            console.log('now idle');
         },
-        // onActive() {
-        //     this.messageStr = 'Hello'
-        // }
+        onActive() {
+            console.log(this.team.gameCode);
+            axios.post('/api/play/game/'+this.team.id+'/whereAreWe')
+                .then(response => {
+                console.log('made it to whereAreWe');
+            });
+
+        },
+        methods: {
+            countIdle() {
+                this.counter++;
+            }
+        },
+        computed: {
+            ...mapGetters('play', ['roundPosition', 'questionPosition', 'page']),
+            ...mapGetters('team', ['team']),
+
+
+        }
     }
 </script>
 
