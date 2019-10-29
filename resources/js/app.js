@@ -15,12 +15,16 @@ Vue.use(VueRouter);
 import Vue from 'vue'
 import BootstrapVue from 'bootstrap-vue'
 
-const eventsHub = new Vue()
+const eventsHub = new Vue();
 import IdleVue from 'idle-vue'
 Vue.use(IdleVue, {
     eventEmitter: eventsHub,
     idleTime: 10000
 });
+
+
+Vue.component('VOffline', require('v-offline'));
+
 
 
 import CircularCountDownTimer from "vue-circular-count-down-timer";

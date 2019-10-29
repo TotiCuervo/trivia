@@ -1,6 +1,7 @@
 <template>
     <div>
         <router-view></router-view>
+        <IdleWatcher></IdleWatcher>
     </div>
 </template>
 
@@ -13,7 +14,6 @@
             }
         },
         mounted() {
-
 
             this.token = localStorage.getItem('user-token') || '';
 
