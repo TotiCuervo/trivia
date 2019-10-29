@@ -1,57 +1,14 @@
 <template>
     <div v-if="this.game_code">
+
+        <!--Not Visible-->
+        <HostModals></HostModals>
+        <HostPresenceChannel></HostPresenceChannel>
+
+        <!--Visible-->
         <HostHeader></HostHeader>
+        <HostPageNav></HostPageNav>
 
-        <div class="pr-3 pl-3">
-            <HostLobby
-                v-if="currentPage === 'HostLobby'">
-            </HostLobby>
-
-            <HostStartGame
-                    v-if="currentPage === 'HostStartGame'">
-            </HostStartGame>
-
-            <HostRoundPreview
-                    v-if="currentPage === 'HostRoundPreview'">
-            </HostRoundPreview>
-
-            <HostQuestionPreview
-                    v-if="currentPage === 'HostQuestionPreview'">
-            </HostQuestionPreview>
-
-            <HostQuestion
-                    v-if="currentPage === 'HostQuestion'">
-            </HostQuestion>
-
-            <HostRoundReview
-                    v-if="currentPage === 'HostRoundReview'">
-            </HostRoundReview>
-
-            <HostAnswerReveal
-                    v-if="currentPage === 'HostAnswerReveal'">
-            </HostAnswerReveal>
-
-            <HostLeaderBoard
-                    v-if="currentPage === 'HostLeaderBoard'"
-                    @gameOver="onGameOver">
-            </HostLeaderBoard>
-
-            <HostGameOver v-if="currentPage === 'HostGameOver'"></HostGameOver>
-        </div>
-
-        <!--Modals-->
-        <b-modal id="leaderBoard" title="Leaderboard" size="lg" hide-footer>
-            <LeaderBoardIndex></LeaderBoardIndex>
-        </b-modal>
-        <b-modal id="gameOutline" title="Game Outline" size="lg" hide-footer>
-            <HostGameOutline></HostGameOutline>
-        </b-modal>
-        <b-modal id="teamList" title="Team List" size="lg" hide-footer>
-            <GameTeamIndex :col="8"></GameTeamIndex>
-        </b-modal>
-        <b-modal id="team" title="Team Profile" size="lg" hide-footer>
-            <HostTeamProfile></HostTeamProfile>
-        </b-modal>
     </div>
 </template>
 
@@ -62,14 +19,11 @@
         data() {
             return {
                 params: '',
-                showGame: false,
             }
         },
         mounted() {
             document.querySelector('body').className = 'host-background';
 
-
-            //New Version please refer to old commits to find past version
             //Gets the parameters from the route
             this.params = this.$route.params;
 
@@ -85,6 +39,7 @@
             //fetches the answer information
             this.fetchAnswers(this.params.id);
 
+            //Prompts user before closing
             if (!localStorage.getItem('gameCode')) {
                 this.createFreshGameCode(this.params);
             } else {
@@ -102,9 +57,6 @@
             ...mapActions('round', ['fetchRounds']),
             ...mapActions('question', ['fetchQuestions']),
             ...mapActions('answer', ['fetchAnswers']),
-            onGameOver(){
-                console.log('Game Over');
-            },
         },
         computed: {
             ...mapGetters('game', ['game', 'game_id', 'gameCode']),
@@ -116,22 +68,6 @@
                 },
                 set(value) {
                     return this.$store.commit('game/SET_GAME_CODE', value);
-                }
-            },
-            playRoundPosition: {
-                get() {
-                    return this.roundPosition;
-                },
-                set(value) {
-                    return this.$store.commit('play/SET_ROUND_POSITION', value);
-                }
-            },
-            playQuestionPosition: {
-                get() {
-                    return this.questionPosition;
-                },
-                set(value) {
-                    return this.$store.commit('play/SET_QUESTION_POSITION', value);
                 }
             },
             currentPage: {

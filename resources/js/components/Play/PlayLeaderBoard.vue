@@ -12,7 +12,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-1 pr-0">
-                                <h6>{{team.place}}.</h6>
+                                <h6>{{team.place}}</h6>
                             </div>
                             <div class="col-4">
                                 <div class="mx-auto" style="width: 100%;">

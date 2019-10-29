@@ -49,7 +49,6 @@
 
                 Echo.join('game.' + this.loggedTeam.gameCode)
                     .listen('NextStep', (e) => {
-                        // console.log('got the page');
                         console.log(e);
                         this.playRoundPosition = e.roundPosition;
                         this.playQuestionPosition = e.questionPosition;
@@ -86,6 +85,17 @@
                         // console.log("I am here");
                         axios.post('/api/team/' + this.team.id + '/iAmHere');
                     });
+
+                let timeout;
+
+                function refresh(){
+                    clearTimeout(timeout);
+                    timeout = setTimeout(() => {
+                        console.log('hello made it to refresh');
+                    }, 2 * 60 * 1000)
+                }
+                refresh();
+                document.addEventListener('click', refresh)
             }
         },
         created() {

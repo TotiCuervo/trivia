@@ -8,7 +8,6 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
-//imports
 import VueRouter from 'vue-router'
 Vue.use(VueRouter);
 
@@ -16,10 +15,20 @@ Vue.use(VueRouter);
 import Vue from 'vue'
 import BootstrapVue from 'bootstrap-vue'
 
+const eventsHub = new Vue()
+import IdleVue from 'idle-vue'
+Vue.use(IdleVue, {
+    eventEmitter: eventsHub,
+    idleTime: 10000
+});
+
+
 import CircularCountDownTimer from "vue-circular-count-down-timer";
 Vue.use(CircularCountDownTimer);
 
+
 Vue.use(BootstrapVue);
+
 
 import 'vue-loaders/dist/vue-loaders.css';
 import VueLoaders from 'vue-loaders';
@@ -115,7 +124,7 @@ const router = new VueRouter({
         },
         { path: '*', redirect: '/home' }
     ]
-})
+});
 
 const app = new Vue({
     el: '#app',

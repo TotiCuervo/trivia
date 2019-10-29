@@ -119,11 +119,10 @@
     export default {
         data() {
             return {
-                teamAnswer: '',
+
             }
         },
         mounted() {
-            this.teamAnswer = this.teamAnswers.find(x => x.team_id === this.team.id && x.question_id === this.question.id);
         },
         methods: {
 
@@ -132,6 +131,9 @@
         computed: {
             ...mapGetters('question', ['questions']),
             ...mapGetters('team', ['teams', 'teamAnswers']),
+            teamAnswer: function() {
+                return this.teamAnswers.find(x => x.team_id === this.team.id && x.question_id === this.question.id);
+            },
         },
     }
 </script>

@@ -27,6 +27,7 @@
     "dependencies": {
         "animate.css": "^3.7.2",
         "bootstrap-vue": "^2.0.0-rc.25",
+        "idle-vue": "^2.0.5",
         "laravel-echo": "^1.5.4",
         "pusher-js": "^5.0.0",
         "vue-circular-count-down-timer": "^1.0.4",

@@ -9,36 +9,39 @@
         <div class="row pt-2 justify-content-center">
             <div class="col-md-6 col-sm-10">
                 <!--if there is an answer-->
-                <transition name="flip" mode="out-in" v-if="this.teamAnswer">
-                    <div class="fancy3 card" v-if="!revealAnswer" key="slide1" style="padding: 50px 0px;" v-bind:class="{'darkMode-card text-white': this.darkMode}">
-                        <div class="card-body">
+                <div class="scene" v-if="this.teamAnswer">
+                    <transition name="flip" mode="out-in">
+                        <div class="fancy3 card" v-if="!revealAnswer" key="slide1" style="padding: 50px 0px;" v-bind:class="{'darkMode-card text-white': this.darkMode}">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12 text-center">
+                                        <h5 class="m-0">
+                                            {{this.teamAnswer.answer}}
+                                        </h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fancy3 card" v-if="revealAnswer" key="slide2" style="padding: 50px 0px;" v-bind:class="{'darkMode-card text-white': this.darkMode}">
+                            <div class="card-body">
+                                <div class="row" style="margin-bottom:-30px;">
+                                    <div class="col-md-12 text-center">
+                                        <h5 class="m-0">
+                                            {{this.teamAnswer.answer}}
+                                        </h5>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="row">
-                                <div class="col-md-12 text-center">
-                                    <h5 class="m-0">
-                                        {{this.teamAnswer.answer}}
-                                    </h5>
+                                <div class="col-md-12">
+                                    <div class="correct-answer float-right" v-if="this.teamAnswer.correct">Correct</div>
+                                    <div class="wrong-answer float-right" v-if="!this.teamAnswer.correct">Wrong</div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="fancy3 card" v-if="revealAnswer" key="slide2" style="padding: 50px 0px;" v-bind:class="{'darkMode-card text-white': this.darkMode}">
-                        <div class="card-body">
-                            <div class="row" style="margin-bottom:-30px;">
-                                <div class="col-md-12 text-center">
-                                    <h5 class="m-0">
-                                        {{this.teamAnswer.answer}}
-                                    </h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="correct-answer float-right" v-if="this.teamAnswer.correct">Correct</div>
-                                <div class="wrong-answer float-right" v-if="!this.teamAnswer.correct">Wrong</div>
-                            </div>
-                        </div>
-                    </div>
-                </transition>
+                    </transition>
+                </div>
+
                 <!--if there is no answer-->
                 <div class="fancy3 card" v-else style="padding: 50px 0px;" v-bind:class="{'darkMode-card text-white': this.darkMode}">
                     <div class="card-body">

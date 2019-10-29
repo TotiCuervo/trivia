@@ -36,7 +36,7 @@
                                           @input="checkName()">
                             </b-form-input>
                             <b-form-invalid-feedback id="team-name-too-long" v-if="this.validName === false">
-                                Sorry, your name is too long
+                                {{nameError}}
                             </b-form-invalid-feedback>
                         </div>
                     </div>
@@ -94,6 +94,7 @@
                 name: '',
                 password: '',
                 error: '',
+                nameError: '',
                 clicked: false
             }
         },
@@ -151,7 +152,21 @@
                 this.error = '';
             },
             checkName() {
-                this.validName = (this.name.length <= 30) ? '' : false;
+                if (this.name.length > 0) {
+                    if (!this.name.match("^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$")) {
+                        this.nameError = 'No special characters or symbols allowed';
+                        this.validName = false;
+                    } else if (!(this.name.length <= 30)){
+                        this.nameError = 'Sorry, your name is too long';
+                        this.validName = false;
+                    } else if (this.name === '') {
+                        this.validName = '';
+                    } else {
+                        this.validName = '';
+                    }
+                } else {
+                    this.validName = '';
+                }
             }
         },
         computed: {
@@ -179,7 +194,7 @@
                 set(value) {
                     return this.$store.commit('team/SET_TEAM', value);
                 }
-            }
+            },
         },
     }
 </script>

@@ -1006,6 +1006,32 @@ background: linear-gradient(to right, #0fa0ff, #0FABFF); /* W3C, IE 10+/ Edge, F
     transform-style: preserve-3d;
 }
 
+.slide-left-leave-active, .slide-left-enter-active {
+    transition: 0.3s;
+    transition-property: height, opacity, transform;
+    overflow: hidden;
+}
+.slide-left-enter {
+    transform: translate(200%, 0);
+
+}
+.slide-left-leave-to {
+    transform: translate(-200%, 0);
+}
+
+.slide-right-leave-active, .slide-right-enter-active {
+    transition: 0.3s;
+    transition-property: height, opacity, transform;
+    overflow: hidden;
+}
+.slide-right-enter {
+    transform: translate(-200%, 0);
+
+}
+.slide-right-leave-to {
+    transform: translate(200%, 0);
+}
+
 /*Dark Mode Toggle*/
 .onoffswitch {
     position: relative; width: 90px;
