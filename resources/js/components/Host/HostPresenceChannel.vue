@@ -131,6 +131,8 @@
 
                     console.log('made it to catchUpTeam. Sending:');
                     console.log($playerPage);
+                    console.log('To Player:');
+                    console.log(team);
 
                     axios.post('/api/host/'+ this.gameCode.code + '/round/' + this.playRoundPosition +'/question/' + this.playQuestionPosition + '/currentPage/' + $playerPage);
 

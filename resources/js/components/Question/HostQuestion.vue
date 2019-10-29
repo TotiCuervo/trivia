@@ -57,7 +57,7 @@
         },
         mounted() {
 
-            // this.timer = this.rounds[this.playRoundPosition].time;
+            this.timer = this.rounds[this.playRoundPosition].time;
             this.decideUpNext();
             this.startTimer();
 
@@ -65,8 +65,8 @@
                 .listen('NewTeam', (e) => {
 
                     if (this.currentPage === 'HostQuestion') {
-                        console.log('made it to Host Question NewTeam:');
-                        console.log('sending PlayQuestion');
+                        // console.log('made it to Host Question NewTeam:');
+                        // console.log('sending PlayQuestion');
 
                         axios.post('/api/host/'+ this.gameCode.code + '/round/' + this.playRoundPosition +'/question/' + this.playQuestionPosition + '/currentPage/' + 'PlayQuestion')
                             .then (response => {
