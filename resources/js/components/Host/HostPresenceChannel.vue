@@ -29,7 +29,7 @@
                         });
                 })
                 .leaving((user) => {
-
+                    console.log('someone is leaving');
                     //sets all teams to not logged in and sends request to log back in;
                     axios.post('/api/host/game/'+this.gameCode.code+'/areYouThere');
 

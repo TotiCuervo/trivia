@@ -1,7 +1,7 @@
 <template>
     <div>
         <router-view></router-view>
-        <IdleWatcher></IdleWatcher>
+<!--        <IdleWatcher></IdleWatcher>-->
     </div>
 </template>
 
