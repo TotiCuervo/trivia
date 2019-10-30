@@ -69,14 +69,16 @@ const actions = {
                 $catchUpPage = 'PlayLeaderBoard';
                 break;
             default:
-                $catchUpPage = 'PlayHomeScreen';
+                $catchUpPage = '';
         }
 
-        Echo.join('game.'+ state.gameCode.code).whisper("catchUp", {
-            roundPosition: state.roundPosition,
-            questionPosition: state.questionPosition,
-            page: $catchUpPage
-        });
+        if (state.page !== 'HostLobby') {
+            Echo.join('game.'+ state.gameCode.code).whisper("catchUp", {
+                roundPosition: state.roundPosition,
+                questionPosition: state.questionPosition,
+                page: $catchUpPage
+            });
+        }
 
     }
 
