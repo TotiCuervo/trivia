@@ -28,6 +28,9 @@
                             this.$store.commit('team/SET_TEAM_ANSWERS', response.data);
                         });
                 })
+                .joining((user) => {
+                    console.log('someone is joining');
+                })
                 .leaving((user) => {
                     console.log('someone is leaving');
                     //sets all teams to not logged in and sends request to log back in;
