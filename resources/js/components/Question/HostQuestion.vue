@@ -5,8 +5,7 @@
             <div class="col-12">
                 <div class="d-flex align-items-center justify-content-center justify-content-sm-between">
                     <!--float-left-->
-<!--                    <h6 class="mb-0 float-left flex-grow-1 flex-sm-grow-0 float-md-0"><i class="fas fa-stopwatch"></i>: {{this.timer}}</h6>-->
-                    <span class="mb-0 float-left flex-grow-1 flex-sm-grow-0 float-md-0" v-b-tooltip.left title='Stopwatch for this question' tabindex="0"><span class="h4"><i class="fas fa-stopwatch"></i></span> <span class="h5"> {{this.timer}}</span></span>
+                    <QuestionTimer></QuestionTimer>
 
                     <!--stays in center-->
                     <h6 class="mb-0 d-none d-sm-flex" v-if="this.questions[this.playQuestionPosition].type === 'Fill-in-blank'"> Round {{this.rounds[this.playRoundPosition].order_number}} Question {{this.questions[this.playQuestionPosition].order_number}} Fill In The Blank </h6>
@@ -18,6 +17,7 @@
                 </div>
             </div>
         </div>
+        <!--Team Answer Count-->
         <div class="row pt-4">
             <div class="col-md-6 offset-md-3">
                 <TeamAnswerCount></TeamAnswerCount>
@@ -26,15 +26,7 @@
         <!--Question Title-->
         <div class="row">
             <div class="col-md-6 offset-md-3 pt-2">
-                <div class="hostQuestion-card card">
-                    <div class="card-body">
-                        <div class="row p-5">
-                            <div class="col-md-12 text-center">
-                                <h4 class="m-0">{{this.questions[this.playQuestionPosition].title}}</h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <HostQuestionCard></HostQuestionCard>
             </div>
         </div>
         <!--Multiple Choice Answers Optional-->
@@ -50,16 +42,13 @@
     export default {
         data() {
             return {
-                timer: 2,
                 upNext: '',
                 newQuestionPosition: '',
             }
         },
         mounted() {
 
-            this.timer = this.rounds[this.playRoundPosition].time;
             this.decideUpNext();
-            this.startTimer();
 
             Echo.join('game.'+this.gameCode.code)
                 .listen('NewTeam', (e) => {
@@ -100,21 +89,6 @@
 
                 }
             },
-            startTimer() {
-
-                let vm = this;
-
-                setTimeout(function () {
-
-                    vm.timer = vm.timer - 1;
-
-                    if (vm.timer !== 0) {
-
-                        vm.startTimer();
-
-                    }
-                }, 1000);
-            },
             onUpNext() {
                 if (this.newQuestionPosition !== "") {
                     this.playQuestionPosition = this.newQuestionPosition;
@@ -127,10 +101,9 @@
         },
         computed: {
             ...mapGetters('question', ['questions']),
-            ...mapGetters('answer', ['answers']),
             ...mapGetters('game', ['gameCode']),
             ...mapGetters('round', ['rounds']),
-            ...mapGetters('play', ['roundPosition', 'questionPosition', 'page']),
+            ...mapGetters('play', ['roundPosition', 'questionPosition', 'page', 'timer']),
             playRoundPosition: {
                 get() {
                     return this.roundPosition;

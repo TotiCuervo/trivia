@@ -19,7 +19,6 @@
         <HostGameOver v-if="currentPage === 'HostGameOver'"></HostGameOver>
     </div>
 </template>
-
 <script>
     import {mapActions, mapGetters} from 'vuex';
 

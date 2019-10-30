@@ -39,6 +39,7 @@
                 <h3>{{question.order_number}}. {{question.title}}</h3>
             </div>
         </div>
+
     </div>
 </template>
 
@@ -52,14 +53,11 @@
             }
         },
         mounted() {
-
-            axios.post('/api/host/'+ this.gameCode.code + '/round/' + this.playRoundPosition +'/question/' + this.playQuestionPosition + '/currentPage/' + 'PlayRoundPreview')
-                .then(response => {
-                    // consolex.log(response.data);
-                });
-
+            this.sendPlayersPage('PlayRoundPreview');
         },
         methods: {
+            ...mapActions('play', ['sendPlayersPage']),
+
             upNext() {
                 for (let $i=0; $i < this.questions.length; $i++) {
                     if (this.questions[$i].round_id === this.rounds[this.playRoundPosition].id && this.questions[$i].order_number === 1) {

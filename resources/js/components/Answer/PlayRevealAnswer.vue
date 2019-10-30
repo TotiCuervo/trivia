@@ -92,10 +92,9 @@
             ...mapGetters('answer', ['answers']),
             ...mapGetters('game', ['gameCode']),
             ...mapGetters('team', ['teamAnswers']),
-            ...mapGetters('play', ['roundPosition', 'questionPosition', 'page', 'myAnswers']),
+            ...mapGetters('play', ['roundPosition', 'questionPosition', 'page', 'revealAnswer']),
             ...mapGetters('user', ['darkMode']),
         },
-        props: ['revealAnswer'],
         watch: {
             questionPosition: function () {
                 this.show_loading = true;

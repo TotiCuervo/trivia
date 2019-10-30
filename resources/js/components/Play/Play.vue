@@ -3,6 +3,7 @@
         <router-view></router-view>
 <!--        <IdleWatcher></IdleWatcher>-->
     </div>
+
 </template>
 
 <script>

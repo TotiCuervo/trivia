@@ -60,8 +60,8 @@
             startRound() {
                 this.currentPage = 'HostRoundPreview';
             },
-            startThisRound(index) {
-                this.playRoundPosition = index;
+            startThisRound(roundPosition) {
+                this.playRoundPosition = roundPosition;
             },
             goToHostLobby() {
                 this.currentPage = 'HostLobby';

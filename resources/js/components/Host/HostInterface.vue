@@ -48,6 +48,8 @@
 
             this.currentPage = 'HostLobby';
 
+            this.$store.commit('play/SET_GAME_CODE', this.gameCode);
+
             window.onbeforeunload = function(e) {
                 return 'Are you sure you want to leave? You will lose all game data';
             };

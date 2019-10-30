@@ -124,9 +124,11 @@
             this.roundQuestions = this.questions.filter(x => x.round_id === this.rounds[this.playRoundPosition].id);
 
             //Change page for players
-            axios.post('/api/host/'+ this.gameCode.code + '/round/' + this.playRoundPosition +'/question/' + 0 + '/currentPage/' + 'PlayRoundReview');
+            this.sendPlayersPage('PlayRoundReview');
+            // axios.post('/api/host/'+ this.gameCode.code + '/round/' + this.playRoundPosition +'/question/' + 0 + '/currentPage/' + 'PlayRoundReview');
         },
         methods: {
+            ...mapActions('play', ['sendPlayersPage']),
             startAnswerReveal() {
                 for (let $i=0; $i < this.questions.length; $i++) {
                     if (this.questions[$i].round_id === this.rounds[this.playRoundPosition].id && this.questions[$i].order_number === 1) {
@@ -134,10 +136,13 @@
                     }
                 }
 
-                axios.post('/api/host/' + this.gameCode.code + '/round/'+ this.playRoundPosition + '/question/' + this.playQuestionPosition + '/currentPage/'+'PlayRevealAnswer')
-                    .then(response => {
+                this.sendPlayersPage('PlayRevealAnswer');
 
-                    });
+
+                // axios.post('/api/host/' + this.gameCode.code + '/round/'+ this.playRoundPosition + '/question/' + this.playQuestionPosition + '/currentPage/'+'PlayRevealAnswer')
+                //     .then(response => {
+                //
+                //     });
 
                 this.currentPage = 'HostAnswerReveal';
             },

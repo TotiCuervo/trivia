@@ -15,6 +15,7 @@
                 </div>
             </div>
         </div>
+        <!--Content-->
         <div class="row pt-4">
             <div class="col-md-6 offset-md-3">
                 <TeamAnswerCount></TeamAnswerCount>
@@ -55,8 +56,6 @@
     export default {
         data() {
             return {
-                // timer: 4,
-                // value: 0
                 timer: 0,
                 value: 0,
                 max: 180
@@ -66,17 +65,15 @@
             this.startTimer();
         },
         methods: {
+            ...mapActions('play', ['sendPlayersPage']),
+
             startTimer() {
                 let vm = this;
                 let timer = setInterval(function() {
                     vm.value += 6;
                     if (vm.value >= 240) {
                         clearInterval(timer);
-
-                        axios.post('/api/host/'+ vm.gameCode.code + '/round/' + vm.playRoundPosition +'/question/' + vm.playQuestionPosition + '/currentPage/' + 'PlayQuestion')
-                            .then(response => {
-                                // console.log(response.data);
-                            });
+                        vm.sendPlayersPage('PlayQuestion');
                         vm.currentPage = 'HostQuestion';
                     }
                 }, 100);
@@ -85,7 +82,6 @@
         computed: {
             ...mapGetters('round', ['rounds']),
             ...mapGetters('question', ['questions']),
-            ...mapGetters('game', ['gameCode']),
             ...mapGetters('play', ['roundPosition', 'questionPosition', 'page']),
             playRoundPosition: {
                 get() {

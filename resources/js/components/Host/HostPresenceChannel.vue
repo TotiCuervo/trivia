@@ -15,7 +15,6 @@
             //Presence Channel
             Echo.join('game.'+this.gameCode.code)
                 .here((users) => {
-
                     //Gets all the Teams
                     axios.get('/api/game/'+this.gameCode.code + '/teams')
                         .then(response => {
@@ -29,7 +28,7 @@
                         });
                 })
                 .joining((user) => {
-                    console.log('someone is joining');
+                    this.catchTeamUp();
                 })
                 .leaving((user) => {
                     console.log('someone is leaving');
@@ -76,7 +75,7 @@
                         }
                     }
 
-                    this.catchUpTeam(e.team);
+                    // this.catchUpTeam(e.team);
 
                 })
                 .listen('TeamLeaving', (e) => {
@@ -113,6 +112,7 @@
 
         },
         methods: {
+            ...mapActions('play', ['catchTeamUp']),
             catchUpTeam(team) {
                 // this is used to catch up a new user if they logged in
 

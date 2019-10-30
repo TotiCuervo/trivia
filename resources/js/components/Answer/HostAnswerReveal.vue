@@ -41,6 +41,7 @@
         <div class="pt-3" v-if="this.questions[this.playQuestionPosition].type === 'Multiple-Choice'">
             <HostMultipleChoiceAnswerOptions :revealAnswer="revealAnswer"></HostMultipleChoiceAnswerOptions>
         </div>
+
         <!--Fill In The Blank-->
         <div v-if="revealAnswer === true && this.questions[this.playQuestionPosition].type === 'Fill-in-blank' ">
             <div class="col-md-12 text-center pt-5">
@@ -64,6 +65,7 @@
                 </div>
             </div>
         </div>
+
         <!--Answer Reveal-->
         <div class="row pt-3">
             <!--Reveal Button-->
@@ -110,6 +112,7 @@
 
         },
         methods: {
+            ...mapActions('play', ['sendPlayersPage', 'revealAnswerToPlayers']),
             decideUpNext() {
                 if (this.playQuestionPosition + 1 === this.questions.length) {
                     this.newQuestionPosition = '';
@@ -132,25 +135,28 @@
                 this.upNext =  '';
 
                 if (this.newQuestionPosition !== "") {
-                    axios.post('/api/host/' + this.gameCode.code + '/round/'+ this.playRoundPosition + '/question/' + this.newQuestionPosition + '/currentPage/'+'PlayRevealAnswer')
-                        .then(response => {
+                    // axios.post('/api/host/' + this.gameCode.code + '/round/'+ this.playRoundPosition + '/question/' + this.newQuestionPosition + '/currentPage/'+'PlayRevealAnswer')
+                    //     .then(response => {
+                    //
+                    //     });
 
-                        });
                     this.playQuestionPosition = this.newQuestionPosition;
+                    this.sendPlayersPage('PlayRevealAnswer');
                     this.currentPage="HostAnswerReveal";
                 } else {
-                    axios.post('/api/host/' + this.gameCode.code + '/round/'+ this.playRoundPosition + '/question/' + 0 + '/currentPage/'+'PlayLeaderBoard')
-                        .then(response => {
-
-                        });
+                    // axios.post('/api/host/' + this.gameCode.code + '/round/'+ this.playRoundPosition + '/question/' + 0 + '/currentPage/'+'PlayLeaderBoard')
+                    //     .then(response => {
+                    //
+                    //     });
                     this.playQuestionPosition = 0;
+                    this.sendPlayersPage('PlayLeaderBoard');
                     this.currentPage="HostLeaderBoard";
                 }
             },
 
             showAnswer() {
-
-                axios.post('/api/host/game/'+ this.gameCode.code +'/question/'+ this.questionPosition +'/revealAnswer');
+                this.revealAnswerToPlayers();
+                // axios.post('/api/host/game/'+ this.gameCode.code +'/question/'+ this.questionPosition +'/revealAnswer');
 
                 this.revealAnswer = true;
             }
