@@ -80,6 +80,11 @@
                     })
                     .listen('AreYouThere', (e) => {
                         axios.post('/api/team/' + this.team.id + '/iAmHere');
+                    })
+                    .listenForWhisper('trigger', (e) => {
+                        this.playQuestionPosition = e.questionPosition;
+                        this.playRoundPosition = e.roundPosition;
+                        this.currentPage = e.page;
                     });
 
             }

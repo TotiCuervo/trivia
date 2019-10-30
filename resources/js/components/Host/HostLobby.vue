@@ -24,6 +24,11 @@
                 <GameTeamIndex :col="3"></GameTeamIndex>
             </div>
         </div>
+        <div class="row pt-4">
+            <div class="col-12 text-center">
+                <b-button pill variant="primary" @click="triggerWhisper()">Trigger Whisper</b-button>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -43,6 +48,16 @@
             goToStartGame() {
                 this.currentPage = 'HostStartGame';
             },
+            triggerWhisper() {
+
+                console.log('made it to triggerWhisper');
+                Echo.join('game.'+this.gameCode.code).whisper("trigger", {
+                    roundPosition: 1,
+                    questionPosition: 0,
+                    page: 'PlayRoundPreview'
+                });
+
+            }
         },
         computed: {
             ...mapGetters('game', ['game', 'game_id', 'gameCode']),
