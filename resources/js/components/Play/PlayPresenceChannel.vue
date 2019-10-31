@@ -7,7 +7,7 @@
     export default {
         data() {
             return {
-
+                catchUpTimeFlag: false,
             }
         },
         mounted() {
@@ -38,9 +38,19 @@
                         if (this.currentPage !== e.page) {
                             console.log('made it to catchUp!');
                             console.log('going to ' + e.page);
+
                             this.playQuestionPosition = e.questionPosition;
                             this.playRoundPosition = e.roundPosition;
                             this.currentPage = e.page;
+
+                            if (e.page === 'PlayQuestion') {
+                                this.catchUpTimeFlag = true;
+                            }
+                        }
+                    })
+                    .listenForWhisper('catchUpTime', (e) => {
+                        if (this.catchUpTimeFlag) {
+                            this.$store.commit('play/UPDATE_TIMER ', e.time);
                         }
                     })
                     .listen('UpdatedAnswer', (e) => {

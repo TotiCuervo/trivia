@@ -12,7 +12,7 @@
             }
         },
         mounted() {
-            this.$store.commit('play/UPDATE_TIMER', 2);
+            this.$store.commit('play/UPDATE_TIMER', 100);
             // this.timer = this.rounds[this.playRoundPosition].time;
             this.startTimer();
         },

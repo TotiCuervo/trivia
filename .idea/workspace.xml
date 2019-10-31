@@ -3,6 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="f562f43b-05cf-4003-ae95-b369e5751c9b" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Play/PlayPresenceChannel.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Play/PlayPresenceChannel.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Question/QuestionTimer.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Question/QuestionTimer.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/store/modules/play.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/store/modules/play.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -269,7 +272,7 @@
       <workItem from="1571796652487" duration="2672000" />
       <workItem from="1571931565999" duration="16503000" />
       <workItem from="1572399780065" duration="164000" />
-      <workItem from="1572462190394" duration="11803000" />
+      <workItem from="1572462190394" duration="13634000" />
     </task>
     <servers />
   </component>

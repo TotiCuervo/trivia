@@ -55,7 +55,7 @@ const actions = {
     },
 
     catchTeamUp({ commit, state }) {
-
+        console.log('in catchTeamUp');
         let $catchUpPage = '';
 
         switch (state.page) {
@@ -68,6 +68,9 @@ const actions = {
             case 'HostLeaderBoard':
                 $catchUpPage = 'PlayLeaderBoard';
                 break;
+            case 'HostQuestion':
+                $catchUpPage = 'PlayQuestion';
+                break;
             default:
                 $catchUpPage = '';
         }
@@ -77,6 +80,14 @@ const actions = {
                 roundPosition: state.roundPosition,
                 questionPosition: state.questionPosition,
                 page: $catchUpPage
+            });
+        }
+
+        //conditions functions
+        if ($catchUpPage === 'PlayQuestion') {
+            console.log('sending time');
+            Echo.join('game.'+ state.gameCode.code).whisper("catchUpTime", {
+                time: state.timer
             });
         }
 
