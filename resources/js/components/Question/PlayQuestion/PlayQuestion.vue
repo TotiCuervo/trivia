@@ -48,12 +48,6 @@
     export default {
         data() {
             return {
-                time: 0,
-                max: 0,
-                timer: '',
-                variantColor: 'success',
-                yellowTime: '',
-                redTime: '',
                 endQuestion: false,
             }
         },
@@ -66,7 +60,6 @@
                 this.endQuestion = true;
                 this.submitAnswer();
             },
-
             submitAnswer() {
                 if (this.playerAnswer.length !== 0) {
                     axios.post('/api/teamAnswers/store', {
@@ -81,9 +74,6 @@
                     });
                 }
             },
-            selectAnswer(answer) {
-                this.answer = answer.title;
-            }
         },
         computed: {
             ...mapGetters('round', ['rounds']),

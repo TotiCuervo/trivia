@@ -4,7 +4,7 @@
         <div class="row no-gutters" v-if="this.rounds[roundPosition].time">
             <div class="col-md-12">
                 <b-progress height="8px" :max="max">
-                    <b-progress-bar :value="time" :variant="variantColor">
+                    <b-progress-bar :value="timer" :variant="variantColor">
                     </b-progress-bar>
                 </b-progress>
             </div>
@@ -18,71 +18,67 @@
     export default {
         data() {
             return {
-                time: 0,
-                max: 0,
-                timer: '',
-                variantColor: 'success',
-                yellowTime: '',
-                redTime: '',
+
             }
         },
         mounted() {
-            let vm = this;
-
-            // let timer = setTimeout(function() {
-            //     vm.startTimer();
-            // }, 5000);
+            this.$store.commit('time/UPDATE_TIMER', this.rounds[this.roundPosition].time);
+            this.setUpTimer(this.rounds[this.roundPosition].time);
             this.startTimer();
 
-            Echo.join('game.'+this.team.gameCode)
-                .listen('StartQuestion', (e) => {
-                    this.variantColor = 'success';
-                    this.endQuestion = false;
-                    this.answer = '';
-                    this.startTimer();
-                })
-                .listen('UpdateTime', (e) => {
-                    if (Number(e.teamID) === this.team.id) {
-                        this.time = parseInt(e.time);
-                    }
-                });
+            // Echo.join('game.'+this.team.gameCode)
+            //     .listen('StartQuestion', (e) => {
+            //         this.variantColor = 'success';
+            //         this.endQuestion = false;
+            //         this.answer = '';
+            //         this.startTimer();
+            //     })
+            //     .listen('UpdateTime', (e) => {
+            //         if (Number(e.teamID) === this.team.id) {
+            //             this.time = parseInt(e.time);
+            //         }
+            //     });
 
         },
         methods: {
+            ...mapActions('time', ['setUpTimer']),
             startTimer() {
-                this.time = this.rounds[this.roundPosition].time;
-                this.max = this.rounds[this.roundPosition].time;
-                this.yellowTime = (this.rounds[this.roundPosition].time/3) + (this.rounds[this.roundPosition].time/3);
-                this.redTime = this.rounds[this.roundPosition].time/3;
                 let vm = this;
-                this.timer = setInterval(function() {
-                    vm.time -= 1;
+                this.stopWatch = setInterval(function() {
+                    vm.$store.commit('time/UPDATE_TIMER', vm.timer - 1);
+                    // vm.timer -= 1;
 
-                    if (vm.time <= vm.yellowTime && vm.time > vm.redTime) {
-                        vm.variantColor = 'warning';
+                    if (vm.stopWatch <= vm.yellowTime && vm.time > vm.redTime) {
+                        vm.$store.commit('time/SET_VARIANT_COLOR', 'warning');
+                        // vm.variantColor = 'warning';
                     }
 
-                    if (vm.time <= vm.redTime) {
-                        vm.variantColor = 'danger';
+                    if (vm.timer <= vm.redTime) {
+                        vm.$store.commit('time/SET_VARIANT_COLOR', 'danger');
+
+                        // vm.variantColor = 'danger';
                     }
 
-                    if (vm.time === -1) {
-                        clearInterval(vm.timer);
+                    if (vm.timer === -1) {
+                        clearInterval(vm.stopWatch);
 
                         vm.$emit('endTheQuestion');
                     }
                 }, 1000);
             },
+
         },
         computed: {
             ...mapGetters('round', ['rounds']),
             ...mapGetters('team', ['team']),
+            ...mapGetters('time', ['timer', 'max', 'variantColor', 'yellowTime', 'redTime']),
             ...mapGetters('play', ['roundPosition', 'questionPosition', 'page']),
         },
         watch: {
             questionPosition: function () {
-                this.variantColor = "success";
-                clearInterval(this.timer);
+                this.$store.commit('time/UPDATE_TIMER', this.rounds[this.roundPosition].time);
+                this.$store.commit('time/SET_VARIANT_COLOR', 'success');
+                clearInterval(this.stopWatch);
                 this.startTimer();
             },
 

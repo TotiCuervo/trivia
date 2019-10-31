@@ -41,7 +41,7 @@ const getters = {
 const actions = {
 
     sendPlayersPage({ commit, state }, page) {
-
+        console.log('in sending players page. Sending: ' + page);
         Echo.join('game.'+ state.gameCode.code).whisper("togglePage", {
             roundPosition: state.roundPosition,
             questionPosition: state.questionPosition,
@@ -85,7 +85,7 @@ const actions = {
 
         //conditions functions
         if ($catchUpPage === 'PlayQuestion') {
-            console.log('sending time');
+            console.log('sending time: ' + state.timer);
             Echo.join('game.'+ state.gameCode.code).whisper("catchUpTime", {
                 time: state.timer
             });
@@ -115,6 +115,7 @@ const mutations = {
         state.revealAnswer = revealAnswer;
     },
     UPDATE_TIMER(state, time) {
+        // console.log('getting time:' + time);
         state.timer = time;
     }
 };

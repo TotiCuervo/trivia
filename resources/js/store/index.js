@@ -10,7 +10,9 @@ import round from './modules/round';
 import question from './modules/question';
 import answer from './modules/answer';
 import team from './modules/team';
-import play from './modules/play'
+import play from './modules/play';
+import time from './modules/time';
+
 
 
 
@@ -25,7 +27,8 @@ export const store = new Vuex.Store({
         question,
         answer,
         team,
-        play
+        play,
+        time
     },
     strict: debug
 });

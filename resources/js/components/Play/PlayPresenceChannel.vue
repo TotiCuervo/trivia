@@ -7,7 +7,7 @@
     export default {
         data() {
             return {
-                catchUpTimeFlag: false,
+
             }
         },
         mounted() {
@@ -33,7 +33,7 @@
                     })
                     .listenForWhisper('revealAnswer', (e) => {
                         this.$store.commit('play/UPDATE_REVEAL_ANSWER', true);
-                    })
+                    } )
                     .listenForWhisper('catchUp', (e) => {
                         if (this.currentPage !== e.page) {
                             console.log('made it to catchUp!');
@@ -44,14 +44,17 @@
                             this.currentPage = e.page;
 
                             if (e.page === 'PlayQuestion') {
-                                this.catchUpTimeFlag = true;
+                                this.$store.commit('time/UPDATE_TIME_FLAG', true);
                             }
                         }
                     })
                     .listenForWhisper('catchUpTime', (e) => {
+                        console.log('made it to catch up time. Time:' + e.time);
                         if (this.catchUpTimeFlag) {
-                            this.$store.commit('play/UPDATE_TIMER ', e.time);
-                        }
+                            console.log('made it to catch up time flag. flag:' + this.catchUpTimeFlag);
+                            this.$store.commit('time/UPDATE_TIMER', e.time);
+                            this.$store.commit('time/UPDATE_TIME_FLAG', false);
+                          }
                     })
                     .listen('UpdatedAnswer', (e) => {
                         if (e.answer.team_id === this.loggedTeam.id) {
@@ -90,10 +93,13 @@
             ...mapActions('question', ['fetchQuestionsByGameCode']),
             ...mapActions('answer', ['fetchAnswersByGameCode']),
             ...mapActions('team', ['fetchTeamAnswers']),
+            ...mapActions('time', ['setUpTimer']),
+
 
         },
         computed: {
             ...mapGetters('team', ['team', 'teamAnswers']),
+            ...mapGetters('time', ['timer', 'catchUpTimeFlag']),
             ...mapGetters('game', ['game']),
             ...mapGetters('round', ['rounds']),
             ...mapGetters('question', ['questions']),
