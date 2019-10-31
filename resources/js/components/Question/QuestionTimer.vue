@@ -13,7 +13,8 @@
         },
         mounted() {
             this.$store.commit('play/UPDATE_TIMER', 99);
-            // this.timer = this.rounds[this.playRoundPosition].time;
+
+            // this.timer = this.rounds[this.roundPosition].time;
             this.startTimer();
         },
         methods: {
@@ -37,7 +38,8 @@
             },
         },
         computed: {
-            ...mapGetters('play', ['timer']),
+            ...mapGetters('play', ['timer', 'roundPosition']),
+            ...mapGetters('round', ['rounds']),
         },
     }
 </script>
