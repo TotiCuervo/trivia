@@ -7,7 +7,7 @@
             <!--Question Title-->
             <div class="row pt-5">
                 <div class="col-md-8 offset-md-2 text-center">
-                    <h5>{{this.questions[questionPosition].title}}</h5>
+                    <h5 v-if="this.questions[questionPosition].title">{{this.questions[questionPosition].title}}</h5>
                 </div>
             </div>
             <!--Answer Input-->
