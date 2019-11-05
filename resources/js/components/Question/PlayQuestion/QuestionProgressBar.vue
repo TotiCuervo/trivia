@@ -9,6 +9,11 @@
                 </b-progress>
             </div>
         </div>
+        <div class="row no-gutters" v-if="this.rounds[roundPosition].time">
+            <div class="col-md-12">
+                {{timer}}
+            </div>
+        </div>
     </div>
 </template>
 

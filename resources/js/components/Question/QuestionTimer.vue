@@ -13,6 +13,8 @@
         },
         mounted() {
             this.$store.commit('play/UPDATE_TIMER', 99);
+            this.$store.commit('play/UPDATE_TIMER', this.rounds[this.roundPosition].time);
+
 
             // this.timer = this.rounds[this.roundPosition].time;
             this.startTimer();
