@@ -23,6 +23,7 @@
         },
         mounted() {
             this.$store.commit('time/UPDATE_TIMER', this.rounds[this.roundPosition].time);
+            console.log('i have set the time in the question progress bar');
             this.setUpTimer(this.rounds[this.roundPosition].time);
             this.startTimer();
 

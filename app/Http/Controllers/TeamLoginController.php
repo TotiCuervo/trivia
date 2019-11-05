@@ -11,6 +11,7 @@ use Str;
 
 use App\Team;
 use App\User;
+use App\Game;
 use App\GameCode;
 use App\Model\Authenticator;
 use Illuminate\Auth\AuthenticationException;
@@ -99,6 +100,7 @@ class TeamLoginController extends Controller
 
     public function register(Request $request)
     {
+        //creates the team
         $team = new Team;
         $team->name = $request->name;
         $team->gameCode = $request->gameCode;
@@ -107,11 +109,16 @@ class TeamLoginController extends Controller
         $team->token = Str::random(32);
         $team->loggedIn = true;
 
+        //adds to database
         $team->save();
 
+        //triggers event
         $this->broadcastNewTeam($team);
 
-        return Team::findorFail($team->id);
+        //returns team
+//        return Team::findorFail($team->id);
+        return $this->retrieveGameData($team->id);
+
     }
 
     public function login(Request $request)
@@ -124,19 +131,49 @@ class TeamLoginController extends Controller
             return 'unauthorized';
         }
 
-//        Log::error($team->loggedIn);
+        //if they are loggedIn, do not let them in
         if ($team->loggedIn === 1) {
             return 'alreadyLoggedIn';
-        } else {
+        }
+        //if not logged in, let them in
+        else {
             $team->loggedIn = true;
             $team->save();
         }
 
+        //triggers event
         $this->broadcastNewTeam($team);
 
         //if authorized, return the team
-        return Team::findorFail($team->id);
+//        return Team::findorFail($team->id);
+
+
+        return $this->retrieveGameData($team->id);
+
     }
+
+    public function retrieveGameData($id) {
+
+        $team = Team::findorFail($id);
+
+        $game = Game::findorFail(GameCode::where('code', $team->gameCode)->first()->game_id);
+
+        $info = array (
+            'team' => $team,
+            'game' => $game,
+            'rounds' => $game->rounds()->orderBy('order_number', 'ASC')->get(),
+            'questions' => $game->questions()->orderBy('round_id', 'ASC')->orderBy('order_number', 'ASC')->get(),
+            'teamAnswers' => $team->teamAnswers()->get(),
+        );
+
+        return $info;
+
+    }
+
+
+
+
+
 
     public function logout($id){
         Log::error('made it to logout');

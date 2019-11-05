@@ -13,28 +13,25 @@
         mounted() {
 
             if(this.team.gameCode) {
-                this.fetchDataByGameCode(this.team.gameCode);
-                this.fetchRoundsByGameCode(this.team.gameCode);
-                this.fetchQuestionsByGameCode(this.team.gameCode);
-                this.fetchAnswersByGameCode(this.team.gameCode);
-                this.fetchTeamAnswers(this.team.id);
-
 
                 Echo.join('game.' + this.loggedTeam.gameCode)
                     .here((users) => {
-                        console.log('i am waking up, where we at?');
+
                     })
                     .listenForWhisper('togglePage', (e) => {
+
                         console.log('made it to togglePage');
                         console.log('going to ' + e.page);
                         this.playQuestionPosition = e.questionPosition;
                         this.playRoundPosition = e.roundPosition;
                         this.currentPage = e.page;
+
                     })
                     .listenForWhisper('revealAnswer', (e) => {
                         this.$store.commit('play/UPDATE_REVEAL_ANSWER', true);
-                    } )
+                    })
                     .listenForWhisper('catchUp', (e) => {
+
                         if (this.currentPage !== e.page) {
                             console.log('made it to catchUp!');
                             console.log('going to ' + e.page);
@@ -47,10 +44,12 @@
                                 this.$store.commit('time/UPDATE_TIME_FLAG', true);
                             }
                         }
+
                     })
                     .listenForWhisper('catchUpTime', (e) => {
                         console.log('made it to catch up time. Time:' + e.time);
                         if (this.catchUpTimeFlag) {
+                            console.log('current Page:' + this.page);
                             console.log('made it to catch up time flag. flag:' + this.catchUpTimeFlag);
                             this.$store.commit('time/UPDATE_TIMER', e.time);
                             this.$store.commit('time/UPDATE_TIME_FLAG', false);
