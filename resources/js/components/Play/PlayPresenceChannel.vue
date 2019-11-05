@@ -48,7 +48,7 @@
                     })
                     .listenForWhisper('catchUpTime', (e) => {
                         console.log('made it to catch up time. Time:' + e.time);
-                        if (this.catchUpTimeFlag || (e.time - this.timer) >= 3) {
+                        if (this.catchUpTimeFlag || (this.timer - e.time) >= 3) {
                             console.log('current Page:' + this.page);
                             console.log('made it to catch up time flag. flag:' + this.catchUpTimeFlag);
                             this.$store.commit('time/UPDATE_TIMER', e.time);
