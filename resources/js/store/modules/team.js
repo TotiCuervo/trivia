@@ -1,6 +1,7 @@
 function initialState() {
     return {
         teams: [],
+        leaderBoard: [],
         team: {
             id: '',
             name: '',
@@ -21,6 +22,9 @@ const getters = {
     },
     teams(state){
         return state.teams;
+    },
+    leaderBoard(state) {
+        return state.leaderBoard;
     },
     teamAnswers(state){
         return state.answers;
@@ -97,8 +101,39 @@ const actions = {
             .then (response => {
                 commit('SET_TEAMS', response.data)
             });
-    }
+    },
+    sortLeaderBoard({commit, state}) {
+        let $place = 1;
+        let $points = 0;
+        let $lb = [];
 
+        for (let $i = 0; $i < state.teams.length; $i++) {
+
+            $points = state.teams[$i].points;
+
+            for (let $b = 0; $b < state.teams.filter(x => x.points === $points).length; $b++) {
+
+                $lb.push({
+                    place: $place,
+                    name: state.teams.filter(x => x.points === $points)[$b].name,
+                    id: state.teams.filter(x => x.points === $points)[$b].id,
+                    double: state.teams.filter(x => x.points === $points)[$b].double,
+                    triple: state.teams.filter(x => x.points === $points)[$b].triple,
+                    loggedIn: state.teams.filter(x => x.points === $points)[$b].loggedIn,
+                    points: state.teams.filter(x => x.points === $points)[$b].points,
+                });
+
+                $i++;
+
+            }
+
+            $place++;
+            $i--;
+
+        }
+
+        commit('SET_LEADER_BOARD', $lb);
+    }
 
 };
 
@@ -111,6 +146,9 @@ const mutations = {
     },
     SET_TEAMS(state,teams) {
         state.teams = teams;
+    },
+    SET_LEADER_BOARD(state, leaderBoard) {
+        state.leaderBoard = leaderBoard;
     },
     SET_TEAM_ANSWERS(state,answers) {
         for (let $i=0; $i < answers.length; $i++) {

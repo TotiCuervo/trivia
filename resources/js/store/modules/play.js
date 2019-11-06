@@ -54,7 +54,7 @@ const actions = {
         Echo.join('game.'+ state.gameCode.code).whisper("revealAnswer", {});
     },
 
-    catchTeamUp({ commit, state }) {
+    catchTeamUp({ commit, state, rootState, dispatch}) {
         console.log('in catchTeamUp');
         let $catchUpPage = '';
 
@@ -75,13 +75,6 @@ const actions = {
                 $catchUpPage = '';
         }
 
-        if (state.page !== 'HostLobby') {
-            Echo.join('game.'+ state.gameCode.code).whisper("catchUp", {
-                roundPosition: state.roundPosition,
-                questionPosition: state.questionPosition,
-                page: $catchUpPage
-            });
-        }
 
         //conditions functions
         if ($catchUpPage === 'PlayQuestion') {
@@ -90,8 +83,28 @@ const actions = {
                 time: state.timer
             });
         }
+        else if ($catchUpPage === 'PlayLeaderBoard') {
+            dispatch('sendPlayersLeaderBoard', rootState.team.leaderBoard);
+        }
 
-    }
+        //Sends Page
+        if (state.page !== 'HostLobby') {
+            Echo.join('game.'+ state.gameCode.code).whisper("catchUp", {
+                roundPosition: state.roundPosition,
+                questionPosition: state.questionPosition,
+                page: $catchUpPage
+            });
+        }
+
+    },
+
+    sendPlayersLeaderBoard({ commit, state }, leaderBoard) {
+        console.log('in sending players leaderboard Sending: ' +leaderBoard);
+        Echo.join('game.'+ state.gameCode.code).whisper("updateLeaderBoard", {
+            leaderBoard: leaderBoard,
+        });
+
+    },
 
 };
 

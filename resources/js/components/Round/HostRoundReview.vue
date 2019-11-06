@@ -1,6 +1,5 @@
 <template>
     <div>
-
         <!--SubHeader-->
         <div class="row pb-3 pt-3 host-subHeader">
             <div class="col-12">
@@ -56,15 +55,15 @@
                 <div class="d-flex align-items-center justify-content-between">
 
                     <!--Left Arrow-->
-                    <span v-if="currentQuestionPosition !== 0" class="float-right fa-2x first-gray then-black trans-1" @click="clickLeft()"><i class="fas fa-arrow-circle-left"></i></span>
-                    <span v-else class="float-right fa-2x first-gray"><i class="fas fa-arrow-circle-left"></i></span>
+                    <span v-if="currentQuestionPosition !== 0" class="float-right fa-2x first-gray then-black trans-1 clicker" @click="clickLeft()"><i class="fas fa-arrow-circle-left"></i></span>
+                    <span v-else class="float-right fa-2x first-gray not-allowed"><i class="fas fa-arrow-circle-left"></i></span>
 
                     <!--Question Number-->
                     <h5 class="m-0">Question {{currentQuestionPosition + 1}}</h5>
 
                     <!--Right Arrow-->
-                    <span v-if="currentQuestionPosition !== roundQuestions.length - 1" class="float-right fa-2x first-gray then-black trans-1" @click="clickRight()"><i class="fas fa-arrow-circle-right"></i></span>
-                    <span v-else class="float-right fa-2x first-gray"><i class="fas fa-arrow-circle-right"></i></span>
+                    <span v-if="currentQuestionPosition !== roundQuestions.length - 1" class="float-right fa-2x first-gray then-black trans-1  clicker" @click="clickRight()"><i class="fas fa-arrow-circle-right"></i></span>
+                    <span v-else class="float-right fa-2x first-gray not-allowed"><i class="fas fa-arrow-circle-right"></i></span>
 
                 </div>
             </div>
@@ -120,30 +119,36 @@
             }
         },
         mounted() {
-
+            //Gets the questions for this round
             this.roundQuestions = this.questions.filter(x => x.round_id === this.rounds[this.playRoundPosition].id);
 
             //Change page for players
             this.sendPlayersPage('PlayRoundReview');
-            // axios.post('/api/host/'+ this.gameCode.code + '/round/' + this.playRoundPosition +'/question/' + 0 + '/currentPage/' + 'PlayRoundReview');
         },
         methods: {
-            ...mapActions('play', ['sendPlayersPage']),
+            ...mapActions('play', ['sendPlayersPage', 'sendPlayersLeaderBoard']),
+            ...mapActions('team', ['sortLeaderBoard']),
             startAnswerReveal() {
+                //Discovers the index for the answer reveal
                 for (let $i=0; $i < this.questions.length; $i++) {
                     if (this.questions[$i].round_id === this.rounds[this.playRoundPosition].id && this.questions[$i].order_number === 1) {
                         this.playQuestionPosition = $i;
                     }
                 }
 
+                //Sends the players the reveal answer page
                 this.sendPlayersPage('PlayRevealAnswer');
 
+                //Send players the updated teams
+                axios.post('/api/team/'+ this.gameCode.code +'/leaderBoard')
+                    .then (response => {
+                        this.$store.commit('team/SET_TEAMS', response.data);
+                        this.sortLeaderBoard();
+                        this.sendPlayersLeaderBoard(this.leaderBoard);
+                    });
 
-                // axios.post('/api/host/' + this.gameCode.code + '/round/'+ this.playRoundPosition + '/question/' + this.playQuestionPosition + '/currentPage/'+'PlayRevealAnswer')
-                //     .then(response => {
-                //
-                //     });
 
+                //Sets the current page
                 this.currentPage = 'HostAnswerReveal';
             },
             clickLeft() {
@@ -163,7 +168,7 @@
             ...mapGetters('answer', ['answers']),
             ...mapGetters('round', ['rounds']),
             ...mapGetters('play', ['roundPosition', 'questionPosition', 'page']),
-            ...mapGetters('team', ['teams', 'teamAnswers']),
+            ...mapGetters('team', ['teams', 'teamAnswers', 'leaderBoard']),
             playRoundPosition: {
                 get() {
                     return this.roundPosition;

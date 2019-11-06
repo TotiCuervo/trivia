@@ -40,6 +40,7 @@
             }
         },
         mounted() {
+
             let vm = this;
             setTimeout(function(){
                 vm.show_description = true;

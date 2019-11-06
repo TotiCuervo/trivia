@@ -163,6 +163,7 @@ class TeamLoginController extends Controller
             'game' => $game,
             'rounds' => $game->rounds()->orderBy('order_number', 'ASC')->get(),
             'questions' => $game->questions()->orderBy('round_id', 'ASC')->orderBy('order_number', 'ASC')->get(),
+            'answers' => $game->answers()->get(),
             'teamAnswers' => $team->teamAnswers()->get(),
         );
 

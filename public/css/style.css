@@ -219,6 +219,8 @@
     cursor: pointer;
 }
 
+.not-allowed {cursor: not-allowed;}
+
 .pointer {
     cursor: default;
 }

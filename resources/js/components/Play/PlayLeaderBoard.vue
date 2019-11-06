@@ -38,14 +38,14 @@
     export default {
         data() {
             return {
-                leaderBoard: []
+
             }
         },
         mounted() {
-            this.sortLeaderBoard();
+            // this.sortLeaderBoard();
         },
         computed: {
-            ...mapGetters('team', ['teams', 'team']),
+            ...mapGetters('team', ['teams', 'team', 'leaderBoard']),
             ...mapGetters('user', ['darkMode']),
 
             loggedTeam: {
@@ -84,6 +84,7 @@
               }
           }
         },
+
         watch: {
             teams: function() {
                 this.sortLeaderBoard();

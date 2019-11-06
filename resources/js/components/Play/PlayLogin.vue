@@ -134,6 +134,7 @@
 
                         console.log(response);
                         console.log(response.data.team);
+
                         //if it is unauthorized, throw unauthorized error
                         if (response.data === 'unauthorized') {
                             this.error = 'unauthorized';
@@ -150,8 +151,8 @@
                             this.$store.commit('game/SET_GAME', response.data.game);
                             this.$store.commit('round/SET_ROUNDS', response.data.rounds);
                             this.$store.commit('question/SET_QUESTIONS', response.data.questions);
+                            this.$store.commit('answer/SET_ANSWERS', response.data.answers);
                             this.$store.commit('team/SET_TEAM_ANSWERS', response.data.teamAnswers);
-
                             localStorage.setItem('user-token',  response.data.token);
                             this.$router.push({name: "playInterface"});
 

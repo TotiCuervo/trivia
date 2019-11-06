@@ -55,29 +55,33 @@
                             this.$store.commit('time/UPDATE_TIME_FLAG', false);
                           }
                     })
+                    .listenForWhisper('updateLeaderBoard', (e) => {
+                        this.$store.commit('team/SET_LEADER_BOARD', e.leaderBoard);
+                        console.log('this leaderboard:' + this.leaderBoard)
+                     })
                     .listen('UpdatedAnswer', (e) => {
                         if (e.answer.team_id === this.loggedTeam.id) {
                             this.$store.commit('team/UPDATE_TEAM_ANSWER', e.answer);
                         }
                     })
-                    .listen('UpdateTeams', (e) => {
-                        console.log('Updated Teams:');
-                        console.log(e.teams);
-                        this.$store.commit('team/SET_TEAMS', e.teams);
-
-                        if (e.teams.find(x => x.id === this.loggedTeam.id && x.name !== this.loggedTeam.name)) {
-                            this.loggedTeam = e.teams.find(x => x.id === this.loggedTeam.id);
-                        }
-
-                        if (!(e.teams.find(x => x.id === this.loggedTeam.id))) {
-                            // console.log('you were logged off');
-                            this.currentPage = '';
-                            this.playQuestionPosition = '';
-                            this.playRoundPosition = '';
-                            this.$router.push({name: "playLogin"});
-                        }
-
-                    })
+                    // .listen('UpdateTeams', (e) => {
+                    //     console.log('Updated Teams:');
+                    //     console.log(e.teams);
+                    //     this.$store.commit('team/SET_TEAMS', e.teams);
+                    //
+                    //     if (e.teams.find(x => x.id === this.loggedTeam.id && x.name !== this.loggedTeam.name)) {
+                    //         this.loggedTeam = e.teams.find(x => x.id === this.loggedTeam.id);
+                    //     }
+                    //
+                    //     if (!(e.teams.find(x => x.id === this.loggedTeam.id))) {
+                    //         // console.log('you were logged off');
+                    //         this.currentPage = '';
+                    //         this.playQuestionPosition = '';
+                    //         this.playRoundPosition = '';
+                    //         this.$router.push({name: "playLogin"});
+                    //     }
+                    //
+                    // })
                     .listen('AreYouThere', (e) => {
                         axios.post('/api/team/' + this.team.id + '/iAmHere');
                     });
@@ -94,10 +98,9 @@
             ...mapActions('team', ['fetchTeamAnswers']),
             ...mapActions('time', ['setUpTimer']),
 
-
         },
         computed: {
-            ...mapGetters('team', ['team', 'teamAnswers']),
+            ...mapGetters('team', ['team', 'teamAnswers', 'leaderBoard']),
             ...mapGetters('time', ['timer', 'catchUpTimeFlag']),
             ...mapGetters('game', ['game']),
             ...mapGetters('round', ['rounds']),
@@ -136,7 +139,6 @@
                     return this.$store.commit('play/SET_PAGE', value);
                 }
             }
-
         },
         watch: {
             questionPosition: function () {
