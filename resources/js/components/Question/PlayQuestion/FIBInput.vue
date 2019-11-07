@@ -36,7 +36,9 @@
         },
         methods: {
             focusOnQuestion() {
-                this.$refs.question.focus();
+                // window.scrollTo(0, 0);
+                document.getElementById('question').scrollIntoView();
+                // this.
             }
 
 
