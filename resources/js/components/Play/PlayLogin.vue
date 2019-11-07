@@ -17,6 +17,8 @@
                     id="play-code"
                     placeholder="Enter your Play Code"
                     @click="validCode = ''"
+                    type="number"
+                    pattern="\d*"
                 ></b-form-input>
                 <b-form-invalid-feedback id="play-code">
                     Sorry :( wrong play code
