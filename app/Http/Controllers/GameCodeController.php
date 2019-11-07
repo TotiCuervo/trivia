@@ -43,7 +43,8 @@ class GameCodeController extends Controller
         $game = Game::findorFail($id);
 
         $gameCode = $game->gameCodes()->create([
-            'code' => strtoupper(Str::random(5)),
+//            'code' => strtoupper(Str::random(5)),
+            'code' => random_int(10000, 99999),
             'expirationTime' => date("Y-m-d H:m:s", strtotime('+24 hours')),
         ]);
 

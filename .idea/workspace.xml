@@ -3,7 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="f562f43b-05cf-4003-ae95-b369e5751c9b" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Play/PlayLogin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Play/PlayLogin.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/GameCodeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/GameCodeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Host/HostLobby.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Host/HostLobby.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Question/PlayQuestion/FIBInput.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Question/PlayQuestion/FIBInput.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Question/PlayQuestion/PlayQuestion.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Question/PlayQuestion/PlayQuestion.vue" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -271,7 +275,7 @@
       <workItem from="1572399780065" duration="164000" />
       <workItem from="1572462190394" duration="31690000" />
       <workItem from="1572985594542" duration="2912000" />
-      <workItem from="1572989107455" duration="8317000" />
+      <workItem from="1572989107455" duration="9146000" />
     </task>
     <servers />
   </component>

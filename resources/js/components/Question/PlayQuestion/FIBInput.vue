@@ -5,6 +5,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <b-form-input
+                            @click="focusOnQuestion"
                             id="input-large"
                             size="lg"
                             placeholder="Enter your answer"
@@ -34,6 +35,9 @@
 
         },
         methods: {
+            focusOnQuestion() {
+                this.$refs.question.focus();
+            }
 
 
         },

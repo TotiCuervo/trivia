@@ -8,7 +8,7 @@
                     <!--left-->
                     <h6 class="m-0 float-left flex-grow-1"><i class="fas fa-user-friends"></i>: {{this.teams.length}} Teams</h6>
 
-                    <h6 class="m-0 flex-grow-1 d-none d-sm-flex">Join this game the code: <u><b>{{this.gameCode.code}}</b></u></h6>
+                    <h6 class="m-0 flex-grow-1 d-none d-sm-flex">Join this game the code:&nbsp;<u><b>{{this.gameCode.code}}</b></u></h6>
 
                     <!--right-->
                     <div class="float-right">
