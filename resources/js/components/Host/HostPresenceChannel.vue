@@ -113,39 +113,6 @@
         },
         methods: {
             ...mapActions('play', ['catchTeamUp']),
-            catchUpTeam(team) {
-                // this is used to catch up a new user if they logged in
-
-                if (this.acceptablePages.find(x => x === this.currentPage)) {
-
-                    let $playerPage = '';
-
-                    switch (this.currentPage) {
-                        case 'HostRoundReview':
-                            $playerPage = 'PlayRoundReview';
-                            break;
-                        case 'HostRoundPreview':
-                            $playerPage = 'PlayRoundPreview';
-                            break;
-                        case 'HostLeaderBoard':
-                            $playerPage = 'PlayLeaderBoard';
-                            break;
-                    }
-
-                    console.log('made it to catchUpTeam. Sending:');
-                    console.log($playerPage);
-                    console.log('To Player:');
-                    console.log(team.name);
-
-                    axios.post('/api/host/'+ this.gameCode.code + '/round/' + this.playRoundPosition +'/question/' + this.playQuestionPosition + '/currentPage/' + $playerPage);
-
-                    if ($playerPage === 'PlayLeaderBoard') {
-                        axios.post('/api/team/'+ this.gameCode.code +'/leaderBoard');
-                    }
-
-                }
-
-            },
             newPlayerToast(team) {
                 this.$bvToast.toast(`${team.name} has joined the game!`, {
                     title: `New Player!`,

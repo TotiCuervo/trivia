@@ -67,6 +67,8 @@
         },
         beforeDestroy() {
             clearInterval(this.stopWatch);
+            this.$store.commit('time/SET_VARIANT_COLOR', 'success');
+
         },
         watch: {
             questionPosition: function () {

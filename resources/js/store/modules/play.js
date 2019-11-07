@@ -55,7 +55,7 @@ const actions = {
     },
 
     catchTeamUp({ commit, state, rootState, dispatch}) {
-        console.log('in catchTeamUp');
+        console.log('in catchTeamUp. Current Page:'+ state.page);
         let $catchUpPage = '';
 
         switch (state.page) {
@@ -71,29 +71,38 @@ const actions = {
             case 'HostQuestion':
                 $catchUpPage = 'PlayQuestion';
                 break;
+            case 'HostAnswerReveal':
+                $catchUpPage = 'PlayRevealAnswer';
+                break;
             default:
                 $catchUpPage = '';
         }
 
 
-        //conditions functions
+        //conditional functions that should be sent before page
+        if ($catchUpPage === 'PlayLeaderBoard') {
+            dispatch('sendPlayersLeaderBoard', rootState.team.leaderBoard);
+        }
+
+        //Sends Page
+        if ($catchUpPage !== '') {
+            console.log('in sending players page. Sending: ' + $catchUpPage);
+            Echo.join('game.'+ state.gameCode.code).whisper("catchUp", {
+                roundPosition: state.roundPosition,
+                questionPosition: state.questionPosition,
+                page: $catchUpPage
+            });
+        }
+
+        //conditions functions that should be sent after page
         if ($catchUpPage === 'PlayQuestion') {
             console.log('sending time: ' + state.timer);
             Echo.join('game.'+ state.gameCode.code).whisper("catchUpTime", {
                 time: state.timer
             });
         }
-        else if ($catchUpPage === 'PlayLeaderBoard') {
-            dispatch('sendPlayersLeaderBoard', rootState.team.leaderBoard);
-        }
-
-        //Sends Page
-        if (state.page !== 'HostLobby') {
-            Echo.join('game.'+ state.gameCode.code).whisper("catchUp", {
-                roundPosition: state.roundPosition,
-                questionPosition: state.questionPosition,
-                page: $catchUpPage
-            });
+        else if ($catchUpPage === 'PlayRevealAnswer') {
+            dispatch('revealAnswerToPlayers');
         }
 
     },
@@ -125,6 +134,7 @@ const mutations = {
         state.gameCode = gameCode;
     },
     UPDATE_REVEAL_ANSWER(state, revealAnswer) {
+        console.log('made it to reveal answer update');
         state.revealAnswer = revealAnswer;
     },
     UPDATE_TIMER(state, time) {

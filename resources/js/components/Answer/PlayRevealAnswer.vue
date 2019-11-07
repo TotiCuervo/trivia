@@ -100,7 +100,8 @@
                 this.show_loading = true;
                 this.show_answer = false;
                 this.runTransitions();
-
+                this.$store.commit('play/UPDATE_REVEAL_ANSWER', false);
+                console.log('updated reveal answer');
             },
         }
 
