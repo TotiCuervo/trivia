@@ -4,7 +4,7 @@
             <div class="col-md-4 offset-md-4 text-center">
                 <div class="row">
                     <div class="col-md-12">
-                        <b-form-input id="input-large" size="lg" placeholder="Enter your answer" v-model="playerAnswer"></b-form-input>
+                        <b-form-input id="input-large" size="lg" placeholder="Enter your answer" v-model="playerAnswer" autocapitalize="none" autocorrect="off" autocomplete="off"></b-form-input>
                     </div>
                 </div>
             </div>
