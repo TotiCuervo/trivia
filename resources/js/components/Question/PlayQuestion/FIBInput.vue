@@ -8,7 +8,7 @@
                             id="input-large"
                             size="lg"
                             placeholder="Enter your answer"
-                            -model="playerAnswer"
+                            v-model="playerAnswer"
                             autocapitalize="none"
                             autocorrect="off"
                             autocomplete="off"
