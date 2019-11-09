@@ -79,7 +79,9 @@
             }
         },
         methods: {
-            ...mapActions('team', ['deleteTeam']),
+            ...mapActions('team', ['deleteTeam', 'sortLeaderBoard',]),
+            ...mapActions('host', ['kickTeamOut', 'changePlayerName', 'sendPlayersLeaderBoard']),
+
             clicked(value) {
                 this.click = value;
             },
@@ -90,13 +92,17 @@
                 axios.post('/api/team/' + this.team.id + '/edit', {
                     name: this.nameChange
                 }).then(response => {
-                    this.$store.commit('SET_TEAMS', response.data);
+                    this.$store.commit('team/SET_TEAMS', response.data);
+                    this.sortLeaderBoard();
+                    this.changePlayerName({team: this.team, newName: this.nameChange});
+                    this.sendPlayersLeaderBoard();
                 });
 
                 this.click = '';
             },
             deleteUser() {
                 this.deleteTeam();
+                this.kickTeamOut(this.team);
                 this.$bvModal.hide('team');
             }
         },

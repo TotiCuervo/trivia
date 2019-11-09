@@ -80,11 +80,7 @@ class TeamAnswerController extends Controller
         $teamAnswer->correct = !($teamAnswer->correct);
         $teamAnswer->save();
 
-        Log::error($teamAnswer->correct);
-        Log::error('$teamAnswer->correct');
-
-
-        if ($teamAnswer->correct === true) {
+        if ($teamAnswer->correct) {
             $this->addPointsToTeam($teamAnswer, $teamAnswer->points);
         } else {
             $this->addPointsToTeam($teamAnswer, 0 - $teamAnswer->points);

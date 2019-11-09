@@ -1,7 +1,7 @@
 <template>
     <div>
-        <div class="row pt-3">
-            <div class="col-md-4 offset-md-4 text-center">
+        <div class="row pt-3 justify-content-center">
+            <div class="col-md-6 col-lg-4 text-center">
                 <div v-for="(answer,index) in this.answers.filter(x => x.question_id === this.questions[this.questionPosition].id)">
                     <div class="row pb-3">
                         <div class="col-md-12 text-center">

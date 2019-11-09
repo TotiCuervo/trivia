@@ -11,6 +11,7 @@ import question from './modules/question';
 import answer from './modules/answer';
 import team from './modules/team';
 import play from './modules/play';
+import host from './modules/host';
 import time from './modules/time';
 
 
@@ -28,7 +29,8 @@ export const store = new Vuex.Store({
         answer,
         team,
         play,
-        time
+        time,
+        host
     },
     strict: debug
 });

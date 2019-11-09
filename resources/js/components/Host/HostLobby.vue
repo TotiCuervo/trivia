@@ -49,13 +49,13 @@
         computed: {
             ...mapGetters('game', ['game', 'game_id', 'gameCode']),
             ...mapGetters('team', ['teams']),
-            ...mapGetters('play', ['roundPosition', 'questionPosition', 'page']),
+            ...mapGetters('host', ['roundPosition', 'questionPosition', 'page']),
             currentPage: {
                 get() {
                     return this.page;
                 },
                 set(value) {
-                    return this.$store.commit('play/SET_PAGE', value);
+                    return this.$store.commit('host/SET_PAGE', value);
                 }
             },
 

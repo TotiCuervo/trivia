@@ -48,7 +48,7 @@
 
             this.currentPage = 'HostLobby';
 
-            this.$store.commit('play/SET_GAME_CODE', this.gameCode);
+            this.$store.commit('host/SET_GAME_CODE', this.gameCode);
 
             window.onbeforeunload = function(e) {
                 return 'Are you sure you want to leave? You will lose all game data';
@@ -63,7 +63,7 @@
         computed: {
             ...mapGetters('game', ['game', 'game_id', 'gameCode']),
             ...mapGetters('round', ['rounds']),
-            ...mapGetters('play', ['roundPosition', 'questionPosition', 'page']),
+            ...mapGetters('host', ['roundPosition', 'questionPosition', 'page']),
             game_code: {
                 get() {
                     return this.gameCode;
@@ -77,7 +77,7 @@
                     return this.page;
                 },
                 set(value) {
-                    return this.$store.commit('play/SET_PAGE', value);
+                    return this.$store.commit('host/SET_PAGE', value);
                 }
             }
 

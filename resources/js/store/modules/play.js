@@ -40,80 +40,10 @@ const getters = {
 
 const actions = {
 
-    sendPlayersPage({ commit, state }, page) {
-        console.log('in sending players page. Sending: ' + page);
-        Echo.join('game.'+ state.gameCode.code).whisper("togglePage", {
-            roundPosition: state.roundPosition,
-            questionPosition: state.questionPosition,
-            page: page
-        });
 
-    },
+    sendAnswerToHost({commit, state}, answer) {
 
-    revealAnswerToPlayers({ commit, state }) {
-        Echo.join('game.'+ state.gameCode.code).whisper("revealAnswer", {});
-    },
-
-    catchTeamUp({ commit, state, rootState, dispatch}) {
-        console.log('in catchTeamUp. Current Page:'+ state.page);
-        let $catchUpPage = '';
-
-        switch (state.page) {
-            case 'HostRoundReview':
-                $catchUpPage = 'PlayRoundReview';
-                break;
-            case 'HostRoundPreview':
-                $catchUpPage = 'PlayRoundPreview';
-                break;
-            case 'HostLeaderBoard':
-                $catchUpPage = 'PlayLeaderBoard';
-                break;
-            case 'HostQuestion':
-                $catchUpPage = 'PlayQuestion';
-                break;
-            case 'HostAnswerReveal':
-                $catchUpPage = 'PlayRevealAnswer';
-                break;
-            default:
-                $catchUpPage = '';
-        }
-
-
-        //conditional functions that should be sent before page
-        if ($catchUpPage === 'PlayLeaderBoard') {
-            dispatch('sendPlayersLeaderBoard', rootState.team.leaderBoard);
-        }
-
-        //Sends Page
-        if ($catchUpPage !== '') {
-            console.log('in sending players page. Sending: ' + $catchUpPage);
-            Echo.join('game.'+ state.gameCode.code).whisper("catchUp", {
-                roundPosition: state.roundPosition,
-                questionPosition: state.questionPosition,
-                page: $catchUpPage
-            });
-        }
-
-        //conditions functions that should be sent after page
-        if ($catchUpPage === 'PlayQuestion') {
-            console.log('sending time: ' + state.timer);
-            Echo.join('game.'+ state.gameCode.code).whisper("catchUpTime", {
-                time: state.timer
-            });
-        }
-        else if ($catchUpPage === 'PlayRevealAnswer') {
-            dispatch('revealAnswerToPlayers');
-        }
-
-    },
-
-    sendPlayersLeaderBoard({ commit, state }, leaderBoard) {
-        console.log('in sending players leaderboard Sending: ' +leaderBoard);
-        Echo.join('game.'+ state.gameCode.code).whisper("updateLeaderBoard", {
-            leaderBoard: leaderBoard,
-        });
-
-    },
+    }
 
 };
 

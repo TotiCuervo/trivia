@@ -88,7 +88,8 @@
                 id: null,
             }
         },
-        created() {
+        mounted() {
+            document.querySelector('body').className = 'trivalo-background';
 
         },
         methods: {

@@ -56,7 +56,7 @@
             this.sendPlayersPage('PlayRoundPreview');
         },
         methods: {
-            ...mapActions('play', ['sendPlayersPage']),
+            ...mapActions('host', ['sendPlayersPage']),
 
             upNext() {
                 for (let $i=0; $i < this.questions.length; $i++) {
@@ -74,13 +74,13 @@
             ...mapGetters('round', ['rounds']),
             ...mapGetters('question', ['questions']),
             ...mapGetters('game', ['gameCode']),
-            ...mapGetters('play', ['roundPosition', 'questionPosition', 'page']),
+            ...mapGetters('host', ['roundPosition', 'questionPosition', 'page']),
             playRoundPosition: {
                 get() {
                     return this.roundPosition;
                 },
                 set(value) {
-                    return this.$store.commit('play/SET_ROUND_POSITION', value);
+                    return this.$store.commit('host/SET_ROUND_POSITION', value);
                 }
             },
             playQuestionPosition: {
@@ -88,7 +88,7 @@
                     return this.questionPosition;
                 },
                 set(value) {
-                    return this.$store.commit('play/SET_QUESTION_POSITION', value);
+                    return this.$store.commit('host/SET_QUESTION_POSITION', value);
                 }
             },
             currentPage: {
@@ -96,7 +96,7 @@
                     return this.page;
                 },
                 set(value) {
-                    return this.$store.commit('play/SET_PAGE', value);
+                    return this.$store.commit('host/SET_PAGE', value);
                 }
             }
         },

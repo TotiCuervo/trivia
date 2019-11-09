@@ -73,6 +73,10 @@
                         if (this.currentPage !== 'HostLobby') {
                             this.newPlayerToast(e.team);
                         }
+
+                        this.sortLeaderBoard();
+                        this.sendPlayersLeaderBoard();
+
                     }
 
                     // this.catchUpTeam(e.team);
@@ -112,10 +116,12 @@
 
         },
         methods: {
-            ...mapActions('play', ['catchTeamUp']),
-            newPlayerToast(team) {
+            ...mapActions('host', ['catchTeamUp', 'sendPlayersLeaderBoard']),
+            ...mapActions('team', ['sortLeaderBoard']),
+
+            newhosterToast(team) {
                 this.$bvToast.toast(`${team.name} has joined the game!`, {
-                    title: `New Player!`,
+                    title: `New player!`,
                     variant: 'info',
                     solid: true
                 })
@@ -124,14 +130,14 @@
         computed: {
             ...mapGetters('game', ['game', 'game_id', 'gameCode']),
             ...mapGetters('round', ['rounds']),
-            ...mapGetters('play', ['roundPosition', 'questionPosition', 'page']),
+            ...mapGetters('host', ['roundPosition', 'questionPosition', 'page']),
             ...mapGetters('team', ['teams', 'teamAnswers']),
             playRoundPosition: {
                 get() {
                     return this.roundPosition;
                 },
                 set(value) {
-                    return this.$store.commit('play/SET_ROUND_POSITION', value);
+                    return this.$store.commit('host/SET_ROUND_POSITION', value);
                 }
             },
             playQuestionPosition: {
@@ -139,7 +145,7 @@
                     return this.questionPosition;
                 },
                 set(value) {
-                    return this.$store.commit('play/SET_QUESTION_POSITION', value);
+                    return this.$store.commit('host/SET_QUESTION_POSITION', value);
                 }
             },
             currentPage: {
@@ -147,7 +153,7 @@
                     return this.page;
                 },
                 set(value) {
-                    return this.$store.commit('play/SET_PAGE', value);
+                    return this.$store.commit('host/SET_PAGE', value);
                 }
             },
             gameTeams: {

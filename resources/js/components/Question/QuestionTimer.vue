@@ -12,8 +12,8 @@
             }
         },
         mounted() {
-            // this.$store.commit('play/UPDATE_TIMER', 3);
-            this.$store.commit('play/UPDATE_TIMER', this.rounds[this.roundPosition].time);
+            this.$store.commit('host/UPDATE_TIMER', 3);
+            // this.$store.commit('host/UPDATE_TIMER', this.rounds[this.roundPosition].time);
 
 
             // this.timer = this.rounds[this.roundPosition].time;
@@ -27,7 +27,7 @@
 
                 setTimeout(function () {
 
-                    vm.$store.commit('play/UPDATE_TIMER', vm.timer - 1);
+                    vm.$store.commit('host/UPDATE_TIMER', vm.timer - 1);
 
                     // vm.timer = vm.timer - 1;
 
@@ -40,7 +40,7 @@
             },
         },
         computed: {
-            ...mapGetters('play', ['timer', 'roundPosition']),
+            ...mapGetters('host', ['timer', 'roundPosition']),
             ...mapGetters('round', ['rounds']),
         },
     }

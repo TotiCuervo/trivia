@@ -35,13 +35,13 @@
 
         },
         computed: {
-            ...mapGetters('play', ['page']),
+            ...mapGetters('host', ['page']),
             currentPage: {
                 get() {
                     return this.page;
                 },
                 set(value) {
-                    return this.$store.commit('play/SET_PAGE', value);
+                    return this.$store.commit('host/SET_PAGE', value);
                 }
             }
         }

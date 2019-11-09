@@ -6,13 +6,11 @@
 
     export default {
         data() {
-            return {
-
-            }
+            return {}
         },
         mounted() {
 
-            if(this.team.gameCode) {
+            if (this.team.gameCode) {
 
                 Echo.join('game.' + this.loggedTeam.gameCode)
                     .here((users) => {
@@ -53,12 +51,26 @@
                             console.log('made it to catch up time flag. flag:' + this.catchUpTimeFlag);
                             this.$store.commit('time/UPDATE_TIMER', e.time);
                             this.$store.commit('time/UPDATE_TIME_FLAG', false);
-                          }
+                        }
                     })
                     .listenForWhisper('updateLeaderBoard', (e) => {
                         this.$store.commit('team/SET_LEADER_BOARD', e.leaderBoard);
                         console.log('this leaderboard:' + this.leaderBoard)
-                     })
+                    })
+                    .listenForWhisper('kickedOut', (e) => {
+                        if (e.team.id === this.loggedTeam.id) {
+                            // console.log('you were logged off');
+                            this.currentPage = '';
+                            this.playQuestionPosition = '';
+                            this.playRoundPosition = '';
+                            this.$router.push({name: "playLogin"});
+                        }
+                    })
+                    .listenForWhisper('newPlayerName', (e) => {
+                        if (e.team.id === this.loggedTeam.id) {
+                            this.$store.commit('team/SET_NAME', e.newName);
+                        }
+                    })
                     .listen('UpdatedAnswer', (e) => {
                         if (e.answer.team_id === this.loggedTeam.id) {
                             this.$store.commit('team/UPDATE_TEAM_ANSWER', e.answer);

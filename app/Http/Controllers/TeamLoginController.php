@@ -192,6 +192,7 @@ class TeamLoginController extends Controller
 
         $team = Team::findorFail($id);
         $team->name = $request->name;
+        $team->identifier = $request->name.$team->gameCode;
         $team->save();
 
         $teams = Team::where('gameCode', $team->gameCode)->get();

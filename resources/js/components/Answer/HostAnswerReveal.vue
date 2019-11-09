@@ -112,7 +112,7 @@
 
         },
         methods: {
-            ...mapActions('play', ['sendPlayersPage', 'revealAnswerToPlayers']),
+            ...mapActions('host', ['sendPlayersPage', 'revealAnswerToPlayers']),
             decideUpNext() {
                 if (this.playQuestionPosition + 1 === this.questions.length) {
                     this.newQuestionPosition = '';
@@ -135,19 +135,10 @@
                 this.upNext =  '';
 
                 if (this.newQuestionPosition !== "") {
-                    // axios.post('/api/host/' + this.gameCode.code + '/round/'+ this.playRoundPosition + '/question/' + this.newQuestionPosition + '/currentPage/'+'PlayRevealAnswer')
-                    //     .then(response => {
-                    //
-                    //     });
-
                     this.playQuestionPosition = this.newQuestionPosition;
                     this.sendPlayersPage('PlayRevealAnswer');
                     this.currentPage="HostAnswerReveal";
                 } else {
-                    // axios.post('/api/host/' + this.gameCode.code + '/round/'+ this.playRoundPosition + '/question/' + 0 + '/currentPage/'+'PlayLeaderBoard')
-                    //     .then(response => {
-                    //
-                    //     });
                     this.playQuestionPosition = 0;
                     this.sendPlayersPage('PlayLeaderBoard');
                     this.currentPage="HostLeaderBoard";
@@ -166,13 +157,13 @@
             ...mapGetters('round', ['rounds']),
             ...mapGetters('answer', ['answers']),
             ...mapGetters('game', ['gameCode']),
-            ...mapGetters('play', ['roundPosition', 'questionPosition', 'page']),
+            ...mapGetters('host', ['roundPosition', 'questionPosition', 'page']),
             playRoundPosition: {
                 get() {
                     return this.roundPosition;
                 },
                 set(value) {
-                    return this.$store.commit('play/SET_ROUND_POSITION', value);
+                    return this.$store.commit('host/SET_ROUND_POSITION', value);
                 }
             },
             playQuestionPosition: {
@@ -180,7 +171,7 @@
                     return this.questionPosition;
                 },
                 set(value) {
-                    return this.$store.commit('play/SET_QUESTION_POSITION', value);
+                    return this.$store.commit('host/SET_QUESTION_POSITION', value);
                 }
             },
             currentPage: {
@@ -188,7 +179,7 @@
                     return this.page;
                 },
                 set(value) {
-                    return this.$store.commit('play/SET_PAGE', value);
+                    return this.$store.commit('host/SET_PAGE', value);
                 }
             }
         },

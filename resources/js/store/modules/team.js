@@ -73,13 +73,14 @@ const actions = {
             console.log(error.response);
         });
     },
-    updateTeamAnswerCorrect({commit, state}, answer) {
+    updateTeamAnswerCorrect({commit, state, dispatch}, answer) {
 
         axios.post('/api/teamAnswers/' + answer.id + '/updateCorrect')
             .then (response => {
-
                 commit('UPDATE_TEAM', response.data);
                 commit('SET_TEAM', response.data);
+                dispatch('sortLeaderBoard');
+                dispatch('host/sendPlayersLeaderBoard',{},{root: true});
             });
 
         commit('UPDATE_TEAM_ANSWER', {
@@ -95,45 +96,55 @@ const actions = {
             powerUp: answer.powerUp,
         });
     },
-    deleteTeam({commit, state}) {
+    deleteTeam({commit, state, dispatch}) {
         console.log('deleted a team');
         axios.post('/api/team/'+ state.team.id +'/delete')
             .then (response => {
-                commit('SET_TEAMS', response.data)
+                commit('SET_TEAMS', response.data);
+                dispatch('sortLeaderBoard');
+                dispatch('host/sendPlayersLeaderBoard',{},{root: true});
             });
     },
     sortLeaderBoard({commit, state}) {
-        let $place = 1;
-        let $points = 0;
+
         let $lb = [];
+        let $pointsLB = [];
+        let $place = 1;
 
+        //adds all the different points into an array
         for (let $i = 0; $i < state.teams.length; $i++) {
+            if ($pointsLB.filter(x => x === state.teams[$i].points).length === 0) {
+                $pointsLB.push(state.teams[$i].points);
+            }
+        }
+        //sorts them from low to high
+        $pointsLB.sort((a, b) => (a > b) ? -1 : 1);
 
-            $points = state.teams[$i].points;
+        //iterates through the points LB array
+        for (let $i = 0; $i < $pointsLB.length; $i++) {
 
-            for (let $b = 0; $b < state.teams.filter(x => x.points === $points).length; $b++) {
+            //adds all of the teams who's points match the pointsLBs points into the LB array
+            for (let $b=0; $b < state.teams.filter(x => x.points === $pointsLB[$i]).length; $b++) {
 
                 $lb.push({
                     place: $place,
-                    name: state.teams.filter(x => x.points === $points)[$b].name,
-                    id: state.teams.filter(x => x.points === $points)[$b].id,
-                    double: state.teams.filter(x => x.points === $points)[$b].double,
-                    triple: state.teams.filter(x => x.points === $points)[$b].triple,
-                    loggedIn: state.teams.filter(x => x.points === $points)[$b].loggedIn,
-                    points: state.teams.filter(x => x.points === $points)[$b].points,
+                    name: state.teams.filter(x => x.points === $pointsLB[$i])[$b].name,
+                    id: state.teams.filter(x => x.points === $pointsLB[$i])[$b].id,
+                    double: state.teams.filter(x => x.points === $pointsLB[$i])[$b].double,
+                    triple: state.teams.filter(x => x.points === $pointsLB[$i])[$b].triple,
+                    loggedIn: state.teams.filter(x => x.points === $pointsLB[$i])[$b].loggedIn,
+                    points: state.teams.filter(x => x.points === $pointsLB[$i])[$b].points,
                 });
-
-                $i++;
 
             }
 
+            //increments the place
             $place++;
-            $i--;
-
         }
 
         commit('SET_LEADER_BOARD', $lb);
-    }
+
+    },
 
 };
 
@@ -208,7 +219,6 @@ const mutations = {
             token: ''
         };
     }
-
 };
 
 export default {

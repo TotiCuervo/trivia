@@ -42,7 +42,7 @@
             }
         },
         mounted() {
-            // this.sortLeaderBoard();
+
         },
         computed: {
             ...mapGetters('team', ['teams', 'team', 'leaderBoard']),
@@ -54,43 +54,7 @@
                 }
             }
         },
-        methods: {
-          sortLeaderBoard() {
-              this.leaderBoard = [];
-
-              let $place = 1;
-              let $points = 0;
-
-              for (let $i = 0; $i < this.teams.length; $i++) {
-
-                  $points = this.teams[$i].points;
-
-                  for (let $b = 0; $b < this.teams.filter(x => x.points === $points).length; $b++) {
-
-                      this.leaderBoard.push({
-                          place: $place,
-                          name: this.teams.filter(x => x.points === $points)[$b].name,
-                          id: this.teams.filter(x => x.points === $points)[$b].id,
-                          points: this.teams.filter(x => x.points === $points)[$b].points,
-                      });
-
-                      $i++;
-
-                  }
-
-                  $place++;
-                  $i--;
-
-              }
-          }
-        },
-
-        watch: {
-            teams: function() {
-                this.sortLeaderBoard();
-            }
-
-        },
+        methods: {}
     }
 </script>
 

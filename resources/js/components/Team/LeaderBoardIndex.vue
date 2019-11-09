@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="row pb-3" v-if="showLeaderBoard" v-for="team in this.leaderBoard">
+        <div class="row pb-3" v-for="team in this.leaderBoard">
             <div class="col-md-12">
                 <div class="trivalo-card card">
                     <div class="card-body">
@@ -71,8 +71,7 @@
     export default {
         data() {
             return {
-                leaderBoard: [],
-                showLeaderBoard: false,
+
             }
         },
         mounted() {
@@ -85,55 +84,15 @@
             this.sortLeaderBoard();
         },
         methods: {
-            sortLeaderBoard() {
-                let $place = 1;
-                let $points = 0;
-
-                for (let $i = 0; $i < this.teams.length; $i++) {
-                    // console.log('made it 2');
-
-                    $points = this.teams[$i].points;
-
-                    // console.log('points:');
-                    // console.log($points);
-                    //
-                    // console.log('teams');
-                    // console.log(this.teams.filter(x => x.points === $points));
-
-                    for (let $b = 0; $b < this.teams.filter(x => x.points === $points).length; $b++) {
-
-                        this.leaderBoard.push({
-                            place: $place,
-                            name: this.teams.filter(x => x.points === $points)[$b].name,
-                            id: this.teams.filter(x => x.points === $points)[$b].id,
-                            double: this.teams.filter(x => x.points === $points)[$b].double,
-                            triple: this.teams.filter(x => x.points === $points)[$b].triple,
-                            loggedIn: this.teams.filter(x => x.points === $points)[$b].loggedIn,
-                            points: this.teams.filter(x => x.points === $points)[$b].points,
-                        });
-
-                        $i++;
-                        //
-                        // console.log('Team:');
-                        // console.log(this.teams.filter(x => x.points === $points)[$b].name);
-
-                    }
-
-                    $place++;
-                    $i--;
-                    this.showLeaderBoard = true;
-
-                }
-            }
+            ...mapActions('team', ['sortLeaderBoard'])
         },
         computed: {
-            ...mapGetters('team', ['teams']),
+            ...mapGetters('team', ['teams', 'leaderBoard']),
             ...mapGetters('game', ['gameCode']),
 
         },
         watch: {
             teams: function() {
-                this.leaderBoard = [];
                 this.sortLeaderBoard();
             }
 

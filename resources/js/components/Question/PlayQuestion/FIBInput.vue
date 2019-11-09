@@ -36,12 +36,9 @@
         },
         methods: {
             focusOnQuestion() {
-                // window.scrollTo(0, 0);
+                //for mobile view, this scrolls to the top so that players can see the timer
                 document.getElementById('question').scrollIntoView();
-                // this.
             }
-
-
         },
         computed: {
             ...mapGetters('answer', ['answer']),
