@@ -101,7 +101,7 @@ const actions = {
                 time: state.timer
             });
         }
-        else if ($catchUpPage === 'PlayRevealAnswer') {
+        else if ($catchUpPage === 'PlayRevealAnswer' && state.revealAnswer) {
             dispatch('revealAnswerToPlayers');
         }
 
