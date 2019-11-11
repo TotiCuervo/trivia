@@ -17,6 +17,7 @@
                     id="play-code"
                     placeholder="Enter your Play Code"
                     @click="validCode = ''"
+                    v-on:keyup.enter="checkPlayCode"
                     type="number"
                     pattern="\d*"
                 ></b-form-input>
@@ -34,7 +35,8 @@
                                       placeholder="Enter your Team Name"
                                       v-model="name"
                                       :state="validName"
-                                      @input="checkName()">
+                                      @input="checkName()"
+                                      v-on:keyup.enter="moveToPassword()">
                         </b-form-input>
                         <b-form-invalid-feedback id="team-name-too-long" v-if="this.validName === false">
                             {{nameError}}
@@ -45,7 +47,13 @@
                 <div class="row pt-3">
                     <div class="col-md-12">
                         <label>Team Password:</label>
-                        <b-form-input id="team-password" placeholder="Password" type="password" v-model="password" :state=validPassword @click="resetInput()"> </b-form-input>
+                        <b-form-input id="team-password"
+                                      placeholder="Password"
+                                      type="password"
+                                      v-model="password"
+                                      :state=validPassword
+                                      @click="resetInput()"
+                                      v-on:keyup.enter="loginOrRegister()"> </b-form-input>
                         <b-form-text id="team-password">
                             Create a new team or login
                         </b-form-text>
@@ -183,6 +191,10 @@
                 } else {
                     this.validName = '';
                 }
+            },
+            moveToPassword() {
+                document.getElementById('team-password').focus();
+
             }
         },
         computed: {

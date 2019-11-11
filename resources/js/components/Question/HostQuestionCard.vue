@@ -22,7 +22,7 @@
         },
         computed: {
             ...mapGetters('question', ['questions']),
-            ...mapGetters('play', ['questionPosition']),
+            ...mapGetters('host', ['questionPosition']),
         },
     }
 </script>
