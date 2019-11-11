@@ -72,7 +72,8 @@ const actions = {
                     this.state.currentPage = '';
                     this.state.questionPosition = '';
                     this.state.roundPosition = '';
-                    playload.router.push({name: "playLogin"});
+                    commit('SET_LOGGED_IN', true);
+                    window.location.reload();
                 }
                 //else, log them into the game
                 else {

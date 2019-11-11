@@ -16,7 +16,9 @@
             }
         },
         mounted() {
-
+            if (!this.team) {
+                window.location.reload();
+            }
         },
         created() {
             window.addEventListener('beforeunload', this.leaving);
