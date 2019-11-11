@@ -22,10 +22,7 @@ Vue.use(IdleVue, {
     idleTime: 10000
 });
 
-
 Vue.component('VOffline', require('v-offline'));
-
-
 
 import CircularCountDownTimer from "vue-circular-count-down-timer";
 Vue.use(CircularCountDownTimer);
@@ -60,8 +57,9 @@ import PlayLobby from './components/Play/PlayLobby.vue'
 import Home from './components/Home.vue'
 import  {store} from './store'
 
+//middleWare
 
-// import  {store} from './store'c
+
 
 const files = require.context('./', true, /\.vue$/i);
 files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
@@ -109,12 +107,26 @@ const router = new VueRouter({
         {
             path: '/play/goodLuck',
             name:  'playInterface',
-            component: PlayInterface
+            component: PlayInterface,
+            beforeEnter:(to, from, next) => {
+
+                if(store.getters['team/name'] === ""){
+                    next({
+                        name: 'playLogin'
+                    })
+                } else {
+                    next()
+                }
+            }
         },
         {
             path: '/play/login',
             name:  'playLogin',
-            component: PlayLogin
+            component: PlayLogin,
+            beforeEnter:(to, from, next) => {
+                store.commit('team/CLEAR_FORM');
+                next()
+            }
         },
         {
             path: '/game/:id/round/:round_id/question',

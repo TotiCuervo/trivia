@@ -2,10 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f562f43b-05cf-4003-ae95-b369e5751c9b" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/resources/js/components/ThrowAways/RefreshLoader.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/Play/PlayInterface.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Play/PlayInterface.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/store/modules/play.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/store/modules/play.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/store/modules/team.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/store/modules/team.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -178,17 +180,17 @@
     <property name="settings.editor.selected.configurable" value="editor.preferences.folding" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/resources/js/components/DarkMode" />
-      <recent name="$PROJECT_DIR$/resources/js/components/Question/PlayQuestion" />
-      <recent name="$PROJECT_DIR$/app/Model" />
-      <recent name="$PROJECT_DIR$/resources/js/components/Answer" />
-      <recent name="$PROJECT_DIR$/resources/js/components/ThrowAways" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/resources/js/components/DarkMode" />
       <recent name="$PROJECT_DIR$/app" />
       <recent name="$PROJECT_DIR$/resources/js/components/store" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/resources/js/components/ThrowAways" />
+      <recent name="$PROJECT_DIR$/resources/js/components/DarkMode" />
+      <recent name="$PROJECT_DIR$/resources/js/components/Question/PlayQuestion" />
+      <recent name="$PROJECT_DIR$/app/Model" />
+      <recent name="$PROJECT_DIR$/resources/js/components/Answer" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -274,7 +276,7 @@
       <workItem from="1572462190394" duration="31690000" />
       <workItem from="1572985594542" duration="2912000" />
       <workItem from="1572989107455" duration="9929000" />
-      <workItem from="1573159586949" duration="23015000" />
+      <workItem from="1573159586949" duration="27175000" />
     </task>
     <servers />
   </component>

@@ -215,8 +215,13 @@ const mutations = {
     },
     CLEAR_FORM(state){
         state.team = {
+            id: '',
             name: '',
-            token: ''
+            token: '',
+            gameCode: '',
+            points: '',
+            double: '',
+            triple: '',
         };
     }
 };
