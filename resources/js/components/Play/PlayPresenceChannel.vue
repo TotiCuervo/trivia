@@ -113,6 +113,7 @@
                     .listen('AreYouThere', (e) => {
                         axios.post('/api/team/' + this.team.id + '/iAmHere');
                     });
+
             }
         },
         created() {

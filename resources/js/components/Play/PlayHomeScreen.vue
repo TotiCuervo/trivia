@@ -38,6 +38,11 @@
                     <h5 v-show="darkMode">Tap Team Name to activate Light Mode</h5>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-12">
+                    <b-button block variant="primary" @click="setGame()">Let's Play</b-button>
+                </div>
+            </div>
 <!--            <div class="card trivalo-card" v-bind:class="{'darkMode-card': darkMode}">-->
 <!--                <div class="card-body py-5">-->
 <!--                    <div class="row">-->
@@ -97,10 +102,16 @@
 
             }
         },
+        methods: {
+            setGame() {
+                axios.post('/api/team/logout/'+ this.team.id);
+                this.$store.commit('play/SET_LOGGED_IN', false);
+            }
+        },
         computed: {
             ...mapGetters('game', ['game']),
             ...mapGetters('user', ['darkMode']),
-
+            ...mapGetters('team', ['team', 'teamAnswers']),
 
         }
     }

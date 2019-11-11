@@ -52,6 +52,8 @@ const actions = {
     attemptLogin({commit, state}, playload) {
 
         console.log('made it in attemptLogin');
+
+        //makes team to send to server
         let $attemptTeam = {
             name: playload.team.name,
             gameCode: playload.team.gameCode,
@@ -59,10 +61,12 @@ const actions = {
             identifier: playload.team.name+playload.team.gameCode,
             provider: 'teams'
         };
+
         //checks to see if the player is registered or logged in
-        axios.post('/api/team/registerOrLogin', $attemptTeam)
+        axios.post('/api/team/lazyLogin', $attemptTeam)
             .then(response => {
                 console.log('response: '+response.data);
+
                 //if it is unauthorized or logged in, give them the boot
                 if (response.data === ('unauthorized' || 'alreadyLoggedIn')) {
                     this.state.currentPage = '';
@@ -74,6 +78,7 @@ const actions = {
                 else {
                     commit('SET_LOGGED_IN', true)
                 }
+
             });
     }
 

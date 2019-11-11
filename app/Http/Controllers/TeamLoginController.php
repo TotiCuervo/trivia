@@ -152,6 +152,28 @@ class TeamLoginController extends Controller
 
     }
 
+    public function lazyLogin(Request $request)
+    {
+        //gets team
+        $team = Team::where('gameCode', $request->gameCode)->where('name', $request->name)->first();
+
+        //checks to see if team is logged in
+        if ($team->loggedIn) {
+            return 'unauthorized';
+        } else {
+            //login user
+            $team->loggedIn = true;
+            $team->save();
+
+            //triggers event
+            $this->broadcastNewTeam($team);
+
+            //return okay
+            return '200 OK';
+        }
+
+    }
+
     public function retrieveGameData($id) {
 
         $team = Team::findorFail($id);

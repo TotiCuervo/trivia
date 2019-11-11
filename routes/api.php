@@ -74,6 +74,7 @@ Route::post('/team/logout/{id}', 'TeamLoginController@logout');
 Route::post('/team/checkCode', 'TeamLoginController@checkCode');
 Route::post('/team/checkIfExpired', 'TeamLoginController@checkIfExpired');
 Route::post('/team/registerOrLogin', 'TeamLoginController@registerOrLogin');
+Route::post('/team/lazyLogin', 'TeamLoginController@lazyLogin');
 Route::get('/team/{id}/pulse', 'TeamLoginController@getPulse');
 Route::post('/team/{id}/answers', 'TeamAnswerController@index');
 Route::post('/team/{id}/edit', 'TeamLoginController@edit');
