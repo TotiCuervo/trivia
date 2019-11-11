@@ -78,7 +78,7 @@
                         </div>
                         <div class="col-sm-6 pb-3" v-if="!undo">
                             <button type="button" class="btn btn-block" v-bind:class="powerUpButtonBind()" v-if="this.clickedPowerUp === '' && !(this.double)" @click="setPowerUp('Double')">Double Points</button>
-                            <button type="button" class="btn btn-block" v-bind:class="powerUpButtonBind()" disabled v-else-if="this.clickedPowerUp === '' && this.double">Triple Points Used</button>
+                            <button type="button" class="btn btn-block" v-bind:class="powerUpButtonBind()" disabled v-else-if="this.clickedPowerUp === '' && this.double">Double Points Used</button>
                             <button type="button" class="btn btn-block" v-bind:class="{'btn-dark': !this.darkMode,'btn-primary triv-blue darkMode darkMode-text-white': this.darkMode }" v-else-if="this.clickedPowerUp !== ''" @click="updatePowerUp">Yes</button>
                         </div>
                         <div class="col-sm-6" v-if="!undo">

@@ -25,6 +25,11 @@
                 <GameTeamIndex :col="3"></GameTeamIndex>
             </div>
         </div>
+        <div class="row pt-4">
+            <div class="col-md-12">
+                <b-button pill variant="primary" @click="catchTeamUp()">Waiting for players</b-button>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -41,6 +46,8 @@
 
         },
         methods: {
+            ...mapActions('host', ['catchTeamUp', 'sendPlayersLeaderBoard', 'kickTeamOut']),
+
             goToStartGame() {
                 this.currentPage = 'HostStartGame';
             },

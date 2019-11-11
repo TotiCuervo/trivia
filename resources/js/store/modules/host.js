@@ -85,14 +85,12 @@ const actions = {
         }
 
         //Sends Page
-        if ($catchUpPage !== '') {
-            console.log('in sending players page. Sending: ' + $catchUpPage);
-            Echo.join('game.'+ state.gameCode.code).whisper("catchUp", {
-                roundPosition: state.roundPosition,
-                questionPosition: state.questionPosition,
-                page: $catchUpPage
-            });
-        }
+        console.log('in sending players page. Sending: ' + $catchUpPage);
+        Echo.join('game.'+ state.gameCode.code).whisper("catchUp", {
+            roundPosition: state.roundPosition,
+            questionPosition: state.questionPosition,
+            page: $catchUpPage
+        });
 
         //conditions functions that should be sent after page
         if ($catchUpPage === 'PlayQuestion') {

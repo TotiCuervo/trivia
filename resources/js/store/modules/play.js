@@ -7,6 +7,7 @@ function initialState() {
         gameCode: '',
         revealAnswer: false,
         timer: 2,
+        loggedIn: false,
         loading: false
     }
 }
@@ -33,6 +34,9 @@ const getters = {
     revealAnswer(state) {
         return state.revealAnswer;
     },
+    loggedIn(state) {
+        return state.loggedIn;
+    },
     timer(state) {
         return state.timer;
     }
@@ -41,8 +45,36 @@ const getters = {
 const actions = {
 
 
+
     sendAnswerToHost({commit, state}, answer) {
 
+    },
+    attemptLogin({commit, state}, playload) {
+
+        console.log('made it in attemptLogin');
+        let $attemptTeam = {
+            name: playload.team.name,
+            gameCode: playload.team.gameCode,
+            password: playload.team.password,
+            identifier: playload.team.name+playload.team.gameCode,
+            provider: 'teams'
+        };
+        //checks to see if the player is registered or logged in
+        axios.post('/api/team/registerOrLogin', $attemptTeam)
+            .then(response => {
+                console.log('response: '+response.data);
+                //if it is unauthorized or logged in, give them the boot
+                if (response.data === ('unauthorized' || 'alreadyLoggedIn')) {
+                    this.state.currentPage = '';
+                    this.state.questionPosition = '';
+                    this.state.roundPosition = '';
+                    playload.router.push({name: "playLogin"});
+                }
+                //else, log them into the game
+                else {
+                    commit('SET_LOGGED_IN', true)
+                }
+            });
     }
 
 };
@@ -62,6 +94,9 @@ const mutations = {
     },
     SET_GAME_CODE(state, gameCode) {
         state.gameCode = gameCode;
+    },
+    SET_LOGGED_IN(state, loggedIn) {
+        state.loggedIn = loggedIn;
     },
     UPDATE_REVEAL_ANSWER(state, revealAnswer) {
         console.log('made it to reveal answer update');

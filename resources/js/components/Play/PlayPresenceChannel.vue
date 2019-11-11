@@ -14,7 +14,9 @@
 
                 Echo.join('game.' + this.loggedTeam.gameCode)
                     .here((users) => {
-
+                        console.log('in here');
+                        this.$store.commit('play/SET_LOGGED_IN', !this.loggedIn);
+                        console.log('loggedIn: '+this.loggedIn);
                     })
                     .listenForWhisper('togglePage', (e) => {
 
@@ -29,9 +31,17 @@
                         this.$store.commit('play/UPDATE_REVEAL_ANSWER', true);
                     })
                     .listenForWhisper('catchUp', (e) => {
+                        console.log('made it to catchUp!');
+
+                        //if player is not loggedIn, attempt to login, if logged in, kick out, if not kicked out, login
+                        if (!this.loggedIn) {
+                            console.log('attempting login');
+                            this.attemptLogin({
+                                team: this.loggedTeam,
+                                router: this.$router});
+                        }
 
                         if (this.currentPage !== e.page) {
-                            console.log('made it to catchUp!');
                             console.log('going to ' + e.page);
 
                             this.playQuestionPosition = e.questionPosition;
@@ -71,6 +81,12 @@
                             this.$store.commit('team/SET_NAME', e.newName);
                         }
                     })
+                    .listenForWhisper('areYouThere', (e) => {
+                        console.log('sending that I am here');
+                        Echo.join('game.'+ this.loggedTeam.gameCode).whisper("iAmHere", {
+                            team: this.loggedTeam
+                        });
+                    })
                     .listen('UpdatedAnswer', (e) => {
                         if (e.answer.team_id === this.loggedTeam.id) {
                             this.$store.commit('team/UPDATE_TEAM_ANSWER', e.answer);
@@ -103,6 +119,7 @@
 
         },
         methods: {
+            ...mapActions('play', ['attemptLogin']),
             ...mapActions('game', ['fetchDataByGameCode']),
             ...mapActions('round', ['fetchRoundsByGameCode']),
             ...mapActions('question', ['fetchQuestionsByGameCode']),
@@ -118,7 +135,7 @@
             ...mapGetters('round', ['rounds']),
             ...mapGetters('question', ['questions']),
             ...mapGetters('answer', ['answers']),
-            ...mapGetters('play', ['roundPosition', 'questionPosition', 'page', 'revealAnswer', 'gameCode']),
+            ...mapGetters('play', ['roundPosition', 'questionPosition', 'page', 'revealAnswer', 'gameCode', 'loggedIn']),
             loggedTeam: {
                 get() {
                     return this.team;

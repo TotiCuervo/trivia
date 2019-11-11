@@ -13,10 +13,10 @@
         },
         mounted() {
             //Presence Channel
-            Echo.join('game.'+this.gameCode.code)
+            Echo.join('game.' + this.gameCode.code)
                 .here((users) => {
                     //Gets all the Teams
-                    axios.get('/api/game/'+this.gameCode.code + '/teams')
+                    axios.get('/api/game/' + this.gameCode.code + '/teams')
                         .then(response => {
                             this.$store.commit('team/SET_TEAMS', response.data);
                         });
@@ -44,6 +44,16 @@
                             });
                     }, 5000);
 
+
+
+                })
+                .listenForWhisper('iAmHere', (e) => {
+
+                    console.log('got a team that is awake');
+                    setTimeout(function () {
+                        console.log('ghosting has commenced');
+                    }, 5000);
+
                 })
                 .listen('NewTeam', (e) => {
 
@@ -51,7 +61,7 @@
                     let $add = true;
 
                     //loops through the teams in the game
-                    for (let $i=0; $i < this.gameTeams.length; $i++) {
+                    for (let $i = 0; $i < this.gameTeams.length; $i++) {
 
                         //if the team is in the list of current teams
                         if (this.gameTeams[$i].name === e.team.name) {
@@ -83,14 +93,9 @@
 
                 })
                 .listen('TeamLeaving', (e) => {
-                    console.log('someone is leaving the game');
 
                     //for now
                     // this.$store.commit('team/REMOVE_TEAM', e.team)
-
-
-
-
 
 
                     //    Old Code:
@@ -116,10 +121,10 @@
 
         },
         methods: {
-            ...mapActions('host', ['catchTeamUp', 'sendPlayersLeaderBoard']),
+            ...mapActions('host', ['catchTeamUp', 'sendPlayersLeaderBoard', 'kickTeamOut']),
             ...mapActions('team', ['sortLeaderBoard']),
 
-            newhosterToast(team) {
+            newPlayerToast(team) {
                 this.$bvToast.toast(`${team.name} has joined the game!`, {
                     title: `New player!`,
                     variant: 'info',
