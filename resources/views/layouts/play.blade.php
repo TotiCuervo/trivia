@@ -9,8 +9,7 @@
 
 
     <!-- Bootstrap CSS -->
-{{--    <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css" >--}}
-    <link href="{{ secure_asset('css/style.css') }}" rel="stylesheet" type="text/css" >
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css" >
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="css/font-awesome-animation.min.css">
 
@@ -32,9 +31,7 @@
     </div>
 </main>
 
-{{--<script src="/js/app.js"></script>--}}
-<script src="{{ secure_asset('js/app.js') }}" defer></script>
-
+<script src="/js/app.js"></script>
 <script src="https://kit.fontawesome.com/7d75c9db00.js"></script>
 
 
