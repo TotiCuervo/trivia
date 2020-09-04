@@ -12,13 +12,16 @@
     {{--    <link rel="stylesheet" href="css/font-awesome-animation.min.css">--}}
     {{--    <script defer src="https://use.fontawesome.com/releases/v5.10.2/js/all.js" integrity="sha384-QMu+Y+eu45Nfr9fmFOlw8EqjiUreChmoQ7k7C1pFNO8hEbGv9yzsszTmz+RzwyCh" crossorigin="anonymous"></script>--}}
 
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css">
+{{--    <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css">--}}
+{{--    <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css">--}}
+    <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ secure_asset('css/style.css') }}" rel="stylesheet" type="text/css">
+
     <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
 {{--    <link rel="stylesheet" href="font-awesome-animation.min.css">--}}
 
 
-    <title>Hello, world!!!</title>
+    <title>Trivalo</title>
 
 </head>
 
@@ -27,7 +30,9 @@
 @yield('layout')
 
 <script src="https://kit.fontawesome.com/7d75c9db00.js"></script>
-<script src="/js/app.js"></script>
+{{--<script src="{{ asset('js/app.js') }}" defer></script>--}}
+<script src="{{ secure_asset('js/app.js') }}" defer></script>
+
 
 
 
